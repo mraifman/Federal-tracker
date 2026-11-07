@@ -26,7 +26,7 @@ A refresh requires valid numeric observations for at least 95% of directory agen
 
 ## Automation and publication
 
-The daily refresh at 12:17 UTC validates, commits data and snapshots, then explicitly uploads and deploys a Pages artifact. An independent Pages workflow deploys site/data pushes. Explicit deployment is necessary because commits using `GITHUB_TOKEN` do not trigger branch-based Pages builds. Pages must use the GitHub Actions build source. Failed retrieval or validation prevents deployment. Six concurrent requests and bounded retries limit API load; permanent HTTP errors are recorded immediately.
+The daily refresh at 12:17 UTC validates, commits data and snapshots, then explicitly uploads and deploys a Pages artifact. An independent Pages workflow deploys site/data pushes. Explicit deployment is necessary because commits using `GITHUB_TOKEN` do not trigger branch-based Pages builds. The explicit artifact deployment was verified with this repository’s existing Pages configuration; changing the build-source setting was unnecessary. Failed retrieval or validation prevents deployment. Six concurrent requests and bounded retries limit API load; permanent HTTP errors are recorded immediately.
 
 ## Remaining work
 
