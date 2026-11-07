@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Official USAspending FY2024-FY2026 agency award obligations; no estimated values."""
+from concurrent.futures import ThreadPoolExecutor, as_completed
 import datetime as dt
 import json
 import pathlib
@@ -14,10 +15,10 @@ def get(path, params=None):
     url = BASE + path
     if params:
         url += "?" + urllib.parse.urlencode(params)
-    for attempt in range(3):
+    for attempt in range(2):
         try:
             req = urllib.request.Request(url, headers={"User-Agent":"FederalAtlasResearch/0.1","Accept":"application/json"})
-            with urllib.request.urlopen(req, timeout=45) as res:
+            with urllib.request.urlopen(req, timeout=12) as res:
                 return json.load(res)
         except Exception:
             if attempt == 2:
@@ -32,26 +33,35 @@ def main():
         agencies = inventory.get("results", inventory.get("agencies", []))
     if not isinstance(agencies, list) or len(agencies) < 10:
         raise RuntimeError("Agency directory missing or malformed")
-    records = []
-    failures = []
-    for a in agencies:
+    def fetch_one(a):
         name = a.get("agency_name") or a.get("name")
         code = a.get("toptier_code") or a.get("agency_code") or a.get("code")
         if not name or code is None:
-            continue
+            return None, []
         code = str(code).zfill(3)
-        years = {}
+        years, errors = {}, []
         for year in (2024, 2025, 2026):
             path = f"/api/v2/agency/{code}/awards/"
             try:
-                d = get(path, {"fiscal_year":year, "agency_type":"funding"})
+                d = get(path, {"fiscal_year": year, "agency_type": "funding"})
                 value = d.get("obligations")
-                if not isinstance(value, (int,float)) or isinstance(value, bool):
+                if not isinstance(value, (int, float)) or isinstance(value, bool):
                     raise ValueError("No numeric obligations")
-                years[str(year)] = {"obligations":value, "transactions":d.get("transaction_count"), "source":BASE + path + "?fiscal_year=" + str(year) + "&agency_type=funding"}
+                years[str(year)] = {"obligations": value, "transactions": d.get("transaction_count"),
+                    "source": BASE + path + "?fiscal_year=" + str(year) + "&agency_type=funding"}
             except Exception as exc:
-                failures.append({"agency":code,"year":year,"error":str(exc)[:120]})
-        records.append({"code":code,"name":name,"years":years})
+                errors.append({"agency": code, "year": year, "error": str(exc)[:120]})
+        return {"code": code, "name": name, "years": years}, errors
+
+    records, failures = [], []
+    # Parallelize independent agencies; bound concurrency to avoid overwhelming the federal API.
+    with ThreadPoolExecutor(max_workers=10) as pool:
+        tasks = [pool.submit(fetch_one, a) for a in agencies]
+        for task in as_completed(tasks):
+            record, errors = task.result()
+            if record:
+                records.append(record)
+            failures.extend(errors)
     if len(records) < 10 or sum(bool(r["years"]) for r in records) < 10:
         raise RuntimeError("Insufficient verified data; refusing to publish")
     result = {
