@@ -8,6 +8,8 @@ The live view covers **USAspending top-tier reporting agencies**, not every fede
 
 The federal directory determines coverage; agencies are never selected by hand. A missing agency-year observation is absent and reported in `errors`, never converted to zero. An API-reported zero remains zero. Each observation links to its exact federal API request and retains latest action date, reporting period, transaction count, and source warnings. Latest action date is not a guarantee of complete reporting.
 
+The Agency directory view separately exposes all records in the official Federal Register agency directory, including historical entities and subagencies, and reproduces its parent-child hierarchy. This directory broadens discoverability beyond USAspending but is not a complete current organizational census. No automatic name matching, operating-status classification, or financial crosswalk is inferred. The full federal source payload is preserved, with retrieval timestamps and daily snapshots.
+
 ## Reproduce
 
 Requires Python 3.12 with no third-party Python dependencies:
@@ -15,6 +17,7 @@ Requires Python 3.12 with no third-party Python dependencies:
 ```sh
 python scripts/refresh_agencies.py
 python -u scripts/refresh_awards.py
+python scripts/refresh_entities.py
 python scripts/validate_data.py
 python -m unittest discover -s scripts -p 'test_*.py'
 python -m http.server 8000

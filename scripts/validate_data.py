@@ -2,6 +2,7 @@
 """Fail deployment on malformed, mismatched, or insufficient federal observations."""
 import json
 from refresh_awards import ROOT, observation
+from refresh_entities import validate as validate_entities
 
 
 def main():
@@ -22,6 +23,7 @@ def main():
     assert count == data['verified_observations']
     assert count + len(data['errors']) == data['expected_observations'] == len(codes) * len(data['fiscal_years'])
     assert count >= data['expected_observations'] * .95
+    validate_entities(json.loads((ROOT / 'data/federal-entities.json').read_text()))
     print(f'Validated {len(codes)} agencies and {count} federal agency-year observations')
 
 if __name__ == '__main__':
