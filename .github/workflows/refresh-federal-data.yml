@@ -2,19 +2,24 @@ name: Refresh federal agency records
 on:
   push:
     branches: [main]
-    paths:
-      - 'scripts/refresh_agencies.py'
-      - 'scripts/refresh_awards.py'
-      - '.github/workflows/refresh-federal-data.yml'
+    paths: ['scripts/**', '.github/workflows/refresh-federal-data.yml']
   workflow_dispatch:
   schedule:
     - cron: '17 12 * * *'
 permissions:
   contents: write
+  pages: write
+  id-token: write
+concurrency:
+  group: federal-refresh
+  cancel-in-progress: false
 jobs:
   refresh:
     runs-on: ubuntu-latest
     timeout-minutes: 25
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -22,14 +27,27 @@ jobs:
           python-version: '3.12'
       - name: Retrieve official agency records
         run: |
-          python scripts/refresh_agencies.py
-          python scripts/refresh_awards.py
-      - name: Commit validated data
+          python -u scripts/refresh_agencies.py
+          python -u scripts/refresh_awards.py
+          python scripts/validate_data.py
+      - name: Commit validated data and historical snapshot
         run: |
           git config user.name "federal-atlas-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/agencies.json data/agency-awards.json
+          git add data
           if ! git diff --cached --quiet; then
-            git commit -m "Update official agency records"
+            git commit -m "Update verified federal data and snapshot"
+            git pull --rebase origin main
             git push
           fi
+      - uses: actions/configure-pages@v5
+      - name: Prepare public files
+        run: |
+          mkdir _site
+          cp index.html _site/
+          cp -r data _site/
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - uses: actions/deploy-pages@v4
+        id: deployment
