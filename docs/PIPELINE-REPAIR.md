@@ -19,3 +19,11 @@ The refresh now retains daily snapshots and validates coverage before committing
 ## Checks
 
 Four ingestion tests cover exhausted retries, permanent HTTP errors, mismatched identities/nonfinite values, and valid zeros. Dataset validation checks coverage, counts, source requests, and response values. `tests/browser.cjs` exercises top 35/all agencies, Treasury search, agency history, year filtering, JavaScript errors, and horizontal overflow at 1440px and 390px. Run it against a local server or pass the live URL, with Playwright and Chromium available.
+
+## Final verification
+
+[Refresh 42405234354](https://github.com/mraifman/Federal-tracker/actions/runs/42405234354) passed all steps: four ingestion tests; 111 official USAspending agencies; 333 verified FY2024–2026 observations with no missing observations; 473 validated Federal Register directory records; data/snapshot commit `c798ec8`; and explicit Pages deployment. [Site deployment 42405234525](https://github.com/mraifman/Federal-tracker/actions/runs/42405234525) also succeeded.
+
+The live https://mraifman.github.io/Federal-tracker/ passed Chromium checks at 1440×1000 and 390×844: top 35 and all 111 reporting agencies, Treasury search and annual history, fiscal-year filtering, all 473 directory records, parent-child drilldown, no JavaScript errors, and no horizontal overflow. An initial directory selector overflow on mobile was fixed before publication. The browser test reads the published directory count through browser fetch to use the same network connection as the application.
+
+The directory is a coverage expansion, not a declaration that every current federal entity or its finances is represented. It preserves historical entities and source parent relationships without inferring status or matching names across databases.
