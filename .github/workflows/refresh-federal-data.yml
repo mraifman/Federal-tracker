@@ -1,0 +1,26 @@
+name: Refresh official federal agency inventory
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 12 * * *'
+permissions:
+  contents: write
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Fetch and validate USAspending agency index
+        run: python scripts/refresh_agencies.py
+      - name: Commit source-stamped records only when changed
+        run: |
+          git config user.name "federal-atlas-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/agencies.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Refresh official USAspending agency inventory"
+            git push
+          fi
