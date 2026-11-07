@@ -14,12 +14,12 @@ jobs:
         with:
           python-version: '3.12'
       - name: Fetch and validate USAspending agency index
-        run: python scripts/refresh_agencies.py
+        run: |\n          python scripts/refresh_agencies.py\n          python scripts/refresh_awards.py
       - name: Commit source-stamped records only when changed
         run: |
           git config user.name "federal-atlas-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/agencies.json
+          git add data/agencies.json data/agency-awards.json
           if ! git diff --cached --quiet; then
             git commit -m "Refresh official USAspending agency inventory"
             git push
