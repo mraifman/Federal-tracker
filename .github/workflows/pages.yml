@@ -2,7 +2,7 @@ name: Deploy Federal Atlas
 on:
   push:
     branches: [main]
-    paths: ['index.html', 'data/**', '.github/workflows/pages.yml']
+    paths: ['index.html', 'needs.css', 'needs.js', 'story.js', 'tracker.js', 'tracker.css', 'workforce.js', 'workforce.css', 'data/**', 'scripts/validate_change_data.py', '.github/workflows/pages.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -23,10 +23,11 @@ jobs:
         with:
           python-version: '3.12'
       - run: python scripts/validate_data.py
+      - run: python scripts/validate_change_data.py
       - uses: actions/configure-pages@v5
       - run: |
           mkdir _site
-          cp index.html _site/
+          cp index.html workforce.js workforce.css _site/
           cp -r data _site/
       - uses: actions/upload-pages-artifact@v3
         with:

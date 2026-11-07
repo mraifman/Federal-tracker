@@ -1,36 +1,24 @@
 # Federal Atlas
 
-An evidence-first atlas of federal government changes since January 20, 2025.
+A focused comparison of the reported federal civilian workforce before Biden left office and the latest OPM snapshot. The interface uses workforce spotlights, a source-based trend chart, agency filters, subagency detail, a searchable table and CSV export. Original typography and colors accompany a layout inspired by Dezernat Zukunft’s budget tracker.
 
-## Current coverage
+## Current comparison
 
-The live view covers **USAspending top-tier reporting agencies**, not every federal entity. Funding-agency award obligations are available from FY2024 (a pre-inauguration reference year) through the latest fiscal year represented in the agency directory. These are award transaction obligations, not appropriations, account obligations, outlays, workforce counts, or evidence of cancellation. Fiscal years do not align with presidential terms. Current fiscal years are partial and prior years can be revised.
+- **Baseline:** December 31, 2024, the last OPM month-end snapshot before January 19, 2025. This is not an exact inauguration-day count.
+- **Latest:** September 30, 2026, checked November 7, 2026. August remains selectable. September has approximately 10,000 missing defense Status records; a non-defense scope is available.
+- **Metric:** OPM EHRI employment counts, all work schedules, including pay and non-pay status. These are not effective FTEs, layoffs, vacancies, or service-capacity estimates. USPS, several intelligence bodies, military personnel and other excluded populations are outside the coverage.
+- **Totals:** 2,312,301 baseline records versus 2,017,021 latest records; the reported difference of −295,280 includes reporting omissions. Missing agency observations are never assigned zero in agency comparisons.
 
-The federal directory determines coverage; agencies are never selected by hand. A missing agency-year observation is absent and reported in `errors`, never converted to zero. An API-reported zero remains zero. Each observation links to its exact federal API request and retains latest action date, reporting period, transaction count, and source warnings. Latest action date is not a guarantee of complete reporting.
+`index.html`, `workforce.js` and `workforce.css` form the active buildless site. `data/workforce-changes.json` retains department, subagency and occupation aggregates for nine snapshots, versioned OPM source URLs and SHA-256 hashes. Individual employee files are not published. Other retained research assets are inactive in the simplified interface.
 
-The Agency directory view separately exposes all records in the official Federal Register agency directory, including historical entities and subagencies, and reproduces its parent-child hierarchy. This directory broadens discoverability beyond USAspending but is not a complete current organizational census. No automatic name matching, operating-status classification, or financial crosswalk is inferred. The full federal source payload is preserved, with retrieval timestamps and daily snapshots.
+## Sources
 
-## Reproduce
+[OPM downloads](https://data.opm.gov/get-data/data-downloads) · [Coverage](https://data.opm.gov/resources/data-sources) · [Release notes](https://data.opm.gov/info-and-help/release-notes) · [API](https://data.opm.gov/get-data/api-access)
 
-Requires Python 3.12 with no third-party Python dependencies:
+## Run and validate
 
-```sh
-python scripts/refresh_agencies.py
-python -u scripts/refresh_awards.py
-python scripts/refresh_entities.py
-python scripts/validate_data.py
-python -m unittest discover -s scripts -p 'test_*.py'
-python -m http.server 8000
-```
+Serve the repository with `python3 -m http.server 8000`. Run `node --check workforce.js`, `python3 scripts/validate_data.py`, and `python3 scripts/validate_change_data.py`. Browser interactions were verified through the Codex browser on desktop and mobile; `tests/browser.cjs` records corresponding regression checks for environments with Playwright installed.
 
-The award endpoint contract is maintained by Treasury at https://github.com/fedspendingtransparency/usaspending-api/blob/master/usaspending_api/api_contracts/contracts/v2/agency/toptier_code/awards.md. Requests explicitly use `agency_type=funding`; the default is awarding and produces different values.
+Rebuild OPM aggregates using `scripts/download_workforce.py` followed by `scripts/build_change_data.py` with the complete manifest. Preserve the pinned versions and all retained snapshots. The broader research data validators also verify historical OMB, fiscal execution and grant-register source provenance.
 
-A refresh requires valid numeric observations for at least 95% of directory agency-year combinations. A failed refresh leaves the previous award dataset intact and fails the workflow. The directory and award files are committed together only after validation. UTC retrieval timestamps appear in each dataset. `data/snapshots/YYYY-MM-DD/` preserves daily observations; repeated refreshes on the same date replace that day's snapshot, with earlier revisions retained in Git history.
-
-## Automation and publication
-
-The daily refresh at 12:17 UTC validates, commits data and snapshots, then explicitly uploads and deploys a Pages artifact. An independent Pages workflow deploys site/data pushes. Explicit deployment is necessary because commits using `GITHUB_TOKEN` do not trigger branch-based Pages builds. The explicit artifact deployment was verified with this repository’s existing Pages configuration; changing the build-source setting was unnecessary. Failed retrieval or validation prevents deployment. Six concurrent requests and bounded retries limit API load; permanent HTTP errors are recorded immediately.
-
-## Remaining work
-
-Comprehensive federal entity coverage requires a broader official entity inventory and explicit reconciliation of entities absent from USAspending. Workforce, account/program/award drilldowns, program cancellation evidence, oversight records, and legally grounded reconstruction requirements remain unimplemented. No restoration costs or program statuses are inferred from funding changes. Future sources need their own reproducible pipelines, period definitions, raw evidence, and coverage validation before their views are enabled.
+GitHub Pages deploys from `main` via `.github/workflows/pages.yml`. Public URL: https://mraifman.github.io/Federal-tracker/

@@ -1,0 +1,184 @@
+{
+  "reviewed_on": "2026-11-07",
+  "coverage": "Four selected cases documenting changes since January 2025. Not a national inventory. Historical findings reflect source periods; present implementation and legal status need follow-up.",
+  "records": [
+    {
+      "id": "irs-filing",
+      "view": "hiring",
+      "agency": "Internal Revenue Service",
+      "service": "Taxpayer service & return processing",
+      "title": "Rebuild filing-season staffing capacity",
+      "metric": "5,162",
+      "metric_label": "filing-season staff departures \u00b7 2025 programs",
+      "status": "Workforce planning needed",
+      "published": "2026-03-16",
+      "period": "2025 deferred resignations and early retirements",
+      "finding": "GAO identified 5,162 filing-season departures within 17,047 employees leaving through these two programs. The filing season itself was largely insulated from the departures.",
+      "impact": "Future return processing, taxpayer correspondence and customer service face staffing risks.",
+      "next": "GAO recommended that IRS incorporate staff losses into its strategic workforce plan and plan to reduce its correspondence backlog.",
+      "unknown": "Departures are not vacancies or a hiring target. The number and occupations to hire, and current recommendation implementation, are not established here.",
+      "source": "https://www.gao.gov/products/gao-26-108116",
+      "source_label": "GAO-26-108116 \u00b7 March 16, 2026",
+      "chart": {
+        "kind": "part",
+        "label": "Departures through the two programs \u00b7 employees",
+        "values": [
+          [
+            "Filing-season units",
+            5162
+          ],
+          [
+            "Other units",
+            11885
+          ]
+        ]
+      },
+      "short": "Taxpayer service",
+      "change": "5,162 filing-season staff left",
+      "impact_short": "Future service capacity at risk",
+      "rebuild": "Workforce and backlog plans",
+      "date": "2025",
+      "lenses": [
+        "hiring"
+      ],
+      "funding": "Restoration cost not established",
+      "roles": "Return processing and customer service; a hiring target is not established",
+      "relation": "GAO identifies a risk to future service, not a measured decline caused by these departures."
+    },
+    {
+      "id": "irs-skills",
+      "view": "hiring",
+      "agency": "Internal Revenue Service",
+      "service": "Tax administration technology",
+      "title": "Address AI workforce skills gaps",
+      "metric": "63",
+      "metric_label": "AI-related staff lost in one IRS group",
+      "status": "Documented skills gap",
+      "published": "2026-03-24",
+      "period": "2025 workforce reductions",
+      "finding": "Officials in Research, Applied Analytics and Statistics reported losing 63 staff working full- or part-time on AI. GAO found IRS lacked a plan to address its AI skills gaps.",
+      "impact": "Staff losses threaten the agency\u2019s capacity to support and develop its AI tools.",
+      "next": "GAO called for identifying needed skills and planning how to address the gaps.",
+      "unknown": "63 is a reported loss in one group, not a required hiring count. The appropriate mix of hiring, training and other responses is not quantified here.",
+      "source": "https://www.gao.gov/products/gao-26-107522",
+      "source_label": "GAO-26-107522 \u00b7 March 24, 2026",
+      "chart": {
+        "kind": "count",
+        "label": "Reported AI-related staff loss \u00b7 RAAS group",
+        "values": [
+          [
+            "Staff lost",
+            63
+          ]
+        ]
+      },
+      "short": "Tax technology",
+      "change": "63 AI-related staff lost in RAAS",
+      "impact_short": "Skills to support tools missing",
+      "rebuild": "Identify skills and capacity gaps",
+      "date": "2025",
+      "lenses": [
+        "hiring"
+      ],
+      "funding": "Restoration cost not established",
+      "roles": "AI support and development; precise roles and headcount are not established",
+      "relation": "GAO links reductions and unaddressed skills gaps to increased risk for AI efforts."
+    },
+    {
+      "id": "dhs-grants",
+      "view": "cuts",
+      "agency": "Department of Homeland Security",
+      "service": "Preparedness, resilience & other grant activities",
+      "title": "Grant terminations disrupted delivery",
+      "metric": "362",
+      "metric_label": "grants terminated \u00b7 Jan 20\u2013Sep 30, 2025",
+      "status": "Documented terminations",
+      "published": "2026-09-17",
+      "period": "January 20\u2013September 30, 2025",
+      "finding": "GAO reported 362 terminated DHS grants and approximately $1 billion in associated deobligations.",
+      "impact": "Some disaster mitigation projects were delayed nearly a year. Some grant actions were subsequently reversed.",
+      "next": "GAO recommended incorporating lessons from these disruptions before further grant actions. The report does not prescribe a blanket restoration amount.",
+      "unknown": "A termination is not necessarily the closure of an entire program. Current award status and restoration costs require award-level follow-up.",
+      "source": "https://www.gao.gov/products/gao-26-109097",
+      "source_label": "GAO-26-109097 \u00b7 September 17, 2026",
+      "chart": {
+        "kind": "bars",
+        "label": "Terminated grants by DHS component \u00b7 count",
+        "values": [
+          [
+            "FEMA",
+            215
+          ],
+          [
+            "USCIS",
+            111
+          ],
+          [
+            "Science & Technology",
+            35
+          ],
+          [
+            "CISA",
+            1
+          ]
+        ]
+      },
+      "short": "Preparedness & resilience",
+      "change": "362 grants terminated",
+      "impact_short": "Some mitigation projects delayed",
+      "rebuild": "Review disruptions and reversals",
+      "date": "Jan\u2013Sep 2025",
+      "lenses": [
+        "cuts",
+        "funding"
+      ],
+      "funding": "About $1B deobligated; amount needed to restore services is unknown",
+      "roles": "Staffing requirements not established in this case",
+      "relation": "GAO documents disruption from grant actions. Some actions were reversed; the termination count is historical."
+    },
+    {
+      "id": "usaid-awards",
+      "view": "cuts",
+      "agency": "U.S. Agency for International Development",
+      "service": "Foreign assistance",
+      "title": "Foreign assistance awards terminated",
+      "metric": "\u224890%",
+      "metric_label": "6,780 of 7,510 awards \u00b7 through March 2026",
+      "status": "Documented terminations",
+      "published": "2026-09-30",
+      "period": "January 2025\u2013March 2026",
+      "finding": "State data reviewed by GAO showed approximately 6,780 USAID awards terminated out of 7,510. Remaining awards transferred to State management.",
+      "impact": "The change reshaped foreign assistance delivery. GAO also identified incomplete staffing and award data at State.",
+      "next": "GAO recommended stronger decision guidance and data. Decisions about restoring particular services require award-level needs and delivery assessments.",
+      "unknown": "Awards are not individual programs. Historical obligations are not savings or a restoration budget; current award and legal status are not independently verified here.",
+      "source": "https://www.gao.gov/products/gao-26-108607",
+      "source_label": "GAO-26-108607 \u00b7 September 30, 2026",
+      "chart": {
+        "kind": "part",
+        "label": "USAID awards reviewed \u00b7 through March 2026",
+        "values": [
+          [
+            "Terminated",
+            6780
+          ],
+          [
+            "Remaining",
+            730
+          ]
+        ]
+      },
+      "short": "Foreign assistance",
+      "change": "6,780 awards terminated",
+      "impact_short": "Remaining awards moved to State",
+      "rebuild": "Establish delivery and oversight needs",
+      "date": "Jan 2025\u2013Mar 2026",
+      "lenses": [
+        "cuts",
+        "funding"
+      ],
+      "funding": "Restoration cost not established; historical obligations are not a rebuilding budget",
+      "roles": "GAO identifies staffing-data gaps at State; required hiring is not quantified",
+      "relation": "The record establishes terminations and transfer of administration, not a quantified service-outcome loss for each award."
+    }
+  ]
+}

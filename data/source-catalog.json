@@ -1,0 +1,43 @@
+{
+  "checked_on": "2026-11-07",
+  "opm_public_inventories": [
+    {
+      "dataset": "employment",
+      "endpoint": "https://data.opm.gov/api/v1/files/employment",
+      "public": true,
+      "current_versions_available": 209,
+      "first_period": "200503",
+      "latest_period": "202609",
+      "ingested": true,
+      "note": "Inventory verified; not all available files have been downloaded. Individual records contain redactions and are not published by this site."
+    },
+    {
+      "dataset": "accessions",
+      "endpoint": "https://data.opm.gov/api/v1/files/accessions",
+      "public": true,
+      "current_versions_available": 261,
+      "first_period": "200501",
+      "latest_period": "202609",
+      "ingested": false,
+      "note": "Inventory verified; not all available files have been downloaded. Individual records contain redactions and are not published by this site."
+    },
+    {
+      "dataset": "separations",
+      "endpoint": "https://data.opm.gov/api/v1/files/separations",
+      "public": true,
+      "current_versions_available": 261,
+      "first_period": "200501",
+      "latest_period": "202609",
+      "ingested": false,
+      "note": "Inventory verified; not all available files have been downloaded. Individual records contain redactions and are not published by this site."
+    }
+  ],
+  "opm_historical": {
+    "source": "https://www.opm.gov/policy-data-oversight/data-analysis-documentation/federal-employment-reports/historical-tables/executive-branch-civilian-employment-since-1940/",
+    "first_year": 1940,
+    "last_year": 2014,
+    "unit": "Thousands of employees at fiscal-year end",
+    "scope": "Executive branch civilian employment excluding Postal Service; based on agency 113-A submissions. Not the BLS monthly seasonally adjusted payroll series.",
+    "status": "Reviewed; useful historical context but stops in 2014 and is not spliced into later OPM or BLS observations."
+  }
+}
