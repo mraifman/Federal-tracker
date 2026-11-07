@@ -1,0 +1,133 @@
+{
+  "checked_on": "2026-11-07",
+  "definition": "Evidence-backed metric values supplement missing source values; they never replace a reported number. Program status, new funding and spending from prior balances are separate. A missing value alone never establishes closure.",
+  "record_cases": [
+    {
+      "id": "sec-reserve",
+      "record_ids": [
+        "449-00-5566|050-5566|NON-FINANCING ACCOUNTS"
+      ],
+      "title": "SEC Reserve Fund",
+      "status": "verified_closed",
+      "label": "Closed by law \u00b7 funding ended",
+      "closure_verified": true,
+      "effective_date": "2025-10-01",
+      "reason": "Public Law 119-21, section 30003, ends the reserve-fund authority, requires remaining balances to move to Treasury and closes the account. SEC\u2019s FY2025 financial report identifies October 1, 2025 as the closure date. FY2026 new funding is therefore verified zero; the missing SF133 row is not left as an unexplained gap.",
+      "verified_metrics": {
+        "appropriations": 0,
+        "net_authority": 0,
+        "gross_authority": 0
+      },
+      "sources": [
+        {
+          "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/html/PLAW-119publ21.htm",
+          "section": "30003(a), (d), (e)"
+        },
+        {
+          "url": "https://www.sec.gov/file/sec-2025-agency-financial-report",
+          "section": "FY2025 Agency Financial Report \u00b7 Reserve Fund closure"
+        }
+      ]
+    },
+    {
+      "id": "afdf",
+      "record_ids": [
+        "184-10-0082|020-0079|NON-FINANCING ACCOUNTS"
+      ],
+      "title": "U.S. contribution to the African Development Fund",
+      "status": "verified_zero_enacted_funding",
+      "label": "FY2026 enacted appropriation: $0",
+      "closure_verified": false,
+      "reason": "Treasury\u2019s official summary of previous appropriations lists the African Development Fund at zero in the FY2026 Enacted column. This verifies no new appropriation, not closure of the international institution or cancellation of all prior balances. Its separate FY2027 cancellation proposal is not treated as enacted.",
+      "verified_metrics": {
+        "appropriations": 0
+      },
+      "sources": [
+        {
+          "url": "https://home.treasury.gov/system/files/266/22.-Treasury-International-Programs-FY-2027-BIB.pdf",
+          "page": 4,
+          "table": "Table 1 \u00b7 FY2026 Enacted column \u00b7 thousands of dollars"
+        }
+      ]
+    },
+    {
+      "id": "gafsp",
+      "record_ids": [
+        "184-10-1475|020-1475|NON-FINANCING ACCOUNTS"
+      ],
+      "title": "Global Agriculture and Food Security Program",
+      "status": "verified_zero_enacted_funding",
+      "label": "FY2026 enacted appropriation: $0",
+      "closure_verified": false,
+      "reason": "Treasury\u2019s official enacted-funding table lists zero FY2026 appropriation. This is a funding decision, not evidence that the international program ceased operating. Proposed FY2027 cancellation of prior balances is kept separate.",
+      "verified_metrics": {
+        "appropriations": 0
+      },
+      "sources": [
+        {
+          "url": "https://home.treasury.gov/system/files/266/22.-Treasury-International-Programs-FY-2027-BIB.pdf",
+          "page": 4,
+          "table": "Table 1 \u00b7 FY2026 Enacted column \u00b7 thousands of dollars"
+        }
+      ]
+    }
+  ],
+  "organization_cases": [
+    {
+      "agency": "072",
+      "title": "USAID: independent operations ceased; functions transferred",
+      "status": "closed_independent_operations_with_transfers",
+      "reason": "USAID OIG\u2019s November 3, 2026 evaluation describes the end of independent operations and transfer of selected functions and programs to State. It reports 1,359 awards still active as of May 15, 2026. Closure of the independent organization is not a zero for all associated funding, obligations or successor activity.",
+      "source": "https://oig.usaid.gov/node/8228"
+    },
+    {
+      "agency": "028",
+      "title": "SSA: payments continued",
+      "status": "payments_reported",
+      "reason": "The FY2026 SF133 reports show approximately $1.667 trillion in net outlays from the OASI and DI trust-fund accounts. An unavailable metric elsewhere is not evidence that Social Security payments stopped.",
+      "source": "https://portal.max.gov/portal/document/SF133/Budget/attachments/2692285459/FY2026_SF133_MONTHLY_Social_Security_Administration.xlsx"
+    }
+  ],
+  "historical_cases": [
+    {
+      "record_ids": [
+        "015-05-0128|020-0128|NON-FINANCING ACCOUNTS"
+      ],
+      "title": "TARP: programs closed before the comparison baseline",
+      "status": "prebaseline_program_wind_down",
+      "reason": "Treasury reports all TARP programs closed by September 30, 2023. Subsequent Office of Financial Stability administration or wind-down funding is not proof of a new Trump-era program cancellation. Missing FY2026 new-authority values remain unverified.",
+      "source": "https://home.treasury.gov/data/troubled-assets-relief-program/about-tarp/"
+    }
+  ],
+  "energy_fund": {
+    "record_id": "019-20-4397|089-4397|NON-FINANCING ACCOUNTS",
+    "title": "America Energy Independence Fund",
+    "status": "zero_new_authority_with_ongoing_spending",
+    "reason": "FY2026 SF133 total resources (1910) equal carried-forward balances (1070), supporting reconciled zero new authority. The same report shows $2.543 billion in obligations and $106.9 million net outlays. It is not verified canceled.",
+    "source": "https://portal.max.gov/portal/document/SF133/Budget/attachments/2692285459/FY2026_SF133_MONTHLY_Department_of_Energy.xlsx"
+  },
+  "retained_sources": [
+    {
+      "file": "data/raw/treasury-international-fy2027-bib.pdf",
+      "sha256": "29c6a8db80bd40b2bf9371c729c7f12c6cd4c8208a4492e831e38963af0ee032"
+    },
+    {
+      "file": "data/raw/pl119-21-section30003.txt",
+      "sha256": "5fae3edcfd76827d671e770d0fb0ee2fb3e7cfc4eab45f9a5274cd80f5fb9d89"
+    }
+  ],
+  "continuity_cases": [
+    {
+      "prior_id": "001-25-4339|003-4339|NON-FINANCING ACCOUNTS",
+      "current_id": "001-25-4346|003-4339|NON-FINANCING ACCOUNTS",
+      "status": "reviewed_account_recode",
+      "reason": "Same Treasury agency/main-account identifier, same account title and same owning OMB agency; the old OMB coding occurs only in FY2024 and the new coding only in FY2026. Combined once for comparison; original source records remain retained. This is not a program cancellation."
+    },
+    {
+      "prior_id": "418-00-8050|043-8050|NON-FINANCING ACCOUNTS",
+      "current_id": "418-00-0200|043-8050|NON-FINANCING ACCOUNTS",
+      "status": "reviewed_account_recode",
+      "reason": "Same Treasury agency/main-account identifier, same account title and same owning OMB agency; the old OMB coding occurs only in FY2024 and the new coding only in FY2026. Combined once for comparison; original source records remain retained. This is not a program cancellation."
+    }
+  ]
+}

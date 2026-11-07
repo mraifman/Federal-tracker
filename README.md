@@ -1,24 +1,36 @@
 # Federal Atlas
 
-A focused comparison of the reported federal civilian workforce before Biden left office and the latest OPM snapshot. The interface uses workforce spotlights, a source-based trend chart, agency filters, subagency detail, a searchable table and CSV export. Original typography and colors accompany a layout inspired by Dezernat Zukunft’s budget tracker.
+An interactive comparison of federal people, funding by purpose, spending uses, and resources awarded to outside parties. The site is published from this repository to [GitHub Pages](https://mraifman.github.io/Federal-tracker/).
 
-## Current comparison
+## Comparisons and definitions
 
-- **Baseline:** December 31, 2024, the last OPM month-end snapshot before January 19, 2025. This is not an exact inauguration-day count.
-- **Latest:** September 30, 2026, checked November 7, 2026. August remains selectable. September has approximately 10,000 missing defense Status records; a non-defense scope is available.
-- **Metric:** OPM EHRI employment counts, all work schedules, including pay and non-pay status. These are not effective FTEs, layoffs, vacancies, or service-capacity estimates. USPS, several intelligence bodies, military personnel and other excluded populations are outside the coverage.
-- **Totals:** 2,312,301 baseline records versus 2,017,021 latest records; the reported difference of −295,280 includes reporting omissions. Missing agency observations are never assigned zero in agency comparisons.
+- **People:** December 31, 2024 (last OPM month-end snapshot before Biden’s final full day, January 19, 2025) versus September 30, 2026. August is selectable. Non-defense is the default; defense civilian reporting is incomplete in September. These are headcounts including pay and non-pay status, not effective FTE, layoffs, vacancies or service capacity.
+- **Funding:** actual FY2024 versus FY2026 OMB SF 133 execution reports, all 58 published agency workbooks. These show enacted and adjusted resources, rather than presidential requests. Account sums are not consolidated federal totals. Official purpose classifications span agencies; mixed/unmatched accounts remain flagged rather than assigned invented shares.
+- **Uses:** matched October–August account obligations in FY2024/FY2026, paired responses for 110 of 111 USAspending directory agencies. NIH has its own official account portfolio. Dollar-scaled composition bars show totals as well as shares.
+- **External awards:** full FY2024/FY2026 transaction archives for all agencies, assistance and contracts, archive vintage October 6, 2026. Transaction obligations are aggregated, never repeated lifetime award ceilings. Loan subsidy cost and face value remain distinct. Funding and awarding agency views are alternatives, not additive totals. Recipient sectors use reported classifications; unresolved account-purpose allocations remain explicit. Program/recipient detail retains negative adjustments. Ten largest recipient amounts per program/year/agency role are named; all remaining dollars are preserved as Other recipients. Individuals are aggregated without names. Prime award archives do not constitute a complete ultimate-beneficiary or subaward ledger.
 
-`index.html`, `workforce.js` and `workforce.css` form the active buildless site. `data/workforce-changes.json` retains department, subagency and occupation aggregates for nine snapshots, versioned OPM source URLs and SHA-256 hashes. Individual employee files are not published. Other retained research assets are inactive in the simplified interface.
+## Interactions
 
-## Sources
+Workforce bubbles reform in place from agencies to subagencies, then occupational series at the source’s organizational limit. Occupational series are actual reported roles, **not** invented office allocations. Public OPM data does not expose NIH institute/center staffing; NIH-wide totals are not substituted for institute headcounts. Funding bubbles drill through topic → agency → bureau → account. Titles use external callouts, measured wrapping and spaced label rails. Crowded charts show the largest changes with all matching records retained in tables/exports.
 
-[OPM downloads](https://data.opm.gov/get-data/data-downloads) · [Coverage](https://data.opm.gov/resources/data-sources) · [Release notes](https://data.opm.gov/info-and-help/release-notes) · [API](https://data.opm.gov/get-data/api-access)
+The agency spending view connects grants/fixed charges to named assistance programs and outside recipients. External allocation bubbles drill sector → program/purpose → recipient, with topic filters, funding/awarding perspectives and CSV export. Account-spending and award periods/scopes differ and are explicitly labeled.
 
-## Run and validate
+Missing data is never evidence of cancellation. Reviewed cases distinguish statutory closure, zero new appropriations, spending from prior balances, account recoding and transferred operations. Source rows, URLs, hashes, derived values and reasons remain in the public datasets.
 
-Serve the repository with `python3 -m http.server 8000`. Run `node --check workforce.js`, `python3 scripts/validate_data.py`, and `python3 scripts/validate_change_data.py`. Browser interactions were verified through the Codex browser on desktop and mobile; `tests/browser.cjs` records corresponding regression checks for environments with Playwright installed.
+## Run locally
 
-Rebuild OPM aggregates using `scripts/download_workforce.py` followed by `scripts/build_change_data.py` with the complete manifest. Preserve the pinned versions and all retained snapshots. The broader research data validators also verify historical OMB, fiscal execution and grant-register source provenance.
+```sh
+python3 -m http.server 8000
+```
 
-GitHub Pages deploys from `main` via `.github/workflows/pages.yml`. Public URL: https://mraifman.github.io/Federal-tracker/
+Open `http://127.0.0.1:8000/`. No build or runtime API key is required; D3 is vendored locally.
+
+## Data pipeline and checks
+
+- `scripts/build_workforce_roles.py`: occupational-series aggregates, reconciled to each organizational parent.
+- `scripts/build_authority_comparison.py`, `scripts/classify_authority.py`, `scripts/audit_funding_availability.py`: SF133 ingestion, purpose crosswalks and strict zero-authority reconciliation.
+- `scripts/build_spending_comparison.py`: matched-period account and object-class responses.
+- `scripts/download_awards_ranged.py`, `scripts/analyze_external_awards.py`: validated full-archive downloads, streamed CSV normalization, transaction deduplication, public agency/program/recipient aggregates. Raw archives/staging stay in `/tmp`, outside Git. Requires Python with pyarrow and DuckDB.
+- `scripts/validate_data.py`, `scripts/validate_change_data.py`, `scripts/validate_comparison.py`, `scripts/validate_allocations.py`: provenance, hierarchy, coverage, financial reconciliation and export checks.
+
+GitHub Actions deploys validated static files. The scheduled legacy agency refresh does **not** automatically rebuild the large workforce, SF133 or full-archive analyses; those retain their explicit snapshot dates until rerun. Historical research assets are retained but are not loaded by the active interface.

@@ -2,7 +2,7 @@ name: Deploy Federal Atlas
 on:
   push:
     branches: [main]
-    paths: ['index.html', 'needs.css', 'needs.js', 'story.js', 'tracker.js', 'tracker.css', 'workforce.js', 'workforce.css', 'data/**', 'scripts/validate_change_data.py', '.github/workflows/pages.yml']
+    paths: ['index.html', 'needs.css', 'needs.js', 'story.js', 'tracker.js', 'tracker.css', 'workforce.js', 'workforce.css', 'research.js', 'research.css', 'atlas-bubbles.js', 'outflows.js', 'vendor/**', 'data/**', 'scripts/validate_change_data.py', '.github/workflows/pages.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -24,11 +24,13 @@ jobs:
           python-version: '3.12'
       - run: python scripts/validate_data.py
       - run: python scripts/validate_change_data.py
+      - run: python scripts/validate_comparison.py
+      - run: python scripts/validate_allocations.py
       - uses: actions/configure-pages@v5
       - run: |
           mkdir _site
-          cp index.html workforce.js workforce.css _site/
-          cp -r data _site/
+          cp index.html workforce.js workforce.css research.js research.css atlas-bubbles.js outflows.js _site/
+          cp -r data vendor _site/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
