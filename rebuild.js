@@ -20,11 +20,11 @@
   window.dispatchEvent(new CustomEvent('atlas-focus-funding',{detail:{topic:topicCode,metric:metric}}));
  }
 
- Promise.all(['repair-bill','workforce-restoration','outlay-pressure','budget-structure'].map(n=>fetch('data/'+n+'.json').then(r=>{if(!r.ok)throw Error(n);return r.json()})))
- .then(([bill,det,outlay,budget])=>render(bill,det,outlay,budget))
+ Promise.all(['repair-bill','workforce-restoration','budget-structure'].map(n=>fetch('data/'+n+'.json').then(r=>{if(!r.ok)throw Error(n);return r.json()})))
+ .then(([bill,det,budget])=>render(bill,det,budget))
  .catch(()=>{root.innerHTML='';});
 
- function render(bill,det,outlay,budget){
+ function render(bill,det,budget){
   const p=bill.people,f=bill.funding;
   const pct=(p.net_change/p.baseline_count*100);
 
@@ -91,32 +91,6 @@
    '</section>';
   }
 
-  // ---- outlay pressure: fewer hands, more money ----
-  let outlaySection='';
-  if(outlay&&outlay.government_wide){
-   const g=outlay.government_wide;
-   const mix=code=>{const m=(outlay.object_mix||[]).find(x=>x.code===code);return m?m.share_b:null;};
-   const grants=mix('40'),personnel=mix('10');
-   const squeeze=(outlay.agencies||[]).filter(a=>a.staff_pct<=-10&&a.staff_pct>-80).slice(0,8);
-   const smax=Math.max(1,...squeeze.map(a=>a.per_employee_pct));
-   const rows=squeeze.map(a=>'<button class="squeeze-row" data-opm="'+esc(a.opm)+'">'+
-     '<span class="sq-name">'+esc(a.name)+'</span>'+
-     '<span class="sq-staff">staff −'+Math.abs(a.staff_pct).toFixed(0)+'%</span>'+
-     '<span class="sq-track"><i style="width:'+(a.per_employee_pct/smax*100)+'%"></i></span>'+
-     '<span class="sq-load">+'+a.per_employee_pct.toFixed(0)+'%<small>per employee</small></span></button>').join('');
-   outlaySection='<section class="outlay">'+
-    '<h2>Doing more with less</h2>'+
-    '<p class="section-lede">The staff were cut; the work wasn’t. Across '+g.matched_agencies+' agencies, the workforce fell <b>'+Math.abs(g.staff_pct).toFixed(0)+'%</b> while the money they actively manage held steady — so each remaining person now handles far more.</p>'+
-    '<div class="outlay-headline"><span class="ohl-label">Money each employee now manages</span>'+
-     '<b class="ohl-figure">+'+g.per_employee_pct.toFixed(0)+'%</b>'+
-     '<span class="ohl-sub">'+money(g.per_employee_a)+' → '+money(g.per_employee_b)+' per employee</span></div>'+
-    '<h3>The squeeze, by agency</h3>'+
-    '<p class="chart-note">How far staffing fell, and how much more each remaining employee must manage. Select an agency to see its spending.</p>'+
-    '<div class="squeeze-list">'+rows+'</div>'+
-    '<p class="muted"><b>What this counts.</b> Only money that staff actively manage. It leaves out benefits, grants and debt interest — about '+(grants!=null?grants.toFixed(0)+'%':'most')+' of the total — which move by formula, not by anyone’s work, so a rising Social Security or interest bill doesn’t count as “doing more.” A few jumps (disaster loans, bank failures) are one-offs. '+esc(outlay.period_note||'')+'</p>'+
-   '</section>';
-  }
-
   // ---- the budget's structure: mandatory vs discretionary, and the debt ----
   let budgetSection='';
   if(budget&&budget.categories&&budget.categories.length){
@@ -143,7 +117,7 @@
      '<p class="muted">'+money(disc.a)+' to '+money(disc.b)+' ('+disc.pct.toFixed(0)+'%), squeezed by growing mandatory programs and debt interest.</p></div>'+
     '<div class="budget-grid">'+
      '<div class="debt-panel"><h3>The national debt’s interest grew '+ni.pct.toFixed(0)+'% from 2024 to 2026</h3>'+
-      '<p class="chart-note">Net interest tripled since 2016, past <b>'+money(ni.b)+'</b> — more than any discretionary function. Election-cycle years.</p>'+spark+'</div>'+
+      '<p class="chart-note">Net interest more than quadrupled since 2016, past <b>'+money(ni.b)+'</b> — more than any discretionary function. Election-cycle years.</p>'+spark+'</div>'+
      '<div class="disc-panel"><h3>The cuts Congress chose</h3>'+
       '<p class="chart-note">Largest discretionary cuts, FY2024 → FY2026.</p>'+dbars+'</div></div>'+
     '<p class="muted">'+esc(budget.basis)+'</p>'+
@@ -156,8 +130,8 @@
    '<h1>To <span class="hl-build">build back better</span>, we must first know what was <span class="hl-demo">demolished</span>.</h1>'+
    '<p class="lede">In under two years, the non-defense federal workforce was <b>hollowed out</b> by <b>'+num(-p.net_change)+'</b> positions — a <b>'+Math.abs(pct).toFixed(0)+'%</b> reduction. People were fired, took buyouts, resigned under pressure or had their jobs eliminated; by NPR’s count more than <b>300,000</b> left or faced separation government-wide. The losses fell hardest on the most experienced civil servants and erased entire agencies. This is what it would take to rebuild.</p>'+
    '<div class="repair-tiles">'+
-    tile('People to rehire',num(p.positions_to_restore),'To bring every career field back to its December 2024 strength.','Net job losses outside defense, counted role by role.')+
-    tile('Annual payroll to rebuild',money(p.loaded_payroll)+'/yr',"Priced at the real grades and salaries of the jobs that were cut.",'Base pay '+money(p.base_payroll)+', plus benefits and overhead.')+
+    tile('People to rehire',num(p.positions_to_restore),'To restore net declines within each occupation, pay plan and grade to December 2024 levels.','Net declines outside defense, counted by occupation, pay plan and grade.')+
+    tile('Annual payroll to rebuild',money(p.loaded_payroll)+'/yr',"Estimated from net declines by occupation, pay plan and grade, priced at baseline salaries.",'Base pay '+money(p.base_payroll)+', plus benefits and overhead.')+
     tile('Funding to restore',money(domestic),'To reverse the domestic funding cuts'+(heroTopics?': '+heroTopics+'.':'.'),'Domestic funding cut, FY2024 to FY2026, outside defense.')+
    '</div>'+
   '</section>'+
@@ -179,7 +153,6 @@
   '</section>'+
   budgetSection+
   cashSection+
-  outlaySection+
   '<p class="repair-cta">Explore the full evidence — headcount, funding and where the money goes — below ↓</p>';
 
   // ---- footnotes collected at the very bottom of the page ----

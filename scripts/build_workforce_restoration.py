@@ -7,15 +7,15 @@ the pipeline (one micro-record per employee, with grade, pay plan and
 annualized adjusted basic pay) and emits data/workforce-restoration.json.
 
 Restoration target: the last OPM month-end snapshot before January 19, 2025
-(December 31, 2024). "Positions to restore" is the sum of per-occupation NET
-declines, so growth in one career field does not mask losses in another, while
-offsetting growth is not double-counted as it would be at the agency x
-occupation grain. Defense is reported separately and excluded from the headline
+(December 31, 2024). "Positions to restore" is the sum of per-occupation/pay-plan/grade NET
+declines across non-defense agencies. Growth in another group does not offset
+a decline. Promotions and reclassifications can affect this scenario; it does
+not identify individual separations. Defense is reported separately and excluded from the headline
 because September defense submissions are incomplete.
 
-Redacted salaries (OPM withholds ~46% government-wide, concentrated in defense)
-are imputed from the baseline average of the same pay-plan+grade, then the same
-occupation, then the non-defense mean. Salaries outside [10k, 500k] are treated
+Groups are priced at their baseline mean reported salary. Groups without a
+reported salary fall back to the same pay-plan+grade, then occupation, then
+the non-defense mean. Salaries outside [10k, 500k] are treated
 as unreported to drop obvious sentinel/erroneous values.
 """
 import argparse, json, pathlib
@@ -49,6 +49,8 @@ def read_period(raw_dir, period):
     dep = defaultdict(int)          # department_code -> count (non-defense)
     dep_all = defaultdict(int)      # department_code -> count (all)
     dep_occ = defaultdict(int)      # (department_code, occ) -> count (non-defense)
+    cells = defaultdict(int)       # (occupation, pay plan, grade) -> count
+    sal_cell = defaultdict(lambda: [0.0, 0])
     sal_occ = defaultdict(lambda: [0.0, 0])
     sal_grade = defaultdict(lambda: [0.0, 0])
     total = nd_total = sal_reported = sal_rows = 0
@@ -78,10 +80,13 @@ def read_period(raw_dir, period):
         dep_name[d] = dn or d
         dep_occ[(d, o)] += c
         grade[(pp, g)] += c
+        cells[(o, pp, g)] += c
         if v is not None:
+            sal_cell[(o, pp, g)][0] += v * c; sal_cell[(o, pp, g)][1] += c
             sal_occ[o][0] += v * c; sal_occ[o][1] += c
             sal_grade[(pp, g)][0] += v * c; sal_grade[(pp, g)][1] += c
     return {
+        'cells': cells, 'sal_cell': sal_cell,
         'occ': occ, 'occ_name': occ_name, 'dep_name': dep_name,
         'grade': grade, 'dep': dep, 'dep_all': dep_all, 'dep_occ': dep_occ,
         'total': total, 'nd_total': nd_total,
@@ -109,8 +114,16 @@ def main():
     nd_mean = (sum(s for s, _ in base['sal_occ'].values())
                / sum(n for _, n in base['sal_occ'].values()))
 
-    def salary_for(occ_code):
-        return occ_avg.get(occ_code, nd_mean)
+    cell_avg = {k: s / n for k, (s, n) in base['sal_cell'].items() if n}
+
+    def salary_for(cell):
+        o, pp, g = cell
+        return cell_avg.get(cell, grade_avg.get((pp, g), occ_avg.get(o, nd_mean)))
+
+    def restoration_cells(comp):
+        current = data[comp]['cells']
+        return [(cell, max(0, count - current.get(cell, 0)))
+                for cell, count in base['cells'].items()]
 
     all_occ = set().union(*(data[p]['occ'] for p in periods))
     occ_name = {}
@@ -120,13 +133,10 @@ def main():
     def scope_block(comp):
         """Headline figures for baseline -> comp."""
         c = data[comp]
-        # per-occupation net (non-defense)
-        restore = cost = 0
-        for o in all_occ:
-            net = c['occ'].get(o, 0) - base['occ'].get(o, 0)
-            if net < 0:
-                restore += -net
-                cost += (-net) * salary_for(o)
+        # Net declines within each occupation/pay-plan/grade cell.
+        declines = restoration_cells(comp)
+        restore = sum(count for _, count in declines)
+        cost = sum(count * salary_for(cell) for cell, count in declines)
         nd_net = c['nd_total'] - base['nd_total']
         all_net = c['total'] - base['total']
         return {
@@ -158,19 +168,25 @@ def main():
         if net < 0:
             occ_top_agency[o] = {'code': d, 'name': dep_name.get(d, d), 'net': net}
 
+    restore_by_occ = defaultdict(int)
+    cost_by_occ = defaultdict(float)
+    for cell, count in restoration_cells(a.comparison):
+        restore_by_occ[cell[0]] += count
+        cost_by_occ[cell[0]] += count * salary_for(cell)
+
     # by occupation (non-defense) for the primary comparison
     by_occupation = []
     for o in all_occ:
         b = base['occ'].get(o, 0); l = comp['occ'].get(o, 0)
         net = l - b
-        sal = salary_for(o)
+        sal = occ_avg.get(o, nd_mean)
         by_occupation.append({
             'code': o, 'name': occ_name.get(o, o),
             'baseline': b, 'latest': l, 'net': net,
             'avg_salary': round(sal),
             'imputed_salary': o not in occ_avg,
-            'restore_count': max(0, -net),
-            'restore_cost': round(max(0, -net) * sal),
+            'restore_count': restore_by_occ[o],
+            'restore_cost': round(cost_by_occ[o]),
             'top_agency': occ_top_agency.get(o),
         })
     by_occupation.sort(key=lambda r: r['net'])
@@ -210,10 +226,10 @@ def main():
         'comparison': {'period': a.comparison, 'label': 'September 30, 2026'},
         'alternate': {'period': a.alternate, 'label': 'August 31, 2026'},
         'methodology': {
-            'target': 'Restore each non-defense occupation to its December 31, 2024 level (last OPM snapshot before January 19, 2025).',
-            'positions': 'Sum of per-occupation NET declines across non-defense agencies. Growth in one field does not offset losses in another, and offsetting growth is not double-counted.',
-            'cost': f'Baseline average salary per occupation x positions to restore, loaded x{LOADING} for benefits and overhead. Base payroll excludes the loading.',
-            'salary_imputation': 'Redacted salaries (OPM withholds ~46% government-wide, concentrated in defense) are imputed from the baseline average of the same pay-plan+grade, then occupation, then the non-defense mean. Values outside [10k, 500k] are treated as unreported.',
+            'target': 'Restore each non-defense occupation, pay plan and grade to its December 31, 2024 level (last OPM snapshot before January 19, 2025).',
+            'positions': 'Sum of positive baseline-minus-comparison headcount differences within occupation/pay-plan/grade groups across non-defense agencies. Growth in another group does not offset a decline. Promotions, reclassifications and ordinary turnover can contribute; these are not identified individual job losses.',
+            'cost': f'For each occupation/pay-plan/grade group, net positions to restore x baseline mean reported annualized adjusted basic pay for that group; loaded x{LOADING} for benefits and overhead. This is a restoration scenario at baseline pay, not an exact current hiring cost. Base payroll excludes the loading.',
+            'salary_imputation': 'Baseline mean reported salary in the same occupation/pay-plan/grade group prices each net decline. Groups with no reported salary fall back to the same pay-plan/grade, then occupation, then the non-defense mean. Withheld salaries within a group are represented by its reported mean; values outside [10k, 500k] are unreported.',
             'defense': 'Defense civilians are excluded from the headline; September defense submissions are incomplete (~10,000 records missing).',
             'caveats': 'Net headcount change is not a count of layoffs. Some turnover is ordinary attrition. Restoring to the pre-transition level is a policy choice, not an established staffing requirement.',
         },
@@ -222,6 +238,17 @@ def main():
         },
         'headline': scope_block(a.comparison),
         'alternate_headline': scope_block(a.alternate),
+        'restoration_by_group': [
+            {'occupation': o, 'pay_plan': pp, 'grade': g,
+             'baseline': base['cells'][cell],
+             'latest': comp['cells'].get(cell, 0),
+             'restore_count': count, 'avg_salary': salary_for(cell),
+             'salary_basis': 'occupation_pay_plan_grade' if cell in cell_avg else
+                 'pay_plan_grade' if (pp, g) in grade_avg else
+                 'occupation' if o in occ_avg else 'non_defense_mean',
+             'base_payroll': count * salary_for(cell)}
+            for cell, count in sorted(restoration_cells(a.comparison), key=lambda x: tuple(str(v) for v in x[0]))
+            for o, pp, g in [cell] if count > 0],
         'by_grade': by_grade,
         'by_occupation': by_occupation,
         'by_agency': by_agency,
