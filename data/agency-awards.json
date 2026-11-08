@@ -1,6 +1,6 @@
 {
   "source": "USAspending.gov official agency award obligations API",
-  "retrieved_at_utc": "2026-11-08T15:20:41.762421+00:00",
+  "retrieved_at_utc": "2026-11-08T15:42:53.469090+00:00",
   "fiscal_years": [
     2024,
     2025,
@@ -14,14 +14,14 @@
       "code": "247",
       "name": "400 Years of African-American History Commission",
       "years": {
-        "2024": {
+        "2025": {
           "obligations": 0.0,
           "transactions": 0,
           "latest_action_date": null,
           "messages": [],
-          "period_start": "2023-10-01",
-          "period_end": "2024-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/247/awards/?fiscal_year=2024&agency_type=funding"
+          "period_start": "2024-10-01",
+          "period_end": "2025-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/247/awards/?fiscal_year=2025&agency_type=funding"
         },
         "2026": {
           "obligations": 0.0,
@@ -32,14 +32,14 @@
           "period_end": "2026-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/247/awards/?fiscal_year=2026&agency_type=funding"
         },
-        "2025": {
+        "2024": {
           "obligations": 0.0,
           "transactions": 0,
           "latest_action_date": null,
           "messages": [],
-          "period_start": "2024-10-01",
-          "period_end": "2025-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/247/awards/?fiscal_year=2025&agency_type=funding"
+          "period_start": "2023-10-01",
+          "period_end": "2024-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/247/awards/?fiscal_year=2024&agency_type=funding"
         }
       }
     },
@@ -56,15 +56,6 @@
           "period_end": "2024-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/310/awards/?fiscal_year=2024&agency_type=funding"
         },
-        "2025": {
-          "obligations": 2525944.16,
-          "transactions": 33,
-          "latest_action_date": "2025-09-19T00:00:00",
-          "messages": [],
-          "period_start": "2024-10-01",
-          "period_end": "2025-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/310/awards/?fiscal_year=2025&agency_type=funding"
-        },
         "2026": {
           "obligations": 2237148.05,
           "transactions": 71,
@@ -73,6 +64,15 @@
           "period_start": "2025-10-01",
           "period_end": "2026-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/310/awards/?fiscal_year=2026&agency_type=funding"
+        },
+        "2025": {
+          "obligations": 2525944.16,
+          "transactions": 33,
+          "latest_action_date": "2025-09-19T00:00:00",
+          "messages": [],
+          "period_start": "2024-10-01",
+          "period_end": "2025-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/310/awards/?fiscal_year=2025&agency_type=funding"
         }
       }
     },
@@ -113,6 +113,15 @@
       "code": "306",
       "name": "Advisory Council on Historic Preservation",
       "years": {
+        "2026": {
+          "obligations": 3021229.16,
+          "transactions": 14,
+          "latest_action_date": "2026-09-14T00:00:00",
+          "messages": [],
+          "period_start": "2025-10-01",
+          "period_end": "2026-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/306/awards/?fiscal_year=2026&agency_type=funding"
+        },
         "2024": {
           "obligations": 790537.58,
           "transactions": 20,
@@ -130,15 +139,6 @@
           "period_start": "2024-10-01",
           "period_end": "2025-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/306/awards/?fiscal_year=2025&agency_type=funding"
-        },
-        "2026": {
-          "obligations": 3021229.16,
-          "transactions": 14,
-          "latest_action_date": "2026-09-14T00:00:00",
-          "messages": [],
-          "period_start": "2025-10-01",
-          "period_end": "2026-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/306/awards/?fiscal_year=2026&agency_type=funding"
         }
       }
     },
@@ -146,6 +146,15 @@
       "code": "166",
       "name": "African Development Foundation",
       "years": {
+        "2025": {
+          "obligations": 0.0,
+          "transactions": 0,
+          "latest_action_date": null,
+          "messages": [],
+          "period_start": "2024-10-01",
+          "period_end": "2025-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/166/awards/?fiscal_year=2025&agency_type=funding"
+        },
         "2024": {
           "obligations": 0.0,
           "transactions": 0,
@@ -163,15 +172,6 @@
           "period_start": "2025-10-01",
           "period_end": "2026-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/166/awards/?fiscal_year=2026&agency_type=funding"
-        },
-        "2025": {
-          "obligations": 0.0,
-          "transactions": 0,
-          "latest_action_date": null,
-          "messages": [],
-          "period_start": "2024-10-01",
-          "period_end": "2025-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/166/awards/?fiscal_year=2025&agency_type=funding"
         }
       }
     },
@@ -245,6 +245,15 @@
       "code": "309",
       "name": "Appalachian Regional Commission",
       "years": {
+        "2026": {
+          "obligations": 21743962.0,
+          "transactions": 32,
+          "latest_action_date": "2026-04-10T00:00:00",
+          "messages": [],
+          "period_start": "2025-10-01",
+          "period_end": "2026-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/309/awards/?fiscal_year=2026&agency_type=funding"
+        },
         "2024": {
           "obligations": 280694526.8,
           "transactions": 456,
@@ -262,15 +271,6 @@
           "period_start": "2024-10-01",
           "period_end": "2025-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/309/awards/?fiscal_year=2025&agency_type=funding"
-        },
-        "2026": {
-          "obligations": 21743962.0,
-          "transactions": 32,
-          "latest_action_date": "2026-04-10T00:00:00",
-          "messages": [],
-          "period_start": "2025-10-01",
-          "period_end": "2026-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/309/awards/?fiscal_year=2026&agency_type=funding"
         }
       }
     },
@@ -320,15 +320,6 @@
           "period_end": "2024-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/313/awards/?fiscal_year=2024&agency_type=funding"
         },
-        "2025": {
-          "obligations": 458358.39,
-          "transactions": 20,
-          "latest_action_date": "2025-09-23T00:00:00",
-          "messages": [],
-          "period_start": "2024-10-01",
-          "period_end": "2025-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/313/awards/?fiscal_year=2025&agency_type=funding"
-        },
         "2026": {
           "obligations": 341921.11,
           "transactions": 7,
@@ -337,6 +328,15 @@
           "period_start": "2025-10-01",
           "period_end": "2026-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/313/awards/?fiscal_year=2026&agency_type=funding"
+        },
+        "2025": {
+          "obligations": 458358.39,
+          "transactions": 20,
+          "latest_action_date": "2025-09-23T00:00:00",
+          "messages": [],
+          "period_start": "2024-10-01",
+          "period_end": "2025-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/313/awards/?fiscal_year=2025&agency_type=funding"
         }
       }
     },
@@ -344,6 +344,15 @@
       "code": "321",
       "name": "Commission for the Preservation of America's Heritage Abroad",
       "years": {
+        "2024": {
+          "obligations": 0.0,
+          "transactions": 0,
+          "latest_action_date": null,
+          "messages": [],
+          "period_start": "2023-10-01",
+          "period_end": "2024-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/321/awards/?fiscal_year=2024&agency_type=funding"
+        },
         "2025": {
           "obligations": 0.0,
           "transactions": 0,
@@ -361,15 +370,6 @@
           "period_start": "2025-10-01",
           "period_end": "2026-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/321/awards/?fiscal_year=2026&agency_type=funding"
-        },
-        "2024": {
-          "obligations": 0.0,
-          "transactions": 0,
-          "latest_action_date": null,
-          "messages": [],
-          "period_start": "2023-10-01",
-          "period_end": "2024-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/321/awards/?fiscal_year=2024&agency_type=funding"
         }
       }
     },
@@ -419,15 +419,6 @@
           "period_end": "2024-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/326/awards/?fiscal_year=2024&agency_type=funding"
         },
-        "2025": {
-          "obligations": 0.0,
-          "transactions": 0,
-          "latest_action_date": null,
-          "messages": [],
-          "period_start": "2024-10-01",
-          "period_end": "2025-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/326/awards/?fiscal_year=2025&agency_type=funding"
-        },
         "2026": {
           "obligations": 0.0,
           "transactions": 0,
@@ -436,6 +427,15 @@
           "period_start": "2025-10-01",
           "period_end": "2026-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/326/awards/?fiscal_year=2026&agency_type=funding"
+        },
+        "2025": {
+          "obligations": 0.0,
+          "transactions": 0,
+          "latest_action_date": null,
+          "messages": [],
+          "period_start": "2024-10-01",
+          "period_end": "2025-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/326/awards/?fiscal_year=2025&agency_type=funding"
         }
       }
     },
@@ -443,14 +443,14 @@
       "code": "338",
       "name": "Committee for Purchase from People Who Are Blind or Severely Disabled",
       "years": {
-        "2024": {
-          "obligations": 2305401.62,
-          "transactions": 52,
-          "latest_action_date": "2024-09-26T00:00:00",
+        "2025": {
+          "obligations": 2163085.14,
+          "transactions": 50,
+          "latest_action_date": "2025-09-30T00:00:00",
           "messages": [],
-          "period_start": "2023-10-01",
-          "period_end": "2024-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/338/awards/?fiscal_year=2024&agency_type=funding"
+          "period_start": "2024-10-01",
+          "period_end": "2025-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/338/awards/?fiscal_year=2025&agency_type=funding"
         },
         "2026": {
           "obligations": 3065031.38,
@@ -461,14 +461,14 @@
           "period_end": "2026-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/338/awards/?fiscal_year=2026&agency_type=funding"
         },
-        "2025": {
-          "obligations": 2163085.14,
-          "transactions": 50,
-          "latest_action_date": "2025-09-30T00:00:00",
+        "2024": {
+          "obligations": 2305401.62,
+          "transactions": 52,
+          "latest_action_date": "2024-09-26T00:00:00",
           "messages": [],
-          "period_start": "2024-10-01",
-          "period_end": "2025-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/338/awards/?fiscal_year=2025&agency_type=funding"
+          "period_start": "2023-10-01",
+          "period_end": "2024-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/338/awards/?fiscal_year=2024&agency_type=funding"
         }
       }
     },
@@ -509,15 +509,6 @@
       "code": "581",
       "name": "Consumer Financial Protection Bureau",
       "years": {
-        "2026": {
-          "obligations": 44123973.46,
-          "transactions": 514,
-          "latest_action_date": "2026-09-30T00:00:00",
-          "messages": [],
-          "period_start": "2025-10-01",
-          "period_end": "2026-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/581/awards/?fiscal_year=2026&agency_type=funding"
-        },
         "2025": {
           "obligations": 117641646.87,
           "transactions": 1030,
@@ -535,6 +526,15 @@
           "period_start": "2023-10-01",
           "period_end": "2024-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/581/awards/?fiscal_year=2024&agency_type=funding"
+        },
+        "2026": {
+          "obligations": 44123973.46,
+          "transactions": 514,
+          "latest_action_date": "2026-09-30T00:00:00",
+          "messages": [],
+          "period_start": "2025-10-01",
+          "period_end": "2026-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/581/awards/?fiscal_year=2026&agency_type=funding"
         }
       }
     },
@@ -575,6 +575,15 @@
       "code": "485",
       "name": "Corporation for National and Community Service",
       "years": {
+        "2024": {
+          "obligations": 893918188.62,
+          "transactions": 2734,
+          "latest_action_date": "2024-09-30T00:00:00",
+          "messages": [],
+          "period_start": "2023-10-01",
+          "period_end": "2024-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/485/awards/?fiscal_year=2024&agency_type=funding"
+        },
         "2025": {
           "obligations": 727669564.0,
           "transactions": 2555,
@@ -592,15 +601,6 @@
           "period_start": "2025-10-01",
           "period_end": "2026-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/485/awards/?fiscal_year=2026&agency_type=funding"
-        },
-        "2024": {
-          "obligations": 893918188.62,
-          "transactions": 2734,
-          "latest_action_date": "2024-09-30T00:00:00",
-          "messages": [],
-          "period_start": "2023-10-01",
-          "period_end": "2024-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/485/awards/?fiscal_year=2024&agency_type=funding"
         }
       }
     },
@@ -608,15 +608,6 @@
       "code": "096",
       "name": "Corps of Engineers - Civil Works",
       "years": {
-        "2025": {
-          "obligations": 4159488133.06,
-          "transactions": 13405,
-          "latest_action_date": "2025-09-30T00:00:00",
-          "messages": [],
-          "period_start": "2024-10-01",
-          "period_end": "2025-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/096/awards/?fiscal_year=2025&agency_type=funding"
-        },
         "2024": {
           "obligations": 8186797819.31,
           "transactions": 16155,
@@ -625,6 +616,15 @@
           "period_start": "2023-10-01",
           "period_end": "2024-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/096/awards/?fiscal_year=2024&agency_type=funding"
+        },
+        "2025": {
+          "obligations": 4159488133.06,
+          "transactions": 13405,
+          "latest_action_date": "2025-09-30T00:00:00",
+          "messages": [],
+          "period_start": "2024-10-01",
+          "period_end": "2025-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/096/awards/?fiscal_year=2025&agency_type=funding"
         },
         "2026": {
           "obligations": 269138545.77,
@@ -650,15 +650,6 @@
           "period_end": "2025-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/542/awards/?fiscal_year=2025&agency_type=funding"
         },
-        "2024": {
-          "obligations": 5413837.45,
-          "transactions": 81,
-          "latest_action_date": "2024-09-24T00:00:00",
-          "messages": [],
-          "period_start": "2023-10-01",
-          "period_end": "2024-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/542/awards/?fiscal_year=2024&agency_type=funding"
-        },
         "2026": {
           "obligations": 10739158.13,
           "transactions": 63,
@@ -667,6 +658,15 @@
           "period_start": "2025-10-01",
           "period_end": "2026-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/542/awards/?fiscal_year=2026&agency_type=funding"
+        },
+        "2024": {
+          "obligations": 5413837.45,
+          "transactions": 81,
+          "latest_action_date": "2024-09-24T00:00:00",
+          "messages": [],
+          "period_start": "2023-10-01",
+          "period_end": "2024-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/542/awards/?fiscal_year=2024&agency_type=funding"
         }
       }
     },
@@ -683,15 +683,6 @@
           "period_end": "2025-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/9553/awards/?fiscal_year=2025&agency_type=funding"
         },
-        "2024": {
-          "obligations": 39021378.86,
-          "transactions": 454,
-          "latest_action_date": "2024-09-30T00:00:00",
-          "messages": [],
-          "period_start": "2023-10-01",
-          "period_end": "2024-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/9553/awards/?fiscal_year=2024&agency_type=funding"
-        },
         "2026": {
           "obligations": 64014611.3,
           "transactions": 413,
@@ -700,6 +691,15 @@
           "period_start": "2025-10-01",
           "period_end": "2026-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/9553/awards/?fiscal_year=2026&agency_type=funding"
+        },
+        "2024": {
+          "obligations": 39021378.86,
+          "transactions": 454,
+          "latest_action_date": "2024-09-30T00:00:00",
+          "messages": [],
+          "period_start": "2023-10-01",
+          "period_end": "2024-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/9553/awards/?fiscal_year=2024&agency_type=funding"
         }
       }
     },
@@ -707,15 +707,6 @@
       "code": "347",
       "name": "Defense Nuclear Facilities Safety Board",
       "years": {
-        "2024": {
-          "obligations": 7332175.48,
-          "transactions": 63,
-          "latest_action_date": "2024-09-27T00:00:00",
-          "messages": [],
-          "period_start": "2023-10-01",
-          "period_end": "2024-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/347/awards/?fiscal_year=2024&agency_type=funding"
-        },
         "2025": {
           "obligations": 5948705.18,
           "transactions": 58,
@@ -733,6 +724,15 @@
           "period_start": "2025-10-01",
           "period_end": "2026-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/347/awards/?fiscal_year=2026&agency_type=funding"
+        },
+        "2024": {
+          "obligations": 7332175.48,
+          "transactions": 63,
+          "latest_action_date": "2024-09-27T00:00:00",
+          "messages": [],
+          "period_start": "2023-10-01",
+          "period_end": "2024-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/347/awards/?fiscal_year=2024&agency_type=funding"
         }
       }
     },
@@ -740,15 +740,6 @@
       "code": "517",
       "name": "Delta Regional Authority",
       "years": {
-        "2024": {
-          "obligations": 0.0,
-          "transactions": 0,
-          "latest_action_date": null,
-          "messages": [],
-          "period_start": "2023-10-01",
-          "period_end": "2024-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/517/awards/?fiscal_year=2024&agency_type=funding"
-        },
         "2025": {
           "obligations": 0.0,
           "transactions": 0,
@@ -766,6 +757,15 @@
           "period_start": "2025-10-01",
           "period_end": "2026-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/517/awards/?fiscal_year=2026&agency_type=funding"
+        },
+        "2024": {
+          "obligations": 0.0,
+          "transactions": 0,
+          "latest_action_date": null,
+          "messages": [],
+          "period_start": "2023-10-01",
+          "period_end": "2024-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/517/awards/?fiscal_year=2024&agency_type=funding"
         }
       }
     },
@@ -773,6 +773,15 @@
       "code": "513",
       "name": "Denali Commission",
       "years": {
+        "2025": {
+          "obligations": 178402532.7,
+          "transactions": 250,
+          "latest_action_date": "2025-09-29T00:00:00",
+          "messages": [],
+          "period_start": "2024-10-01",
+          "period_end": "2025-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/513/awards/?fiscal_year=2025&agency_type=funding"
+        },
         "2024": {
           "obligations": 60722029.39,
           "transactions": 199,
@@ -790,15 +799,6 @@
           "period_start": "2025-10-01",
           "period_end": "2026-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/513/awards/?fiscal_year=2026&agency_type=funding"
-        },
-        "2025": {
-          "obligations": 178402532.7,
-          "transactions": 250,
-          "latest_action_date": "2025-09-29T00:00:00",
-          "messages": [],
-          "period_start": "2024-10-01",
-          "period_end": "2025-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/513/awards/?fiscal_year=2025&agency_type=funding"
         }
       }
     },
@@ -806,14 +806,14 @@
       "code": "012",
       "name": "Department of Agriculture",
       "years": {
-        "2024": {
-          "obligations": 173473412566.09,
-          "transactions": 1673163,
-          "latest_action_date": "2024-09-30T00:00:00",
+        "2026": {
+          "obligations": 173566047612.0,
+          "transactions": 1899049,
+          "latest_action_date": "2026-09-30T00:00:00",
           "messages": [],
-          "period_start": "2023-10-01",
-          "period_end": "2024-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/012/awards/?fiscal_year=2024&agency_type=funding"
+          "period_start": "2025-10-01",
+          "period_end": "2026-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/012/awards/?fiscal_year=2026&agency_type=funding"
         },
         "2025": {
           "obligations": 186576553511.66,
@@ -824,14 +824,14 @@
           "period_end": "2025-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/012/awards/?fiscal_year=2025&agency_type=funding"
         },
-        "2026": {
-          "obligations": 173566047612.0,
-          "transactions": 1899049,
-          "latest_action_date": "2026-09-30T00:00:00",
+        "2024": {
+          "obligations": 173473412566.09,
+          "transactions": 1673163,
+          "latest_action_date": "2024-09-30T00:00:00",
           "messages": [],
-          "period_start": "2025-10-01",
-          "period_end": "2026-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/012/awards/?fiscal_year=2026&agency_type=funding"
+          "period_start": "2023-10-01",
+          "period_end": "2024-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/012/awards/?fiscal_year=2024&agency_type=funding"
         }
       }
     },
@@ -872,14 +872,14 @@
       "code": "097",
       "name": "Department of Defense",
       "years": {
-        "2025": {
-          "obligations": 563865084373.37,
-          "transactions": 4533982,
-          "latest_action_date": "2025-09-30T00:00:00",
+        "2024": {
+          "obligations": 511880623707.46,
+          "transactions": 4458552,
+          "latest_action_date": "2024-09-30T00:00:00",
           "messages": [],
-          "period_start": "2024-10-01",
-          "period_end": "2025-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/097/awards/?fiscal_year=2025&agency_type=funding"
+          "period_start": "2023-10-01",
+          "period_end": "2024-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/097/awards/?fiscal_year=2024&agency_type=funding"
         },
         "2026": {
           "obligations": 479968025277.35,
@@ -890,14 +890,14 @@
           "period_end": "2026-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/097/awards/?fiscal_year=2026&agency_type=funding"
         },
-        "2024": {
-          "obligations": 511880623707.46,
-          "transactions": 4458552,
-          "latest_action_date": "2024-09-30T00:00:00",
+        "2025": {
+          "obligations": 563865084373.37,
+          "transactions": 4533982,
+          "latest_action_date": "2025-09-30T00:00:00",
           "messages": [],
-          "period_start": "2023-10-01",
-          "period_end": "2024-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/097/awards/?fiscal_year=2024&agency_type=funding"
+          "period_start": "2024-10-01",
+          "period_end": "2025-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/097/awards/?fiscal_year=2025&agency_type=funding"
         }
       }
     },
@@ -938,15 +938,6 @@
       "code": "089",
       "name": "Department of Energy",
       "years": {
-        "2024": {
-          "obligations": 61778461824.95,
-          "transactions": 24355,
-          "latest_action_date": "2024-09-30T00:00:00",
-          "messages": [],
-          "period_start": "2023-10-01",
-          "period_end": "2024-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/089/awards/?fiscal_year=2024&agency_type=funding"
-        },
         "2025": {
           "obligations": 78366619052.01,
           "transactions": 24915,
@@ -955,6 +946,15 @@
           "period_start": "2024-10-01",
           "period_end": "2025-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/089/awards/?fiscal_year=2025&agency_type=funding"
+        },
+        "2024": {
+          "obligations": 61778461824.95,
+          "transactions": 24355,
+          "latest_action_date": "2024-09-30T00:00:00",
+          "messages": [],
+          "period_start": "2023-10-01",
+          "period_end": "2024-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/089/awards/?fiscal_year=2024&agency_type=funding"
         },
         "2026": {
           "obligations": 58037815566.2,
@@ -971,15 +971,6 @@
       "code": "075",
       "name": "Department of Health and Human Services",
       "years": {
-        "2026": {
-          "obligations": 2201116524377.07,
-          "transactions": 310491,
-          "latest_action_date": "2026-09-30T00:00:00",
-          "messages": [],
-          "period_start": "2025-10-01",
-          "period_end": "2026-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/075/awards/?fiscal_year=2026&agency_type=funding"
-        },
         "2024": {
           "obligations": 1853711963749.82,
           "transactions": 379496,
@@ -997,6 +988,15 @@
           "period_start": "2024-10-01",
           "period_end": "2025-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/075/awards/?fiscal_year=2025&agency_type=funding"
+        },
+        "2026": {
+          "obligations": 2201116524377.07,
+          "transactions": 310491,
+          "latest_action_date": "2026-09-30T00:00:00",
+          "messages": [],
+          "period_start": "2025-10-01",
+          "period_end": "2026-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/075/awards/?fiscal_year=2026&agency_type=funding"
         }
       }
     },
@@ -1070,6 +1070,15 @@
       "code": "015",
       "name": "Department of Justice",
       "years": {
+        "2025": {
+          "obligations": 11131431236.45,
+          "transactions": 107688,
+          "latest_action_date": "2025-09-30T00:00:00",
+          "messages": [],
+          "period_start": "2024-10-01",
+          "period_end": "2025-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/015/awards/?fiscal_year=2025&agency_type=funding"
+        },
         "2026": {
           "obligations": 11447267037.23,
           "transactions": 95518,
@@ -1087,15 +1096,6 @@
           "period_start": "2023-10-01",
           "period_end": "2024-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/015/awards/?fiscal_year=2024&agency_type=funding"
-        },
-        "2025": {
-          "obligations": 11131431236.45,
-          "transactions": 107688,
-          "latest_action_date": "2025-09-30T00:00:00",
-          "messages": [],
-          "period_start": "2024-10-01",
-          "period_end": "2025-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/015/awards/?fiscal_year=2025&agency_type=funding"
         }
       }
     },
@@ -1103,15 +1103,6 @@
       "code": "1601",
       "name": "Department of Labor",
       "years": {
-        "2024": {
-          "obligations": 10610259074.39,
-          "transactions": 14791,
-          "latest_action_date": "2024-09-30T00:00:00",
-          "messages": [],
-          "period_start": "2023-10-01",
-          "period_end": "2024-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/1601/awards/?fiscal_year=2024&agency_type=funding"
-        },
         "2026": {
           "obligations": 12956844474.03,
           "transactions": 12229,
@@ -1129,6 +1120,15 @@
           "period_start": "2024-10-01",
           "period_end": "2025-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/1601/awards/?fiscal_year=2025&agency_type=funding"
+        },
+        "2024": {
+          "obligations": 10610259074.39,
+          "transactions": 14791,
+          "latest_action_date": "2024-09-30T00:00:00",
+          "messages": [],
+          "period_start": "2023-10-01",
+          "period_end": "2024-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/1601/awards/?fiscal_year=2024&agency_type=funding"
         }
       }
     },
@@ -1145,15 +1145,6 @@
           "period_end": "2024-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/019/awards/?fiscal_year=2024&agency_type=funding"
         },
-        "2025": {
-          "obligations": 14219901781.67,
-          "transactions": 77445,
-          "latest_action_date": "2025-09-30T00:00:00",
-          "messages": [],
-          "period_start": "2024-10-01",
-          "period_end": "2025-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/019/awards/?fiscal_year=2025&agency_type=funding"
-        },
         "2026": {
           "obligations": 26281107737.79,
           "transactions": 53178,
@@ -1162,6 +1153,15 @@
           "period_start": "2025-10-01",
           "period_end": "2026-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/019/awards/?fiscal_year=2026&agency_type=funding"
+        },
+        "2025": {
+          "obligations": 14219901781.67,
+          "transactions": 77445,
+          "latest_action_date": "2025-09-30T00:00:00",
+          "messages": [],
+          "period_start": "2024-10-01",
+          "period_end": "2025-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/019/awards/?fiscal_year=2025&agency_type=funding"
         }
       }
     },
@@ -1169,6 +1169,15 @@
       "code": "014",
       "name": "Department of the Interior",
       "years": {
+        "2024": {
+          "obligations": 18095514265.21,
+          "transactions": 88475,
+          "latest_action_date": "2024-09-30T00:00:00",
+          "messages": [],
+          "period_start": "2023-10-01",
+          "period_end": "2024-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/014/awards/?fiscal_year=2024&agency_type=funding"
+        },
         "2025": {
           "obligations": 17106026221.69,
           "transactions": 77001,
@@ -1186,15 +1195,6 @@
           "period_start": "2025-10-01",
           "period_end": "2026-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/014/awards/?fiscal_year=2026&agency_type=funding"
-        },
-        "2024": {
-          "obligations": 18095514265.21,
-          "transactions": 88475,
-          "latest_action_date": "2024-09-30T00:00:00",
-          "messages": [],
-          "period_start": "2023-10-01",
-          "period_end": "2024-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/014/awards/?fiscal_year=2024&agency_type=funding"
         }
       }
     },
@@ -1211,15 +1211,6 @@
           "period_end": "2024-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/020/awards/?fiscal_year=2024&agency_type=funding"
         },
-        "2025": {
-          "obligations": 9911942296.31,
-          "transactions": 25067,
-          "latest_action_date": "2025-09-30T00:00:00",
-          "messages": [],
-          "period_start": "2024-10-01",
-          "period_end": "2025-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/020/awards/?fiscal_year=2025&agency_type=funding"
-        },
         "2026": {
           "obligations": 14671720496.1,
           "transactions": 18551,
@@ -1228,6 +1219,15 @@
           "period_start": "2025-10-01",
           "period_end": "2026-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/020/awards/?fiscal_year=2026&agency_type=funding"
+        },
+        "2025": {
+          "obligations": 9911942296.31,
+          "transactions": 25067,
+          "latest_action_date": "2025-09-30T00:00:00",
+          "messages": [],
+          "period_start": "2024-10-01",
+          "period_end": "2025-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/020/awards/?fiscal_year=2025&agency_type=funding"
         }
       }
     },
@@ -1235,15 +1235,6 @@
       "code": "069",
       "name": "Department of Transportation",
       "years": {
-        "2025": {
-          "obligations": 134289734149.85,
-          "transactions": 176344,
-          "latest_action_date": "2025-09-30T00:00:00",
-          "messages": [],
-          "period_start": "2024-10-01",
-          "period_end": "2025-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/069/awards/?fiscal_year=2025&agency_type=funding"
-        },
         "2024": {
           "obligations": 118996790563.94,
           "transactions": 174156,
@@ -1252,6 +1243,15 @@
           "period_start": "2023-10-01",
           "period_end": "2024-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/069/awards/?fiscal_year=2024&agency_type=funding"
+        },
+        "2025": {
+          "obligations": 134289734149.85,
+          "transactions": 176344,
+          "latest_action_date": "2025-09-30T00:00:00",
+          "messages": [],
+          "period_start": "2024-10-01",
+          "period_end": "2025-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/069/awards/?fiscal_year=2025&agency_type=funding"
         },
         "2026": {
           "obligations": 138317509300.1,
@@ -1301,6 +1301,15 @@
       "code": "349",
       "name": "District of Columbia Courts",
       "years": {
+        "2024": {
+          "obligations": 101655052.02,
+          "transactions": 638,
+          "latest_action_date": "2024-09-30T00:00:00",
+          "messages": [],
+          "period_start": "2023-10-01",
+          "period_end": "2024-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/349/awards/?fiscal_year=2024&agency_type=funding"
+        },
         "2025": {
           "obligations": 63988228.44,
           "transactions": 844,
@@ -1318,15 +1327,6 @@
           "period_start": "2025-10-01",
           "period_end": "2026-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/349/awards/?fiscal_year=2026&agency_type=funding"
-        },
-        "2024": {
-          "obligations": 101655052.02,
-          "transactions": 638,
-          "latest_action_date": "2024-09-30T00:00:00",
-          "messages": [],
-          "period_start": "2023-10-01",
-          "period_end": "2024-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/349/awards/?fiscal_year=2024&agency_type=funding"
         }
       }
     },
@@ -1334,14 +1334,14 @@
       "code": "525",
       "name": "Election Assistance Commission",
       "years": {
-        "2024": {
-          "obligations": 61613172.47,
-          "transactions": 151,
-          "latest_action_date": "2024-09-27T00:00:00",
+        "2025": {
+          "obligations": 17270859.98,
+          "transactions": 116,
+          "latest_action_date": "2025-09-29T00:00:00",
           "messages": [],
-          "period_start": "2023-10-01",
-          "period_end": "2024-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/525/awards/?fiscal_year=2024&agency_type=funding"
+          "period_start": "2024-10-01",
+          "period_end": "2025-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/525/awards/?fiscal_year=2025&agency_type=funding"
         },
         "2026": {
           "obligations": 36979918.03,
@@ -1352,14 +1352,14 @@
           "period_end": "2026-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/525/awards/?fiscal_year=2026&agency_type=funding"
         },
-        "2025": {
-          "obligations": 17270859.98,
-          "transactions": 116,
-          "latest_action_date": "2025-09-29T00:00:00",
+        "2024": {
+          "obligations": 61613172.47,
+          "transactions": 151,
+          "latest_action_date": "2024-09-27T00:00:00",
           "messages": [],
-          "period_start": "2024-10-01",
-          "period_end": "2025-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/525/awards/?fiscal_year=2025&agency_type=funding"
+          "period_start": "2023-10-01",
+          "period_end": "2024-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/525/awards/?fiscal_year=2024&agency_type=funding"
         }
       }
     },
@@ -1400,15 +1400,6 @@
       "code": "045",
       "name": "Equal Employment Opportunity Commission",
       "years": {
-        "2024": {
-          "obligations": 52716986.85,
-          "transactions": 920,
-          "latest_action_date": "2024-09-30T00:00:00",
-          "messages": [],
-          "period_start": "2023-10-01",
-          "period_end": "2024-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/045/awards/?fiscal_year=2024&agency_type=funding"
-        },
         "2025": {
           "obligations": 49353711.05,
           "transactions": 962,
@@ -1426,6 +1417,15 @@
           "period_start": "2025-10-01",
           "period_end": "2026-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/045/awards/?fiscal_year=2026&agency_type=funding"
+        },
+        "2024": {
+          "obligations": 52716986.85,
+          "transactions": 920,
+          "latest_action_date": "2024-09-30T00:00:00",
+          "messages": [],
+          "period_start": "2023-10-01",
+          "period_end": "2024-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/045/awards/?fiscal_year=2024&agency_type=funding"
         }
       }
     },
@@ -1433,6 +1433,15 @@
       "code": "1100",
       "name": "Executive Office of the President",
       "years": {
+        "2026": {
+          "obligations": 427464726.37,
+          "transactions": 1589,
+          "latest_action_date": "2026-09-30T00:00:00",
+          "messages": [],
+          "period_start": "2025-10-01",
+          "period_end": "2026-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/1100/awards/?fiscal_year=2026&agency_type=funding"
+        },
         "2024": {
           "obligations": 401753491.57,
           "transactions": 1634,
@@ -1450,15 +1459,6 @@
           "period_start": "2024-10-01",
           "period_end": "2025-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/1100/awards/?fiscal_year=2025&agency_type=funding"
-        },
-        "2026": {
-          "obligations": 427464726.37,
-          "transactions": 1589,
-          "latest_action_date": "2026-09-30T00:00:00",
-          "messages": [],
-          "period_start": "2025-10-01",
-          "period_end": "2026-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/1100/awards/?fiscal_year=2026&agency_type=funding"
         }
       }
     },
@@ -1499,15 +1499,6 @@
       "code": "7802",
       "name": "Farm Credit System Insurance Corporation",
       "years": {
-        "2024": {
-          "obligations": 0.0,
-          "transactions": 0,
-          "latest_action_date": null,
-          "messages": [],
-          "period_start": "2023-10-01",
-          "period_end": "2024-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/7802/awards/?fiscal_year=2024&agency_type=funding"
-        },
         "2025": {
           "obligations": 0.0,
           "transactions": 0,
@@ -1516,6 +1507,15 @@
           "period_start": "2024-10-01",
           "period_end": "2025-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/7802/awards/?fiscal_year=2025&agency_type=funding"
+        },
+        "2024": {
+          "obligations": 0.0,
+          "transactions": 0,
+          "latest_action_date": null,
+          "messages": [],
+          "period_start": "2023-10-01",
+          "period_end": "2024-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/7802/awards/?fiscal_year=2024&agency_type=funding"
         },
         "2026": {
           "obligations": 0.0,
@@ -1664,14 +1664,14 @@
       "code": "054",
       "name": "Federal Labor Relations Authority",
       "years": {
-        "2024": {
-          "obligations": 1480851.66,
-          "transactions": 61,
-          "latest_action_date": "2024-09-30T00:00:00",
+        "2026": {
+          "obligations": 4738256.72,
+          "transactions": 67,
+          "latest_action_date": "2026-09-30T00:00:00",
           "messages": [],
-          "period_start": "2023-10-01",
-          "period_end": "2024-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/054/awards/?fiscal_year=2024&agency_type=funding"
+          "period_start": "2025-10-01",
+          "period_end": "2026-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/054/awards/?fiscal_year=2026&agency_type=funding"
         },
         "2025": {
           "obligations": 1616655.84,
@@ -1682,14 +1682,14 @@
           "period_end": "2025-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/054/awards/?fiscal_year=2025&agency_type=funding"
         },
-        "2026": {
-          "obligations": 4738256.72,
-          "transactions": 67,
-          "latest_action_date": "2026-09-30T00:00:00",
+        "2024": {
+          "obligations": 1480851.66,
+          "transactions": 61,
+          "latest_action_date": "2024-09-30T00:00:00",
           "messages": [],
-          "period_start": "2025-10-01",
-          "period_end": "2026-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/054/awards/?fiscal_year=2026&agency_type=funding"
+          "period_start": "2023-10-01",
+          "period_end": "2024-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/054/awards/?fiscal_year=2024&agency_type=funding"
         }
       }
     },
@@ -1697,15 +1697,6 @@
       "code": "065",
       "name": "Federal Maritime Commission",
       "years": {
-        "2024": {
-          "obligations": 6547801.39,
-          "transactions": 80,
-          "latest_action_date": "2024-09-30T00:00:00",
-          "messages": [],
-          "period_start": "2023-10-01",
-          "period_end": "2024-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/065/awards/?fiscal_year=2024&agency_type=funding"
-        },
         "2025": {
           "obligations": 4874565.23,
           "transactions": 82,
@@ -1714,6 +1705,15 @@
           "period_start": "2024-10-01",
           "period_end": "2025-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/065/awards/?fiscal_year=2025&agency_type=funding"
+        },
+        "2024": {
+          "obligations": 6547801.39,
+          "transactions": 80,
+          "latest_action_date": "2024-09-30T00:00:00",
+          "messages": [],
+          "period_start": "2023-10-01",
+          "period_end": "2024-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/065/awards/?fiscal_year=2024&agency_type=funding"
         },
         "2026": {
           "obligations": 6525998.59,
@@ -1796,14 +1796,14 @@
       "code": "473",
       "name": "Federal Permitting Improvement Steering Council",
       "years": {
-        "2024": {
-          "obligations": 2734838.36,
-          "transactions": 8,
-          "latest_action_date": "2024-09-25T00:00:00",
+        "2025": {
+          "obligations": 2133874.15,
+          "transactions": 7,
+          "latest_action_date": "2025-08-18T00:00:00",
           "messages": [],
-          "period_start": "2023-10-01",
-          "period_end": "2024-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/473/awards/?fiscal_year=2024&agency_type=funding"
+          "period_start": "2024-10-01",
+          "period_end": "2025-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/473/awards/?fiscal_year=2025&agency_type=funding"
         },
         "2026": {
           "obligations": 1929129.62,
@@ -1814,14 +1814,14 @@
           "period_end": "2026-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/473/awards/?fiscal_year=2026&agency_type=funding"
         },
-        "2025": {
-          "obligations": 2133874.15,
-          "transactions": 7,
-          "latest_action_date": "2025-08-18T00:00:00",
+        "2024": {
+          "obligations": 2734838.36,
+          "transactions": 8,
+          "latest_action_date": "2024-09-25T00:00:00",
           "messages": [],
-          "period_start": "2024-10-01",
-          "period_end": "2025-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/473/awards/?fiscal_year=2025&agency_type=funding"
+          "period_start": "2023-10-01",
+          "period_end": "2024-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/473/awards/?fiscal_year=2024&agency_type=funding"
         }
       }
     },
@@ -1928,15 +1928,6 @@
       "code": "471",
       "name": "Gulf Coast Ecosystem Restoration Council",
       "years": {
-        "2024": {
-          "obligations": 235467121.11,
-          "transactions": 94,
-          "latest_action_date": "2024-09-25T00:00:00",
-          "messages": [],
-          "period_start": "2023-10-01",
-          "period_end": "2024-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/471/awards/?fiscal_year=2024&agency_type=funding"
-        },
         "2025": {
           "obligations": 175588723.2,
           "transactions": 101,
@@ -1954,6 +1945,15 @@
           "period_start": "2025-10-01",
           "period_end": "2026-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/471/awards/?fiscal_year=2026&agency_type=funding"
+        },
+        "2024": {
+          "obligations": 235467121.11,
+          "transactions": 94,
+          "latest_action_date": "2024-09-25T00:00:00",
+          "messages": [],
+          "period_start": "2023-10-01",
+          "period_end": "2024-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/471/awards/?fiscal_year=2024&agency_type=funding"
         }
       }
     },
@@ -2027,15 +2027,6 @@
       "code": "164",
       "name": "Inter-American Foundation",
       "years": {
-        "2024": {
-          "obligations": 32129955.38,
-          "transactions": 336,
-          "latest_action_date": "2024-09-27T00:00:00",
-          "messages": [],
-          "period_start": "2023-10-01",
-          "period_end": "2024-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/164/awards/?fiscal_year=2024&agency_type=funding"
-        },
         "2025": {
           "obligations": 2166099.38,
           "transactions": 413,
@@ -2053,6 +2044,15 @@
           "period_start": "2025-10-01",
           "period_end": "2026-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/164/awards/?fiscal_year=2026&agency_type=funding"
+        },
+        "2024": {
+          "obligations": 32129955.38,
+          "transactions": 336,
+          "latest_action_date": "2024-09-27T00:00:00",
+          "messages": [],
+          "period_start": "2023-10-01",
+          "period_end": "2024-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/164/awards/?fiscal_year=2024&agency_type=funding"
         }
       }
     },
@@ -2093,15 +2093,6 @@
       "code": "381",
       "name": "James Madison Memorial Fellowship Foundation",
       "years": {
-        "2025": {
-          "obligations": 0.0,
-          "transactions": 0,
-          "latest_action_date": null,
-          "messages": [],
-          "period_start": "2024-10-01",
-          "period_end": "2025-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/381/awards/?fiscal_year=2025&agency_type=funding"
-        },
         "2024": {
           "obligations": 0.0,
           "transactions": 0,
@@ -2110,6 +2101,15 @@
           "period_start": "2023-10-01",
           "period_end": "2024-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/381/awards/?fiscal_year=2024&agency_type=funding"
+        },
+        "2025": {
+          "obligations": 0.0,
+          "transactions": 0,
+          "latest_action_date": null,
+          "messages": [],
+          "period_start": "2024-10-01",
+          "period_end": "2025-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/381/awards/?fiscal_year=2025&agency_type=funding"
         },
         "2026": {
           "obligations": 0.0,
@@ -2135,15 +2135,6 @@
           "period_end": "2024-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/382/awards/?fiscal_year=2024&agency_type=funding"
         },
-        "2026": {
-          "obligations": 0.0,
-          "transactions": 0,
-          "latest_action_date": null,
-          "messages": [],
-          "period_start": "2025-10-01",
-          "period_end": "2026-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/382/awards/?fiscal_year=2026&agency_type=funding"
-        },
         "2025": {
           "obligations": 0.0,
           "transactions": 0,
@@ -2152,6 +2143,15 @@
           "period_start": "2024-10-01",
           "period_end": "2025-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/382/awards/?fiscal_year=2025&agency_type=funding"
+        },
+        "2026": {
+          "obligations": 0.0,
+          "transactions": 0,
+          "latest_action_date": null,
+          "messages": [],
+          "period_start": "2025-10-01",
+          "period_end": "2026-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/382/awards/?fiscal_year=2026&agency_type=funding"
         }
       }
     },
@@ -2168,15 +2168,6 @@
           "period_end": "2024-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/3301/awards/?fiscal_year=2024&agency_type=funding"
         },
-        "2026": {
-          "obligations": 0.0,
-          "transactions": 0,
-          "latest_action_date": null,
-          "messages": [],
-          "period_start": "2025-10-01",
-          "period_end": "2026-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/3301/awards/?fiscal_year=2026&agency_type=funding"
-        },
         "2025": {
           "obligations": 0.0,
           "transactions": 0,
@@ -2185,6 +2176,15 @@
           "period_start": "2024-10-01",
           "period_end": "2025-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/3301/awards/?fiscal_year=2025&agency_type=funding"
+        },
+        "2026": {
+          "obligations": 0.0,
+          "transactions": 0,
+          "latest_action_date": null,
+          "messages": [],
+          "period_start": "2025-10-01",
+          "period_end": "2026-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/3301/awards/?fiscal_year=2026&agency_type=funding"
         }
       }
     },
@@ -2201,15 +2201,6 @@
           "period_end": "2024-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/387/awards/?fiscal_year=2024&agency_type=funding"
         },
-        "2026": {
-          "obligations": 0.0,
-          "transactions": 0,
-          "latest_action_date": null,
-          "messages": [],
-          "period_start": "2025-10-01",
-          "period_end": "2026-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/387/awards/?fiscal_year=2026&agency_type=funding"
-        },
         "2025": {
           "obligations": 0.0,
           "transactions": 0,
@@ -2218,6 +2209,15 @@
           "period_start": "2024-10-01",
           "period_end": "2025-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/387/awards/?fiscal_year=2025&agency_type=funding"
+        },
+        "2026": {
+          "obligations": 0.0,
+          "transactions": 0,
+          "latest_action_date": null,
+          "messages": [],
+          "period_start": "2025-10-01",
+          "period_end": "2026-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/387/awards/?fiscal_year=2026&agency_type=funding"
         }
       }
     },
@@ -2234,15 +2234,6 @@
           "period_end": "2024-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/389/awards/?fiscal_year=2024&agency_type=funding"
         },
-        "2025": {
-          "obligations": 3236752.74,
-          "transactions": 206,
-          "latest_action_date": "2025-09-30T00:00:00",
-          "messages": [],
-          "period_start": "2024-10-01",
-          "period_end": "2025-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/389/awards/?fiscal_year=2025&agency_type=funding"
-        },
         "2026": {
           "obligations": 6127242.52,
           "transactions": 226,
@@ -2251,6 +2242,15 @@
           "period_start": "2025-10-01",
           "period_end": "2026-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/389/awards/?fiscal_year=2026&agency_type=funding"
+        },
+        "2025": {
+          "obligations": 3236752.74,
+          "transactions": 206,
+          "latest_action_date": "2025-09-30T00:00:00",
+          "messages": [],
+          "period_start": "2024-10-01",
+          "period_end": "2025-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/389/awards/?fiscal_year=2025&agency_type=funding"
         }
       }
     },
@@ -2300,15 +2300,6 @@
           "period_end": "2024-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/487/awards/?fiscal_year=2024&agency_type=funding"
         },
-        "2025": {
-          "obligations": 329512.6,
-          "transactions": 38,
-          "latest_action_date": "2025-09-25T00:00:00",
-          "messages": [],
-          "period_start": "2024-10-01",
-          "period_end": "2025-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/487/awards/?fiscal_year=2025&agency_type=funding"
-        },
         "2026": {
           "obligations": 252953.29,
           "transactions": 24,
@@ -2317,6 +2308,15 @@
           "period_start": "2025-10-01",
           "period_end": "2026-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/487/awards/?fiscal_year=2026&agency_type=funding"
+        },
+        "2025": {
+          "obligations": 329512.6,
+          "transactions": 38,
+          "latest_action_date": "2025-09-25T00:00:00",
+          "messages": [],
+          "period_start": "2024-10-01",
+          "period_end": "2025-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/487/awards/?fiscal_year=2025&agency_type=funding"
         }
       }
     },
@@ -2324,15 +2324,6 @@
       "code": "080",
       "name": "National Aeronautics and Space Administration",
       "years": {
-        "2025": {
-          "obligations": 22332142196.25,
-          "transactions": 35815,
-          "latest_action_date": "2025-09-30T00:00:00",
-          "messages": [],
-          "period_start": "2024-10-01",
-          "period_end": "2025-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/080/awards/?fiscal_year=2025&agency_type=funding"
-        },
         "2024": {
           "obligations": 21069796237.37,
           "transactions": 33233,
@@ -2350,6 +2341,15 @@
           "period_start": "2025-10-01",
           "period_end": "2026-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/080/awards/?fiscal_year=2026&agency_type=funding"
+        },
+        "2025": {
+          "obligations": 22332142196.25,
+          "transactions": 35815,
+          "latest_action_date": "2025-09-30T00:00:00",
+          "messages": [],
+          "period_start": "2024-10-01",
+          "period_end": "2025-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/080/awards/?fiscal_year=2025&agency_type=funding"
         }
       }
     },
@@ -2390,15 +2390,6 @@
       "code": "394",
       "name": "National Capital Planning Commission",
       "years": {
-        "2024": {
-          "obligations": 0.0,
-          "transactions": 0,
-          "latest_action_date": null,
-          "messages": [],
-          "period_start": "2023-10-01",
-          "period_end": "2024-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/394/awards/?fiscal_year=2024&agency_type=funding"
-        },
         "2025": {
           "obligations": 0.0,
           "transactions": 0,
@@ -2416,13 +2407,7 @@
           "period_start": "2025-10-01",
           "period_end": "2026-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/394/awards/?fiscal_year=2026&agency_type=funding"
-        }
-      }
-    },
-    {
-      "code": "413",
-      "name": "National Council on Disability",
-      "years": {
+        },
         "2024": {
           "obligations": 0.0,
           "transactions": 0,
@@ -2430,7 +2415,22 @@
           "messages": [],
           "period_start": "2023-10-01",
           "period_end": "2024-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/413/awards/?fiscal_year=2024&agency_type=funding"
+          "source": "https://api.usaspending.gov/api/v2/agency/394/awards/?fiscal_year=2024&agency_type=funding"
+        }
+      }
+    },
+    {
+      "code": "413",
+      "name": "National Council on Disability",
+      "years": {
+        "2025": {
+          "obligations": 0.0,
+          "transactions": 0,
+          "latest_action_date": null,
+          "messages": [],
+          "period_start": "2024-10-01",
+          "period_end": "2025-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/413/awards/?fiscal_year=2025&agency_type=funding"
         },
         "2026": {
           "obligations": 0.0,
@@ -2441,14 +2441,14 @@
           "period_end": "2026-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/413/awards/?fiscal_year=2026&agency_type=funding"
         },
-        "2025": {
+        "2024": {
           "obligations": 0.0,
           "transactions": 0,
           "latest_action_date": null,
           "messages": [],
-          "period_start": "2024-10-01",
-          "period_end": "2025-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/413/awards/?fiscal_year=2025&agency_type=funding"
+          "period_start": "2023-10-01",
+          "period_end": "2024-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/413/awards/?fiscal_year=2024&agency_type=funding"
         }
       }
     },
@@ -2489,15 +2489,6 @@
       "code": "417",
       "name": "National Endowment for the Arts",
       "years": {
-        "2024": {
-          "obligations": 165343884.23,
-          "transactions": 3975,
-          "latest_action_date": "2024-09-26T00:00:00",
-          "messages": [],
-          "period_start": "2023-10-01",
-          "period_end": "2024-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/417/awards/?fiscal_year=2024&agency_type=funding"
-        },
         "2025": {
           "obligations": 120510712.87,
           "transactions": 2246,
@@ -2506,6 +2497,15 @@
           "period_start": "2024-10-01",
           "period_end": "2025-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/417/awards/?fiscal_year=2025&agency_type=funding"
+        },
+        "2024": {
+          "obligations": 165343884.23,
+          "transactions": 3975,
+          "latest_action_date": "2024-09-26T00:00:00",
+          "messages": [],
+          "period_start": "2023-10-01",
+          "period_end": "2024-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/417/awards/?fiscal_year=2024&agency_type=funding"
         },
         "2026": {
           "obligations": 163689075.38,
@@ -2597,15 +2597,6 @@
           "period_end": "2024-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/421/awards/?fiscal_year=2024&agency_type=funding"
         },
-        "2025": {
-          "obligations": 1149030.95,
-          "transactions": 74,
-          "latest_action_date": "2025-09-25T00:00:00",
-          "messages": [],
-          "period_start": "2024-10-01",
-          "period_end": "2025-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/421/awards/?fiscal_year=2025&agency_type=funding"
-        },
         "2026": {
           "obligations": 294243.27,
           "transactions": 68,
@@ -2614,6 +2605,15 @@
           "period_start": "2025-10-01",
           "period_end": "2026-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/421/awards/?fiscal_year=2026&agency_type=funding"
+        },
+        "2025": {
+          "obligations": 1149030.95,
+          "transactions": 74,
+          "latest_action_date": "2025-09-25T00:00:00",
+          "messages": [],
+          "period_start": "2024-10-01",
+          "period_end": "2025-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/421/awards/?fiscal_year=2025&agency_type=funding"
         }
       }
     },
@@ -2630,15 +2630,6 @@
           "period_end": "2024-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/049/awards/?fiscal_year=2024&agency_type=funding"
         },
-        "2025": {
-          "obligations": 9308202365.19,
-          "transactions": 19378,
-          "latest_action_date": "2025-09-29T00:00:00",
-          "messages": [],
-          "period_start": "2024-10-01",
-          "period_end": "2025-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/049/awards/?fiscal_year=2025&agency_type=funding"
-        },
         "2026": {
           "obligations": 6791873999.43,
           "transactions": 10802,
@@ -2647,6 +2638,15 @@
           "period_start": "2025-10-01",
           "period_end": "2026-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/049/awards/?fiscal_year=2026&agency_type=funding"
+        },
+        "2025": {
+          "obligations": 9308202365.19,
+          "transactions": 19378,
+          "latest_action_date": "2025-09-29T00:00:00",
+          "messages": [],
+          "period_start": "2024-10-01",
+          "period_end": "2025-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/049/awards/?fiscal_year=2025&agency_type=funding"
         }
       }
     },
@@ -2663,15 +2663,6 @@
           "period_end": "2024-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/424/awards/?fiscal_year=2024&agency_type=funding"
         },
-        "2025": {
-          "obligations": 29684314.81,
-          "transactions": 208,
-          "latest_action_date": "2025-09-30T00:00:00",
-          "messages": [],
-          "period_start": "2024-10-01",
-          "period_end": "2025-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/424/awards/?fiscal_year=2025&agency_type=funding"
-        },
         "2026": {
           "obligations": 22690763.18,
           "transactions": 212,
@@ -2680,6 +2671,15 @@
           "period_start": "2025-10-01",
           "period_end": "2026-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/424/awards/?fiscal_year=2026&agency_type=funding"
+        },
+        "2025": {
+          "obligations": 29684314.81,
+          "transactions": 208,
+          "latest_action_date": "2025-09-30T00:00:00",
+          "messages": [],
+          "period_start": "2024-10-01",
+          "period_end": "2025-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/424/awards/?fiscal_year=2025&agency_type=funding"
         }
       }
     },
@@ -2762,15 +2762,6 @@
           "period_end": "2024-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/431/awards/?fiscal_year=2024&agency_type=funding"
         },
-        "2026": {
-          "obligations": 0.0,
-          "transactions": 0,
-          "latest_action_date": null,
-          "messages": [],
-          "period_start": "2025-10-01",
-          "period_end": "2026-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/431/awards/?fiscal_year=2026&agency_type=funding"
-        },
         "2025": {
           "obligations": 0.0,
           "transactions": 0,
@@ -2779,6 +2770,15 @@
           "period_start": "2024-10-01",
           "period_end": "2025-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/431/awards/?fiscal_year=2025&agency_type=funding"
+        },
+        "2026": {
+          "obligations": 0.0,
+          "transactions": 0,
+          "latest_action_date": null,
+          "messages": [],
+          "period_start": "2025-10-01",
+          "period_end": "2026-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/431/awards/?fiscal_year=2026&agency_type=funding"
         }
       }
     },
@@ -2786,14 +2786,14 @@
       "code": "432",
       "name": "Occupational Safety and Health Review Commission",
       "years": {
-        "2024": {
-          "obligations": 1859174.11,
-          "transactions": 72,
-          "latest_action_date": "2024-09-30T00:00:00",
+        "2026": {
+          "obligations": 1222035.21,
+          "transactions": 41,
+          "latest_action_date": "2026-09-29T00:00:00",
           "messages": [],
-          "period_start": "2023-10-01",
-          "period_end": "2024-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/432/awards/?fiscal_year=2024&agency_type=funding"
+          "period_start": "2025-10-01",
+          "period_end": "2026-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/432/awards/?fiscal_year=2026&agency_type=funding"
         },
         "2025": {
           "obligations": 1566719.22,
@@ -2804,14 +2804,14 @@
           "period_end": "2025-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/432/awards/?fiscal_year=2025&agency_type=funding"
         },
-        "2026": {
-          "obligations": 1222035.21,
-          "transactions": 41,
-          "latest_action_date": "2026-09-29T00:00:00",
+        "2024": {
+          "obligations": 1859174.11,
+          "transactions": 72,
+          "latest_action_date": "2024-09-30T00:00:00",
           "messages": [],
-          "period_start": "2025-10-01",
-          "period_end": "2026-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/432/awards/?fiscal_year=2026&agency_type=funding"
+          "period_start": "2023-10-01",
+          "period_end": "2024-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/432/awards/?fiscal_year=2024&agency_type=funding"
         }
       }
     },
@@ -2828,15 +2828,6 @@
           "period_end": "2024-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/434/awards/?fiscal_year=2024&agency_type=funding"
         },
-        "2025": {
-          "obligations": 3353283.91,
-          "transactions": 15,
-          "latest_action_date": "2025-08-04T00:00:00",
-          "messages": [],
-          "period_start": "2024-10-01",
-          "period_end": "2025-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/434/awards/?fiscal_year=2025&agency_type=funding"
-        },
         "2026": {
           "obligations": 276228.63,
           "transactions": 20,
@@ -2845,6 +2836,15 @@
           "period_start": "2025-10-01",
           "period_end": "2026-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/434/awards/?fiscal_year=2026&agency_type=funding"
+        },
+        "2025": {
+          "obligations": 3353283.91,
+          "transactions": 15,
+          "latest_action_date": "2025-08-04T00:00:00",
+          "messages": [],
+          "period_start": "2024-10-01",
+          "period_end": "2025-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/434/awards/?fiscal_year=2025&agency_type=funding"
         }
       }
     },
@@ -2852,6 +2852,15 @@
       "code": "435",
       "name": "Office of Navajo and Hopi Indian Relocation",
       "years": {
+        "2026": {
+          "obligations": 0.0,
+          "transactions": 0,
+          "latest_action_date": null,
+          "messages": [],
+          "period_start": "2025-10-01",
+          "period_end": "2026-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/435/awards/?fiscal_year=2026&agency_type=funding"
+        },
         "2024": {
           "obligations": 0.0,
           "transactions": 0,
@@ -2869,15 +2878,6 @@
           "period_start": "2024-10-01",
           "period_end": "2025-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/435/awards/?fiscal_year=2025&agency_type=funding"
-        },
-        "2026": {
-          "obligations": 0.0,
-          "transactions": 0,
-          "latest_action_date": null,
-          "messages": [],
-          "period_start": "2025-10-01",
-          "period_end": "2026-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/435/awards/?fiscal_year=2026&agency_type=funding"
         }
       }
     },
@@ -2918,6 +2918,15 @@
       "code": "062",
       "name": "Office of Special Counsel",
       "years": {
+        "2025": {
+          "obligations": 1864351.81,
+          "transactions": 29,
+          "latest_action_date": "2025-09-19T00:00:00",
+          "messages": [],
+          "period_start": "2024-10-01",
+          "period_end": "2025-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/062/awards/?fiscal_year=2025&agency_type=funding"
+        },
         "2024": {
           "obligations": 1724859.81,
           "transactions": 23,
@@ -2935,15 +2944,6 @@
           "period_start": "2025-10-01",
           "period_end": "2026-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/062/awards/?fiscal_year=2026&agency_type=funding"
-        },
-        "2025": {
-          "obligations": 1864351.81,
-          "transactions": 29,
-          "latest_action_date": "2025-09-19T00:00:00",
-          "messages": [],
-          "period_start": "2024-10-01",
-          "period_end": "2025-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/062/awards/?fiscal_year=2025&agency_type=funding"
         }
       }
     },
@@ -2993,15 +2993,6 @@
           "period_end": "2025-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/579/awards/?fiscal_year=2025&agency_type=funding"
         },
-        "2026": {
-          "obligations": 0.0,
-          "transactions": 0,
-          "latest_action_date": null,
-          "messages": [],
-          "period_start": "2025-10-01",
-          "period_end": "2026-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/579/awards/?fiscal_year=2026&agency_type=funding"
-        },
         "2024": {
           "obligations": 0.0,
           "transactions": 0,
@@ -3010,6 +3001,15 @@
           "period_start": "2023-10-01",
           "period_end": "2024-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/579/awards/?fiscal_year=2024&agency_type=funding"
+        },
+        "2026": {
+          "obligations": 0.0,
+          "transactions": 0,
+          "latest_action_date": null,
+          "messages": [],
+          "period_start": "2025-10-01",
+          "period_end": "2026-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/579/awards/?fiscal_year=2026&agency_type=funding"
         }
       }
     },
@@ -3026,15 +3026,6 @@
           "period_end": "2024-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/1125/awards/?fiscal_year=2024&agency_type=funding"
         },
-        "2025": {
-          "obligations": 77464020.83,
-          "transactions": 577,
-          "latest_action_date": "2025-09-30T00:00:00",
-          "messages": [],
-          "period_start": "2024-10-01",
-          "period_end": "2025-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/1125/awards/?fiscal_year=2025&agency_type=funding"
-        },
         "2026": {
           "obligations": 123718073.68,
           "transactions": 402,
@@ -3043,6 +3034,15 @@
           "period_start": "2025-10-01",
           "period_end": "2026-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/1125/awards/?fiscal_year=2026&agency_type=funding"
+        },
+        "2025": {
+          "obligations": 77464020.83,
+          "transactions": 577,
+          "latest_action_date": "2025-09-30T00:00:00",
+          "messages": [],
+          "period_start": "2024-10-01",
+          "period_end": "2025-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/1125/awards/?fiscal_year=2025&agency_type=funding"
         }
       }
     },
@@ -3116,15 +3116,6 @@
       "code": "535",
       "name": "Privacy and Civil Liberties Oversight Board",
       "years": {
-        "2024": {
-          "obligations": 2102260.08,
-          "transactions": 25,
-          "latest_action_date": "2024-09-27T00:00:00",
-          "messages": [],
-          "period_start": "2023-10-01",
-          "period_end": "2024-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/535/awards/?fiscal_year=2024&agency_type=funding"
-        },
         "2025": {
           "obligations": 2623467.11,
           "transactions": 23,
@@ -3133,6 +3124,15 @@
           "period_start": "2024-10-01",
           "period_end": "2025-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/535/awards/?fiscal_year=2025&agency_type=funding"
+        },
+        "2024": {
+          "obligations": 2102260.08,
+          "transactions": 25,
+          "latest_action_date": "2024-09-27T00:00:00",
+          "messages": [],
+          "period_start": "2023-10-01",
+          "period_end": "2024-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/535/awards/?fiscal_year=2024&agency_type=funding"
         },
         "2026": {
           "obligations": 2700482.41,
@@ -3149,6 +3149,15 @@
       "code": "290",
       "name": "Public Buildings Reform Board",
       "years": {
+        "2026": {
+          "obligations": 1348434.3,
+          "transactions": 1,
+          "latest_action_date": "2025-11-07T00:00:00",
+          "messages": [],
+          "period_start": "2025-10-01",
+          "period_end": "2026-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/290/awards/?fiscal_year=2026&agency_type=funding"
+        },
         "2024": {
           "obligations": 0.0,
           "transactions": 0,
@@ -3166,15 +3175,6 @@
           "period_start": "2024-10-01",
           "period_end": "2025-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/290/awards/?fiscal_year=2025&agency_type=funding"
-        },
-        "2026": {
-          "obligations": 1348434.3,
-          "transactions": 1,
-          "latest_action_date": "2025-11-07T00:00:00",
-          "messages": [],
-          "period_start": "2025-10-01",
-          "period_end": "2026-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/290/awards/?fiscal_year=2026&agency_type=funding"
         }
       }
     },
@@ -3182,6 +3182,15 @@
       "code": "060",
       "name": "Railroad Retirement Board",
       "years": {
+        "2024": {
+          "obligations": 14396682785.25,
+          "transactions": 116038,
+          "latest_action_date": "2024-09-30T00:00:00",
+          "messages": [],
+          "period_start": "2023-10-01",
+          "period_end": "2024-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/060/awards/?fiscal_year=2024&agency_type=funding"
+        },
         "2025": {
           "obligations": 14555733835.1,
           "transactions": 117744,
@@ -3199,15 +3208,6 @@
           "period_start": "2025-10-01",
           "period_end": "2026-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/060/awards/?fiscal_year=2026&agency_type=funding"
-        },
-        "2024": {
-          "obligations": 14396682785.25,
-          "transactions": 116038,
-          "latest_action_date": "2024-09-30T00:00:00",
-          "messages": [],
-          "period_start": "2023-10-01",
-          "period_end": "2024-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/060/awards/?fiscal_year=2024&agency_type=funding"
         }
       }
     },
@@ -3215,15 +3215,6 @@
       "code": "050",
       "name": "Securities and Exchange Commission",
       "years": {
-        "2024": {
-          "obligations": 553026336.25,
-          "transactions": 1484,
-          "latest_action_date": "2024-09-30T00:00:00",
-          "messages": [],
-          "period_start": "2023-10-01",
-          "period_end": "2024-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/050/awards/?fiscal_year=2024&agency_type=funding"
-        },
         "2025": {
           "obligations": 497682867.45,
           "transactions": 1699,
@@ -3232,6 +3223,15 @@
           "period_start": "2024-10-01",
           "period_end": "2025-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/050/awards/?fiscal_year=2025&agency_type=funding"
+        },
+        "2024": {
+          "obligations": 553026336.25,
+          "transactions": 1484,
+          "latest_action_date": "2024-09-30T00:00:00",
+          "messages": [],
+          "period_start": "2023-10-01",
+          "period_end": "2024-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/050/awards/?fiscal_year=2024&agency_type=funding"
         },
         "2026": {
           "obligations": 570594803.29,
@@ -3248,15 +3248,6 @@
       "code": "090",
       "name": "Selective Service System",
       "years": {
-        "2024": {
-          "obligations": 1750843.94,
-          "transactions": 23,
-          "latest_action_date": "2024-09-29T00:00:00",
-          "messages": [],
-          "period_start": "2023-10-01",
-          "period_end": "2024-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/090/awards/?fiscal_year=2024&agency_type=funding"
-        },
         "2025": {
           "obligations": 7423930.26,
           "transactions": 64,
@@ -3265,6 +3256,15 @@
           "period_start": "2024-10-01",
           "period_end": "2025-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/090/awards/?fiscal_year=2025&agency_type=funding"
+        },
+        "2024": {
+          "obligations": 1750843.94,
+          "transactions": 23,
+          "latest_action_date": "2024-09-29T00:00:00",
+          "messages": [],
+          "period_start": "2023-10-01",
+          "period_end": "2024-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/090/awards/?fiscal_year=2024&agency_type=funding"
         },
         "2026": {
           "obligations": 5101433.22,
@@ -3347,6 +3347,15 @@
       "code": "574",
       "name": "Southeast Crescent Regional Commission",
       "years": {
+        "2024": {
+          "obligations": 0.0,
+          "transactions": 0,
+          "latest_action_date": null,
+          "messages": [],
+          "period_start": "2023-10-01",
+          "period_end": "2024-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/574/awards/?fiscal_year=2024&agency_type=funding"
+        },
         "2025": {
           "obligations": 0.0,
           "transactions": 0,
@@ -3364,15 +3373,6 @@
           "period_start": "2025-10-01",
           "period_end": "2026-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/574/awards/?fiscal_year=2026&agency_type=funding"
-        },
-        "2024": {
-          "obligations": 0.0,
-          "transactions": 0,
-          "latest_action_date": null,
-          "messages": [],
-          "period_start": "2023-10-01",
-          "period_end": "2024-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/574/awards/?fiscal_year=2024&agency_type=funding"
         }
       }
     },
@@ -3380,15 +3380,6 @@
       "code": "569",
       "name": "Southwest Border Regional Commission",
       "years": {
-        "2025": {
-          "obligations": 0.0,
-          "transactions": 0,
-          "latest_action_date": null,
-          "messages": [],
-          "period_start": "2024-10-01",
-          "period_end": "2025-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/569/awards/?fiscal_year=2025&agency_type=funding"
-        },
         "2024": {
           "obligations": 0.0,
           "transactions": 0,
@@ -3397,6 +3388,15 @@
           "period_start": "2023-10-01",
           "period_end": "2024-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/569/awards/?fiscal_year=2024&agency_type=funding"
+        },
+        "2025": {
+          "obligations": 0.0,
+          "transactions": 0,
+          "latest_action_date": null,
+          "messages": [],
+          "period_start": "2024-10-01",
+          "period_end": "2025-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/569/awards/?fiscal_year=2025&agency_type=funding"
         },
         "2026": {
           "obligations": 0.0,
@@ -3521,15 +3521,6 @@
           "period_end": "2024-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/077/awards/?fiscal_year=2024&agency_type=funding"
         },
-        "2026": {
-          "obligations": -164545832.48,
-          "transactions": 614,
-          "latest_action_date": "2026-09-17T00:00:00",
-          "messages": [],
-          "period_start": "2025-10-01",
-          "period_end": "2026-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/077/awards/?fiscal_year=2026&agency_type=funding"
-        },
         "2025": {
           "obligations": -1747987195.27,
           "transactions": 661,
@@ -3538,6 +3529,15 @@
           "period_start": "2024-10-01",
           "period_end": "2025-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/077/awards/?fiscal_year=2025&agency_type=funding"
+        },
+        "2026": {
+          "obligations": -164545832.48,
+          "transactions": 614,
+          "latest_action_date": "2026-09-17T00:00:00",
+          "messages": [],
+          "period_start": "2025-10-01",
+          "period_end": "2026-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/077/awards/?fiscal_year=2026&agency_type=funding"
         }
       }
     },
@@ -3545,15 +3545,6 @@
       "code": "510",
       "name": "United States Chemical Safety Board",
       "years": {
-        "2025": {
-          "obligations": 1325058.28,
-          "transactions": 104,
-          "latest_action_date": "2025-09-26T00:00:00",
-          "messages": [],
-          "period_start": "2024-10-01",
-          "period_end": "2025-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/510/awards/?fiscal_year=2025&agency_type=funding"
-        },
         "2024": {
           "obligations": 1506121.63,
           "transactions": 91,
@@ -3562,6 +3553,15 @@
           "period_start": "2023-10-01",
           "period_end": "2024-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/510/awards/?fiscal_year=2024&agency_type=funding"
+        },
+        "2025": {
+          "obligations": 1325058.28,
+          "transactions": 104,
+          "latest_action_date": "2025-09-26T00:00:00",
+          "messages": [],
+          "period_start": "2024-10-01",
+          "period_end": "2025-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/510/awards/?fiscal_year=2025&agency_type=funding"
         },
         "2026": {
           "obligations": 2342832.94,
@@ -3578,6 +3578,15 @@
       "code": "345",
       "name": "United States Court of Appeals for Veterans Claims",
       "years": {
+        "2024": {
+          "obligations": 0.0,
+          "transactions": 0,
+          "latest_action_date": null,
+          "messages": [],
+          "period_start": "2023-10-01",
+          "period_end": "2024-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/345/awards/?fiscal_year=2024&agency_type=funding"
+        },
         "2025": {
           "obligations": 0.0,
           "transactions": 0,
@@ -3595,15 +3604,6 @@
           "period_start": "2025-10-01",
           "period_end": "2026-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/345/awards/?fiscal_year=2026&agency_type=funding"
-        },
-        "2024": {
-          "obligations": 0.0,
-          "transactions": 0,
-          "latest_action_date": null,
-          "messages": [],
-          "period_start": "2023-10-01",
-          "period_end": "2024-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/345/awards/?fiscal_year=2024&agency_type=funding"
         }
       }
     },
@@ -3620,15 +3620,6 @@
           "period_end": "2024-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/1133/awards/?fiscal_year=2024&agency_type=funding"
         },
-        "2025": {
-          "obligations": 15013766.84,
-          "transactions": 139,
-          "latest_action_date": "2025-09-30T00:00:00",
-          "messages": [],
-          "period_start": "2024-10-01",
-          "period_end": "2025-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/1133/awards/?fiscal_year=2025&agency_type=funding"
-        },
         "2026": {
           "obligations": 14232320.46,
           "transactions": 157,
@@ -3637,6 +3628,15 @@
           "period_start": "2025-10-01",
           "period_end": "2026-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/1133/awards/?fiscal_year=2026&agency_type=funding"
+        },
+        "2025": {
+          "obligations": 15013766.84,
+          "transactions": 139,
+          "latest_action_date": "2025-09-30T00:00:00",
+          "messages": [],
+          "period_start": "2024-10-01",
+          "period_end": "2025-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/1133/awards/?fiscal_year=2025&agency_type=funding"
         }
       }
     },
@@ -3653,15 +3653,6 @@
           "period_end": "2024-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/519/awards/?fiscal_year=2024&agency_type=funding"
         },
-        "2026": {
-          "obligations": 0.0,
-          "transactions": 0,
-          "latest_action_date": null,
-          "messages": [],
-          "period_start": "2025-10-01",
-          "period_end": "2026-09-30",
-          "source": "https://api.usaspending.gov/api/v2/agency/519/awards/?fiscal_year=2026&agency_type=funding"
-        },
         "2025": {
           "obligations": 0.0,
           "transactions": 0,
@@ -3670,6 +3661,15 @@
           "period_start": "2024-10-01",
           "period_end": "2025-09-30",
           "source": "https://api.usaspending.gov/api/v2/agency/519/awards/?fiscal_year=2025&agency_type=funding"
+        },
+        "2026": {
+          "obligations": 0.0,
+          "transactions": 0,
+          "latest_action_date": null,
+          "messages": [],
+          "period_start": "2025-10-01",
+          "period_end": "2026-09-30",
+          "source": "https://api.usaspending.gov/api/v2/agency/519/awards/?fiscal_year=2026&agency_type=funding"
         }
       }
     }
