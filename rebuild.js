@@ -55,10 +55,10 @@
     c.items.map(r=>'<button class="role-card" data-agency-code="'+esc(r.agency)+'">'+
       '<span class="rc-top"><span class="rc-name">'+esc(r.label)+'</span><span class="rc-pct">'+(r.pct<=0?'−':'+')+Math.abs(r.pct).toFixed(0)+'%</span></span>'+
       '<span class="rc-desc">'+esc(r.description)+'</span>'+
-      '<span class="rc-meta">'+num(r.baseline)+' → '+num(r.latest)+' · '+num(r.net)+' positions · explore →</span></button>').join('')+
+      '<span class="rc-meta">'+num(r.baseline)+' → '+num(r.latest)+' · '+num(r.net)+' positions · '+(r.seasonal?'year-over-year · ':'')+'explore →</span></button>').join('')+
     '</div></div>').join('');
   const sn=bill.seasonal_note;
-  const seasonalNote=sn?'<p class="seasonal-note"><b>A note on seasonal work.</b> A few agencies staff up for the summer, so the September snapshot flatters them. The '+esc(sn.agency)+', for example, looks roughly flat since December 2024 ('+(sn.headline_pct>=0?'+':'−')+Math.abs(sn.headline_pct).toFixed(0)+'%) but is down <b>'+Math.abs(sn.yoy_pct).toFixed(0)+'%</b> year over year ('+esc(sn.yoy_label)+', the same season). The cuts are real — just masked by seasonal hiring — so seasonal roles like park rangers and wildland firefighters are not shown as cards above.</p>':'';
+  const seasonalNote=sn?'<p class="seasonal-note"><b>A note on seasonal work.</b> A few agencies staff up for the summer, so the September snapshot flatters them. The '+esc(sn.agency)+' as a whole looks roughly flat since December 2024 ('+(sn.headline_pct>=0?'+':'−')+Math.abs(sn.headline_pct).toFixed(0)+'%) but is down <b>'+Math.abs(sn.yoy_pct).toFixed(0)+'%</b> year over year ('+esc(sn.yoy_label)+', the same season). The cuts are real — just masked by seasonal hiring — so the park ranger card above is measured year over year, not against the summer peak; wildland-fire staffing shows the same pattern.</p>':'';
 
   // ---- funding: cut topics to restore (exclude Defense from the domestic frame) ----
   const cuts=f.top_cut_topics.filter(t=>!/^defense$/i.test(t.topic));

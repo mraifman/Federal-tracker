@@ -39,6 +39,8 @@ SERVICE_ROLES = [
      'Deploy the moment disaster strikes to coordinate shelter, food and aid so communities can rebuild.'),
     ('Environment, science & safety', 'National Weather Service Meteorologist', 'CM', ['CM|role|1340'],
      'Forecast the hurricanes, tornadoes and floods whose warnings save lives and property.'),
+    ('Environment, science & safety', 'Park Ranger', 'IN', ['IN|role|0025'],
+     'Protect the national parks, guide visitors and run the search-and-rescue missions when hikers go missing.'),
     ('Environment, science & safety', 'USGS Hydrologic Technician', 'IN', ['IN|IN08|role|1316'],
      "Measure the nation's rivers and groundwater to warn of floods and protect drinking-water supplies."),
     ('Environment, science & safety', 'Interior Biologist & Natural-Resource Specialist', 'IN', ['IN|role|0401'],
@@ -73,23 +75,33 @@ def build_seasonal_note(baseline, comparison):
     }
 
 
+# Seasonal roles whose September snapshot is a summer peak are compared
+# year-over-year (same month) instead, so their real decline is not masked.
+SEASONAL_BASIS = {'Park Ranger': '202512'}
+
+
 def build_service_roles(baseline, comparison):
     roles = json.loads((ROOT / 'data/workforce-roles.json').read_text())
     by_id = {r['id']: r for r in roles['records']}
     out = []
     for category, label, agency, ids, desc in SERVICE_ROLES:
+        cmp = SEASONAL_BASIS.get(label, comparison)
         a = b = 0
         for rid in ids:
             r = by_id.get(rid)
             if not r:
                 continue
             a += r['values'].get(baseline, 0) or 0
-            b += r['values'].get(comparison, 0) or 0
-        out.append({
+            b += r['values'].get(cmp, 0) or 0
+        row = {
             'category': category, 'label': label, 'agency': agency,
             'description': desc, 'baseline': a, 'latest': b, 'net': b - a,
             'pct': round((b / a - 1) * 100, 1) if a else None,
-        })
+        }
+        if label in SEASONAL_BASIS:
+            row['seasonal'] = True
+            row['basis_note'] = 'year-over-year'
+        out.append(row)
     return out
 
 
