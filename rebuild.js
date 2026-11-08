@@ -130,23 +130,22 @@
    const W=360,H=118,L=5,R=5,Tp=14,Bm=24;
    const maxY=Math.max(...tr.map(d=>d.amount))*1.08,sx=i=>L+i/(tr.length-1)*(W-L-R),sy=v=>Tp+(1-v/maxY)*(H-Tp-Bm);
    const pts=tr.map((d,i)=>sx(i)+','+sy(d.amount)).join(' ');
-   const oneT=maxY>=1e12?'<line x1="'+L+'" x2="'+(W-R)+'" y1="'+sy(1e12)+'" y2="'+sy(1e12)+'" stroke="#bd6b52" stroke-dasharray="3 3" opacity=".7"/><text x="'+(W-R)+'" y="'+(sy(1e12)-4)+'" text-anchor="end" font-size="9" fill="#bd6b52">$1T</text>':'';
-   const spark='<svg viewBox="0 0 '+W+' '+H+'" class="interest-spark" role="img" aria-label="Net interest on the national debt by presidential-election year">'+oneT+
+   const spark='<svg viewBox="0 0 '+W+' '+H+'" class="interest-spark" role="img" aria-label="Net interest on the national debt by presidential-election year">'+
      '<polyline points="'+pts+'" fill="none" stroke="#19354a" stroke-width="2.5"/>'+
      tr.map((d,i)=>'<circle cx="'+sx(i)+'" cy="'+sy(d.amount)+'" r="3.5" fill="#19354a"/><text x="'+sx(i)+'" y="'+(H-9)+'" text-anchor="'+(i===0?'start':i===tr.length-1?'end':'middle')+'" font-size="10" fill="#5d727b">'+d.year+'</text><text x="'+sx(i)+'" y="'+(sy(d.amount)-8)+'" text-anchor="'+(i===tr.length-1?'end':i===0?'start':'middle')+'" font-size="10" font-weight="600" fill="#19354a">'+money(d.amount)+'</text>').join('')+'</svg>';
    const dc=budget.discretionary.cuts.slice(0,6),dmax=Math.max(1,...dc.map(c=>Math.abs(c.amount)));
    const dbars=dc.map(c=>'<div class="disc-row"><span class="disc-name">'+esc(c.function)+'</span><span class="disc-track"><i style="width:'+(Math.abs(c.amount)/dmax*100)+'%"></i></span><span class="disc-val">−'+money(Math.abs(c.amount))+'</span></div>').join('');
    budgetSection='<section class="budget-structure">'+
-    '<h2>Most of the budget is already spoken for</h2>'+
-    '<p class="section-lede">Three dollars in four are not decided each year. <b>Mandatory</b> programs — Social Security, Medicare, Medicaid — run on formulas Congress never revisited ('+mand.share_b.toFixed(0)+'% of the budget, up '+mand.pct.toFixed(0)+'%). The <b>interest on the national debt</b> takes another '+ni.share_b.toFixed(0)+'%. Only about a quarter is <b>discretionary</b> — the part Congress actually chooses each year — and that slice is shrinking.</p>'+
+    '<h2>Discretionary spending fell from '+disc.share_a.toFixed(0)+'% to '+disc.share_b.toFixed(0)+'% of the budget</h2>'+
+    '<p class="section-lede">Three of every four federal dollars aren’t decided each year. <b>Mandatory</b> programs — Social Security, Medicare, Medicaid — run on autopilot ('+mand.share_b.toFixed(0)+'% of the budget). <b>Debt interest</b> takes another '+ni.share_b.toFixed(0)+'%. Only about a quarter is <b>discretionary</b> — what Congress actually chooses — and that share is shrinking.</p>'+
     '<div class="bud-stacks"><div class="bud-legend">'+budget.categories.map(c=>'<span><i style="background:'+color[c.name]+'"></i>'+esc(c.name)+'</span>').join('')+'</div>'+
      stackRow('FY2024','a',budget.total.a)+stackRow('FY2026','b',budget.total.b)+
-     '<p class="muted">Discretionary budget authority fell from '+disc.share_a.toFixed(0)+'% to '+disc.share_b.toFixed(0)+'% of the total — '+money(disc.a)+' to '+money(disc.b)+' ('+disc.pct.toFixed(0)+'%).</p></div>'+
+     '<p class="muted">'+money(disc.a)+' to '+money(disc.b)+' ('+disc.pct.toFixed(0)+'%), squeezed by growing mandatory programs and debt interest.</p></div>'+
     '<div class="budget-grid">'+
      '<div class="debt-panel"><h3>The national debt’s interest grew '+ni.pct.toFixed(0)+'% from 2024 to 2026</h3>'+
-      '<p class="chart-note">Net interest crossed <b>'+money(ni.b)+'</b> — roughly triple its 2016 level and more than any single discretionary function. Shown on the presidential-election cycle.</p>'+spark+'</div>'+
-     '<div class="disc-panel"><h3>Inside the slice they control</h3>'+
-      '<p class="chart-note">The largest discretionary cuts, FY2024 to FY2026 — the choices actually made.</p>'+dbars+'</div></div>'+
+      '<p class="chart-note">Net interest tripled since 2016, past <b>'+money(ni.b)+'</b> — more than any discretionary function. Election-cycle years.</p>'+spark+'</div>'+
+     '<div class="disc-panel"><h3>The cuts Congress chose</h3>'+
+      '<p class="chart-note">Largest discretionary cuts, FY2024 → FY2026.</p>'+dbars+'</div></div>'+
     '<p class="muted">'+esc(budget.basis)+'</p>'+
    '</section>';
   }
