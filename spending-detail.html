@@ -91,7 +91,7 @@ h2{font:500 clamp(24px,3.2vw,34px)/1.15 Georgia,serif;letter-spacing:-.8px;margi
   </div>
   <p class="caption">Obligations and outlays can fall in different years: a multi-year grant obligated in FY2024 is paid out over several years, so a single year's outlays include old commitments. This page shows <b>obligations</b> — what each agency chose to commit — not cash outlays. And a drop in new authority alone doesn't prove a program ended: agencies can keep spending from prior-year balances.</p>
  </section>
- <div class="controls">
+ <p class="warn">Identified mandatory benefit programs are excluded, including Social Security, Medicare, Medicaid and veterans’ compensation. Remaining awards are not all classified as discretionary. <a href="data/mandatory-benefit-programs.json">Excluded programs and sources ↓</a></p><div class="controls">
   <label>Agency<select id="agency"></select></label>
   <label>Award type<select id="kind">
    <option value="Grants / cooperative agreements">Grants &amp; cooperative agreements</option>
@@ -118,7 +118,7 @@ h2{font:500 clamp(24px,3.2vw,34px)/1.15 Georgia,serif;letter-spacing:-.8px;margi
     return JSON.parse(new TextDecoder().decode(raw));});}));
   return cache.get(path);
  }
- let index,taxonomy,unit,code=new URLSearchParams(location.search).get('agency')||'ALL',kind='all';
+ let benefitPolicy,index,taxonomy,unit,code=new URLSearchParams(location.search).get('agency')||'ALL',kind='all';
 
  function pair(rows,idKey,nameKey){
   const m=new Map();
@@ -155,7 +155,7 @@ h2{font:500 clamp(24px,3.2vw,34px)/1.15 Georgia,serif;letter-spacing:-.8px;margi
 
  function render(){
   const app=$('app');
-  const rows=unit.programs.filter(r=>r.basis==='funding'&&(kind==='all'||r.award_kind===kind));
+  const rows=unit.programs.filter(r=>!Object.hasOwn(benefitPolicy.programs,String(r.program_code))&&r.basis==='funding'&&(kind==='all'||r.award_kind===kind));
   if(!rows.length){app.innerHTML='<div class="warn">No '+esc(kind==='all'?'award':kind.toLowerCase())+' records are reported for this agency in the retained archive. This does not establish zero funding.</div>';return;}
   const a=rows.filter(r=>r.year===2024).reduce((s,r)=>s+(r.amount||0),0);
   const b=rows.filter(r=>r.year===2026).reduce((s,r)=>s+(r.amount||0),0);
@@ -184,7 +184,7 @@ h2{font:500 clamp(24px,3.2vw,34px)/1.15 Georgia,serif;letter-spacing:-.8px;margi
   try{unit=await get(u.file);render();}
   catch(e){$('app').innerHTML='<div class="warn">This agency’s award aggregate could not be loaded. Reload to retry.</div>';}
  }
- Promise.all([get('data/outbound-awards.json'),get('data/grant-subjects.json')]).then(([idx,tax])=>{
+ Promise.all([get('data/outbound-awards.json'),get('data/grant-subjects.json'),get('data/mandatory-benefit-programs.json')]).then(([idx,tax,policy])=>{benefitPolicy=policy;
   index=idx;taxonomy=tax;setMethod();
   const sel=$('agency');
   const opts=index.units.filter(u=>u.code!=='ALL').sort((p,q)=>p.name.localeCompare(q.name));

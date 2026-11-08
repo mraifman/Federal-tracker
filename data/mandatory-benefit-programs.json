@@ -1,0 +1,163 @@
+{
+  "definition": "Exclude these identified mandatory benefit programs from the external-award interface, including totals, flows, program comparisons, recipient details and exports. This is a reviewed program exclusion list, not a full discretionary classification of remaining awards. Raw archives and published source aggregates retain all transactions.",
+  "sources": [
+    {
+      "url": "https://www.cbo.gov/content/mandatory-spending-options",
+      "basis": "Mandatory spending includes Social Security, Medicare, Medicaid, income security, nutrition assistance, retirement and veterans benefits."
+    },
+    {
+      "url": "https://www.cbo.gov/publication/62105",
+      "basis": "Current budget outlook and mandatory-program descriptions."
+    },
+    {
+      "url": "https://www.usaspending.gov/download_center/award_data_archive",
+      "basis": "Program identifiers and names in the retained FY2024/FY2026 official transaction archives."
+    }
+  ],
+  "programs": {
+    "96.001": {
+      "name": "SOCIAL SECURITY DISABILITY INSURANCE",
+      "group": "Social Security and SSI"
+    },
+    "96.002": {
+      "name": "SOCIAL SECURITY RETIREMENT INSURANCE",
+      "group": "Social Security and SSI"
+    },
+    "96.004": {
+      "name": "SOCIAL SECURITY SURVIVORS INSURANCE",
+      "group": "Social Security and SSI"
+    },
+    "96.006": {
+      "name": "SUPPLEMENTAL SECURITY INCOME",
+      "group": "Social Security and SSI"
+    },
+    "96.020": {
+      "name": "SPECIAL BENEFITS FOR CERTAIN WORLD WAR II VETERANS",
+      "group": "Social Security and SSI"
+    },
+    "93.770": {
+      "name": "MEDICARE PRESCRIPTION DRUG COVERAGE",
+      "group": "Medicare, Medicaid and CHIP"
+    },
+    "93.773": {
+      "name": "MEDICARE HOSPITAL INSURANCE",
+      "group": "Medicare, Medicaid and CHIP"
+    },
+    "93.774": {
+      "name": "MEDICARE SUPPLEMENTARY MEDICAL INSURANCE",
+      "group": "Medicare, Medicaid and CHIP"
+    },
+    "93.778": {
+      "name": "GRANTS TO STATES FOR MEDICAID",
+      "group": "Medicare, Medicaid and CHIP"
+    },
+    "93.767": {
+      "name": "CHILDREN'S HEALTH INSURANCE PROGRAM",
+      "group": "Medicare, Medicaid and CHIP"
+    },
+    "64.028": {
+      "name": "POST-9/11 VETERANS EDUCATIONAL ASSISTANCE",
+      "group": "Veterans compensation, pensions and education benefits"
+    },
+    "64.031": {
+      "name": "LIFE INSURANCE FOR VETERANS - DIRECT PAYMENTS FOR INSURANCE",
+      "group": "Veterans compensation, pensions and education benefits"
+    },
+    "64.101": {
+      "name": "BURIAL EXPENSES ALLOWANCE FOR VETERANS",
+      "group": "Veterans compensation, pensions and education benefits"
+    },
+    "64.104": {
+      "name": "PENSION FOR NON-SERVICE-CONNECTED DISABILITY FOR VETERANS",
+      "group": "Veterans compensation, pensions and education benefits"
+    },
+    "64.105": {
+      "name": "PENSION TO VETERANS SURVIVING SPOUSES, AND CHILDREN",
+      "group": "Veterans compensation, pensions and education benefits"
+    },
+    "64.109": {
+      "name": "VETERANS COMPENSATION FOR SERVICE-CONNECTED DISABILITY",
+      "group": "Veterans compensation, pensions and education benefits"
+    },
+    "64.110": {
+      "name": "VETERANS DEPENDENCY AND INDEMNITY COMPENSATION FOR SERVICE-CONNECTED DEATH",
+      "group": "Veterans compensation, pensions and education benefits"
+    },
+    "64.117": {
+      "name": "SURVIVORS AND DEPENDENTS EDUCATIONAL ASSISTANCE",
+      "group": "Veterans compensation, pensions and education benefits"
+    },
+    "64.120": {
+      "name": "POST-VIETNAM ERA VETERANS' EDUCATIONAL ASSISTANCE",
+      "group": "Veterans compensation, pensions and education benefits"
+    },
+    "64.124": {
+      "name": "ALL-VOLUNTEER FORCE EDUCATIONAL ASSISTANCE",
+      "group": "Veterans compensation, pensions and education benefits"
+    },
+    "64.206": {
+      "name": "VA OUTER BURIAL RECEPTACLE ALLOWANCE PROGRAM",
+      "group": "Veterans compensation, pensions and education benefits"
+    },
+    "10.551": {
+      "name": "SUPPLEMENTAL NUTRITION ASSISTANCE PROGRAM",
+      "group": "Nutrition benefits"
+    },
+    "10.553": {
+      "name": "10.553",
+      "group": "Nutrition benefits"
+    },
+    "10.555": {
+      "name": "NATIONAL SCHOOL LUNCH PROGRAM",
+      "group": "Nutrition benefits"
+    },
+    "10.556": {
+      "name": "10.556",
+      "group": "Nutrition benefits"
+    },
+    "10.558": {
+      "name": "CHILD AND ADULT CARE FOOD PROGRAM",
+      "group": "Nutrition benefits"
+    },
+    "10.559": {
+      "name": "SUMMER FOOD SERVICE PROGRAM FOR CHILDREN",
+      "group": "Nutrition benefits"
+    },
+    "17.225": {
+      "name": "UNEMPLOYMENT INSURANCE",
+      "group": "Income and family benefits"
+    },
+    "93.558": {
+      "name": "TEMPORARY ASSISTANCE FOR NEEDY FAMILIES",
+      "group": "Income and family benefits"
+    },
+    "93.563": {
+      "name": "CHILD SUPPORT SERVICES",
+      "group": "Income and family benefits"
+    },
+    "93.596": {
+      "name": "CHILD CARE MANDATORY AND MATCHING FUNDS OF THE CHILD CARE AND DEVELOPMENT FUND",
+      "group": "Income and family benefits"
+    },
+    "93.658": {
+      "name": "FOSTER CARE TITLE IV-E",
+      "group": "Income and family benefits"
+    },
+    "93.659": {
+      "name": "ADOPTION ASSISTANCE",
+      "group": "Income and family benefits"
+    },
+    "57.001": {
+      "name": "SOCIAL INSURANCE FOR RAILROAD WORKERS",
+      "group": "Retirement and pension benefits"
+    },
+    "86.001": {
+      "name": "PENSION PLAN TERMINATION INSURANCE",
+      "group": "Retirement and pension benefits"
+    }
+  },
+  "limitations": [
+    "Programs with both mandatory and discretionary funding are not assigned invented shares. Remaining awards may include mandatory funding outside this reviewed benefit-program list.",
+    "Agency account-spending comparisons above the award view retain their broader scope."
+  ]
+}
