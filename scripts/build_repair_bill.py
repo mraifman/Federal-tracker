@@ -21,7 +21,7 @@ METRIC = 'net_authority'
 # Roles that grew over the period (air traffic control, border, park rangers,
 # wildland fire) are deliberately excluded; this feature is about the cuts.
 SERVICE_ROLES = [
-    ('Health & consumer safety', 'USDA Food Safety Inspectors', 'AG', ['AG|role|1862', 'AG|role|1863'],
+    ('Health & consumer safety', 'Food Safety Inspectors', 'AG', ['AG|role|1862', 'AG|role|1863'],
      'Inspect meat, poultry and egg products to prevent foodborne illness.'),
     ('Health & consumer safety', 'Consumer Safety Officers', 'HE', ['HE|role|0696'],
      'Check the safety of medicines, medical devices and consumer products.'),
@@ -41,11 +41,11 @@ SERVICE_ROLES = [
      'Forecast weather and warn of hurricanes, tornadoes and floods.'),
     ('Environment, science & safety', 'Park Rangers', 'IN', ['IN|role|0025'],
      'Protect parks, guide visitors and help with search and rescue.'),
-    ('Environment, science & safety', 'USGS Hydrologic Technicians', 'IN', ['IN|IN08|role|1316'],
+    ('Environment, science & safety', 'Hydrologic Technicians', 'IN', ['IN|IN08|role|1316'],
      'Monitor rivers and groundwater to support flood warnings and water supplies.'),
     ('Environment, science & safety', 'Interior Biologists & Natural-Resource Specialists', 'IN', ['IN|role|0401'],
      'Protect wildlife, habitats and public lands.'),
-    ('Environment, science & safety', 'EPA Environmental Protection Specialists', 'EP', ['EP|role|0028'],
+    ('Environment, science & safety', 'Environmental Protection Specialists', 'EP', ['EP|role|0028'],
      'Protect air and water through environmental programs.'),
 ]
 
