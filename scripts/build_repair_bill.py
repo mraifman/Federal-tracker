@@ -67,6 +67,8 @@ def main():
 
     fy24 = fy26 = cut = grew = 0.0
     topic_cut = defaultdict(float)
+    topic_grew = defaultdict(float)
+    topic_code = {}
     for r in rows:
         a = value(r, '2024', evidence)
         b = value(r, '2026', evidence)
@@ -76,13 +78,20 @@ def main():
             fy26 += b
         if a is None or b is None:
             continue
+        topic = r.get('topic', 'Unclassified')
+        topic_code[topic] = r.get('topic_code')
         d = b - a
         if d < 0:
             cut += -d
-            topic_cut[r.get('topic', 'Unclassified')] += -d
+            topic_cut[topic] += -d
         else:
             grew += d
-    top_topics = sorted(topic_cut.items(), key=lambda kv: -kv[1])[:8]
+            topic_grew[topic] += d
+
+    def topic_list(agg, n=8):
+        return [{'topic': t, 'topic_code': topic_code.get(t), 'amount': round(v)}
+                for t, v in sorted(agg.items(), key=lambda kv: -kv[1])[:n]]
+    top_topics = topic_list(topic_cut)
 
     people = restoration['headline']
     out = {
@@ -101,7 +110,8 @@ def main():
             'fy2026_total': round(fy26),
             'restore_total': round(cut),
             'increase_total': round(grew),
-            'top_cut_topics': [{'topic': t, 'amount': round(v)} for t, v in top_topics],
+            'top_cut_topics': top_topics,
+            'top_increase_topics': topic_list(topic_grew),
             'basis': ('Sum of FY2024->FY2026 decreases in reported net budget authority '
                       '(line 4180) across non-financing accounts, using the same values '
                       'and continuity merges as the funding view. Defense cuts are '

@@ -32,7 +32,8 @@
 .grade-axis{display:flex;justify-content:center;font-size:10px;color:var(--muted);margin-top:12px;gap:6px}
 
 .agency-casualties h3{font-size:16px;font-weight:600;margin:0 0 14px}
-.casualty{display:grid;grid-template-columns:1fr auto;gap:6px 14px;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--line)}
+.casualty{width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:1fr auto;gap:6px 14px;align-items:baseline;padding:13px 6px;color:inherit;font:inherit;border-radius:5px;transition:background .12s}
+.casualty:hover,.casualty:focus-visible{background:#f0ece1}
 .casualty .c-name{font:500 16px/1.2 Georgia,serif}
 .casualty .c-pct{font:600 20px/1 Georgia,serif;color:var(--coral);white-space:nowrap}
 .casualty .c-detail{grid-column:1/-1;font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
@@ -41,11 +42,29 @@
 .rehire-jobs h3{font-size:16px;font-weight:600;margin:0 0 4px}
 .rehire-jobs .chart-note{font-size:12px;color:var(--muted);margin:0 0 18px}
 .job-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:14px}
-.job-card{border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:0 8px 8px 0;background:#fcfaf5;padding:16px 18px}
+.job-card{display:block;width:100%;text-align:left;color:inherit;font:inherit;border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:0 8px 8px 0;background:#fcfaf5;padding:16px 18px;cursor:pointer;transition:box-shadow .12s,transform .12s}
+.job-card:hover,.job-card:focus-visible{box-shadow:0 8px 22px #19354a12;transform:translateY(-1px)}
+.job-card[disabled]{cursor:default;transform:none;box-shadow:none}
 .job-card .j-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
 .job-card .j-name{font:500 15px/1.25 Georgia,serif}
 .job-card .j-count{font:600 20px/1 Georgia,serif;color:var(--teal);white-space:nowrap}
-.job-card .j-meta{font-size:11px;color:var(--muted);margin-top:8px;font-variant-numeric:tabular-nums}
+.job-card .j-meta{display:block;font-size:11px;color:var(--muted);margin-top:8px;line-height:1.5;font-variant-numeric:tabular-nums}
+
+.priorities{margin:46px 0 0;border-top:1px solid var(--line);padding-top:40px}
+.priorities h2{font:500 clamp(26px,3.4vw,38px)/1.15 Georgia,serif;letter-spacing:-1px;margin:0 0 6px}
+.priorities .section-lede{font-size:15px;color:#41535f;max-width:64ch;margin:0 0 26px}
+.priorities .section-lede b{color:var(--ink)}
+.priority-bars{display:flex;flex-direction:column;gap:10px;max-width:760px}
+.priority-bar{display:grid;grid-template-columns:minmax(150px,230px) 1fr auto;gap:16px;align-items:center;width:100%;text-align:left;background:none;border:0;color:inherit;font:inherit;padding:10px 8px;border-radius:6px;cursor:pointer;transition:background .12s}
+.priority-bar:hover,.priority-bar:focus-visible{background:#f0ece1}
+.priority-bar[disabled]{cursor:default}
+.priority-bar .pb-name{font-size:14px;font-weight:500}
+.priority-bar .pb-track{height:16px;background:#eef0ea;border-radius:3px;overflow:hidden}
+.priority-bar .pb-track i{display:block;height:100%;background:var(--coral);border-radius:3px}
+.priority-bar .pb-val{font:600 15px/1 Georgia,serif;color:var(--coral);white-space:nowrap;font-variant-numeric:tabular-nums}
+.priority-contrast{font-size:13px;color:#41535f;max-width:68ch;margin:26px 0 0;line-height:1.6}
+.priority-contrast b{color:var(--ink)}
+.link-btn{background:none;border:0;padding:0;color:var(--teal);text-decoration:underline;text-underline-offset:3px;font:inherit;cursor:pointer}
 
 .repair-cta{text-align:center;font-size:13px;color:var(--muted);margin:46px 0 8px;padding-top:28px;border-top:1px solid var(--line)}
 .repair-method{font-size:11px;color:var(--muted);line-height:1.7;max-width:70ch;margin:18px auto 0}

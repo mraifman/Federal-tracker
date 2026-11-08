@@ -48,6 +48,7 @@ def read_period(raw_dir, period):
     grade = defaultdict(int)        # (pay_plan, grade) -> count (non-defense)
     dep = defaultdict(int)          # department_code -> count (non-defense)
     dep_all = defaultdict(int)      # department_code -> count (all)
+    dep_occ = defaultdict(int)      # (department_code, occ) -> count (non-defense)
     sal_occ = defaultdict(lambda: [0.0, 0])
     sal_grade = defaultdict(lambda: [0.0, 0])
     total = nd_total = sal_reported = sal_rows = 0
@@ -75,13 +76,14 @@ def read_period(raw_dir, period):
         dep[d] += c
         dep_all[d] += c
         dep_name[d] = dn or d
+        dep_occ[(d, o)] += c
         grade[(pp, g)] += c
         if v is not None:
             sal_occ[o][0] += v * c; sal_occ[o][1] += c
             sal_grade[(pp, g)][0] += v * c; sal_grade[(pp, g)][1] += c
     return {
         'occ': occ, 'occ_name': occ_name, 'dep_name': dep_name,
-        'grade': grade, 'dep': dep, 'dep_all': dep_all,
+        'grade': grade, 'dep': dep, 'dep_all': dep_all, 'dep_occ': dep_occ,
         'total': total, 'nd_total': nd_total,
         'sal_occ': sal_occ, 'sal_grade': sal_grade,
         'sal_reported': sal_reported, 'sal_rows': sal_rows,
@@ -140,8 +142,23 @@ def main():
             'all_net_change': all_net,
         }
 
-    # by occupation (non-defense) for the primary comparison
+    # department names (union across periods)
+    dep_name = {}
+    for p in periods:
+        dep_name.update(data[p]['dep_name'])
+
+    # hardest-hit agency per occupation, for drill-down targets
     comp = data[a.comparison]
+    occ_top_agency = {}
+    occ_dep_net = defaultdict(lambda: defaultdict(int))
+    for (d, o) in set(base['dep_occ']) | set(comp['dep_occ']):
+        occ_dep_net[o][d] = comp['dep_occ'].get((d, o), 0) - base['dep_occ'].get((d, o), 0)
+    for o, deps in occ_dep_net.items():
+        d, net = min(deps.items(), key=lambda kv: kv[1])
+        if net < 0:
+            occ_top_agency[o] = {'code': d, 'name': dep_name.get(d, d), 'net': net}
+
+    # by occupation (non-defense) for the primary comparison
     by_occupation = []
     for o in all_occ:
         b = base['occ'].get(o, 0); l = comp['occ'].get(o, 0)
@@ -154,6 +171,7 @@ def main():
             'imputed_salary': o not in occ_avg,
             'restore_count': max(0, -net),
             'restore_cost': round(max(0, -net) * sal),
+            'top_agency': occ_top_agency.get(o),
         })
     by_occupation.sort(key=lambda r: r['net'])
 
@@ -171,9 +189,6 @@ def main():
     by_grade.sort(key=lambda r: r['net'])
 
     # by agency (non-defense), named
-    dep_name = {}
-    for p in periods:
-        dep_name.update(data[p]['dep_name'])
     all_dep = set().union(*(data[p]['dep'] for p in periods))
     placeholder = ('no data', 'not reported', 'unknown', 'redacted')
     by_agency = []
