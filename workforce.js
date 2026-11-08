@@ -11,18 +11,18 @@ function detail(){if(!selected&&!inspectedRole)return '';const r=inspectedRole?d
 function serviceRoles() {
  if(focus!=='all'||selected)return '';
  const examples=[
- ['AG|role|1863','USDA food inspectors'],
- ['AG|role|1862','USDA consumer safety inspectors'],
- ['EP|role|0028','EPA environmental protection specialists'],
- ['IN|IN08|role|1316','U.S. Geological Survey hydrologic technicians'],
- ['IN|IN28|role|1710','Bureau of Indian Education teaching and vocational training staff'],
- ['ED|role|1730','Department of Education research staff']
+ ['AG|role|1863','USDA food inspectors','Inspect meat and poultry products.'],
+ ['AG|role|1862','USDA consumer safety inspectors','Verify compliance with sanitation requirements.'],
+ ['EP|role|0028','EPA environmental protection specialists','Implement and evaluate environmental programs.'],
+ ['IN|IN08|role|1316','U.S. Geological Survey hydrologic technicians','Collect streamflow and groundwater measurements.'],
+ ['IN|IN28|role|1710','Bureau of Indian Education teaching and vocational training staff','Teach academic and vocational subjects.'],
+ ['ED|role|1730','Department of Education research staff','Study education programs and outcomes.']
  ];
- const cards=examples.map(([id,label])=>{
+ const cards=examples.map(([id,label,description])=>{
   const role=data.roles.find(row=>row.id===id);
   const a=role?.values[baseline],b=role?.values[end];
   if(a==null||b==null)return '';
-  return '<article><h3>'+esc(label)+'</h3><strong>'+fmt(Math.abs(b-a))+' '+(b<a?'fewer':b>a?'more':'change')+'</strong><p>'+fmt(a)+' → '+fmt(b)+' employees · '+pct(a,b)+'</p><small>OPM series '+role.code+'</small></article>';
+  return '<article><h3>'+esc(label)+'</h3><p>'+esc(description)+'</p><strong>'+fmt(Math.abs(b-a))+' '+(b<a?'fewer':b>a?'more':'change')+'</strong><p>'+fmt(a)+' → '+fmt(b)+' employees · '+pct(a,b)+'</p><small>OPM series '+role.code+'</small></article>';
  }).join('');
  return '<section id="public-service-roles"><h2>Who delivers federal services?</h2><p>Selected federal occupations · December 2024 to '+short(end)+'</p><div class="service-role-grid">'+cards+'</div><p class="muted">EPA specialists cover multiple environmental programs. Hydrologic technicians work across water monitoring activities. These records do not identify who specifically conducts air-quality work or water-quality tests, or how many inspections and tests took place.</p></section>';
 }
