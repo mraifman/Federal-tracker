@@ -181,12 +181,16 @@
   budgetSection+
   cashSection+
   outlaySection+
-  '<p class="repair-cta">Explore the full evidence — headcount, funding and where the money goes — below ↓</p>'+
-  '<details class="repair-method"><summary>How these figures are built</summary>'+
+  '<p class="repair-cta">Explore the full evidence — headcount, funding and where the money goes — below ↓</p>';
+
+  // ---- footnotes collected at the very bottom of the page ----
+  const methodDetails='<details class="repair-method"><summary>How the repair-bill figures are built</summary>'+
    '<p>'+esc(det.methodology.target)+' '+esc(det.methodology.positions)+' '+esc(det.methodology.cost)+'</p>'+
    '<p>'+esc(det.methodology.salary_imputation)+' Salaries are reported for '+det.salary_coverage.reported_pct+'% of non-defense staff. '+esc(det.methodology.defense)+'</p>'+
-   '<p>'+esc(det.methodology.caveats)+' '+esc(f.basis)+' * marks an occupation whose average salary was imputed.</p></details>'+
-  seasonalNote;
+   '<p>'+esc(det.methodology.caveats)+' '+esc(f.basis)+' * marks an occupation whose average salary was imputed.</p></details>';
+  const pageNotes=document.getElementById('page-notes');
+  if(pageNotes){pageNotes.querySelector('#rebuild-notes')?.remove();
+   pageNotes.insertAdjacentHTML('beforeend','<div id="rebuild-notes" class="note-block">'+methodDetails+seasonalNote+'</div>');}
 
   // ---- wire drill-downs ----
   root.querySelectorAll('[data-agency-code]').forEach(el=>el.addEventListener('click',()=>focusWorkforce(el.dataset.agencyCode)));

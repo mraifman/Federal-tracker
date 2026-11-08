@@ -123,6 +123,9 @@
 @media(max-width:600px){.squeeze-row{grid-template-columns:1fr auto;gap:4px 12px}.squeeze-row .sq-track{display:none}}
 
 .repair-cta{text-align:center;font-size:13px;color:var(--muted);margin:46px 0 8px;padding-top:28px;border-top:1px solid var(--line)}
+.page-notes{margin:52px 0 0;padding-top:30px;border-top:1px solid var(--line)}
+.page-notes>h2{font:500 22px/1.2 Georgia,serif;letter-spacing:-.5px;margin:0 0 16px;color:var(--ink)}
+.note-block{margin:0 0 14px}
 .repair-method{font-size:11px;color:var(--muted);line-height:1.7;max-width:70ch;margin:18px auto 0}
 .repair-method summary{cursor:pointer;color:var(--ink)}
 
