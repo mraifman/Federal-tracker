@@ -48,6 +48,31 @@ SERVICE_ROLES = [
 ]
 
 
+def build_seasonal_note(baseline, comparison):
+    """Park Service example of seasonal masking: the September snapshot (summer
+    peak) flatters seasonal agencies, so a same-season year-over-year change is
+    the honest measure. Uses the latest available December (one year after the
+    baseline)."""
+    w = json.loads((ROOT / 'data/workforce-changes.json').read_text())
+    periods = w['periods']
+    yoy = next((p for p in periods if p.startswith(str(int(baseline[:4]) + 1))
+                and p[4:] == baseline[4:]), None)
+    nps = next((r for r in w['records']['subagencies'] if r['id'] == 'IN|IN10'), None)
+    if not nps or not yoy:
+        return None
+    v = nps['values']
+    base, head, season = v.get(baseline), v.get(comparison), v.get(yoy)
+    if not base:
+        return None
+    return {
+        'agency': 'National Park Service',
+        'baseline': base, 'headline_latest': head, 'yoy_latest': season,
+        'headline_pct': round((head / base - 1) * 100, 1) if head else None,
+        'yoy_pct': round((season / base - 1) * 100, 1) if season else None,
+        'yoy_label': 'December 2024 to December 2025',
+    }
+
+
 def build_service_roles(baseline, comparison):
     roles = json.loads((ROOT / 'data/workforce-roles.json').read_text())
     by_id = {r['id']: r for r in roles['records']}
@@ -157,6 +182,8 @@ def main():
         },
         'service_roles': build_service_roles(
             restoration['baseline']['period'], restoration['comparison']['period']),
+        'seasonal_note': build_seasonal_note(
+            restoration['baseline']['period'], restoration['comparison']['period']),
         'funding': {
             'metric': METRIC,
             'fy2024_total': round(fy24),
@@ -177,8 +204,8 @@ def main():
     print(f"Wrote {dest}")
     print(f"  funding FY2024 ${fy24/1e12:.2f}T -> FY2026 ${fy26/1e12:.2f}T")
     print(f"  program funding to restore (gross cuts): ${cut/1e9:.1f}B")
-    for t, v in top_topics:
-        print(f"    {t[:44]:44} ${v/1e9:6.1f}B")
+    for t in top_topics:
+        print(f"    {t['topic'][:44]:44} ${t['amount']/1e9:6.1f}B")
 
 
 if __name__ == '__main__':

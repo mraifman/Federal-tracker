@@ -51,6 +51,8 @@
 .role-card .rc-pct{font:600 20px/1 Georgia,serif;color:var(--coral);white-space:nowrap}
 .role-card .rc-desc{display:block;font-size:13px;color:#41535f;line-height:1.5;margin:9px 0 10px}
 .role-card .rc-meta{display:block;font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
+.seasonal-note{font-size:12.5px;line-height:1.6;color:#41535f;background:#eef0ea;border-left:3px solid var(--muted);border-radius:0 7px 7px 0;padding:14px 18px;margin:8px 0 0;max-width:72ch}
+.seasonal-note b{color:var(--ink)}
 
 .priorities{margin:46px 0 0;border-top:1px solid var(--line);padding-top:40px}
 .priorities h2{font:500 clamp(26px,3.4vw,38px)/1.15 Georgia,serif;letter-spacing:-1px;margin:0 0 6px}

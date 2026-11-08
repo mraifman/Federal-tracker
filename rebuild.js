@@ -57,6 +57,8 @@
       '<span class="rc-desc">'+esc(r.description)+'</span>'+
       '<span class="rc-meta">'+num(r.baseline)+' → '+num(r.latest)+' · '+num(r.net)+' positions · explore →</span></button>').join('')+
     '</div></div>').join('');
+  const sn=bill.seasonal_note;
+  const seasonalNote=sn?'<p class="seasonal-note"><b>A note on seasonal work.</b> A few agencies staff up for the summer, so the September snapshot flatters them. The '+esc(sn.agency)+', for example, looks roughly flat since December 2024 ('+(sn.headline_pct>=0?'+':'−')+Math.abs(sn.headline_pct).toFixed(0)+'%) but is down <b>'+Math.abs(sn.yoy_pct).toFixed(0)+'%</b> year over year ('+esc(sn.yoy_label)+', the same season). The cuts are real — just masked by seasonal hiring — so seasonal roles like park rangers and wildland firefighters are not shown as cards above.</p>':'';
 
   // ---- funding: cut topics to restore (exclude Defense from the domestic frame) ----
   const cuts=f.top_cut_topics.filter(t=>!/^defense$/i.test(t.topic));
@@ -84,7 +86,7 @@
   '<section class="service-people">'+
    '<h2>The people behind the services</h2>'+
    '<p class="section-lede">Every cut is a person who did a job Americans rely on. Each of these is a real federal occupational series, thinned between December 2024 and September 2026. Select any role to open its agency.</p>'+
-   serviceGroups+
+   serviceGroups+seasonalNote+
   '</section>'+
   '<section class="demolition">'+
    '<h2>What was demolished</h2>'+
