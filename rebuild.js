@@ -85,9 +85,9 @@
    const surge=(o.surge_topics||[]).slice(0,3).map(t=>esc(t.topic)+' (+'+money(t.amount)+')').join(', ');
    cashSection='<section class="priorities">'+
     '<h2>The cash that actually stopped flowing</h2>'+
-    '<p class="section-lede"><b>Outlays</b> are cash payments. Total outlays rose '+(o.total_pct!=null?o.total_pct.toFixed(0)+'%':'')+' — but that hides where money stopped reaching people. These services saw the sharpest drop in real payments, FY2024 to FY2026.</p>'+
+    '<p class="section-lede"><b>Outlays</b> are cash payments. Total outlays rose '+(o.total_pct!=null?o.total_pct.toFixed(0)+'%':'')+' — but that hides where money stopped reaching people. These services saw the sharpest drop in payments, FY2024 to FY2026. This chart includes mandatory funding; select a topic to explore its discretionary portion.</p>'+
     '<div class="priority-bars">'+obars+'</div>'+
-    (surge?'<p class="priority-contrast">The rise went almost entirely to mandatory programs and interest — '+surge+' — not to the services above. <button class="link-btn" data-explore-funding>See the full funding picture →</button></p>':'')+
+    (surge?'<p class="priority-contrast">The rise went almost entirely to mandatory programs and interest — '+surge+' — not to the services above. <button class="link-btn" data-explore-funding>Explore discretionary funding →</button></p>':'')+
    '</section>';
   }
 

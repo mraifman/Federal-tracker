@@ -66,4 +66,6 @@ def main():
  (ROOT/'data/authority-comparison.json').write_text(json.dumps(out,separators=(',',':'),allow_nan=False)+'\n');print('Published',len(combined),'accounts from',len(sources),'workbooks',flush=True)
  from classify_authority import main as classify
  classify()
+ from add_discretionary_metrics import main as add_discretionary
+ add_discretionary()
 if __name__=='__main__':main()

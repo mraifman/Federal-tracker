@@ -15,6 +15,15 @@ for r in a['records']:
   assert str(source['year'])==year and len(source['sha256'])==64
   assert values['source_rows'] and all(x['row']>=2 for x in values['source_rows'])
   assert all(isinstance(v,(int,float)) and math.isfinite(v) for v in values['metrics'].values())
+discretionary_lines={'4070':'discretionary_net_authority','4000':'discretionary_gross_authority','1160':'discretionary_appropriations','4080':'discretionary_net_outlays'}
+assert a.get('discretionary_definition')
+for r in a['records']:
+ for values in r['years'].values():
+  rows=values.get('discretionary_source_rows',[])
+  assert all(x['row']>=2 and x['line'] in discretionary_lines for x in rows)
+  present={x['line'] for x in rows}
+  for line,metric in discretionary_lines.items():
+   assert (metric in values['metrics'])==(line in present), (r['id'],metric)
 assert len({r['agency_code'] for r in a['records']})==123
 nih=[r for r in a['records'] if r['credit_scope'].startswith('NON-') and 'national institutes of health' in r['bureau'].lower()]
 assert len(nih)==33
