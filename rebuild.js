@@ -87,7 +87,7 @@
     '<h2>Where cash payments fell</h2>'+
     '<p class="section-lede"><b>Outlays</b> are cash payments. Total payments rose '+(o.total_pct!=null?o.total_pct.toFixed(0)+'%':'')+' overall. These topics had the largest declines, FY2024 to FY2026.</p>'+
     '<div class="priority-bars">'+obars+'</div>'+
-    (surge?'<p class="priority-contrast">The rise went almost entirely to mandatory programs and interest — '+surge+' — not to the services above. <button class="link-btn" data-explore-funding>Explore discretionary funding →</button></p>':'')+
+    (surge?'<p class="priority-contrast">The rise went almost entirely to mandatory programs and interest — '+surge+' — not to the services above. <button class="link-btn" data-explore-funding>Explore funding priorities →</button></p>':'')+
    '</section>';
   }
 
