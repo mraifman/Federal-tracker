@@ -45,7 +45,7 @@ Promise.all(['authority-comparison','spending-comparison','workforce-changes','a
  navigation.setAttribute('aria-label','Sections in this investigation');
  tabs.after(navigation);
  const scenes={
-  workforce:[['#public-service-roles','Public service roles'],['.trend-layout','Workforce trend'],['.bubble-panel','Explore offices'],['.table-scroll','Compare records']],
+  workforce:[['#public-service-roles','Public service roles'],['.bubble-panel','Explore offices'],['.trend-layout','Workforce trend'],['.table-scroll','Compare records']],
   funding:[['.spotlights','Choose a subject'],['.trend-layout','Explore funding'],['.table-scroll','Account records']],
   uses:[['.spotlights','Choose an agency'],['.investigation-metrics','Agency totals'],['.composition','Spending mix'],['#outbound-panel','External awards']]
  };

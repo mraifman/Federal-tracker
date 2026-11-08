@@ -21,3 +21,7 @@
 [data-atlas-scene]{scroll-margin-top:calc(var(--atlas-tabs-height,60px) + 60px)}
 @media(prefers-reduced-motion:no-preference){.atlas-scene-enter{animation:atlas-scene .32s ease-out both}@keyframes atlas-scene{from{opacity:.45;transform:translateY(5px)}to{opacity:1;transform:none}}.endpoint-line,.endpoint-before,.endpoint-after{transition:left .35s ease,width .35s ease}}
 @media(max-width:650px){.atlas-reading-nav{gap:1rem}.atlas-reading-nav a{font-size:12px}}
+/* Give the interactive chart the main reading width; keep controls with the graphic. */
+#workforce-app{display:flex;flex-direction:column}#workforce-app>.trend-layout{order:2}#workforce-app>#agencies{order:1}#workforce-app>.office-inspector{order:3}
+#funding-app>.trend-layout{display:flex;flex-direction:column;align-items:stretch}#funding-app>.trend-layout>.research-filters{order:-1;position:static;display:flex;flex-wrap:wrap;align-items:end;gap:12px;padding:16px}#funding-app>.trend-layout>.research-filters h3{width:100%;margin:0}#funding-app>.trend-layout>.research-filters label{flex:1 1 150px;min-width:0}#funding-app>.trend-layout>.research-filters p{width:100%;margin:0}#funding-app .allocation-host{min-height:0}#funding-app .allocation-bubbles{max-height:78vh}
+@media(prefers-reduced-motion:no-preference){.endpoint-after{animation:atlas-endpoint .5s cubic-bezier(.25,.7,.25,1)}@keyframes atlas-endpoint{from{left:var(--baseline-position)}}}
