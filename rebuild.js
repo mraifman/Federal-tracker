@@ -20,11 +20,11 @@
   window.dispatchEvent(new CustomEvent('atlas-focus-funding',{detail:{topic:topicCode}}));
  }
 
- Promise.all(['repair-bill','workforce-restoration'].map(n=>fetch('data/'+n+'.json').then(r=>{if(!r.ok)throw Error(n);return r.json()})))
- .then(([bill,det])=>render(bill,det))
+ Promise.all(['repair-bill','workforce-restoration','outlay-pressure'].map(n=>fetch('data/'+n+'.json').then(r=>{if(!r.ok)throw Error(n);return r.json()})))
+ .then(([bill,det,outlay])=>render(bill,det,outlay))
  .catch(()=>{root.innerHTML='';});
 
- function render(bill,det){
+ function render(bill,det,outlay){
   const p=bill.people,f=bill.funding;
   const pct=(p.net_change/p.baseline_count*100);
 
@@ -72,6 +72,32 @@
   const grew=f.top_increase_topics.slice(0,3).map(t=>esc(t.topic)+' ('+money(t.amount)+')').join(', ');
   const heroTopics=cuts.slice(0,3).map(t=>esc(t.topic)+' ('+money(t.amount)+')').join(', ');
 
+  // ---- outlay pressure: fewer hands, more money ----
+  let outlaySection='';
+  if(outlay&&outlay.government_wide){
+   const g=outlay.government_wide;
+   const mix=code=>{const m=(outlay.object_mix||[]).find(x=>x.code===code);return m?m.share_b:null;};
+   const grants=mix('40'),personnel=mix('10');
+   const squeeze=(outlay.agencies||[]).filter(a=>a.staff_pct<=-10&&a.staff_pct>-80).slice(0,8);
+   const smax=Math.max(1,...squeeze.map(a=>a.per_employee_pct));
+   const rows=squeeze.map(a=>'<button class="squeeze-row" data-opm="'+esc(a.opm)+'">'+
+     '<span class="sq-name">'+esc(a.name)+'</span>'+
+     '<span class="sq-staff">staff −'+Math.abs(a.staff_pct).toFixed(0)+'%</span>'+
+     '<span class="sq-track"><i style="width:'+(a.per_employee_pct/smax*100)+'%"></i></span>'+
+     '<span class="sq-load">+'+a.per_employee_pct.toFixed(0)+'%<small>per employee</small></span></button>').join('');
+   outlaySection='<section class="outlay">'+
+    '<h2>Fewer hands, more money</h2>'+
+    '<p class="section-lede">The people were cut, but the money was not. Across '+g.matched_agencies+' agencies with comparable records, the workforce fell <b>'+Math.abs(g.staff_pct).toFixed(0)+'%</b> while the obligations they manage rose <b>'+g.oblig_pct.toFixed(0)+'%</b> — so the same work now lands on far fewer desks.</p>'+
+    '<div class="outlay-headline"><span class="ohl-label">Money each federal employee now administers</span>'+
+     '<b class="ohl-figure">+'+g.per_employee_pct.toFixed(0)+'%</b>'+
+     '<span class="ohl-sub">'+money(g.per_employee_a)+' → '+money(g.per_employee_b)+' per employee</span></div>'+
+    '<h3>The squeeze, by agency</h3>'+
+    '<p class="chart-note">How far staffing fell, and how much more each remaining employee must now administer. Select an agency to open its spending.</p>'+
+    '<div class="squeeze-list">'+rows+'</div>'+
+    '<p class="muted">This is not contractors replacing civil servants — the spending mix barely moved'+(grants!=null?' (grants '+grants.toFixed(0)+'% of obligations, personnel '+(personnel||0).toFixed(0)+'%)':'')+'. It is the same workload spread across fewer people. '+esc(outlay.period_note||'')+'</p>'+
+   '</section>';
+  }
+
   root.innerHTML=
   '<section class="repair-hero">'+
    '<p class="eyebrow">The federal workforce · December 2024 → September 2026</p>'+
@@ -106,6 +132,7 @@
    '<p class="priority-contrast">Total federal budget authority still <b>rose '+money(f.fy2026_total-f.fy2024_total)+'</b> net over the same period — but that growth is mandatory, led by '+grew+' — not a restoration of these services. '+
     '<button class="link-btn" data-explore-funding>See the full funding picture →</button></p>'+
   '</section>'+
+  outlaySection+
   '<p class="repair-cta">Explore the full evidence — headcount, funding and where the money goes — below ↓</p>'+
   '<details class="repair-method"><summary>How these figures are built</summary>'+
    '<p>'+esc(det.methodology.target)+' '+esc(det.methodology.positions)+' '+esc(det.methodology.cost)+'</p>'+
@@ -116,6 +143,10 @@
   root.querySelectorAll('[data-agency-code]').forEach(el=>el.addEventListener('click',()=>focusWorkforce(el.dataset.agencyCode)));
   root.querySelectorAll('[data-topic-code]').forEach(el=>el.addEventListener('click',()=>focusFunding(el.dataset.topicCode)));
   root.querySelector('[data-explore-funding]')?.addEventListener('click',()=>focusFunding('all'));
+  root.querySelectorAll('[data-opm]').forEach(el=>el.addEventListener('click',()=>{
+    window.dispatchEvent(new CustomEvent('atlas-open-uses',{detail:{opmId:el.dataset.opm}}));
+    document.querySelector('[data-project-panel="uses"]')?.scrollIntoView({behavior:'smooth',block:'start'});
+  }));
  }
 
  function tile(label,figure,sub,foot){
