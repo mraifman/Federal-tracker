@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Where the money goes | Federal Atlas</title>
+<meta name="description" content="For any federal agency, see how its award spending shifted — which programs by Assistance Listing code, and which subjects — from FY2024 to FY2026.">
+<style>
+:root{--paper:#f8f6ef;--ink:#19354a;--muted:#5d727b;--line:#d3dbd5;--coral:#bd6b52;--teal:#43838b}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.6 'Avenir Next',Avenir,'Segoe UI',sans-serif}
+a{color:inherit;text-underline-offset:4px}
+header{margin:12px;padding:22px 25px;background:#fffdf8;display:flex;justify-content:space-between;align-items:center;gap:20px;border-radius:6px}
+.brand{font-size:25px;letter-spacing:-1px;font-weight:800;text-decoration:none;line-height:1}
+.brand span{display:block;font-size:8px;letter-spacing:2px;font-weight:500;margin-top:10px}
+header nav{display:flex;gap:22px;font-size:12px}
+main{max-width:1080px;margin:auto;padding:0 32px 60px}
+.intro{padding:40px 0 10px}
+.eyebrow{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+h1{font:600 clamp(32px,5vw,56px)/1.08 Georgia,serif;letter-spacing:-1.5px;margin:14px 0 16px;max-width:18ch}
+.intro p{font-size:16px;color:#30424f;max-width:62ch}
+.controls{display:flex;flex-wrap:wrap;gap:22px;align-items:flex-end;border-block:1px solid var(--line);padding:22px 0;margin:24px 0}
+label{display:flex;flex-direction:column;font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);gap:7px}
+select{border:1px solid #bdccc3;background:#fffdf8;border-radius:5px;padding:11px 12px;font:14px 'Avenir Next',sans-serif;color:var(--ink);max-width:100%;min-width:260px}
+.headline{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin:26px 0 10px}
+.headline span{display:block;font-size:12px;color:var(--muted)}
+.headline b{display:block;font:600 clamp(26px,4vw,42px)/1 Georgia,serif;letter-spacing:-1px;margin:6px 0 4px}
+.headline small{font-size:12px;color:var(--muted)}
+.headline .down b{color:var(--coral)}.headline .up b{color:var(--teal)}
+section.block{margin:46px 0 0;border-top:1px solid var(--line);padding-top:34px}
+h2{font:500 clamp(24px,3.2vw,34px)/1.15 Georgia,serif;letter-spacing:-.8px;margin:0 0 6px}
+.note{font-size:12.5px;color:var(--muted);max-width:70ch;margin:0 0 22px}
+.legend{display:flex;gap:18px;flex-wrap:wrap;font-size:11px;color:var(--muted);margin:0 0 16px}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+/* subject bars */
+.subj{display:flex;flex-direction:column;gap:9px}
+.subj-row{display:grid;grid-template-columns:minmax(150px,230px) 1fr auto;gap:16px;align-items:center}
+.subj-name{font-size:14px;font-weight:500}
+.subj-track{position:relative;height:18px;background:#eef0ea;border-radius:3px}
+.subj-track i{position:absolute;top:0;height:100%;border-radius:3px}
+.subj-track .a{background:#b6c6cc;opacity:.85}
+.subj-track .b{background:var(--teal)}
+.subj-track .b.neg{background:var(--coral)}
+.subj-val{font:600 14px/1.1 Georgia,serif;white-space:nowrap;text-align:right;font-variant-numeric:tabular-nums}
+.subj-val.neg{color:var(--coral)}.subj-val.pos{color:var(--teal)}
+.subj-val small{display:block;font:400 10px/1.3 'Avenir Next',sans-serif;color:var(--muted)}
+/* program dumbbell */
+.prog{display:flex;flex-direction:column;gap:0}
+.prog-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(160px,1.1fr) 96px;align-items:center;gap:16px;border-top:1px solid var(--line);padding:11px 0}
+.prog-row .pname{font-size:13.5px}
+.prog-row .pname small{display:block;color:var(--muted);font-size:11px;margin-top:2px;font-variant-numeric:tabular-nums}
+.plot{position:relative;height:24px}
+.plot .bar{position:absolute;height:2px;top:11px}
+.plot .dot{position:absolute;width:11px;height:11px;border-radius:50%;top:7px;transform:translateX(-50%)}
+.pchg{text-align:right;font:600 14px/1.1 Georgia,serif;font-variant-numeric:tabular-nums}
+.pchg.neg{color:var(--coral)}.pchg.pos{color:var(--teal)}
+.source{font-size:11px;color:var(--muted);margin-top:40px;border-top:1px solid var(--line);padding-top:20px;line-height:1.7}
+.loading{padding:40px 0;color:var(--muted)}
+.warn{border-left:3px solid #b9934c;background:#eeecde;padding:14px 18px;font-size:13px;margin:16px 0}
+@media(max-width:640px){main{padding:0 18px 40px}.headline{grid-template-columns:1fr;gap:14px}.subj-row{grid-template-columns:1fr auto}.subj-track{display:none}.prog-row{grid-template-columns:1fr 84px}.plot{grid-column:1/-1}}
+</style></head>
+<body>
+<header>
+ <a class="brand" href="./">Federal Atlas<span>PEOPLE · PURPOSE · PUBLIC MONEY</span></a>
+ <nav><a href="./">The workforce</a><a href="./?view=uses">Where money goes</a><a href="#method">About the data</a></nav>
+</header>
+<main>
+ <section class="intro">
+  <p class="eyebrow">Award spending · full FY2024 → full FY2026</p>
+  <h1>Where the money goes, program by program.</h1>
+  <p>Pick any federal agency to see how the grants and awards it funds changed — broken down by subject, and by individual program under its federal Assistance Listing code.</p>
+ </section>
+ <div class="controls">
+  <label>Agency<select id="agency"></select></label>
+  <label>Award type<select id="kind">
+   <option value="Grants / cooperative agreements">Grants &amp; cooperative agreements</option>
+   <option value="Contracts">Contracts</option>
+   <option value="all">All award types</option>
+  </select></label>
+ </div>
+ <div id="app"><p class="loading">Loading award records…</p></div>
+ <p class="source" id="method"></p>
+</main>
+<script>
+(()=>{'use strict';
+ const $=id=>document.getElementById(id);
+ const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ const money=n=>{const v=Math.abs(n),d=v>=1e12?1e12:v>=1e9?1e9:v>=1e6?1e6:1;return (n<0?'−':'')+'$'+(v/d).toLocaleString('en-US',{maximumFractionDigits:d===1?0:v/d>=100?0:1})+({1:'',1e6:'M',1e9:'B',1e12:'T'}[d]);};
+ const signed=n=>(n>0?'+':'')+money(n);
+ const titleCase=s=>String(s).toLowerCase().replace(/\b\w/g,c=>c.toUpperCase()).replace(/\b(Nih|Cdc|Fda|Epa|Usda|Hiv|Aids|Arpa|Us)\b/gi,c=>c.toUpperCase());
+ const cache=new Map();
+ async function get(path){
+  if(!cache.has(path))cache.set(path,fetch(path).then(r=>{if(!r.ok)throw Error('unavailable');
+   if(!path.endsWith('.gz'))return r.json();
+   return r.arrayBuffer().then(async raw=>{const b=new Uint8Array(raw);
+    if(b[0]===31&&b[1]===139){const s=new Blob([raw]).stream().pipeThrough(new DecompressionStream('gzip'));return JSON.parse(await new Response(s).text());}
+    return JSON.parse(new TextDecoder().decode(raw));});}));
+  return cache.get(path);
+ }
+ let index,taxonomy,unit,code=new URLSearchParams(location.search).get('agency')||'NIH',kind='Grants / cooperative agreements';
+
+ function pair(rows,idKey,nameKey){
+  const m=new Map();
+  for(const r of rows){const id=r[idKey]||'Unreported';if(!m.has(id))m.set(id,{id,name:r[nameKey]||id,a:0,b:0});const x=m.get(id);x[r.year===2024?'a':'b']+=r.amount||0;}
+  return [...m.values()].sort((p,q)=>Math.abs(q.b-q.a)-Math.abs(p.b-p.a));
+ }
+ function bySubject(rows){
+  const m=new Map();
+  for(const r of rows){const s=(taxonomy[r.program_code]&&taxonomy[r.program_code].subject)||'Unclassified';if(!m.has(s))m.set(s,{id:s,name:s,a:0,b:0});const x=m.get(s);x[r.year===2024?'a':'b']+=r.amount||0;}
+  return [...m.values()].sort((p,q)=>Math.abs(q.b-q.a)-Math.abs(p.b-p.a));
+ }
+
+ function subjectBars(subs){
+  const shown=subs.slice(0,8);
+  const max=Math.max(1,...shown.flatMap(r=>[Math.abs(r.a),Math.abs(r.b)]));
+  return '<div class="legend"><span><i style="background:#b6c6cc"></i>FY2024</span><span><i style="background:var(--teal)"></i>FY2026 higher</span><span><i style="background:var(--coral)"></i>FY2026 lower</span></div><div class="subj">'+
+   shown.map(r=>{const chg=r.b-r.a,neg=chg<0;return '<div class="subj-row"><span class="subj-name">'+esc(titleCase(r.name))+'</span>'+
+    '<span class="subj-track"><i class="a" style="left:0;width:'+(Math.abs(r.a)/max*100)+'%"></i><i class="b'+(neg?' neg':'')+'" style="left:0;top:9px;height:9px;width:'+(Math.abs(r.b)/max*100)+'%"></i></span>'+
+    '<span class="subj-val '+(neg?'neg':'pos')+'">'+signed(chg)+'<small>'+money(r.a)+' → '+money(r.b)+'</small></span></div>';}).join('')+'</div>';
+ }
+ function dumbbell(progs){
+  const shown=progs.slice(0,12).filter(r=>r.a||r.b);
+  const lo=Math.min(...shown.flatMap(r=>[r.a,r.b]),0);
+  const hi=Math.max(...shown.flatMap(r=>[r.a,r.b]),0);
+  const pos=v=>4+92*(v-lo)/((hi-lo)||1);
+  return '<div class="legend"><span><i style="background:#fff;border:2px solid var(--muted)"></i>FY2024</span><span><i style="background:var(--ink)"></i>FY2026</span><span>Same dollar scale across rows</span></div><div class="prog">'+
+   shown.map(r=>{const chg=r.b-r.a,neg=chg<0,col=neg?'#bd6b52':'#216e70',x1=pos(r.a),x2=pos(r.b);
+    return '<div class="prog-row"><span class="pname">'+esc(titleCase(r.name))+'<small>Program '+esc(r.id)+' · '+money(r.a)+' → '+money(r.b)+'</small></span>'+
+     '<span class="plot"><i class="bar" style="left:'+Math.min(x1,x2)+'%;width:'+Math.abs(x2-x1)+'%;background:'+col+'"></i>'+
+     '<i class="dot" style="left:'+x1+'%;background:#fff;border:2px solid '+col+'"></i>'+
+     '<i class="dot" style="left:'+x2+'%;background:'+col+'"></i></span>'+
+     '<span class="pchg '+(neg?'neg':'pos')+'">'+signed(chg)+'</span></div>';}).join('')+'</div>';
+ }
+
+ function render(){
+  const app=$('app');
+  const rows=unit.programs.filter(r=>r.basis==='funding'&&(kind==='all'||r.award_kind===kind));
+  if(!rows.length){app.innerHTML='<div class="warn">No '+esc(kind==='all'?'award':kind.toLowerCase())+' records are reported for this agency in the retained archive. This does not establish zero funding.</div>';return;}
+  const a=rows.filter(r=>r.year===2024).reduce((s,r)=>s+(r.amount||0),0);
+  const b=rows.filter(r=>r.year===2026).reduce((s,r)=>s+(r.amount||0),0);
+  const progs=pair(rows,'program_code','program_name');
+  const grants=kind==='Grants / cooperative agreements';
+  const subs=grants?bySubject(rows):[];
+  app.innerHTML=
+   '<section class="headline" aria-label="Award totals">'+
+    '<div><span>FY2024 award obligations</span><b>'+money(a)+'</b><small>'+esc(unit.name)+'</small></div>'+
+    '<div><span>FY2026 award obligations</span><b>'+money(b)+'</b><small>'+(progs.length)+' programs / purposes</small></div>'+
+    '<div class="'+(b<a?'down':'up')+'"><span>Change</span><b>'+signed(b-a)+'</b><small>'+(a>0?((b/a-1)*100).toFixed(0)+'%':'—')+' · nominal dollars</small></div>'+
+   '</section>'+
+   (grants?'<section class="block"><h2>By subject</h2><p class="note">Grant dollars grouped by the subject of their program, derived from the federal Assistance Listing. The eight largest shifts are shown.</p>'+subjectBars(subs)+'</section>':'')+
+   '<section class="block"><h2>Program by program</h2><p class="note">The twelve largest changes among individual '+(grants?'grant programs':kind==='Contracts'?'contract purposes':'award lines')+', each identified by its '+(grants?'Assistance Listing':'')+' code. Open dots mark FY2024, filled dots FY2026; every row shares one dollar scale.</p>'+dumbbell(progs)+'</section>';
+ }
+
+ function setMethod(){
+  $('method').innerHTML='Source: USAspending full award archives'+(index.source_vintage?' ('+esc(index.source_vintage)+')':'')+'. '+esc(index.definition||'')+' Program identity follows the federal Assistance Listing (grants) or Product/Service code (contracts); subjects use the documented listing-title crosswalk in <a href="data/grant-subjects.json">grant-subjects.json</a>. Full fiscal-year award obligations, a different scope and period from account outlays. A drop in obligations alone does not establish that a program was canceled. <a href="data/outbound-awards.json">Source receipts ↓</a>';
+ }
+ async function load(){
+  $('app').innerHTML='<p class="loading">Loading award records…</p>';
+  const u=index.units.find(x=>x.code===code)||index.units.find(x=>x.code==='NIH');
+  code=u.code;$('agency').value=code;
+  const url=new URL(location.href);url.searchParams.set('agency',code);history.replaceState(null,'',url);
+  try{unit=await get(u.file);render();}
+  catch(e){$('app').innerHTML='<div class="warn">This agency’s award aggregate could not be loaded. Reload to retry.</div>';}
+ }
+ Promise.all([get('data/outbound-awards.json'),get('data/grant-subjects.json')]).then(([idx,tax])=>{
+  index=idx;taxonomy=tax;setMethod();
+  const sel=$('agency');
+  const opts=index.units.filter(u=>u.code!=='ALL').sort((p,q)=>p.name.localeCompare(q.name));
+  sel.innerHTML='<option value="ALL">All government external awards</option>'+opts.map(u=>'<option value="'+esc(u.code)+'">'+esc(u.name)+'</option>').join('');
+  sel.value=index.units.some(u=>u.code===code)?code:'NIH';
+  sel.onchange=e=>{code=e.target.value;load();};
+  $('kind').onchange=e=>{kind=e.target.value;if(unit)render();};
+  load();
+ }).catch(()=>{$('app').innerHTML='<div class="warn">The award index could not be loaded.</div>';});
+})();
+</script>
+</body></html>

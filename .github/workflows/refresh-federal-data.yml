@@ -50,7 +50,7 @@ jobs:
       - name: Prepare public files
         run: |
           mkdir _site
-          cp index.html grant-change-examples.html workforce.js workforce.css research.js research.css atlas-bubbles.js outflows.js rebuild.js rebuild.css _site/
+          cp index.html grant-change-examples.html spending-detail.html workforce.js workforce.css research.js research.css atlas-bubbles.js outflows.js rebuild.js rebuild.css _site/
           cp -r data vendor _site/
       - uses: actions/upload-pages-artifact@v3
         with:
