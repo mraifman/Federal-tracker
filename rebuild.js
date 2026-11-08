@@ -1,4 +1,4 @@
-/* The repair bill: what Trump's cuts demolished and what rebuilding would take.
+/* The repair bill: what the cuts demolished and what rebuilding would take.
    Reads data/repair-bill.json (top-line people + funding) and
    data/workforce-restoration.json (grade, occupation and agency detail).
    Cards drill into the existing workforce and funding investigations. */
@@ -74,7 +74,7 @@
   '<section class="repair-hero">'+
    '<p class="eyebrow">The federal workforce · December 2024 → September 2026</p>'+
    '<h1>To build back better, we must first know what was demolished.</h1>'+
-   '<p class="lede">In under two years, the Trump administration cut <b>'+num(-p.net_change)+'</b> non-defense federal jobs — a <b>'+Math.abs(pct).toFixed(0)+'%</b> reduction that fell hardest on the most experienced civil servants and erased entire agencies. This is what it would take to rebuild.</p>'+
+   '<p class="lede">In under two years, Republican leaders in Washington cut <b>'+num(-p.net_change)+'</b> non-defense federal jobs — a <b>'+Math.abs(pct).toFixed(0)+'%</b> reduction that fell hardest on the most experienced civil servants and erased entire agencies. This is what it would take to rebuild.</p>'+
    '<div class="repair-tiles">'+
     tile('People to rehire',num(p.positions_to_restore),'To return every career field to its December 2024 strength.','Sum of per-occupation net losses, non-defense.')+
     tile('Annual payroll to rebuild',money(p.loaded_payroll)+'/yr',"Priced at the actual grades and salaries of the roles that were cut.",'Base pay '+money(p.base_payroll)+', loaded ×1.33 for benefits & overhead.')+
@@ -98,7 +98,7 @@
    '</div>'+
   '</section>'+
   '<section class="priorities">'+
-   '<h2>What he stopped funding</h2>'+
+   '<h2>What they stopped funding</h2>'+
    '<p class="section-lede">The demolition was not only people. Reversing the FY2024→FY2026 cuts to domestic functions would take <b>'+money(domestic)+'</b> in restored budget authority. Select a function to open its accounts.</p>'+
    '<div class="priority-bars">'+cutBars+'</div>'+
    '<p class="priority-contrast">Total federal budget authority still <b>rose '+money(f.fy2026_total-f.fy2024_total)+'</b> net over the same period — but that growth is mandatory, led by '+grew+' — not a restoration of these services. '+
