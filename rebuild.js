@@ -111,7 +111,7 @@
    const dbars=dc.map(c=>'<div class="disc-row"><span class="disc-name">'+esc(c.function)+'</span><span class="disc-track"><i style="width:'+(Math.abs(c.amount)/dmax*100)+'%"></i></span><span class="disc-val">−'+money(Math.abs(c.amount))+'</span></div>').join('');
    budgetSection='<section class="budget-structure">'+
     '<h2>Discretionary spending fell from '+disc.share_a.toFixed(0)+'% to '+disc.share_b.toFixed(0)+'% of the budget</h2>'+
-    '<p class="section-lede">Three of every four federal dollars aren’t decided each year. <b>Mandatory</b> programs — Social Security, Medicare, Medicaid — run on autopilot ('+mand.share_b.toFixed(0)+'% of the budget). <b>Debt interest</b> takes another '+ni.share_b.toFixed(0)+'%. Only about a quarter is <b>discretionary</b> — what Congress actually chooses — and that share is shrinking.</p>'+
+    '<p class="section-lede">Congress’s annual funding decisions cover just <b>'+disc.share_b.toFixed(0)+'%</b> of the budget. Mandatory programs account for <b>'+mand.share_b.toFixed(0)+'%</b>; debt interest takes <b>'+ni.share_b.toFixed(0)+'%</b>.</p>'+
     '<div class="bud-stacks"><div class="bud-legend">'+budget.categories.map(c=>'<span><i style="background:'+color[c.name]+'"></i>'+esc(c.name)+'</span>').join('')+'</div>'+
      stackRow('FY2024','a',budget.total.a)+stackRow('FY2026','b',budget.total.b)+
      '<p class="muted">'+money(disc.a)+' to '+money(disc.b)+' ('+disc.pct.toFixed(0)+'%), squeezed by growing mandatory programs and debt interest.</p></div>'+
