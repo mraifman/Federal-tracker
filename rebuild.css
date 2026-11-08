@@ -76,6 +76,31 @@
 .priority-contrast b{color:var(--ink)}
 .link-btn{background:none;border:0;padding:0;color:var(--teal);text-decoration:underline;text-underline-offset:3px;font:inherit;cursor:pointer}
 
+.budget-structure{margin:46px 0 0;border-top:1px solid var(--line);padding-top:40px}
+.budget-structure h2{font:500 clamp(26px,3.4vw,38px)/1.15 Georgia,serif;letter-spacing:-1px;margin:0 0 6px}
+.budget-structure .section-lede{font-size:15px;color:#41535f;max-width:66ch;margin:0 0 26px}
+.budget-structure .section-lede b{color:var(--ink)}
+.bud-stacks{margin:0 0 32px}
+.bud-legend{display:flex;gap:18px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin:0 0 12px}
+.bud-legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.bud-stack{display:grid;grid-template-columns:62px 1fr;align-items:center;gap:14px;margin:8px 0}
+.bud-year{font-size:12px;color:var(--muted);font-weight:600}
+.bud-bar{display:flex;height:36px;border-radius:5px;overflow:hidden;box-shadow:inset 0 0 0 1px #0001}
+.bud-seg{display:flex;align-items:center;justify-content:center;min-width:2px}
+.bud-seg-lbl{font-size:11px;font-weight:600;color:#fff;letter-spacing:.3px}
+.budget-grid{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:start;margin:12px 0 0}
+.debt-panel h3,.disc-panel h3{font-size:16px;font-weight:600;margin:0 0 4px}
+.debt-panel .chart-note,.disc-panel .chart-note{font-size:12.5px;color:var(--muted);margin:0 0 14px;line-height:1.55}
+.debt-panel .chart-note b,.disc-panel .chart-note b{color:var(--ink)}
+.interest-spark{width:100%;height:auto;display:block;background:#fcfaf5;border:1px solid var(--line);border-radius:8px;padding:6px}
+.disc-row{display:grid;grid-template-columns:minmax(110px,1.3fr) 1fr auto;gap:12px;align-items:center;padding:7px 0;border-bottom:1px solid var(--line)}
+.disc-name{font-size:13px}
+.disc-track{height:12px;background:#eef0ea;border-radius:3px;overflow:hidden}
+.disc-track i{display:block;height:100%;background:var(--coral);border-radius:3px}
+.disc-val{font:600 13px/1 Georgia,serif;color:var(--coral);white-space:nowrap;font-variant-numeric:tabular-nums}
+@media(max-width:760px){.budget-grid{grid-template-columns:1fr;gap:28px}}
+@media(max-width:600px){.bud-stack{grid-template-columns:46px 1fr;gap:8px}.bud-bar{height:30px}}
+
 .outlay{margin:46px 0 0;border-top:1px solid var(--line);padding-top:40px}
 .outlay h2{font:500 clamp(26px,3.4vw,38px)/1.15 Georgia,serif;letter-spacing:-1px;margin:0 0 6px}
 .outlay .section-lede{font-size:15px;color:#41535f;max-width:64ch;margin:0 0 24px}

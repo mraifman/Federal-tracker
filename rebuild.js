@@ -20,11 +20,11 @@
   window.dispatchEvent(new CustomEvent('atlas-focus-funding',{detail:{topic:topicCode,metric:metric}}));
  }
 
- Promise.all(['repair-bill','workforce-restoration','outlay-pressure'].map(n=>fetch('data/'+n+'.json').then(r=>{if(!r.ok)throw Error(n);return r.json()})))
- .then(([bill,det,outlay])=>render(bill,det,outlay))
+ Promise.all(['repair-bill','workforce-restoration','outlay-pressure','budget-structure'].map(n=>fetch('data/'+n+'.json').then(r=>{if(!r.ok)throw Error(n);return r.json()})))
+ .then(([bill,det,outlay,budget])=>render(bill,det,outlay,budget))
  .catch(()=>{root.innerHTML='';});
 
- function render(bill,det,outlay){
+ function render(bill,det,outlay,budget){
   const p=bill.people,f=bill.funding;
   const pct=(p.net_change/p.baseline_count*100);
 
@@ -105,7 +105,7 @@
      '<span class="sq-track"><i style="width:'+(a.per_employee_pct/smax*100)+'%"></i></span>'+
      '<span class="sq-load">+'+a.per_employee_pct.toFixed(0)+'%<small>per employee</small></span></button>').join('');
    outlaySection='<section class="outlay">'+
-    '<h2>Fewer hands, more money</h2>'+
+    '<h2>Doing more with less</h2>'+
     '<p class="section-lede">The people were cut, but their workload was not. Across '+g.matched_agencies+' agencies with comparable records, the workforce fell <b>'+Math.abs(g.staff_pct).toFixed(0)+'%</b> while the money staff actively run — setting aside benefits, formula grants and debt interest — held roughly steady, so each remaining employee now manages far more of it.</p>'+
     '<div class="outlay-headline"><span class="ohl-label">Operational money each employee now runs</span>'+
      '<b class="ohl-figure">+'+g.per_employee_pct.toFixed(0)+'%</b>'+
@@ -117,26 +117,59 @@
    '</section>';
   }
 
+  // ---- the budget's structure: mandatory vs discretionary, and the debt ----
+  let budgetSection='';
+  if(budget&&budget.categories&&budget.categories.length){
+   const cm={};budget.categories.forEach(c=>cm[c.name]=c);
+   const disc=cm['Discretionary'],mand=cm['Mandatory'],ni=cm['Net interest'];
+   const color={'Mandatory':'#6b7f88','Discretionary':'#43838b','Net interest':'#c27a4e'};
+   const stackRow=(label,key,total)=>'<div class="bud-stack"><span class="bud-year">'+label+'</span><span class="bud-bar">'+
+     budget.categories.map(c=>{const pct=c[key]/total*100;return '<span class="bud-seg" style="width:'+pct+'%;background:'+color[c.name]+'">'+(pct>11?'<span class="bud-seg-lbl">'+pct.toFixed(0)+'%</span>':'')+'</span>';}).join('')+'</span></div>';
+   // net-interest trajectory on the presidential-election cycle
+   const tr=budget.net_interest_trend.filter(d=>[2016,2020,2024,2026].includes(d.year));
+   const W=360,H=118,L=5,R=5,Tp=14,Bm=24;
+   const maxY=Math.max(...tr.map(d=>d.amount))*1.08,sx=i=>L+i/(tr.length-1)*(W-L-R),sy=v=>Tp+(1-v/maxY)*(H-Tp-Bm);
+   const pts=tr.map((d,i)=>sx(i)+','+sy(d.amount)).join(' ');
+   const oneT=maxY>=1e12?'<line x1="'+L+'" x2="'+(W-R)+'" y1="'+sy(1e12)+'" y2="'+sy(1e12)+'" stroke="#bd6b52" stroke-dasharray="3 3" opacity=".7"/><text x="'+(W-R)+'" y="'+(sy(1e12)-4)+'" text-anchor="end" font-size="9" fill="#bd6b52">$1T</text>':'';
+   const spark='<svg viewBox="0 0 '+W+' '+H+'" class="interest-spark" role="img" aria-label="Net interest on the national debt by presidential-election year">'+oneT+
+     '<polyline points="'+pts+'" fill="none" stroke="#19354a" stroke-width="2.5"/>'+
+     tr.map((d,i)=>'<circle cx="'+sx(i)+'" cy="'+sy(d.amount)+'" r="3.5" fill="#19354a"/><text x="'+sx(i)+'" y="'+(H-9)+'" text-anchor="'+(i===0?'start':i===tr.length-1?'end':'middle')+'" font-size="10" fill="#5d727b">'+d.year+'</text><text x="'+sx(i)+'" y="'+(sy(d.amount)-8)+'" text-anchor="'+(i===tr.length-1?'end':i===0?'start':'middle')+'" font-size="10" font-weight="600" fill="#19354a">'+money(d.amount)+'</text>').join('')+'</svg>';
+   const dc=budget.discretionary.cuts.slice(0,6),dmax=Math.max(1,...dc.map(c=>Math.abs(c.amount)));
+   const dbars=dc.map(c=>'<div class="disc-row"><span class="disc-name">'+esc(c.function)+'</span><span class="disc-track"><i style="width:'+(Math.abs(c.amount)/dmax*100)+'%"></i></span><span class="disc-val">−'+money(Math.abs(c.amount))+'</span></div>').join('');
+   budgetSection='<section class="budget-structure">'+
+    '<h2>Most of the budget is already spoken for</h2>'+
+    '<p class="section-lede">Three dollars in four are not decided each year. <b>Mandatory</b> programs — Social Security, Medicare, Medicaid — run on formulas Congress never revisited ('+mand.share_b.toFixed(0)+'% of the budget, up '+mand.pct.toFixed(0)+'%). The <b>interest on the national debt</b> takes another '+ni.share_b.toFixed(0)+'%. Only about a quarter is <b>discretionary</b> — the part Congress actually chooses each year — and that slice is shrinking.</p>'+
+    '<div class="bud-stacks"><div class="bud-legend">'+budget.categories.map(c=>'<span><i style="background:'+color[c.name]+'"></i>'+esc(c.name)+'</span>').join('')+'</div>'+
+     stackRow('FY2024','a',budget.total.a)+stackRow('FY2026','b',budget.total.b)+
+     '<p class="muted">Discretionary budget authority fell from '+disc.share_a.toFixed(0)+'% to '+disc.share_b.toFixed(0)+'% of the total — '+money(disc.a)+' to '+money(disc.b)+' ('+disc.pct.toFixed(0)+'%).</p></div>'+
+    '<div class="budget-grid">'+
+     '<div class="debt-panel"><h3>The national debt’s interest grew '+ni.pct.toFixed(0)+'% from 2024 to 2026</h3>'+
+      '<p class="chart-note">Net interest crossed <b>'+money(ni.b)+'</b> — roughly triple its 2016 level and more than any single discretionary function. Shown on the presidential-election cycle.</p>'+spark+'</div>'+
+     '<div class="disc-panel"><h3>Inside the slice they control</h3>'+
+      '<p class="chart-note">The largest discretionary cuts, FY2024 to FY2026 — the choices actually made.</p>'+dbars+'</div></div>'+
+    '<p class="muted">'+esc(budget.basis)+'</p>'+
+   '</section>';
+  }
+
   root.innerHTML=
   '<section class="repair-hero">'+
    '<p class="eyebrow">The federal workforce · December 2024 → September 2026</p>'+
    '<h1>To <span class="hl-build">build back better</span>, we must first know what was <span class="hl-demo">demolished</span>.</h1>'+
-   '<p class="lede">In under two years, Republican leaders in Washington cut <b>'+num(-p.net_change)+'</b> non-defense federal jobs — a <b>'+Math.abs(pct).toFixed(0)+'%</b> reduction that fell hardest on the most experienced civil servants and erased entire agencies. This is what it would take to rebuild.</p>'+
+   '<p class="lede">In under two years, the non-defense federal workforce was <b>hollowed out</b> by <b>'+num(-p.net_change)+'</b> positions — a <b>'+Math.abs(pct).toFixed(0)+'%</b> reduction. People were fired, took buyouts, resigned under pressure or had their jobs eliminated; by NPR’s count more than <b>300,000</b> left or faced separation government-wide. The losses fell hardest on the most experienced civil servants and erased entire agencies. This is what it would take to rebuild.</p>'+
    '<div class="repair-tiles">'+
     tile('People to rehire',num(p.positions_to_restore),'To return every career field to its December 2024 strength.','Sum of per-occupation net losses, non-defense.')+
     tile('Annual payroll to rebuild',money(p.loaded_payroll)+'/yr',"Priced at the actual grades and salaries of the roles that were cut.",'Base pay '+money(p.base_payroll)+', loaded ×1.33 for benefits & overhead.')+
     tile('Program funding to restore',money(domestic),'To reverse the cuts to domestic public services'+(heroTopics?': '+heroTopics+'.':'.'),'Decreases in reported net budget authority, FY2024→FY2026, excluding defense.')+
    '</div>'+
-   '<p class="hero-source">Independent reporting corroborates the scale. By <a href="https://www.npr.org" target="_blank" rel="noopener">NPR</a>’s count, more than <b>300,000</b> federal personnel left or faced separation — mass firings, roughly 75,000 buyouts, resignations and eliminated positions — during the administration’s overhaul. The figures here are OPM’s own month-end headcounts over the same period.</p>'+
   '</section>'+
   '<section class="service-people">'+
-   '<h2>The people behind the services</h2>'+
+   '<h2>Cutting core services that Americans rely on</h2>'+
    '<p class="section-lede">Every cut is a person who did a job Americans rely on. Each of these is a real federal occupational series, thinned between December 2024 and September 2026. Select any role to open its agency.</p>'+
    serviceGroups+
   '</section>'+
   '<section class="demolition">'+
-   '<h2>What was demolished</h2>'+
-   '<p class="section-lede">The reductions were not spread evenly. They concentrated in senior, experienced grades — institutional knowledge that takes years to rebuild — and gutted specific agencies to the point of collapse. Select any agency or role to open its full record.</p>'+
+   '<h2>The reductions were not spread evenly</h2>'+
+   '<p class="section-lede">They concentrated in senior, experienced grades — institutional knowledge that takes years to rebuild — and gutted specific agencies to the point of collapse. Select any agency or role to open its full record.</p>'+
    '<div class="demolition-grid">'+
     '<div class="grade-chart"><h3>The experience drain, by GS grade</h3>'+
      '<p class="chart-note">Net change in non-defense staff at each General Schedule grade. Senior ranks (GS-13 to 15) lost <b>'+num(-senior)+'</b> people.</p>'+
@@ -145,13 +178,7 @@
     '<div class="agency-casualties"><h3>Agencies hollowed out</h3>'+cas+'</div>'+
    '</div>'+
   '</section>'+
-  '<section class="priorities">'+
-   '<h2>What they stopped funding</h2>'+
-   '<p class="section-lede">The demolition was not only people. Reversing the FY2024→FY2026 cuts to domestic functions would take <b>'+money(domestic)+'</b> in restored budget authority. Select a function to open its accounts.</p>'+
-   '<div class="priority-bars">'+cutBars+'</div>'+
-   '<p class="priority-contrast">Total federal budget authority still <b>rose '+money(f.fy2026_total-f.fy2024_total)+'</b> net over the same period — but that growth is mandatory, led by '+grew+' — not a restoration of these services. '+
-    '<button class="link-btn" data-explore-funding>See the full funding picture →</button></p>'+
-  '</section>'+
+  budgetSection+
   cashSection+
   outlaySection+
   '<p class="repair-cta">Explore the full evidence — headcount, funding and where the money goes — below ↓</p>'+
