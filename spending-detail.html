@@ -52,7 +52,19 @@ h2{font:500 clamp(24px,3.2vw,34px)/1.15 Georgia,serif;letter-spacing:-.8px;margi
 .pchg{text-align:right;font:600 14px/1.1 Georgia,serif;font-variant-numeric:tabular-nums}
 .pchg.neg{color:var(--coral)}.pchg.pos{color:var(--teal)}
 .source{font-size:11px;color:var(--muted);margin-top:40px;border-top:1px solid var(--line);padding-top:20px;line-height:1.7}
+.explainer{margin:30px 0 0}
+.explainer h3{font-size:12px;letter-spacing:1.6px;text-transform:uppercase;color:var(--teal);font-weight:600;margin:0 0 14px}
+.money-chain{display:flex;flex-wrap:wrap;align-items:stretch;gap:10px}
+.money-step{flex:1 1 190px;background:#fffdf8;border:1px solid var(--line);border-radius:9px;padding:15px 16px;position:relative}
+.money-step.here{border-color:var(--teal);box-shadow:inset 0 0 0 1px var(--teal)}
+.money-step h4{font:500 18px/1.2 Georgia,serif;margin:0 0 6px}
+.money-step p{font-size:12.5px;color:#41535f;margin:0;line-height:1.5}
+.money-step .tag{position:absolute;top:-9px;right:12px;background:var(--teal);color:#fff;font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:3px 7px;border-radius:10px}
+.money-arrow{display:flex;align-items:center;color:var(--muted);font-size:20px;align-self:center}
+.explainer .caption{font-size:12px;color:var(--muted);margin:14px 0 0;max-width:74ch;line-height:1.65}
+.explainer .caption b{color:var(--ink)}
 .loading{padding:40px 0;color:var(--muted)}
+@media(max-width:640px){.money-arrow{transform:rotate(90deg);justify-content:center}.money-step{flex-basis:100%}}
 .warn{border-left:3px solid #b9934c;background:#eeecde;padding:14px 18px;font-size:13px;margin:16px 0}
 @media(max-width:640px){main{padding:0 18px 40px}.headline{grid-template-columns:1fr;gap:14px}.subj-row{grid-template-columns:1fr auto}.subj-track{display:none}.prog-row{grid-template-columns:1fr 84px}.plot{grid-column:1/-1}}
 </style></head>
@@ -66,6 +78,17 @@ h2{font:500 clamp(24px,3.2vw,34px)/1.15 Georgia,serif;letter-spacing:-.8px;margi
   <p class="eyebrow">Award spending · full FY2024 → full FY2026</p>
   <h1>Where the money goes, program by program.</h1>
   <p>Pick any federal agency to see how the grants and awards it funds changed — broken down by subject, and by individual program under its federal Assistance Listing code.</p>
+ </section>
+ <section class="explainer">
+  <h3>How to read the money</h3>
+  <div class="money-chain">
+   <div class="money-step"><h4>Budget authority</h4><p>Permission to spend — the ceiling Congress sets. Like an approved credit limit.</p></div>
+   <div class="money-arrow">→</div>
+   <div class="money-step here"><span class="tag">This page</span><h4>Obligation</h4><p>A binding commitment — a signed contract or awarded grant. The government is on the hook, even before any cash moves.</p></div>
+   <div class="money-arrow">→</div>
+   <div class="money-step"><h4>Outlay</h4><p>Cash actually leaving the Treasury — a payment, which may settle commitments made years earlier.</p></div>
+  </div>
+  <p class="caption">Obligations and outlays can fall in different years: a multi-year grant obligated in FY2024 is paid out over several years, so a single year's outlays include old commitments. This page shows <b>obligations</b> — what each agency chose to commit — not cash outlays. And a drop in new authority alone doesn't prove a program ended: agencies can keep spending from prior-year balances.</p>
  </section>
  <div class="controls">
   <label>Agency<select id="agency"></select></label>
