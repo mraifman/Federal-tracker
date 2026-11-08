@@ -157,6 +157,9 @@ def main():
     topic_cut = defaultdict(float)
     topic_grew = defaultdict(float)
     topic_code = {}
+    # actual cash: SF 133 net outlays (line 4190)
+    oy24 = oy26 = 0.0
+    topic_outlay = defaultdict(float)
     for r in rows:
         a = value(r, '2024', evidence)
         b = value(r, '2026', evidence)
@@ -164,10 +167,18 @@ def main():
             fy24 += a
         if b is not None:
             fy26 += b
-        if a is None or b is None:
-            continue
         topic = r.get('topic', 'Unclassified')
         topic_code[topic] = r.get('topic_code')
+        oa = value(r, '2024', evidence, 'net_outlays')
+        ob = value(r, '2026', evidence, 'net_outlays')
+        if oa is not None:
+            oy24 += oa
+        if ob is not None:
+            oy26 += ob
+        if oa is not None and ob is not None:
+            topic_outlay[topic] += ob - oa
+        if a is None or b is None:
+            continue
         d = b - a
         if d < 0:
             cut += -d
@@ -180,6 +191,13 @@ def main():
         return [{'topic': t, 'topic_code': topic_code.get(t), 'amount': round(v)}
                 for t, v in sorted(agg.items(), key=lambda kv: -kv[1])[:n]]
     top_topics = topic_list(topic_cut)
+
+    # outlay cuts (most negative change) and surges (most positive)
+    outlay_sorted = sorted(topic_outlay.items(), key=lambda kv: kv[1])
+    outlay_cuts = [{'topic': t, 'topic_code': topic_code.get(t), 'amount': round(v)}
+                   for t, v in outlay_sorted if v < 0][:6]
+    outlay_surges = [{'topic': t, 'topic_code': topic_code.get(t), 'amount': round(v)}
+                     for t, v in reversed(outlay_sorted) if v > 0][:3]
 
     people = restoration['headline']
     out = {
@@ -204,6 +222,14 @@ def main():
             'increase_total': round(grew),
             'top_cut_topics': top_topics,
             'top_increase_topics': topic_list(topic_grew),
+            'outlays': {
+                'fy2024_total': round(oy24),
+                'fy2026_total': round(oy26),
+                'total_pct': round((oy26 / oy24 - 1) * 100, 1) if oy24 else None,
+                'cut_topics': outlay_cuts,
+                'surge_topics': outlay_surges,
+                'basis': 'Actual cash paid out: SF 133 net outlays (line 4190), FY2024 vs FY2026, non-financing accounts. Outlays settle commitments from this and prior years, a different measure from new budget authority or obligations.',
+            },
             'basis': ('Sum of FY2024->FY2026 decreases in reported net budget authority '
                       '(line 4180) across non-financing accounts, using the same values '
                       'and continuity merges as the funding view. Defense cuts are '

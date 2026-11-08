@@ -16,8 +16,8 @@
   document.querySelector('[data-project-tab="workforce"]')?.click();
   document.querySelector('[data-project-panel="workforce"]')?.scrollIntoView({behavior:'smooth',block:'start'});
  }
- function focusFunding(topicCode){
-  window.dispatchEvent(new CustomEvent('atlas-focus-funding',{detail:{topic:topicCode}}));
+ function focusFunding(topicCode,metric){
+  window.dispatchEvent(new CustomEvent('atlas-focus-funding',{detail:{topic:topicCode,metric:metric}}));
  }
 
  Promise.all(['repair-bill','workforce-restoration','outlay-pressure'].map(n=>fetch('data/'+n+'.json').then(r=>{if(!r.ok)throw Error(n);return r.json()})))
@@ -71,6 +71,25 @@
     '<span class="pb-val">'+money(t.amount)+'</span></button>').join('');
   const grew=f.top_increase_topics.slice(0,3).map(t=>esc(t.topic)+' ('+money(t.amount)+')').join(', ');
   const heroTopics=cuts.slice(0,3).map(t=>esc(t.topic)+' ('+money(t.amount)+')').join(', ');
+
+  // ---- actual cash: net outlays that stopped flowing ----
+  let cashSection='';
+  if(f.outlays&&f.outlays.cut_topics&&f.outlays.cut_topics.length){
+   const o=f.outlays;
+   const ocuts=o.cut_topics.filter(t=>!/mixed purpose|unclassified/i.test(t.topic)).slice(0,5);
+   const omax=Math.max(1,...ocuts.map(t=>Math.abs(t.amount)));
+   const obars=ocuts.map(t=>'<button class="priority-bar" '+(t.topic_code?'data-topic-code="'+esc(t.topic_code)+'" data-metric="net_outlays"':'disabled')+'>'+
+     '<span class="pb-name">'+esc(t.topic)+'</span>'+
+     '<span class="pb-track"><i style="width:'+(Math.abs(t.amount)/omax*100)+'%"></i></span>'+
+     '<span class="pb-val">−'+money(Math.abs(t.amount))+'</span></button>').join('');
+   const surge=(o.surge_topics||[]).slice(0,3).map(t=>esc(t.topic)+' (+'+money(t.amount)+')').join(', ');
+   cashSection='<section class="priorities">'+
+    '<h2>The cash that actually stopped flowing</h2>'+
+    '<p class="section-lede">Budget authority is a promise; <b>outlays</b> are the cash that actually leaves the Treasury. Overall federal outlays still rose '+(o.total_pct!=null?o.total_pct.toFixed(0)+'%':'')+' — but that masks where real money stopped reaching people. These functions saw the steepest drop in actual payments, FY2024 to FY2026.</p>'+
+    '<div class="priority-bars">'+obars+'</div>'+
+    (surge?'<p class="priority-contrast">The overall rise went almost entirely to mandatory programs and interest — '+surge+' — not to the services above. <button class="link-btn" data-explore-funding>See the full funding picture →</button></p>':'')+
+   '</section>';
+  }
 
   // ---- outlay pressure: fewer hands, more money ----
   let outlaySection='';
@@ -132,6 +151,7 @@
    '<p class="priority-contrast">Total federal budget authority still <b>rose '+money(f.fy2026_total-f.fy2024_total)+'</b> net over the same period — but that growth is mandatory, led by '+grew+' — not a restoration of these services. '+
     '<button class="link-btn" data-explore-funding>See the full funding picture →</button></p>'+
   '</section>'+
+  cashSection+
   outlaySection+
   '<p class="repair-cta">Explore the full evidence — headcount, funding and where the money goes — below ↓</p>'+
   '<details class="repair-method"><summary>How these figures are built</summary>'+
@@ -141,7 +161,7 @@
 
   // ---- wire drill-downs ----
   root.querySelectorAll('[data-agency-code]').forEach(el=>el.addEventListener('click',()=>focusWorkforce(el.dataset.agencyCode)));
-  root.querySelectorAll('[data-topic-code]').forEach(el=>el.addEventListener('click',()=>focusFunding(el.dataset.topicCode)));
+  root.querySelectorAll('[data-topic-code]').forEach(el=>el.addEventListener('click',()=>focusFunding(el.dataset.topicCode,el.dataset.metric)));
   root.querySelector('[data-explore-funding]')?.addEventListener('click',()=>focusFunding('all'));
   root.querySelectorAll('[data-opm]').forEach(el=>el.addEventListener('click',()=>{
     window.dispatchEvent(new CustomEvent('atlas-open-uses',{detail:{opmId:el.dataset.opm}}));
