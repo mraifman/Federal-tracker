@@ -87,14 +87,14 @@
      '<span class="sq-load">+'+a.per_employee_pct.toFixed(0)+'%<small>per employee</small></span></button>').join('');
    outlaySection='<section class="outlay">'+
     '<h2>Fewer hands, more money</h2>'+
-    '<p class="section-lede">The people were cut, but the money was not. Across '+g.matched_agencies+' agencies with comparable records, the workforce fell <b>'+Math.abs(g.staff_pct).toFixed(0)+'%</b> while the obligations they manage rose <b>'+g.oblig_pct.toFixed(0)+'%</b> — so the same work now lands on far fewer desks.</p>'+
-    '<div class="outlay-headline"><span class="ohl-label">Money each federal employee now administers</span>'+
+    '<p class="section-lede">The people were cut, but their workload was not. Across '+g.matched_agencies+' agencies with comparable records, the workforce fell <b>'+Math.abs(g.staff_pct).toFixed(0)+'%</b> while the money staff actively run — setting aside benefits, formula grants and debt interest — held roughly steady, so each remaining employee now manages far more of it.</p>'+
+    '<div class="outlay-headline"><span class="ohl-label">Operational money each employee now runs</span>'+
      '<b class="ohl-figure">+'+g.per_employee_pct.toFixed(0)+'%</b>'+
      '<span class="ohl-sub">'+money(g.per_employee_a)+' → '+money(g.per_employee_b)+' per employee</span></div>'+
     '<h3>The squeeze, by agency</h3>'+
-    '<p class="chart-note">How far staffing fell, and how much more each remaining employee must now administer. Select an agency to open its spending.</p>'+
+    '<p class="chart-note">How far staffing fell, and how much more operational money each remaining employee must now run. Select an agency to open its spending.</p>'+
     '<div class="squeeze-list">'+rows+'</div>'+
-    '<p class="muted">This is not contractors replacing civil servants — the spending mix barely moved'+(grants!=null?' (grants '+grants.toFixed(0)+'% of obligations, personnel '+(personnel||0).toFixed(0)+'%)':'')+'. It is the same workload spread across fewer people. '+esc(outlay.period_note||'')+'</p>'+
+    '<p class="muted"><b>What this counts.</b> Only the money staff actively administer. It excludes the '+(grants!=null?'~'+grants.toFixed(0)+'%':'majority')+' of obligations that is benefits, formula grants and debt interest — money that flows by formula, not by labour — so a growing Social Security or interest bill is not counted as staff “doing more.” A few agency increases (disaster lending, bank resolution) reflect one-off program surges. '+esc(outlay.period_note||'')+'</p>'+
    '</section>';
   }
 
