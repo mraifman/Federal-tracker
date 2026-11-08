@@ -42,7 +42,7 @@
 
   // ---- hardest-hit agencies (flagship destructions by %, meaningful size) ----
   const cas=det.by_agency.filter(a=>a.baseline>=400&&a.net<0&&a.pct!=null)
-    .sort((a,b)=>a.pct-b.pct).slice(0,6)
+    .sort((a,b)=>a.pct-b.pct).slice(0,9)
     .map(a=>'<button class="casualty" data-agency-code="'+esc(a.code)+'"><span class="c-name">'+esc(title(a.name))+'</span>'+
       '<span class="c-pct">'+a.pct.toFixed(0)+'%</span>'+
       '<span class="c-detail">'+num(a.baseline)+' → '+num(a.latest)+' · '+num(a.net)+' positions · explore →</span></button>').join('');
@@ -55,10 +55,10 @@
     c.items.map(r=>'<button class="role-card" data-agency-code="'+esc(r.agency)+'">'+
       '<span class="rc-top"><span class="rc-name">'+esc(r.label)+'</span><span class="rc-pct">'+(r.pct<=0?'−':'+')+Math.abs(r.pct).toFixed(0)+'%</span></span>'+
       '<span class="rc-desc">'+esc(r.description)+'</span>'+
-      '<span class="rc-meta">'+num(r.baseline)+' → '+num(r.latest)+' · '+num(r.net)+' positions · '+(r.seasonal?'year-over-year · ':'')+'explore →</span></button>').join('')+
+      '<span class="rc-meta">'+num(r.baseline)+' → '+num(r.latest)+' · '+num(r.net)+' positions · '+(r.seasonal?'year-over-year<sup class="role-fn" data-seasonal-note role="link" tabindex="0" aria-label="Why measured year over year? See note at the bottom">†</sup> · ':'')+'explore →</span></button>').join('')+
     '</div></div>').join('');
   const sn=bill.seasonal_note;
-  const seasonalNote=sn?'<p class="seasonal-note"><b>A note on seasonal work.</b> A few agencies staff up for the summer, so the September snapshot flatters them. The '+esc(sn.agency)+' as a whole looks roughly flat since December 2024 ('+(sn.headline_pct>=0?'+':'−')+Math.abs(sn.headline_pct).toFixed(0)+'%) but is down <b>'+Math.abs(sn.yoy_pct).toFixed(0)+'%</b> year over year ('+esc(sn.yoy_label)+', the same season). The cuts are real — just masked by seasonal hiring — so the park ranger card above is measured year over year, not against the summer peak. (Wildland-fire crews are seasonal too; measured the same way their numbers held roughly flat, so they are not shown as a cut.)</p>':'';
+  const seasonalNote=sn?'<p class="seasonal-note" id="seasonal-note"><b>A note on seasonal work.</b> A few agencies staff up for the summer, so the September snapshot flatters them. The '+esc(sn.agency)+' as a whole looks roughly flat since December 2024 ('+(sn.headline_pct>=0?'+':'−')+Math.abs(sn.headline_pct).toFixed(0)+'%) but is down <b>'+Math.abs(sn.yoy_pct).toFixed(0)+'%</b> year over year ('+esc(sn.yoy_label)+', the same season). The cuts are real — just masked by seasonal hiring — so the park ranger card above is measured year over year, not against the summer peak. (Wildland-fire crews are seasonal too; measured the same way their numbers held roughly flat, so they are not shown as a cut.)</p>':'';
 
   // ---- funding: cut topics to restore (exclude Defense from the domestic frame) ----
   const cuts=f.top_cut_topics.filter(t=>!/^defense$/i.test(t.topic));
@@ -120,18 +120,19 @@
   root.innerHTML=
   '<section class="repair-hero">'+
    '<p class="eyebrow">The federal workforce · December 2024 → September 2026</p>'+
-   '<h1>To build back better, we must first know what was demolished.</h1>'+
+   '<h1>To <span class="hl-build">build back better</span>, we must first know what was <span class="hl-demo">demolished</span>.</h1>'+
    '<p class="lede">In under two years, Republican leaders in Washington cut <b>'+num(-p.net_change)+'</b> non-defense federal jobs — a <b>'+Math.abs(pct).toFixed(0)+'%</b> reduction that fell hardest on the most experienced civil servants and erased entire agencies. This is what it would take to rebuild.</p>'+
    '<div class="repair-tiles">'+
     tile('People to rehire',num(p.positions_to_restore),'To return every career field to its December 2024 strength.','Sum of per-occupation net losses, non-defense.')+
     tile('Annual payroll to rebuild',money(p.loaded_payroll)+'/yr',"Priced at the actual grades and salaries of the roles that were cut.",'Base pay '+money(p.base_payroll)+', loaded ×1.33 for benefits & overhead.')+
     tile('Program funding to restore',money(domestic),'To reverse the cuts to domestic public services'+(heroTopics?': '+heroTopics+'.':'.'),'Decreases in reported net budget authority, FY2024→FY2026, excluding defense.')+
    '</div>'+
+   '<p class="hero-source">Independent reporting corroborates the scale. By <a href="https://www.npr.org" target="_blank" rel="noopener">NPR</a>’s count, more than <b>300,000</b> federal personnel left or faced separation — mass firings, roughly 75,000 buyouts, resignations and eliminated positions — during the administration’s overhaul. The figures here are OPM’s own month-end headcounts over the same period.</p>'+
   '</section>'+
   '<section class="service-people">'+
    '<h2>The people behind the services</h2>'+
    '<p class="section-lede">Every cut is a person who did a job Americans rely on. Each of these is a real federal occupational series, thinned between December 2024 and September 2026. Select any role to open its agency.</p>'+
-   serviceGroups+seasonalNote+
+   serviceGroups+
   '</section>'+
   '<section class="demolition">'+
    '<h2>What was demolished</h2>'+
@@ -157,10 +158,12 @@
   '<details class="repair-method"><summary>How these figures are built</summary>'+
    '<p>'+esc(det.methodology.target)+' '+esc(det.methodology.positions)+' '+esc(det.methodology.cost)+'</p>'+
    '<p>'+esc(det.methodology.salary_imputation)+' Salaries are reported for '+det.salary_coverage.reported_pct+'% of non-defense staff. '+esc(det.methodology.defense)+'</p>'+
-   '<p>'+esc(det.methodology.caveats)+' '+esc(f.basis)+' * marks an occupation whose average salary was imputed.</p></details>';
+   '<p>'+esc(det.methodology.caveats)+' '+esc(f.basis)+' * marks an occupation whose average salary was imputed.</p></details>'+
+  seasonalNote;
 
   // ---- wire drill-downs ----
   root.querySelectorAll('[data-agency-code]').forEach(el=>el.addEventListener('click',()=>focusWorkforce(el.dataset.agencyCode)));
+  root.querySelectorAll('[data-seasonal-note]').forEach(el=>{const go=e=>{e.stopPropagation();e.preventDefault();document.getElementById('seasonal-note')?.scrollIntoView({behavior:'smooth',block:'center'})};el.addEventListener('click',go);el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')go(e)})});
   root.querySelectorAll('[data-topic-code]').forEach(el=>el.addEventListener('click',()=>focusFunding(el.dataset.topicCode,el.dataset.metric)));
   root.querySelector('[data-explore-funding]')?.addEventListener('click',()=>focusFunding('all'));
   root.querySelectorAll('[data-opm]').forEach(el=>el.addEventListener('click',()=>{

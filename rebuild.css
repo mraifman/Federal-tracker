@@ -3,10 +3,14 @@
 .repair-hero{padding:56px 0 20px;max-width:960px}
 .repair-hero .eyebrow{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
 .repair-hero h1{font:600 clamp(34px,5.2vw,62px)/1.07 Georgia,'Times New Roman',serif;letter-spacing:-1.5px;margin:16px 0 22px;max-width:16ch}
+.repair-hero h1 .hl-build{color:var(--teal)}
+.repair-hero h1 .hl-demo{color:var(--coral);font-style:italic}
 .repair-hero .lede{font-size:clamp(16px,1.9vw,20px);line-height:1.5;max-width:60ch;color:#30424f}
 .repair-hero .lede b{font-weight:700;color:var(--ink)}
 
 .repair-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:38px 0 10px}
+.hero-source{font-size:12.5px;line-height:1.6;color:var(--muted);max-width:74ch;margin:20px 0 0}
+.hero-source b{color:var(--ink)}
 .repair-tile{background:#fffdf8;border:1px solid var(--line);border-top:4px solid var(--coral);border-radius:10px;padding:24px 22px;box-shadow:0 12px 30px #19354a0d}
 .repair-tile .tile-label{font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--muted)}
 .repair-tile .tile-figure{font:600 clamp(32px,4vw,46px)/1 Georgia,serif;letter-spacing:-1.5px;color:var(--coral);margin:12px 0 10px}
@@ -51,6 +55,8 @@
 .role-card .rc-pct{font:600 20px/1 Georgia,serif;color:var(--coral);white-space:nowrap}
 .role-card .rc-desc{display:block;font-size:13px;color:#41535f;line-height:1.5;margin:9px 0 10px}
 .role-card .rc-meta{display:block;font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
+.role-fn{color:var(--teal);cursor:pointer;font-weight:700;padding:0 2px;text-decoration:none}
+.role-fn:hover,.role-fn:focus-visible{text-decoration:underline}
 .seasonal-note{font-size:12.5px;line-height:1.6;color:#41535f;background:#eef0ea;border-left:3px solid var(--muted);border-radius:0 7px 7px 0;padding:14px 18px;margin:8px 0 0;max-width:72ch}
 .seasonal-note b{color:var(--ink)}
 

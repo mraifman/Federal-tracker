@@ -21,31 +21,31 @@ METRIC = 'net_authority'
 # Roles that grew over the period (air traffic control, border, park rangers,
 # wildland fire) are deliberately excluded; this feature is about the cuts.
 SERVICE_ROLES = [
-    ('Health & consumer safety', 'USDA Food Safety Inspector', 'AG', ['AG|role|1862', 'AG|role|1863'],
+    ('Health & consumer safety', 'USDA Food Safety Inspectors', 'AG', ['AG|role|1862', 'AG|role|1863'],
      'Inspect meat, poultry and egg products every day, stopping foodborne illness before it reaches your grocery shelf.'),
-    ('Health & consumer safety', 'FDA Consumer Safety Officer', 'HE', ['HE|role|0696'],
+    ('Health & consumer safety', 'FDA Consumer Safety Officers', 'HE', ['HE|role|0696'],
      'Monitor how medicines, medical devices and cosmetics are made, so the health products you use are safe and effective.'),
-    ('Health & consumer safety', 'Public Health Scientist', 'HE', ['HE|role|0601'],
+    ('Health & consumer safety', 'Public Health Scientists', 'HE', ['HE|role|0601'],
      'Track disease outbreaks and run the labs and studies that keep epidemics from spreading.'),
-    ('Health & consumer safety', 'OSHA Workplace Safety Inspector', 'DL', ['DL|role|0018'],
+    ('Health & consumer safety', 'OSHA Workplace Safety Inspectors', 'DL', ['DL|role|0018'],
      'Inspect workplaces and enforce the rules that let millions of Americans come home safe from work each day.'),
-    ('Economic security & lifelines', 'Social Security Claims Specialist', 'SZ', ['SZ|role|0105'],
+    ('Economic security & lifelines', 'Social Security Claims Specialists', 'SZ', ['SZ|role|0105'],
      'Help retirees, people with disabilities and surviving spouses actually receive the benefits they earned.'),
-    ('Economic security & lifelines', 'IRS Taxpayer Phone Representative', 'TR', ['TR|role|0962'],
+    ('Economic security & lifelines', 'IRS Taxpayer Phone Representatives', 'TR', ['TR|role|0962'],
      'Answer the phone when you call the IRS with a question about your return or your refund.'),
-    ('Economic security & lifelines', 'IRS Revenue Agent', 'TR', ['TR|role|0512'],
+    ('Economic security & lifelines', 'IRS Revenue Agents', 'TR', ['TR|role|0512'],
      'Audit the most complex returns so the wealthiest taxpayers and corporations pay what they legally owe.'),
-    ('Economic security & lifelines', 'FEMA Emergency Management Specialist', 'HS', ['HS|role|0089'],
+    ('Economic security & lifelines', 'FEMA Emergency Management Specialists', 'HS', ['HS|role|0089'],
      'Deploy the moment disaster strikes to coordinate shelter, food and aid so communities can rebuild.'),
-    ('Environment, science & safety', 'National Weather Service Meteorologist', 'CM', ['CM|role|1340'],
+    ('Environment, science & safety', 'National Weather Service Meteorologists', 'CM', ['CM|role|1340'],
      'Forecast the hurricanes, tornadoes and floods whose warnings save lives and property.'),
-    ('Environment, science & safety', 'Park Ranger', 'IN', ['IN|role|0025'],
+    ('Environment, science & safety', 'Park Rangers', 'IN', ['IN|role|0025'],
      'Protect the national parks, guide visitors and run the search-and-rescue missions when hikers go missing.'),
-    ('Environment, science & safety', 'USGS Hydrologic Technician', 'IN', ['IN|IN08|role|1316'],
+    ('Environment, science & safety', 'USGS Hydrologic Technicians', 'IN', ['IN|IN08|role|1316'],
      "Measure the nation's rivers and groundwater to warn of floods and protect drinking-water supplies."),
-    ('Environment, science & safety', 'Interior Biologist & Natural-Resource Specialist', 'IN', ['IN|role|0401'],
+    ('Environment, science & safety', 'Interior Biologists & Natural-Resource Specialists', 'IN', ['IN|role|0401'],
      'Protect wildlife, fisheries and the public lands that belong to every American.'),
-    ('Environment, science & safety', 'EPA Environmental Protection Specialist', 'EP', ['EP|role|0028'],
+    ('Environment, science & safety', 'EPA Environmental Protection Specialists', 'EP', ['EP|role|0028'],
      'Run the programs that keep the air you breathe and the water you drink clean.'),
 ]
 
@@ -77,7 +77,7 @@ def build_seasonal_note(baseline, comparison):
 
 # Seasonal roles whose September snapshot is a summer peak are compared
 # year-over-year (same month) instead, so their real decline is not masked.
-SEASONAL_BASIS = {'Park Ranger': '202512'}
+SEASONAL_BASIS = {'Park Rangers': '202512'}
 
 
 def build_service_roles(baseline, comparison):
