@@ -1,8 +1,8 @@
-name: Deploy Federal Atlas
+name: Deploy Progress 2028
 on:
   push:
     branches: [main]
-    paths: ['index.html', 'needs.css', 'needs.js', 'story.js', 'tracker.js', 'tracker.css', 'workforce.js', 'workforce.css', 'research.js', 'research.css', 'atlas-bubbles.js', 'outflows.js', 'rebuild.js', 'rebuild.css', 'vendor/**', 'data/**', 'scripts/validate_change_data.py', '.github/workflows/pages.yml']
+    paths: ['index.html', 'needs.css', 'needs.js', 'story.js', 'tracker.js', 'tracker.css', 'workforce.js', 'workforce.css', 'research.js', 'research.css', 'atlas-bubbles.js', 'outflows.js', 'legal-review.js', 'notes.js', 'rebuild.js', 'rebuild.css', 'vendor/**', 'data/**', 'scripts/validate_change_data.py', '.github/workflows/pages.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -26,10 +26,12 @@ jobs:
       - run: python scripts/validate_change_data.py
       - run: python scripts/validate_comparison.py
       - run: python scripts/validate_allocations.py
+      - run: python scripts/validate_legal_review.py
+      - run: node tests/legal-review.cjs
       - uses: actions/configure-pages@v5
       - run: |
           mkdir _site
-          cp index.html grant-change-examples.html workforce.js workforce.css research.js research.css atlas-bubbles.js outflows.js rebuild.js rebuild.css _site/
+          cp index.html grant-change-examples.html workforce.js workforce.css research.js research.css atlas-bubbles.js notes.js legal-review.js outflows.js rebuild.js rebuild.css _site/
           cp -r data vendor _site/
       - uses: actions/upload-pages-artifact@v3
         with:

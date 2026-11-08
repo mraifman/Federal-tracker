@@ -35,7 +35,9 @@ jobs:
           python scripts/validate_data.py
           python scripts/validate_change_data.py
           python scripts/validate_comparison.py
+          python scripts/build_legal_review.py
           python scripts/validate_allocations.py
+          python scripts/validate_legal_review.py
       - name: Commit validated data and historical snapshot
         run: |
           git config user.name "federal-atlas-bot"
@@ -50,7 +52,7 @@ jobs:
       - name: Prepare public files
         run: |
           mkdir _site
-          cp index.html grant-change-examples.html workforce.js workforce.css research.js research.css atlas-bubbles.js outflows.js rebuild.js rebuild.css _site/
+          cp index.html grant-change-examples.html workforce.js workforce.css research.js research.css atlas-bubbles.js notes.js legal-review.js outflows.js rebuild.js rebuild.css _site/
           cp -r data vendor _site/
       - uses: actions/upload-pages-artifact@v3
         with:

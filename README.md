@@ -1,4 +1,4 @@
-# Federal Atlas
+# Progress 2028
 
 An interactive comparison of federal people, funding by purpose, spending uses, and resources awarded to outside parties. The site is published from this repository to [GitHub Pages](https://mraifman.github.io/Federal-tracker/).
 
@@ -34,3 +34,11 @@ Open `http://127.0.0.1:8000/`. No build or runtime API key is required; D3 is ve
 - `scripts/validate_data.py`, `scripts/validate_change_data.py`, `scripts/validate_comparison.py`, `scripts/validate_allocations.py`: provenance, hierarchy, coverage, financial reconciliation and export checks.
 
 GitHub Actions deploys validated static files. The scheduled legacy agency refresh does **not** automatically rebuild the large workforce, SF133 or full-archive analyses; those retain their explicit snapshot dates until rerun. Historical research assets are retained but are not loaded by the active interface.
+
+## Court review
+
+`data/legal-cases.json` stores manually reviewed court sources, dates, party identifiers and program scope. Program matches flag related litigation; only exact program-and-recipient matches identify a verified party link. These annotations never adjust financial figures or imply that funds are available.
+
+`python scripts/build_legal_review.py` screens the complete displayed program set for large reductions, negative net obligations and missing-year transactions. It generates `data/legal-review-queue.json`; this is a review queue, not an automated litigation search. The daily refresh regenerates financial flags and overdue-review notices but never updates a case’s `checked_on` date or verifies a court finding. Reviewers must read new orders, stays and appeals and update sources and scope explicitly. A documented search with no case identified is distinct from a record not reviewed.
+
+Run `python scripts/validate_legal_review.py`, `node tests/legal-review.cjs` and `python -m unittest discover -s scripts -p 'test_*.py'`. Sources, case histories and methodological notes are collected at the bottom of the main page.

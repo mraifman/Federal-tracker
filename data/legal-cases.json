@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "definition": "Court findings are reviewed separately from financial transactions. A program match establishes related litigation, not that every award or recipient is covered. No search match and no review are distinct; neither proves lawful termination. Financial amounts are never replaced by legal annotations.",
+  "states": {
+    "verified": "Court case \u00b7 named party",
+    "related_unverified": "Related case \u00b7 coverage varies",
+    "not_identified": "No litigation identified in documented search",
+    "not_reviewed": "Not reviewed",
+    "unavailable": "Review data unavailable"
+  },
+  "cases": [
+    {
+      "id": "climate-united-cadc-25-5122",
+      "title": "Climate United Fund v. Citibank",
+      "court": "U.S. Court of Appeals for the D.C. Circuit",
+      "dockets": [
+        "25-5122",
+        "25-5123",
+        "26-589"
+      ],
+      "label": "Termination notice blocked; litigation ongoing",
+      "summary": "The appeals court upheld preliminary protection against EPA\u2019s March 2025 termination notice. The dispute remains unresolved.",
+      "access_status": "Access to funds remains separately disputed; the ruling does not establish that recipients can draw money.",
+      "checked_on": "2026-11-08",
+      "next_review_on": "2026-11-15",
+      "event_due_on": "2026-12-04",
+      "coverage_note": "The program label marks related litigation. Named-party links use the program and recipient identifiers listed in the filed petition; they do not verify effects on every transaction, subrecipient or project.",
+      "scopes": [
+        {
+          "program_code": "66.957",
+          "recipient_ids": [
+            "XKVHSKHU4PP6",
+            "G1YAE6AFNDN4",
+            "MEV6KLB5LAL7"
+          ],
+          "recipient_names": [
+            "CLIMATE UNITED FUND",
+            "POWER FORWARD COMMUNITIES, INC",
+            "COALITION FOR GREEN CAPITAL"
+          ],
+          "source_ids": [
+            "parties",
+            "judgment"
+          ]
+        },
+        {
+          "program_code": "66.960",
+          "recipient_ids": [
+            "JZDQKLMKMUJ3",
+            "X9W4FCT6QND5"
+          ],
+          "recipient_names": [
+            "INCLUSIV, INC",
+            "JUSTICE CLIMATE FUND, INC."
+          ],
+          "source_ids": [
+            "parties",
+            "judgment"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "judgment",
+          "title": "Appeals court judgment \u00b7 August 4, 2026",
+          "url": "https://media.cadc.uscourts.gov/judgments/docs/2026/08/25-5122-2186441.pdf",
+          "kind": "court_order"
+        },
+        {
+          "id": "docket",
+          "title": "Supreme Court docket \u00b7 26-589",
+          "url": "https://www.supremecourt.gov/search.aspx?filename=/docket/docketfiles/html/public/26-589.html",
+          "kind": "court_docket"
+        },
+        {
+          "id": "parties",
+          "title": "Filed petition \u00b7 parties and procedural history",
+          "url": "https://www.supremecourt.gov/DocketPDF/26/26-589/431482/20261102131123209_Climate%20United%20Petition.pdf",
+          "kind": "party_filing"
+        },
+        {
+          "id": "history",
+          "title": "Sabin Center \u00b7 case history and access-to-funds developments",
+          "url": "https://www.climatecasechart.com/document/climate-united-fund-v-citibank-n-a_6506",
+          "kind": "secondary_case_history"
+        }
+      ],
+      "timeline": [
+        {
+          "date": "2026-08-04",
+          "text": "Appeals court affirmed the preliminary injunction; the portion blocking the March termination notice had a majority, while the remaining relief was affirmed by an equally divided court.",
+          "source_id": "judgment"
+        },
+        {
+          "date": "2026-10-09",
+          "text": "Court clarified the disbursement stay for Coalition for Green Capital\u2019s previously withdrawn funds; this clarification should not be generalized to every recipient.",
+          "source_id": "history"
+        },
+        {
+          "date": "2026-11-02",
+          "text": "EPA filed a petition asking the Supreme Court to review the decision.",
+          "source_id": "docket"
+        },
+        {
+          "date": "2026-12-04",
+          "text": "Response deadline shown on the Supreme Court docket; no outcome inferred.",
+          "source_id": "docket"
+        }
+      ]
+    }
+  ],
+  "reviews": []
+}

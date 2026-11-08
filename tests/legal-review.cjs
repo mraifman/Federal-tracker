@@ -1,0 +1,14 @@
+const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
+const {assess}=require('../legal-review.js'),registry=JSON.parse(fs.readFileSync(path.join(__dirname,'../data/legal-cases.json'),'utf8'));
+const context={programCode:'66.957',today:'2026-11-08'};
+assert.equal(assess(registry,context).state,'related_unverified');
+assert.equal(assess(registry,{...context,recipientId:'XKVHSKHU4PP6'}).state,'verified');
+assert.equal(assess(registry,{...context,recipientId:'UNRELATED'}).state,'related_unverified');
+assert.equal(assess(registry,{...context,recipientId:'XKVHSKHU4PP6',programCode:'93.855'}).state,'not_reviewed');
+assert.equal(assess(registry,{programCode:'93.855'}).state,'not_reviewed');
+assert.equal(assess(null,context).state,'unavailable');
+assert.equal(assess(registry,{...context,today:'2026-12-01'}).overdue,true);
+const reviewed=JSON.parse(JSON.stringify(registry));reviewed.reviews.push({program_code:'93.855',outcome:'not_identified',checked_on:'2026-11-08',searches:[{query:'documented search',url:'https://www.courtlistener.com/'}]});
+assert.equal(assess(reviewed,{programCode:'93.855'}).state,'not_identified');
+assert.equal(assess(registry,{programCode:'93.855'}).state,'not_reviewed');
+console.log('Exact party scope, uncertain program coverage, unreviewed records, search results, unavailable data and overdue reviews verified.');

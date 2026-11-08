@@ -84,8 +84,8 @@
      '<span class="pb-val">−'+money(Math.abs(t.amount))+'</span></button>').join('');
    const surge=(o.surge_topics||[]).slice(0,3).map(t=>esc(t.topic)+' (+'+money(t.amount)+')').join(', ');
    cashSection='<section class="priorities">'+
-    '<h2>The cash that actually stopped flowing</h2>'+
-    '<p class="section-lede"><b>Outlays</b> are cash payments. Total outlays rose '+(o.total_pct!=null?o.total_pct.toFixed(0)+'%':'')+' — but that hides where money stopped reaching people. These services saw the sharpest drop in payments, FY2024 to FY2026. This chart includes mandatory funding; select a topic to explore its discretionary portion.</p>'+
+    '<h2>Where cash payments fell</h2>'+
+    '<p class="section-lede"><b>Outlays</b> are cash payments. Total payments rose '+(o.total_pct!=null?o.total_pct.toFixed(0)+'%':'')+' overall. These topics had the largest declines, FY2024 to FY2026.</p>'+
     '<div class="priority-bars">'+obars+'</div>'+
     (surge?'<p class="priority-contrast">The rise went almost entirely to mandatory programs and interest — '+surge+' — not to the services above. <button class="link-btn" data-explore-funding>Explore discretionary funding →</button></p>':'')+
    '</section>';
@@ -128,7 +128,7 @@
   '<section class="repair-hero">'+
    '<p class="eyebrow">The federal workforce · December 2024 → September 2026</p>'+
    '<h1>To <span class="hl-build">build back better</span>, we must first know what was <span class="hl-demo">demolished</span>.</h1>'+
-   '<p class="lede">In under two years, the non-defense federal workforce was <b>hollowed out</b> by <b>'+num(-p.net_change)+'</b> positions — a <b>'+Math.abs(pct).toFixed(0)+'%</b> reduction. People were fired, took buyouts, resigned under pressure or had their jobs eliminated. The losses fell hardest on the most experienced civil servants and erased entire agencies.</p>'+
+   '<p class="lede">By September 2026, agencies reported <b>'+num(-p.net_change)+'</b> fewer non-defense employees than in December 2024 — a <b>'+Math.abs(pct).toFixed(0)+'%</b> decline. Explore the jobs lost, funding changes, and estimated cost to rebuild.</p>'+
    '<div class="repair-tiles">'+
     tile('People to rehire',num(p.positions_to_restore),'Rebuild each career field at its former mix of pay grades.','Net declines by occupation and grade; excludes defense.')+
     tile('Annual payroll to rebuild',money(p.loaded_payroll)+'/yr',"Baseline salaries matched to each occupation and pay grade.",'Base pay '+money(p.base_payroll)+', plus benefits and overhead.')+
@@ -136,12 +136,12 @@
    '</div>'+
   '</section>'+
   '<section class="service-people">'+
-   '<h2>Cutting core services that Americans rely on</h2>'+
+   '<h2>The people behind public services</h2>'+
    '<p class="section-lede">Inspectors, scientists and specialists lost from public service. Most cards compare December 2024 with September 2026; † marks a same-season comparison. Select a role to explore its agency.</p>'+
    serviceGroups+
   '</section>'+
   '<section class="demolition">'+
-   '<h2>The reductions were not spread evenly</h2>'+
+   '<h2>Where the workforce shrank</h2>'+
    '<p class="section-lede">Compare losses by pay grade and agency. Select an agency to explore its record.</p>'+
    '<div class="demolition-grid">'+
     '<div class="grade-chart"><h3>The experience drain, by GS grade</h3>'+
@@ -156,17 +156,17 @@
   '<p class="repair-cta">Explore the records behind the headlines ↓</p>';
 
   // ---- footnotes collected at the very bottom of the page ----
-  const methodDetails='<details class="repair-method"><summary>How the repair-bill figures are built</summary>'+
+  const methodDetails='<div class="repair-method">'+
    '<p>'+esc(det.methodology.target)+' '+esc(det.methodology.positions)+' '+esc(det.methodology.cost)+'</p>'+
    '<p>'+esc(det.methodology.salary_imputation)+' Salaries are reported for '+det.salary_coverage.reported_pct+'% of non-defense staff. '+esc(det.methodology.defense)+'</p>'+
-   '<p>'+esc(det.methodology.caveats)+' '+esc(f.basis)+' * marks an occupation whose average salary was imputed.</p></details>';
+   '<p>'+esc(det.methodology.caveats)+' '+esc(f.basis)+' The cash-payment chart includes mandatory funding; topic drill-downs show only discretionary funding.'+' * marks an occupation whose average salary was imputed.</p></div>';
   const pageNotes=document.getElementById('page-notes');
   if(pageNotes){pageNotes.querySelector('#rebuild-notes')?.remove();
-   pageNotes.insertAdjacentHTML('beforeend','<div id="rebuild-notes" class="note-block">'+methodDetails+seasonalNote+'</div>');}
+   pageNotes.insertAdjacentHTML('beforeend','<details id="rebuild-notes" class="note-block"><summary>Rebuilding estimates and seasonal comparisons</summary>'+methodDetails+seasonalNote+'</details>');}
 
   // ---- wire drill-downs ----
   root.querySelectorAll('[data-agency-code]').forEach(el=>el.addEventListener('click',()=>focusWorkforce(el.dataset.agencyCode)));
-  root.querySelectorAll('[data-seasonal-note]').forEach(el=>{const go=e=>{e.stopPropagation();e.preventDefault();document.getElementById('seasonal-note')?.scrollIntoView({behavior:'smooth',block:'center'})};el.addEventListener('click',go);el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')go(e)})});
+  root.querySelectorAll('[data-seasonal-note]').forEach(el=>{const go=e=>{e.stopPropagation();e.preventDefault();const note=document.getElementById('seasonal-note');if(note){note.closest('details').open=true;note.scrollIntoView({behavior:'smooth',block:'center'})}};el.addEventListener('click',go);el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')go(e)})});
   root.querySelectorAll('[data-topic-code]').forEach(el=>el.addEventListener('click',()=>focusFunding(el.dataset.topicCode,el.dataset.metric)));
   root.querySelector('[data-explore-funding]')?.addEventListener('click',()=>focusFunding('all'));
   root.querySelectorAll('[data-opm]').forEach(el=>el.addEventListener('click',()=>{
