@@ -1,4 +1,4 @@
-/* The repair bill: what the cuts demolished and what rebuilding would take.
+/* Historical staffing and funding changes, with descriptive benchmark estimates.
    Reads data/repair-bill.json (top-line people + funding) and
    data/workforce-restoration.json (grade, occupation and agency detail).
    Cards drill into the existing workforce and funding investigations. */
@@ -55,7 +55,7 @@
     c.items.map(r=>'<button class="role-card" data-agency-code="'+esc(r.agency)+'">'+
       '<span class="rc-top"><span class="rc-name">'+esc(r.label)+'</span><span class="rc-pct">'+(r.pct<=0?'−':'+')+Math.abs(r.pct).toFixed(0)+'%</span></span>'+
       '<span class="rc-desc">'+esc(r.description)+'</span>'+
-      '<span class="rc-meta">'+num(r.baseline)+' → '+num(r.latest)+' · '+num(r.net)+' positions · '+(r.seasonal?'year-over-year<sup class="role-fn" data-seasonal-note role="link" tabindex="0" aria-label="Why measured year over year? See note at the bottom">†</sup> · ':'')+'explore →</span></button>').join('')+
+      '<span class="rc-meta">'+num(r.baseline)+' → '+num(r.latest)+' · '+num(r.net)+' employees · '+(r.seasonal?'year-over-year<sup class="role-fn" data-seasonal-note role="link" tabindex="0" aria-label="Why measured year over year? See note at the bottom">†</sup> · ':'')+'explore →</span></button>').join('')+
     '</div></div>').join('');
   const sn=bill.seasonal_note;
   const seasonalNote=sn?'<p class="seasonal-note" id="seasonal-note"><b>A note on seasonal work.</b> A few agencies staff up for the summer, so the September snapshot flatters them. The '+esc(sn.agency)+' as a whole looks roughly flat since December 2024 ('+(sn.headline_pct>=0?'+':'−')+Math.abs(sn.headline_pct).toFixed(0)+'%) but is down <b>'+Math.abs(sn.yoy_pct).toFixed(0)+'%</b> year over year ('+esc(sn.yoy_label)+', the same season). The cuts are real — just masked by seasonal hiring — so the park ranger card above is measured year over year, not against the summer peak. (Wildland-fire crews are seasonal too; measured the same way their numbers held roughly flat, so they are not shown as a cut.)</p>':'';
@@ -128,24 +128,24 @@
   '<section class="repair-hero">'+
    '<p class="eyebrow">The federal workforce · December 2024 → September 2026</p>'+
    '<h1>To <span class="hl-build">build back better</span>, we must first know what was <span class="hl-demo">demolished</span>.</h1>'+
-   '<p class="lede">By September 2026, agencies reported <b>'+num(-p.net_change)+'</b> fewer non-defense employees than in December 2024 — a <b>'+Math.abs(pct).toFixed(0)+'%</b> decline. Explore the jobs lost, funding changes, and estimated cost to rebuild.</p>'+
+   '<p class="lede">By September 2026, agencies reported <b>'+num(-p.net_change)+'</b> fewer non-defense employees than in December 2024 — a <b>'+Math.abs(pct).toFixed(0)+'%</b> decline. Explore staffing and funding changes, with payroll estimates by occupation and pay grade.</p>'+
    '<div class="repair-tiles">'+
-    tile('People to rehire',num(p.positions_to_restore),'Rebuild each career field at its former mix of pay grades.','Net declines by occupation and grade; excludes defense.')+
-    tile('Annual payroll to rebuild',money(p.loaded_payroll)+'/yr',"Baseline salaries matched to each occupation and pay grade.",'Base pay '+money(p.base_payroll)+', plus benefits and overhead.')+
-    tile('Funding to restore',money(domestic),'To reverse the domestic funding cuts'+(heroTopics?': '+heroTopics+'.':'.'),'Domestic funding cut, FY2024 to FY2026, outside defense.')+
+    tile('Staffing declines',num(p.positions_to_restore),'Combined decreases across occupations and pay grades.','Non-defense · December 2024 to September 2026')+
+    tile('Payroll represented by the declines',money(p.loaded_payroll)+'/yr','Estimated annual payroll associated with those staffing decreases.','At baseline pay, including benefits and overhead.')+
+    tile('Drop in federal funding',money(domestic),'Combined reductions across non-defense accounts.','Account decreases, before increases elsewhere · FY2024 to FY2026')+
    '</div>'+
   '</section>'+
   '<section class="service-people">'+
    '<h2>The people behind public services</h2>'+
-   '<p class="section-lede">Inspectors, scientists and specialists lost from public service. Most cards compare December 2024 with September 2026; † marks a same-season comparison. Select a role to explore its agency.</p>'+
+   '<p class="section-lede">Changes in the inspectors, scientists and specialists who deliver public services. Most cards compare December 2024 with September 2026; † marks a same-season comparison. Select a role to explore its agency.</p>'+
    serviceGroups+
   '</section>'+
   '<section class="demolition">'+
    '<h2>Where the workforce shrank</h2>'+
    '<p class="section-lede">Compare losses by pay grade and agency. Select an agency to explore its record.</p>'+
    '<div class="demolition-grid">'+
-    '<div class="grade-chart"><h3>The experience drain, by GS grade</h3>'+
-     '<p class="chart-note">Change by pay grade, outside defense. The senior ranks (GS-13 to 15) alone lost <b>'+num(-senior)+'</b> people.</p>'+
+    '<div class="grade-chart"><h3>Staffing changes, by pay grade</h3>'+
+     '<p class="chart-note">Change by pay grade, outside defense. Headcount in GS-13 to 15 fell by <b>'+num(-senior)+'</b>.</p>'+
      '<div class="grade-bars">'+gradeBars+'</div>'+
      '<div class="grade-axis">← fewer employees</div></div>'+
     '<div class="agency-casualties"><h3>Agencies hollowed out</h3>'+cas+'</div>'+
@@ -157,12 +157,15 @@
 
   // ---- footnotes collected at the very bottom of the page ----
   const methodDetails='<div class="repair-method">'+
-   '<p>'+esc(det.methodology.target)+' '+esc(det.methodology.positions)+' '+esc(det.methodology.cost)+'</p>'+
+   '<p>December 2024 is a historical comparison point, not a recommended staffing or funding target. The cards describe changes to assess, not a prescribed rebuilding plan.</p>'+
+   '<p><b>Staffing declines.</b> The '+num(p.positions_to_restore)+' figure sums decreases within occupation, pay-plan and grade groups without offsetting growth in other groups. Promotions, reclassifications and turnover can contribute. It is not a count of unique people separated, eliminated jobs or positions that should be rehired. The net non-defense headcount decline, after growth is included, is '+num(-p.net_change)+'.</p>'+
+   '<p><b>Payroll represented.</b> Baseline mean salaries for the same occupation, pay plan and grade are applied to those declines. The estimate includes the existing 33% benefits-and-overhead allowance; it is not observed payroll savings, a wage bill for identified departing people, or a rebuilding budget. Base pay is '+money(p.base_payroll)+'.</p>'+
+   '<p><b>Funding reductions.</b> The card sums account-level decreases outside defense. Increases in other accounts are not subtracted, so this is not the net change in total federal funding or a proposed amount to restore.</p>'+
    '<p>'+esc(det.methodology.salary_imputation)+' Salaries are reported for '+det.salary_coverage.reported_pct+'% of non-defense staff. '+esc(det.methodology.defense)+'</p>'+
-   '<p>'+esc(det.methodology.caveats)+' '+esc(f.basis)+' The cash-payment chart includes mandatory funding; topic drill-downs show only discretionary funding.'+' * marks an occupation whose average salary was imputed.</p></div>';
+   '<p>'+'Net headcount changes are not layoff counts. Separations, new hires and transfers are distinct personnel actions. '+esc(f.basis)+' The cash-payment chart includes mandatory funding; topic drill-downs show only discretionary funding.'+' * marks an occupation whose average salary was imputed.</p></div>';
   const pageNotes=document.getElementById('page-notes');
   if(pageNotes){pageNotes.querySelector('#rebuild-notes')?.remove();
-   pageNotes.insertAdjacentHTML('beforeend','<details id="rebuild-notes" class="note-block"><summary>Rebuilding estimates and seasonal comparisons</summary>'+methodDetails+seasonalNote+'</details>');}
+   pageNotes.insertAdjacentHTML('beforeend','<details id="rebuild-notes" class="note-block"><summary>Staffing, payroll and funding measures</summary>'+methodDetails+seasonalNote+'</details>');}
 
   // ---- wire drill-downs ----
   root.querySelectorAll('[data-agency-code]').forEach(el=>el.addEventListener('click',()=>focusWorkforce(el.dataset.agencyCode)));
