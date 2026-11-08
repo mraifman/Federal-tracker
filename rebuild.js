@@ -85,7 +85,7 @@
    const surge=(o.surge_topics||[]).slice(0,3).map(t=>esc(t.topic)+' (+'+money(t.amount)+')').join(', ');
    cashSection='<section class="priorities">'+
     '<h2>The cash that actually stopped flowing</h2>'+
-    '<p class="section-lede">Budgets are promises; <b>outlays</b> are the cash that actually goes out the door. Total outlays rose '+(o.total_pct!=null?o.total_pct.toFixed(0)+'%':'')+' — but that hides where money stopped reaching people. These services saw the sharpest drop in real payments, FY2024 to FY2026.</p>'+
+    '<p class="section-lede"><b>Outlays</b> are cash payments. Total outlays rose '+(o.total_pct!=null?o.total_pct.toFixed(0)+'%':'')+' — but that hides where money stopped reaching people. These services saw the sharpest drop in real payments, FY2024 to FY2026.</p>'+
     '<div class="priority-bars">'+obars+'</div>'+
     (surge?'<p class="priority-contrast">The rise went almost entirely to mandatory programs and interest — '+surge+' — not to the services above. <button class="link-btn" data-explore-funding>See the full funding picture →</button></p>':'')+
    '</section>';
@@ -130,19 +130,19 @@
    '<h1>To <span class="hl-build">build back better</span>, we must first know what was <span class="hl-demo">demolished</span>.</h1>'+
    '<p class="lede">In under two years, the non-defense federal workforce was <b>hollowed out</b> by <b>'+num(-p.net_change)+'</b> positions — a <b>'+Math.abs(pct).toFixed(0)+'%</b> reduction. People were fired, took buyouts, resigned under pressure or had their jobs eliminated; by NPR’s count more than <b>300,000</b> left or faced separation government-wide. The losses fell hardest on the most experienced civil servants and erased entire agencies. This is what it would take to rebuild.</p>'+
    '<div class="repair-tiles">'+
-    tile('People to rehire',num(p.positions_to_restore),'To restore net declines within each occupation, pay plan and grade to December 2024 levels.','Net declines outside defense, counted by occupation, pay plan and grade.')+
-    tile('Annual payroll to rebuild',money(p.loaded_payroll)+'/yr',"Estimated from net declines by occupation, pay plan and grade, priced at baseline salaries.",'Base pay '+money(p.base_payroll)+', plus benefits and overhead.')+
+    tile('People to rehire',num(p.positions_to_restore),'Rebuild each career field at its former mix of pay grades.','Net declines by occupation and grade; excludes defense.')+
+    tile('Annual payroll to rebuild',money(p.loaded_payroll)+'/yr',"Baseline salaries matched to each occupation and pay grade.",'Base pay '+money(p.base_payroll)+', plus benefits and overhead.')+
     tile('Funding to restore',money(domestic),'To reverse the domestic funding cuts'+(heroTopics?': '+heroTopics+'.':'.'),'Domestic funding cut, FY2024 to FY2026, outside defense.')+
    '</div>'+
   '</section>'+
   '<section class="service-people">'+
    '<h2>Cutting core services that Americans rely on</h2>'+
-   '<p class="section-lede">The inspectors, scientists and specialists who keep everyday services running — each a real federal job, thinned between December 2024 and September 2026. Select any role to open its agency.</p>'+
+   '<p class="section-lede">Inspectors, scientists and specialists lost from public service. Most cards compare December 2024 with September 2026; † marks a same-season comparison. Select a role to explore its agency.</p>'+
    serviceGroups+
   '</section>'+
   '<section class="demolition">'+
    '<h2>The reductions were not spread evenly</h2>'+
-   '<p class="section-lede">They hit the most senior, experienced staff hardest — knowledge that takes years to replace — and gutted some agencies entirely. Select any to see its record.</p>'+
+   '<p class="section-lede">Compare losses by pay grade and agency. Select an agency to explore its record.</p>'+
    '<div class="demolition-grid">'+
     '<div class="grade-chart"><h3>The experience drain, by GS grade</h3>'+
      '<p class="chart-note">Change by pay grade, outside defense. The senior ranks (GS-13 to 15) alone lost <b>'+num(-senior)+'</b> people.</p>'+
@@ -153,7 +153,7 @@
   '</section>'+
   budgetSection+
   cashSection+
-  '<p class="repair-cta">Explore the full evidence — headcount, funding and where the money goes — below ↓</p>';
+  '<p class="repair-cta">Explore the records behind the headlines ↓</p>';
 
   // ---- footnotes collected at the very bottom of the page ----
   const methodDetails='<details class="repair-method"><summary>How the repair-bill figures are built</summary>'+

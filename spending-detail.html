@@ -67,6 +67,7 @@ h2{font:500 clamp(24px,3.2vw,34px)/1.15 Georgia,serif;letter-spacing:-.8px;margi
 @media(max-width:640px){.money-arrow{transform:rotate(90deg);justify-content:center}.money-step{flex-basis:100%}}
 .warn{border-left:3px solid #b9934c;background:#eeecde;padding:14px 18px;font-size:13px;margin:16px 0}
 @media(max-width:640px){main{padding:0 18px 40px}.headline{grid-template-columns:1fr;gap:14px}.subj-row{grid-template-columns:1fr auto}.subj-track{display:none}.prog-row{grid-template-columns:1fr 84px}.plot{grid-column:1/-1}}
+.controls label{min-width:0;flex:1 1 260px}.controls select{min-width:0;width:100%}@media(max-width:640px){header{flex-wrap:wrap}header nav{flex-wrap:wrap;gap:14px}}
 </style></head>
 <body>
 <header>
@@ -76,17 +77,17 @@ h2{font:500 clamp(24px,3.2vw,34px)/1.15 Georgia,serif;letter-spacing:-.8px;margi
 <main>
  <section class="intro">
   <p class="eyebrow">Award spending · full FY2024 → full FY2026</p>
-  <h1>Where the money goes, program by program.</h1>
-  <p>Pick any federal agency to see how the grants and awards it funds changed — broken down by subject, and by individual program under its federal Assistance Listing code.</p>
+  <h1>From the big picture to individual programs.</h1>
+  <p>Compare all external awards first. Choose an agency or award type, then explore programs. <a href="./?view=uses&amp;agency=ALL#project-views">Explore the interactive money flows →</a></p>
  </section>
  <section class="explainer">
   <h3>How to read the budget</h3>
   <div class="money-chain">
-   <div class="money-step"><h4>Budget authority</h4><p>Permission to spend — the ceiling Congress sets. Like an approved credit limit.</p></div>
+   <div class="money-step"><h4>Budget authority</h4><p>Legal authority to commit funds.</p></div>
    <div class="money-arrow">→</div>
-   <div class="money-step here"><span class="tag">This page</span><h4>Obligation</h4><p>A binding commitment — a signed contract or awarded grant. The government is on the hook, even before any cash moves.</p></div>
+   <div class="money-step here"><span class="tag">This page</span><h4>Obligation</h4><p>A binding commitment, such as a contract or grant, made before cash is paid.</p></div>
    <div class="money-arrow">→</div>
-   <div class="money-step"><h4>Outlay</h4><p>Cash actually leaving the Treasury — a payment, which may settle commitments made years earlier.</p></div>
+   <div class="money-step"><h4>Outlay</h4><p>Cash paid, including payments on earlier commitments.</p></div>
   </div>
   <p class="caption">Obligations and outlays can fall in different years: a multi-year grant obligated in FY2024 is paid out over several years, so a single year's outlays include old commitments. This page shows <b>obligations</b> — what each agency chose to commit — not cash outlays. And a drop in new authority alone doesn't prove a program ended: agencies can keep spending from prior-year balances.</p>
  </section>
@@ -117,7 +118,7 @@ h2{font:500 clamp(24px,3.2vw,34px)/1.15 Georgia,serif;letter-spacing:-.8px;margi
     return JSON.parse(new TextDecoder().decode(raw));});}));
   return cache.get(path);
  }
- let index,taxonomy,unit,code=new URLSearchParams(location.search).get('agency')||'NIH',kind='Grants / cooperative agreements';
+ let index,taxonomy,unit,code=new URLSearchParams(location.search).get('agency')||'ALL',kind='all';
 
  function pair(rows,idKey,nameKey){
   const m=new Map();
@@ -167,6 +168,7 @@ h2{font:500 clamp(24px,3.2vw,34px)/1.15 Georgia,serif;letter-spacing:-.8px;margi
     '<div><span>FY2026 award obligations</span><b>'+money(b)+'</b><small>'+(progs.length)+' programs / purposes</small></div>'+
     '<div class="'+(b<a?'down':'up')+'"><span>Change</span><b>'+signed(b-a)+'</b><small>'+(a>0?((b/a-1)*100).toFixed(0)+'%':'—')+' · nominal dollars</small></div>'+
    '</section>'+
+   (kind==='all'?'<section class="block"><h2>By award type</h2><p class="note">Grants, contracts and other assistance. Choose an award type above to explore its programs.</p>'+subjectBars(pair(rows,'award_kind','award_kind'))+'</section>':'')+
    (grants?'<section class="block"><h2>By subject</h2><p class="note">Grant dollars grouped by the subject of their program, derived from the federal Assistance Listing. The eight largest shifts are shown.</p>'+subjectBars(subs)+'</section>':'')+
    '<section class="block"><h2>Program by program</h2><p class="note">The twelve largest changes among individual '+(grants?'grant programs':kind==='Contracts'?'contract purposes':'award lines')+', each identified by its '+(grants?'Assistance Listing':'')+' code. Open dots mark FY2024, filled dots FY2026; every row shares one dollar scale.</p>'+dumbbell(progs)+'</section>';
  }
@@ -187,6 +189,7 @@ h2{font:500 clamp(24px,3.2vw,34px)/1.15 Georgia,serif;letter-spacing:-.8px;margi
   const sel=$('agency');
   const opts=index.units.filter(u=>u.code!=='ALL').sort((p,q)=>p.name.localeCompare(q.name));
   sel.innerHTML='<option value="ALL">All government external awards</option>'+opts.map(u=>'<option value="'+esc(u.code)+'">'+esc(u.name)+'</option>').join('');
+  $('kind').value=kind;
   sel.value=index.units.some(u=>u.code===code)?code:'NIH';
   sel.onchange=e=>{code=e.target.value;load();};
   $('kind').onchange=e=>{kind=e.target.value;if(unit)render();};
