@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Two numbers | Progress 2028</title>
+<meta name="description" content="The federal story in two pictures: how the workforce shrank, and how spending shifted, from FY2024 to FY2026.">
+<style>
+:root{--paper:#f8f6ef;--ink:#19354a;--muted:#5d727b;--line:#d8ded4;--coral:#bd6b52;--teal:#43838b}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 'Avenir Next',Avenir,'Segoe UI',sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+header{display:flex;justify-content:space-between;align-items:baseline;gap:16px;max-width:1000px;margin:auto;padding:24px 28px 0}
+.brand{font-weight:800;font-size:19px;letter-spacing:-.5px;text-decoration:none}
+header nav{font-size:13px}
+main{max-width:1000px;margin:auto;padding:0 28px 70px}
+.intro{padding:46px 0 10px;max-width:40ch}
+.intro .eyebrow{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+.intro h1{font:600 clamp(34px,6vw,58px)/1.05 Georgia,serif;letter-spacing:-1.5px;margin:14px 0 0}
+.panel{margin:58px 0 0;padding-top:34px;border-top:1px solid var(--line)}
+.panel .kicker{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+.panel h2{font:600 clamp(26px,4vw,40px)/1.1 Georgia,serif;letter-spacing:-1px;margin:8px 0 0}
+.lead{font-size:clamp(16px,1.9vw,19px);color:#30424f;max-width:58ch;margin:14px 0 0}
+.lead b{color:var(--ink)}
+.big{font:700 clamp(52px,11vw,104px)/.95 Georgia,serif;letter-spacing:-3px;color:var(--coral);margin:26px 0 4px}
+.big small{display:block;font:500 17px/1.3 'Avenir Next',sans-serif;letter-spacing:0;color:var(--muted);margin-top:14px}
+figure{margin:30px 0 0}
+svg{display:block;width:100%;height:auto;overflow:visible}
+.cap{font-size:12.5px;color:var(--muted);margin:14px 0 0;line-height:1.5}
+.axislbl{font:12px 'Avenir Next',sans-serif;fill:var(--muted)}
+.loading{color:var(--muted);padding:30px 0}
+footer{max-width:1000px;margin:auto;padding:30px 28px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
+@media(max-width:560px){main{padding:0 18px 50px}header{padding:20px 18px 0}}
+</style></head>
+<body>
+<header>
+ <a class="brand" href="./">Progress 2028</a>
+ <nav><a href="./">Full explorer →</a></nav>
+</header>
+<main>
+ <section class="intro">
+  <p class="eyebrow">The federal government · FY2024 → FY2026</p>
+  <h1>Two numbers that matter.</h1>
+ </section>
+
+ <section class="panel" id="people">
+  <p class="kicker">01 · The workforce</p>
+  <h2>Fewer people doing the work</h2>
+  <div id="people-body"><p class="loading">Loading…</p></div>
+ </section>
+
+ <section class="panel" id="money">
+  <p class="kicker">02 · The spending</p>
+  <h2>The money didn’t shrink — it shifted</h2>
+  <div id="money-body"><p class="loading">Loading…</p></div>
+ </section>
+</main>
+<footer>
+ Non-defense civilian employees, OPM month-end counts. Outlays are SF 133 net outlays (cash paid), FY2024 vs FY2026.
+ Both measures exclude defense civilians, whose September reporting is incomplete. <a href="./">See the full data explorer →</a>
+</footer>
+<script>
+(()=>{'use strict';
+ const $=id=>document.getElementById(id);
+ const nf=n=>Math.round(n).toLocaleString('en-US');
+ const money=n=>{const v=Math.abs(n),d=v>=1e12?1e12:v>=1e9?1e9:1e6;return (n<0?'−':'+')+'$'+(v/d).toLocaleString('en-US',{maximumFractionDigits:v/d>=100?0:1})+({1e6:'M',1e9:'B',1e12:'T'}[d]);};
+ const mname={'202412':'Dec ’24','202503':'Mar ’25','202506':'Jun ’25','202509':'Sep ’25','202512':'Dec ’25','202603':'Mar ’26','202606':'Jun ’26','202608':'Aug ’26','202609':'Sep ’26'};
+
+ Promise.all(['workforce-changes','repair-bill'].map(n=>fetch('data/'+n+'.json').then(r=>r.json())))
+  .then(([w,rb])=>{renderPeople(w);renderMoney(rb);})
+  .catch(()=>{$('people-body').innerHTML='<p class="cap">Data could not load.</p>';});
+
+ function renderPeople(w){
+  const dep=w.records.departments.filter(r=>r.id!=='DOD');
+  const periods=w.periods;
+  const val=p=>dep.reduce((s,r)=>s+(r.values[p]||0),0);
+  const pts=periods.map(p=>({p,v:val(p)}));
+  const a=pts[0].v,b=pts[pts.length-1].v,drop=b-a,pctv=(b/a-1)*100;
+  // chart
+  const W=900,H=380,L=8,R=8,T=20,B=40;
+  const vals=pts.map(o=>o.v),lo=Math.min(...vals)*0.985,hi=Math.max(...vals)*1.004;
+  const x=i=>L+i/(pts.length-1)*(W-L-R),y=v=>T+(1-(v-lo)/(hi-lo))*(H-T-B);
+  const line=pts.map((o,i)=>x(i)+','+y(o.v)).join(' ');
+  const area='M'+x(0)+','+y(pts[0].v)+' L'+line+' L'+x(pts.length-1)+','+(H-B)+' L'+x(0)+','+(H-B)+' Z';
+  const dots=pts.map((o,i)=>'<circle cx="'+x(i)+'" cy="'+y(o.v)+'" r="'+(i===0||i===pts.length-1?5:3)+'" fill="'+(i===pts.length-1?'#bd6b52':'#315f7b')+'"/>').join('');
+  const labs=pts.map((o,i)=>(i%2===0||i===pts.length-1)?'<text class="axislbl" x="'+x(i)+'" y="'+(H-14)+'" text-anchor="middle">'+mname[o.p]+'</text>':'').join('');
+  const endLabel='<text x="'+x(pts.length-1)+'" y="'+(y(b)-14)+'" text-anchor="end" font:600 13px sans-serif font-weight="700" fill="#bd6b52" font-size="13">'+nf(b)+'</text>'+
+    '<text x="'+x(0)+'" y="'+(y(a)-14)+'" text-anchor="start" font-weight="700" fill="#315f7b" font-size="13">'+nf(a)+'</text>';
+  $('people-body').innerHTML=
+   '<p class="lead">Between December 2024 and September 2026, the non-defense federal workforce fell by <b>'+nf(-drop)+'</b> — one in eight jobs.</p>'+
+   '<div class="big">−'+nf(-drop)+'<small>non-defense federal employees · '+pctv.toFixed(0)+'%, December 2024 → September 2026</small></div>'+
+   '<figure><svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Non-defense federal employees, December 2024 to September 2026">'+
+     '<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#547e98" stop-opacity=".45"/><stop offset="1" stop-color="#547e98" stop-opacity=".04"/></linearGradient></defs>'+
+     '<path d="'+area+'" fill="url(#g)"/><polyline points="'+line+'" fill="none" stroke="#315f7b" stroke-width="3"/>'+dots+labs+endLabel+
+   '</svg><p class="cap">Each point is an OPM month-end snapshot. The count fell steadily through early 2026, then flattened — it has not recovered.</p></figure>';
+ }
+
+ function renderMoney(rb){
+  const o=rb.funding&&rb.funding.outlays;if(!o){$('money-body').innerHTML='<p class="cap">Outlay data unavailable.</p>';return;}
+  const cuts=o.cut_topics.filter(t=>!/mixed|unclassified/i.test(t.topic)).slice(0,4).map(t=>({name:t.topic,amt:t.amount}));
+  const ups=o.surge_topics.slice(0,3).map(t=>({name:t.topic,amt:t.amount}));
+  const rows=[...ups.sort((a,b)=>b.amt-a.amt),...cuts.sort((a,b)=>a.amt-b.amt)];
+  const totPct=(o.fy2026_total/o.fy2024_total-1)*100;
+  // diverging bars
+  const max=Math.max(...rows.map(r=>Math.abs(r.amt)));
+  const barH=38,gap=14,W=900,mid=470,padR=120,T=6;
+  const H=rows.length*(barH+gap)+T;
+  const scale=w=>Math.abs(w)/max*(Math.min(mid-150,W-padR-mid));
+  const bars=rows.map((r,i)=>{const yy=T+i*(barH+gap),pos=r.amt>0,w=scale(r.amt);
+    const x0=pos?mid:mid-w,col=pos?'#43838b':'#bd6b52';
+    return '<rect x="'+x0+'" y="'+yy+'" width="'+w+'" height="'+barH+'" rx="3" fill="'+col+'"/>'+
+      '<text x="'+(pos?mid-10:mid+10)+'" y="'+(yy+barH/2+5)+'" text-anchor="'+(pos?'end':'start')+'" font-size="15" fill="#19354a">'+r.name+'</text>'+
+      '<text x="'+(pos?mid+w+10:mid-w-10)+'" y="'+(yy+barH/2+5)+'" text-anchor="'+(pos?'start':'end')+'" font-size="15" font-weight="700" fill="'+col+'">'+money(r.amt)+'</text>';
+  }).join('');
+  $('money-body').innerHTML=
+   '<p class="lead">Total federal spending actually <b>rose '+totPct.toFixed(0)+'%</b> over these two years. But almost all of the growth went to Medicare, interest on the debt, and Social Security — while the cash for schools, housing and foreign aid fell.</p>'+
+   '<figure><svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Change in federal outlays by purpose, FY2024 to FY2026">'+
+     '<line x1="'+mid+'" y1="0" x2="'+mid+'" y2="'+H+'" stroke="#c9d1c8" stroke-width="1"/>'+bars+
+   '</svg><p class="cap">Change in actual cash paid out (net outlays), FY2024 vs FY2026. Teal grew; coral fell. The three biggest increases are mandatory programs and debt interest, not discretionary choices.</p></figure>';
+ }
+})();
+</script>
+</body></html>
