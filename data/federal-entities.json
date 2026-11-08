@@ -1,6 +1,6 @@
 {
   "source": "https://www.federalregister.gov/api/v1/agencies.json",
-  "retrieved_at_utc": "2026-11-08T14:59:46.730164+00:00",
+  "retrieved_at_utc": "2026-11-08T15:21:13.213814+00:00",
   "count": 473,
   "coverage": "Federal Register agency directory, including historical entities and subagencies. This is not a complete current federal organizational census. Directory inclusion does not establish operating status, termination, or funding coverage. Parent relationships are reproduced from the source; names are not automatically matched to USAspending.",
   "entities": [
