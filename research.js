@@ -36,3 +36,52 @@ window.addEventListener('atlas-open-uses',e=>{const code=e.detail.opmId==='HE|HE
 function download(name,headers,rows){const quote=s=>'"'+String(s??'').replace(/"/g,'""')+'"',csv=[headers,...rows].map(r=>r.map(quote).join(',')).join('\r\n'),url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
 window.addEventListener('keydown',e=>{if(!record)return;if(e.key==='Escape'){const id=record;record='';renderFunding();[...document.querySelectorAll('[data-authority-record]')].find(el=>el.dataset.authorityRecord===id)?.focus({preventScroll:true})}if(e.key==='Tab'){const c=[...document.querySelectorAll('#funding-app .drawer button,#funding-app .drawer a')],first=c[0],last=c.at(-1);if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}});
 Promise.all(['authority-comparison','spending-comparison','workforce-changes','agencies','spending-workforce-crosswalk','funding-status-evidence'].map(n=>fetch('data/'+n+'.json').then(r=>{if(!r.ok)throw Error(n);return r.json()}))).then(([f,s,w,a,l,e])=>{authority=f;spend=s;workforce=w;directory=a;links=l;statusEvidence=e;applyContinuity();if(use!=='ALL'&&use!=='NIH'&&!directory.agencies.some(a=>a.code===use))use='NIH';renderFunding();renderUses();const initial=new URLSearchParams(location.search).get('view');setTab(['workforce','funding','uses'].includes(initial)?initial:'workforce')}).catch(e=>{for(const id of ['funding-app','uses-app'])$(id).innerHTML='<p class="warning">This view could not load its source dataset: '+esc(e.message)+'. Reload to retry.</p>'});})();
+
+/* Keep the reader's location visible as each investigation changes depth. */
+(()=>{
+ const tabs=document.getElementById('project-views');
+ const navigation=document.createElement('nav');
+ navigation.className='atlas-reading-nav';
+ navigation.setAttribute('aria-label','Sections in this investigation');
+ tabs.after(navigation);
+ const scenes={
+  workforce:[['#public-service-roles','Public service roles'],['.trend-layout','Workforce trend'],['.bubble-panel','Explore offices'],['.table-scroll','Compare records']],
+  funding:[['.spotlights','Choose a subject'],['.trend-layout','Explore funding'],['.table-scroll','Account records']],
+  uses:[['.spotlights','Choose an agency'],['.investigation-metrics','Agency totals'],['.composition','Spending mix'],['#outbound-panel','External awards']]
+ };
+ let scheduled=false,observer,lastPanel;
+ function update(){
+  scheduled=false;
+  const panel=document.querySelector('[data-project-panel]:not([hidden])');
+  if(!panel)return;
+  const view=panel.dataset.projectPanel;
+  observer?.disconnect();
+  const links=[];
+  for(const [selector,label] of scenes[view]){
+   const section=panel.querySelector(selector);
+   if(!section)continue;
+   section.dataset.atlasScene='';
+   if(!section.id)section.id='scene-'+view+'-'+links.length;
+   const link=document.createElement('a');
+   link.href='#'+section.id;link.textContent=label;
+   link.onclick=e=>{e.preventDefault();section.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});};
+   links.push({section,link});
+  }
+  navigation.replaceChildren(...links.map(x=>x.link));
+  navigation.hidden=!links.length;
+  function mark(){
+   const offset=tabs.offsetHeight+navigation.offsetHeight+24;
+   const current=links.filter(x=>x.section.getBoundingClientRect().top<=offset).at(-1)||links[0];
+   links.forEach(x=>{if(x===current)x.link.setAttribute('aria-current','location');else x.link.removeAttribute('aria-current')});
+  }
+  observer=new IntersectionObserver(mark,{rootMargin:'-12% 0px -55% 0px'});
+  links.forEach(x=>observer.observe(x.section));mark();
+  if(panel!==lastPanel){lastPanel?.classList.remove('atlas-scene-enter');panel.classList.add('atlas-scene-enter');lastPanel=panel}
+ }
+ function queue(){if(!scheduled){scheduled=true;requestAnimationFrame(update)}}
+ new ResizeObserver(()=>document.documentElement.style.setProperty('--atlas-tabs-height',tabs.offsetHeight+'px')).observe(tabs);
+ document.querySelectorAll('[data-project-panel]').forEach(panel=>{
+  new MutationObserver(queue).observe(panel,{attributes:true,attributeFilter:['hidden']});
+  new MutationObserver(queue).observe(panel.firstElementChild,{childList:true});
+ });queue();
+})();
