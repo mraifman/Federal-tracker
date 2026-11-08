@@ -85,9 +85,9 @@
    const surge=(o.surge_topics||[]).slice(0,3).map(t=>esc(t.topic)+' (+'+money(t.amount)+')').join(', ');
    cashSection='<section class="priorities">'+
     '<h2>The cash that actually stopped flowing</h2>'+
-    '<p class="section-lede">Budget authority is a promise; <b>outlays</b> are the cash that actually leaves the Treasury. Overall federal outlays still rose '+(o.total_pct!=null?o.total_pct.toFixed(0)+'%':'')+' — but that masks where real money stopped reaching people. These functions saw the steepest drop in actual payments, FY2024 to FY2026.</p>'+
+    '<p class="section-lede">Budgets are promises; <b>outlays</b> are the cash that actually goes out the door. Total outlays rose '+(o.total_pct!=null?o.total_pct.toFixed(0)+'%':'')+' — but that hides where money stopped reaching people. These services saw the sharpest drop in real payments, FY2024 to FY2026.</p>'+
     '<div class="priority-bars">'+obars+'</div>'+
-    (surge?'<p class="priority-contrast">The overall rise went almost entirely to mandatory programs and interest — '+surge+' — not to the services above. <button class="link-btn" data-explore-funding>See the full funding picture →</button></p>':'')+
+    (surge?'<p class="priority-contrast">The rise went almost entirely to mandatory programs and interest — '+surge+' — not to the services above. <button class="link-btn" data-explore-funding>See the full funding picture →</button></p>':'')+
    '</section>';
   }
 
@@ -106,14 +106,14 @@
      '<span class="sq-load">+'+a.per_employee_pct.toFixed(0)+'%<small>per employee</small></span></button>').join('');
    outlaySection='<section class="outlay">'+
     '<h2>Doing more with less</h2>'+
-    '<p class="section-lede">The people were cut, but their workload was not. Across '+g.matched_agencies+' agencies with comparable records, the workforce fell <b>'+Math.abs(g.staff_pct).toFixed(0)+'%</b> while the money staff actively run — setting aside benefits, formula grants and debt interest — held roughly steady, so each remaining employee now manages far more of it.</p>'+
-    '<div class="outlay-headline"><span class="ohl-label">Operational money each employee now runs</span>'+
+    '<p class="section-lede">The staff were cut; the work wasn’t. Across '+g.matched_agencies+' agencies, the workforce fell <b>'+Math.abs(g.staff_pct).toFixed(0)+'%</b> while the money they actively manage held steady — so each remaining person now handles far more.</p>'+
+    '<div class="outlay-headline"><span class="ohl-label">Money each employee now manages</span>'+
      '<b class="ohl-figure">+'+g.per_employee_pct.toFixed(0)+'%</b>'+
      '<span class="ohl-sub">'+money(g.per_employee_a)+' → '+money(g.per_employee_b)+' per employee</span></div>'+
     '<h3>The squeeze, by agency</h3>'+
-    '<p class="chart-note">How far staffing fell, and how much more operational money each remaining employee must now run. Select an agency to open its spending.</p>'+
+    '<p class="chart-note">How far staffing fell, and how much more each remaining employee must manage. Select an agency to see its spending.</p>'+
     '<div class="squeeze-list">'+rows+'</div>'+
-    '<p class="muted"><b>What this counts.</b> Only the money staff actively administer. It excludes the '+(grants!=null?'~'+grants.toFixed(0)+'%':'majority')+' of obligations that is benefits, formula grants and debt interest — money that flows by formula, not by labour — so a growing Social Security or interest bill is not counted as staff “doing more.” A few agency increases (disaster lending, bank resolution) reflect one-off program surges. '+esc(outlay.period_note||'')+'</p>'+
+    '<p class="muted"><b>What this counts.</b> Only money that staff actively manage. It leaves out benefits, grants and debt interest — about '+(grants!=null?grants.toFixed(0)+'%':'most')+' of the total — which move by formula, not by anyone’s work, so a rising Social Security or interest bill doesn’t count as “doing more.” A few jumps (disaster loans, bank failures) are one-offs. '+esc(outlay.period_note||'')+'</p>'+
    '</section>';
   }
 
@@ -156,22 +156,22 @@
    '<h1>To <span class="hl-build">build back better</span>, we must first know what was <span class="hl-demo">demolished</span>.</h1>'+
    '<p class="lede">In under two years, the non-defense federal workforce was <b>hollowed out</b> by <b>'+num(-p.net_change)+'</b> positions — a <b>'+Math.abs(pct).toFixed(0)+'%</b> reduction. People were fired, took buyouts, resigned under pressure or had their jobs eliminated; by NPR’s count more than <b>300,000</b> left or faced separation government-wide. The losses fell hardest on the most experienced civil servants and erased entire agencies. This is what it would take to rebuild.</p>'+
    '<div class="repair-tiles">'+
-    tile('People to rehire',num(p.positions_to_restore),'To return every career field to its December 2024 strength.','Sum of per-occupation net losses, non-defense.')+
-    tile('Annual payroll to rebuild',money(p.loaded_payroll)+'/yr',"Priced at the actual grades and salaries of the roles that were cut.",'Base pay '+money(p.base_payroll)+', loaded ×1.33 for benefits & overhead.')+
-    tile('Program funding to restore',money(domestic),'To reverse the cuts to domestic public services'+(heroTopics?': '+heroTopics+'.':'.'),'Decreases in reported net budget authority, FY2024→FY2026, excluding defense.')+
+    tile('People to rehire',num(p.positions_to_restore),'To bring every career field back to its December 2024 strength.','Net job losses outside defense, counted role by role.')+
+    tile('Annual payroll to rebuild',money(p.loaded_payroll)+'/yr',"Priced at the real grades and salaries of the jobs that were cut.",'Base pay '+money(p.base_payroll)+', plus benefits and overhead.')+
+    tile('Funding to restore',money(domestic),'To reverse the domestic funding cuts'+(heroTopics?': '+heroTopics+'.':'.'),'Domestic funding cut, FY2024 to FY2026, outside defense.')+
    '</div>'+
   '</section>'+
   '<section class="service-people">'+
    '<h2>Cutting core services that Americans rely on</h2>'+
-   '<p class="section-lede">Every cut is a person who did a job Americans rely on. Each of these is a real federal occupational series, thinned between December 2024 and September 2026. Select any role to open its agency.</p>'+
+   '<p class="section-lede">The inspectors, scientists and specialists who keep everyday services running — each a real federal job, thinned between December 2024 and September 2026. Select any role to open its agency.</p>'+
    serviceGroups+
   '</section>'+
   '<section class="demolition">'+
    '<h2>The reductions were not spread evenly</h2>'+
-   '<p class="section-lede">They concentrated in senior, experienced grades — institutional knowledge that takes years to rebuild — and gutted specific agencies to the point of collapse. Select any agency or role to open its full record.</p>'+
+   '<p class="section-lede">They hit the most senior, experienced staff hardest — knowledge that takes years to replace — and gutted some agencies entirely. Select any to see its record.</p>'+
    '<div class="demolition-grid">'+
     '<div class="grade-chart"><h3>The experience drain, by GS grade</h3>'+
-     '<p class="chart-note">Net change in non-defense staff at each General Schedule grade. Senior ranks (GS-13 to 15) lost <b>'+num(-senior)+'</b> people.</p>'+
+     '<p class="chart-note">Change by pay grade, outside defense. The senior ranks (GS-13 to 15) alone lost <b>'+num(-senior)+'</b> people.</p>'+
      '<div class="grade-bars">'+gradeBars+'</div>'+
      '<div class="grade-axis">← fewer employees</div></div>'+
     '<div class="agency-casualties"><h3>Agencies hollowed out</h3>'+cas+'</div>'+
