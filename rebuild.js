@@ -47,15 +47,16 @@
       '<span class="c-pct">'+a.pct.toFixed(0)+'%</span>'+
       '<span class="c-detail">'+num(a.baseline)+' → '+num(a.latest)+' · '+num(a.net)+' positions · explore →</span></button>').join('');
 
-  // ---- top jobs to rehire ----
-  const jobs=det.by_occupation.filter(o=>o.net<0).slice(0,8).map(o=>{
-    const ta=o.top_agency;
-    return '<button class="job-card"'+(ta?' data-agency-code="'+esc(ta.code)+'"':' disabled')+'>'+
-      '<span class="j-top"><span class="j-name">'+esc(title(o.name))+'</span>'+
-      '<span class="j-count">'+num(o.restore_count)+'</span></span>'+
-      '<span class="j-meta">'+num(o.baseline)+' → '+num(o.latest)+' · avg '+money(o.avg_salary)+'/yr · '+money(o.restore_cost)+' to rebuild'+(o.imputed_salary?' *':'')+
-      (ta?'<br>Hit hardest at '+esc(title(ta.name))+' ('+num(ta.net)+') · explore →':'')+'</span></button>';
-  }).join('');
+  // ---- curated federal roles that touch daily life ----
+  const roles=bill.service_roles||[];
+  const cats=[];
+  roles.forEach(r=>{let g=cats.find(c=>c.name===r.category);if(!g){g={name:r.category,items:[]};cats.push(g)}g.items.push(r)});
+  const serviceGroups=cats.map(c=>'<div class="role-category"><h3>'+esc(c.name)+'</h3><div class="role-grid">'+
+    c.items.map(r=>'<button class="role-card" data-agency-code="'+esc(r.agency)+'">'+
+      '<span class="rc-top"><span class="rc-name">'+esc(r.label)+'</span><span class="rc-pct">'+(r.pct<=0?'−':'+')+Math.abs(r.pct).toFixed(0)+'%</span></span>'+
+      '<span class="rc-desc">'+esc(r.description)+'</span>'+
+      '<span class="rc-meta">'+num(r.baseline)+' → '+num(r.latest)+' · '+num(r.net)+' positions · explore →</span></button>').join('')+
+    '</div></div>').join('');
 
   // ---- funding: cut topics to restore (exclude Defense from the domestic frame) ----
   const cuts=f.top_cut_topics.filter(t=>!/^defense$/i.test(t.topic));
@@ -80,6 +81,11 @@
     tile('Program funding to restore',money(domestic),'To reverse the cuts to domestic public services'+(heroTopics?': '+heroTopics+'.':'.'),'Decreases in reported net budget authority, FY2024→FY2026, excluding defense.')+
    '</div>'+
   '</section>'+
+  '<section class="service-people">'+
+   '<h2>The people behind the services</h2>'+
+   '<p class="section-lede">Every cut is a person who did a job Americans rely on. Each of these is a real federal occupational series, thinned between December 2024 and September 2026. Select any role to open its agency.</p>'+
+   serviceGroups+
+  '</section>'+
   '<section class="demolition">'+
    '<h2>What was demolished</h2>'+
    '<p class="section-lede">The reductions were not spread evenly. They concentrated in senior, experienced grades — institutional knowledge that takes years to rebuild — and gutted specific agencies to the point of collapse. Select any agency or role to open its full record.</p>'+
@@ -90,9 +96,6 @@
      '<div class="grade-axis">← fewer employees</div></div>'+
     '<div class="agency-casualties"><h3>Agencies hollowed out</h3>'+cas+'</div>'+
    '</div>'+
-   '<div class="rehire-jobs"><h3>The jobs that must be refilled</h3>'+
-    '<p class="chart-note">The largest workforce holes to close, by occupation — the people who inspect food, answer the phones at Social Security and the IRS, run the IT and enforce the law.</p>'+
-    '<div class="job-grid">'+jobs+'</div></div>'+
   '</section>'+
   '<section class="priorities">'+
    '<h2>What he stopped funding</h2>'+

@@ -38,17 +38,19 @@
 .casualty .c-pct{font:600 20px/1 Georgia,serif;color:var(--coral);white-space:nowrap}
 .casualty .c-detail{grid-column:1/-1;font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
 
-.rehire-jobs{margin:40px 0 0}
-.rehire-jobs h3{font-size:16px;font-weight:600;margin:0 0 4px}
-.rehire-jobs .chart-note{font-size:12px;color:var(--muted);margin:0 0 18px}
-.job-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:14px}
-.job-card{display:block;width:100%;text-align:left;color:inherit;font:inherit;border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:0 8px 8px 0;background:#fcfaf5;padding:16px 18px;cursor:pointer;transition:box-shadow .12s,transform .12s}
-.job-card:hover,.job-card:focus-visible{box-shadow:0 8px 22px #19354a12;transform:translateY(-1px)}
-.job-card[disabled]{cursor:default;transform:none;box-shadow:none}
-.job-card .j-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
-.job-card .j-name{font:500 15px/1.25 Georgia,serif}
-.job-card .j-count{font:600 20px/1 Georgia,serif;color:var(--teal);white-space:nowrap}
-.job-card .j-meta{display:block;font-size:11px;color:var(--muted);margin-top:8px;line-height:1.5;font-variant-numeric:tabular-nums}
+.service-people{margin:46px 0 0;border-top:1px solid var(--line);padding-top:40px}
+.service-people h2{font:500 clamp(26px,3.4vw,38px)/1.15 Georgia,serif;letter-spacing:-1px;margin:0 0 6px}
+.service-people .section-lede{font-size:15px;color:#41535f;max-width:64ch;margin:0 0 30px}
+.role-category{margin:0 0 30px}
+.role-category h3{font-size:12px;letter-spacing:1.6px;text-transform:uppercase;color:var(--teal);font-weight:600;margin:0 0 14px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.role-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:14px}
+.role-card{display:block;width:100%;text-align:left;color:inherit;font:inherit;border:1px solid var(--line);border-left:3px solid var(--coral);border-radius:0 8px 8px 0;background:#fcfaf5;padding:17px 19px;cursor:pointer;transition:box-shadow .12s,transform .12s}
+.role-card:hover,.role-card:focus-visible{box-shadow:0 8px 22px #19354a12;transform:translateY(-1px)}
+.role-card .rc-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.role-card .rc-name{font:500 17px/1.2 Georgia,serif}
+.role-card .rc-pct{font:600 20px/1 Georgia,serif;color:var(--coral);white-space:nowrap}
+.role-card .rc-desc{display:block;font-size:13px;color:#41535f;line-height:1.5;margin:9px 0 10px}
+.role-card .rc-meta{display:block;font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
 
 .priorities{margin:46px 0 0;border-top:1px solid var(--line);padding-top:40px}
 .priorities h2{font:500 clamp(26px,3.4vw,38px)/1.15 Georgia,serif;letter-spacing:-1px;margin:0 0 6px}
