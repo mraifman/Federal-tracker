@@ -128,7 +128,7 @@
   '<section class="repair-hero">'+
    '<p class="eyebrow">The federal workforce · December 2024 → September 2026</p>'+
    '<h1>To <span class="hl-build">build back better</span>, we must first know what was <span class="hl-demo">demolished</span>.</h1>'+
-   '<p class="lede">In under two years, the non-defense federal workforce was <b>hollowed out</b> by <b>'+num(-p.net_change)+'</b> positions — a <b>'+Math.abs(pct).toFixed(0)+'%</b> reduction. People were fired, took buyouts, resigned under pressure or had their jobs eliminated; by NPR’s count more than <b>300,000</b> left or faced separation government-wide. The losses fell hardest on the most experienced civil servants and erased entire agencies. This is what it would take to rebuild.</p>'+
+   '<p class="lede">In under two years, the non-defense federal workforce was <b>hollowed out</b> by <b>'+num(-p.net_change)+'</b> positions — a <b>'+Math.abs(pct).toFixed(0)+'%</b> reduction. People were fired, took buyouts, resigned under pressure or had their jobs eliminated. The losses fell hardest on the most experienced civil servants and erased entire agencies. This is what it would take to rebuild.</p>'+
    '<div class="repair-tiles">'+
     tile('People to rehire',num(p.positions_to_restore),'Rebuild each career field at its former mix of pay grades.','Net declines by occupation and grade; excludes defense.')+
     tile('Annual payroll to rebuild',money(p.loaded_payroll)+'/yr',"Baseline salaries matched to each occupation and pay grade.",'Base pay '+money(p.base_payroll)+', plus benefits and overhead.')+
