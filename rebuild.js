@@ -130,8 +130,8 @@
    '<h1>To <span class="hl-build">build back better</span>, we must first know what was <span class="hl-demo">demolished</span>.</h1>'+
    '<p class="lede">By September 2026, agencies reported <b>'+num(-p.net_change)+'</b> fewer non-defense employees than in December 2024 — a <b>'+Math.abs(pct).toFixed(0)+'%</b> decline. Explore staffing and funding changes, with payroll estimates by occupation and pay grade.</p>'+
    '<div class="repair-tiles">'+
-    tile('Staffing declines',num(p.positions_to_restore),'Combined decreases across occupations and pay grades.','Non-defense · December 2024 to September 2026')+
-    tile('Payroll represented by the declines',money(p.loaded_payroll)+'/yr','Estimated annual payroll associated with those staffing decreases.','At baseline pay, including benefits and overhead.')+
+    tile('Fewer federal employees',num(p.positions_to_restore),'Combined decreases across occupations and pay grades.','Non-defense · December 2024 to September 2026')+
+    tile('Operational funding needed to reinstate the lost workforce',money(p.loaded_payroll)+'/yr','Estimated annual payroll to restore the lost positions at their former pay grades.','At baseline pay, including benefits and overhead.')+
     tile('Drop in federal funding',money(domestic),'Combined reductions across non-defense accounts.','Account decreases, before increases elsewhere · FY2024 to FY2026')+
    '</div>'+
   '</section>'+
