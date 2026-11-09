@@ -48,7 +48,7 @@ footer{max-width:1000px;margin:auto;padding:30px 28px;border-top:1px solid var(-
 
  <section class="panel" id="money">
   <p class="kicker">02 · The spending</p>
-  <h2>What Congress chose to cut</h2>
+  <h2>The money didn’t shrink — it shifted</h2>
   <div id="money-body"><p class="loading">Loading…</p></div>
  </section>
 </main>
@@ -63,8 +63,8 @@ footer{max-width:1000px;margin:auto;padding:30px 28px;border-top:1px solid var(-
  const money=n=>{const v=Math.abs(n),d=v>=1e12?1e12:v>=1e9?1e9:1e6;return (n<0?'−':'+')+'$'+(v/d).toLocaleString('en-US',{maximumFractionDigits:v/d>=100?0:1})+({1e6:'M',1e9:'B',1e12:'T'}[d]);};
  const mname={'202412':'Dec ’24','202503':'Mar ’25','202506':'Jun ’25','202509':'Sep ’25','202512':'Dec ’25','202603':'Mar ’26','202606':'Jun ’26','202608':'Aug ’26','202609':'Sep ’26'};
 
- Promise.all(['workforce-changes','budget-structure'].map(n=>fetch('data/'+n+'.json').then(r=>r.json())))
-  .then(([w,bs])=>{renderPeople(w);renderMoney(bs);})
+ Promise.all(['workforce-changes','repair-bill'].map(n=>fetch('data/'+n+'.json').then(r=>r.json())))
+  .then(([w,rb])=>{renderPeople(w);renderMoney(rb);})
   .catch(()=>{$('people-body').innerHTML='<p class="cap">Data could not load.</p>';});
 
  function renderPeople(w){
@@ -92,17 +92,15 @@ footer{max-width:1000px;margin:auto;padding:30px 28px;border-top:1px solid var(-
    '</svg><p class="cap">Each point is an OPM month-end snapshot. The count fell steadily through early 2026, then flattened — it has not recovered.</p></figure>';
  }
 
- function renderMoney(bs){
-  const cats={};bs.categories.forEach(c=>cats[c.name]=c);
-  const disc=cats['Discretionary'];if(!disc){$('money-body').innerHTML='<p class="cap">Funding data unavailable.</p>';return;}
-  const decline=disc.b-disc.a;
-  const clean=f=>f.replace('Department of ','').replace('-Military',' (military)');
-  const adds=bs.discretionary.adds.slice(0,3).map(t=>({name:clean(t.function),amt:t.amount})).sort((a,b)=>b.amt-a.amt);
-  const cuts=bs.discretionary.cuts.slice(0,5).map(t=>({name:clean(t.function),amt:t.amount})).sort((a,b)=>a.amt-b.amt);
-  const rows=[...adds,...cuts];
+ function renderMoney(rb){
+  const o=rb.funding&&rb.funding.outlays;if(!o){$('money-body').innerHTML='<p class="cap">Outlay data unavailable.</p>';return;}
+  const cuts=o.cut_topics.filter(t=>!/mixed|unclassified/i.test(t.topic)).slice(0,4).map(t=>({name:t.topic,amt:t.amount}));
+  const ups=o.surge_topics.slice(0,3).map(t=>({name:t.topic,amt:t.amount}));
+  const rows=[...ups.sort((a,b)=>b.amt-a.amt),...cuts.sort((a,b)=>a.amt-b.amt)];
+  const totPct=(o.fy2026_total/o.fy2024_total-1)*100;
   // diverging bars
   const max=Math.max(...rows.map(r=>Math.abs(r.amt)));
-  const barH=38,gap=14,W=900,mid=430,padR=120,T=6;
+  const barH=38,gap=14,W=900,mid=470,padR=120,T=6;
   const H=rows.length*(barH+gap)+T;
   const scale=w=>Math.abs(w)/max*(Math.min(mid-150,W-padR-mid));
   const bars=rows.map((r,i)=>{const yy=T+i*(barH+gap),pos=r.amt>0,w=scale(r.amt);
@@ -112,11 +110,10 @@ footer{max-width:1000px;margin:auto;padding:30px 28px;border-top:1px solid var(-
       '<text x="'+(pos?mid+w+10:mid-w-10)+'" y="'+(yy+barH/2+5)+'" text-anchor="'+(pos?'start':'end')+'" font-size="15" font-weight="700" fill="'+col+'">'+money(r.amt)+'</text>';
   }).join('');
   $('money-body').innerHTML=
-   '<p class="lead">Most of the budget runs on autopilot — Social Security, Medicare, interest on the debt. The part Congress actually votes on each year is <b>discretionary</b> spending, and it fell <b>'+Math.abs(disc.pct).toFixed(0)+'%</b>. These were the choices.</p>'+
-   '<div class="big">'+money(decline)+'<small>in discretionary funding — the part Congress decides · from '+disc.share_a.toFixed(0)+'% to '+disc.share_b.toFixed(0)+'% of the budget</small></div>'+
-   '<figure><svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Change in discretionary funding by function, FY2024 to FY2026">'+
+   '<p class="lead">Total federal spending actually <b>rose '+totPct.toFixed(0)+'%</b> over these two years. But almost all of the growth went to Medicare, interest on the debt, and Social Security — while the cash for schools, housing and foreign aid fell.</p>'+
+   '<figure><svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Change in federal outlays by purpose, FY2024 to FY2026">'+
      '<line x1="'+mid+'" y1="0" x2="'+mid+'" y2="'+H+'" stroke="#c9d1c8" stroke-width="1"/>'+bars+
-   '</svg><p class="cap">Change in discretionary budget authority by function, FY2024 → FY2026. Teal grew; coral fell. Mandatory programs (Social Security, Medicare) and debt interest are excluded — this is only what Congress decides each year.</p></figure>';
+   '</svg><p class="cap">Change in actual cash paid out (net outlays), FY2024 vs FY2026. Teal grew; coral fell. The three biggest increases are mandatory programs and debt interest, not discretionary choices.</p></figure>';
  }
 })();
 </script>
