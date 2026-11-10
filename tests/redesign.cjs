@@ -28,6 +28,16 @@ const fs=require('node:fs/promises');
   assert(await work.locator('button[data-chart-mode="ranked"][aria-pressed="true"]').count(),'mode survives drilldown');
   await work.locator('[data-work-root]').first().click();
   await work.locator('button[data-chart-mode="bubbles"]').click();assert(await work.locator('.bubble-chart').isVisible());
+  const treasuryBubble=work.locator('.agency-bubble[data-agency="TR"]');
+  await treasuryBubble.hover();await page.locator('#atlas-tooltip:not([hidden])').waitFor();
+  for(const value of ['Treasury','117,063','83,063','34,000','Select to explore'])assert((await page.locator('#atlas-tooltip').innerText()).includes(value),'Tooltip figure '+value);
+  const tipBounds=await page.locator('#atlas-tooltip').boundingBox();assert(tipBounds.x>=0&&tipBounds.x+tipBounds.width<=width,'Tooltip fits screen');
+  await treasuryBubble.focus();await page.keyboard.press('Escape');assert(await page.locator('#atlas-tooltip').isHidden());
+  const colors=await work.locator('.agency-bubble circle').evaluateAll(nodes=>new Set(nodes.map(n=>getComputedStyle(n).fill)).size);assert(colors>3,'Source units have distinct colors');
+  await work.locator('.chart-color-control select').selectOption('direction');assert.equal(await treasuryBubble.locator('circle').evaluate(n=>getComputedStyle(n).fill),'rgb(216, 80, 110)');
+  await work.locator('.chart-color-control select').selectOption('record');
+  const contained=await work.locator('.agency-bubble').evaluateAll(nodes=>nodes.every(e=>{const n=e.__data__;return n.x-n.radius>=0&&n.x+n.radius<=1100&&n.y-n.radius>=0&&n.y+n.radius<=650}));assert(contained,'Bubbles fit plot');
+
   await work.locator('button[data-chart-mode="ranked"]').click();
   assert.equal(await work.locator('.ranked-row:visible').count(),12);
   await work.locator('.ranked-more').click();assert.equal(await work.locator('.ranked-row:visible').count(),32);
@@ -56,7 +66,7 @@ const fs=require('node:fs/promises');
   await page.locator('#uses-panel').evaluate(e=>e.scrollIntoView({block:'start'}));await page.screenshot({path:'/tmp/federal-redesign-'+width+'-money.png'});await noOverflow();
   await page.click('#uses-panel .reading-link');assert(await page.locator('#funding-method-notes').getAttribute('open')!==null);
   assert.deepEqual(errors,[]);assert.deepEqual(failures,[]);
-  console.log(JSON.stringify({url,width,heroCount:expected.count,sourceValues:true,workforceDrilldown:true,rankedAndBubbles:true,csv:true,search:true,periods:true,fundingDrilldown:true,accountSources:true,moneyFlows:true,recipients:true,notes:true,noOverflow:true,errors,failures}));await page.close();
+  console.log(JSON.stringify({url,width,heroCount:expected.count,sourceValues:true,workforceDrilldown:true,rankedAndBubbles:true,tooltips:true,colorModes:true,csv:true,search:true,periods:true,fundingDrilldown:true,accountSources:true,moneyFlows:true,recipients:true,notes:true,noOverflow:true,errors,failures}));await page.close();
  }
  await browser.close();
 })().catch(error=>{console.error(error);process.exit(1)});

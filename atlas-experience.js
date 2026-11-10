@@ -44,7 +44,7 @@
     points.forEach((point,i)=>{
       const r=rows[i];
       const preview=()=>{document.getElementById('hero-map-preview').textContent=r.name+' · '+number(r.a)+' → '+number(r.b)+' employees · '+r.pct.toFixed(1)+'%';};
-      point.onmouseenter=preview;point.onfocus=preview;
+      point.onmouseenter=preview;point.onfocus=preview;window.AtlasChartTools?.attachTooltip(point,r,{people:true,endPeriod:'202609'});
       point.onclick=()=>{
         if(!document.querySelector('#workforce-app .agency-bubble')){
           location.href='?view=workforce&department='+encodeURIComponent(r.id)+'#project-views';return;
