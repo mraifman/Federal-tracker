@@ -34,7 +34,7 @@
     const before = all.reduce((sum, r) => sum + (r.values['202412'] ?? 0), 0);
     const after = all.reduce((sum, r) => sum + (r.values['202609'] ?? 0), 0);
     facts.innerHTML = '<div class="workforce-signal"><b>' + number(Math.abs(after-before)) + '</b><div><span>Net ' + (after < before ? 'fewer' : 'more') + ' reported non-defense employees</span><small>December 2024 → September 2026</small></div><a href="#method">What this measures ↗</a></div>';
-    const W=520,H=350,L=54,R=20,T=24,B=55;
+    const W=520,H=350,L=82,R=20,T=24,B=55;
     const min=-100,max=Math.max(125,Math.ceil(Math.max(...rows.map(r=>r.pct))/25)*25);
     const logMax=Math.ceil(Math.log10(Math.max(...rows.map(r=>r.a))));
     const x = n => L+(n-min)/(max-min)*(W-L-R);
@@ -43,6 +43,7 @@
     let svg='<svg class="hero-map-svg" viewBox="0 0 '+W+' '+H+'" role="group" aria-label="OPM agency workforce chart: percentage change versus baseline employee count"><desc>Each point is one agency with both observations. Horizontal position is percentage headcount change from December 2024 to September 2026. Vertical position is baseline headcount on a logarithmic scale. Defense is excluded. Use left and right arrow keys to explore agencies.</desc><defs><filter id="atlas-glow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="6"/></filter></defs>';
     for (const n of [-100,-50,0,50,100]) svg+='<line x1="'+x(n)+'" x2="'+x(n)+'" y1="'+T+'" y2="'+(H-B)+'" stroke="'+(n===0?'#b9c6ef66':'#b9c6ef15')+'" '+(n===0?'':'stroke-dasharray="2 5"')+'/><text x="'+x(n)+'" y="'+(H-B+23)+'" text-anchor="middle">'+(n>0?'+':'')+n+'%</text>';
     for (const n of [1,100,10000,1000000].filter(n=>Math.log10(n)<=logMax)) svg+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+y(n)+'" y2="'+y(n)+'" stroke="#b9c6ef15" stroke-dasharray="2 5"/><text x="'+(L-10)+'" y="'+(y(n)+3)+'" text-anchor="end">'+(n>=1e6?'1M':n>=1e3?n/1e3+'k':n)+'</text>';
+    svg+='<text class="hero-y-title" transform="translate(16 '+((T+H-B)/2)+') rotate(-90)" text-anchor="middle"><tspan x="0" dy="0">Employees in</tspan><tspan x="0" dy="1.25em">December 2024</tspan></text>';
     svg+='<text x="'+(W-R)+'" y="'+(H-8)+'" text-anchor="end">Staff change (%)</text>';
     for (const [i,r] of rows.entries()) {
       const color=r.b<r.a?'#f47797':r.b>r.a?'#75d6d7':'#acb4d6';
