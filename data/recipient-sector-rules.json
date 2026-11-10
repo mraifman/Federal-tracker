@@ -1,0 +1,65 @@
+{
+  "version": "fabs-explicit-codes-v2",
+  "retrieved_at_utc": "2026-11-10T13:57:21.621999+00:00",
+  "source": "https://github.com/fedspendingtransparency/usaspending-api/blob/1fcb25ff13af5c1600db95989f92d57c3b7014a1/usaspending_api/broker/management/sql/create_business_categories_functions.sql",
+  "source_snapshot": "data/raw/usaspending-business-categories.sql",
+  "source_sha256": "42d274fa65e2288218700b3cd3ddff8af69f5fe13840c8e06aed3286e714838e",
+  "field": "business_types_code",
+  "format": "Modern single-letter flags may be concatenated, e.g. HMX. Legacy numeric flags have two digits. Descriptions are never searched for sector keywords.",
+  "groups": {
+    "Individuals": [
+      "21",
+      "P"
+    ],
+    "Academia": [
+      "06",
+      "20",
+      "H",
+      "O",
+      "S",
+      "T",
+      "U",
+      "V"
+    ],
+    "Nonprofits": [
+      "12",
+      "M",
+      "N"
+    ],
+    "Government / public bodies": [
+      "00",
+      "01",
+      "02",
+      "04",
+      "05",
+      "11",
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "I",
+      "J",
+      "K",
+      "L"
+    ],
+    "Private sector": [
+      "22",
+      "23",
+      "Q",
+      "R"
+    ]
+  },
+  "multiple_flag_precedence": [
+    "Individuals",
+    "Academia",
+    "Nonprofits",
+    "Government / public bodies",
+    "Private sector"
+  ],
+  "reason": "Higher education must be explicitly reported; nonprofit definitions exclude higher education and are not positive academic evidence. Any individual flag wins for privacy. These mutually exclusive analytic groups are not official program-purpose assignments.",
+  "unknown": "Unmapped or missing classifications stay Unknown / unclassified.",
+  "contract_scope": "Contract grouping remains based on explicit reported boolean organization-type flags; the assistance keyword correction is not applied to contract descriptions."
+}

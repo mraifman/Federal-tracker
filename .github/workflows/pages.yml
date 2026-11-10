@@ -28,6 +28,7 @@ jobs:
       - run: python scripts/validate_allocations.py
       - run: python scripts/validate_legal_review.py
       - run: node tests/legal-review.cjs
+      - run: node tests/recipient-sectors.cjs
       - uses: actions/configure-pages@v5
       - run: |
           mkdir _site

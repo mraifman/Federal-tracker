@@ -38,6 +38,7 @@ jobs:
           python scripts/build_legal_review.py
           python scripts/validate_allocations.py
           python scripts/validate_legal_review.py
+          node tests/recipient-sectors.cjs
       - name: Commit validated data and historical snapshot
         run: |
           git config user.name "federal-atlas-bot"
