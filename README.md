@@ -43,9 +43,9 @@ GitHub Actions deploys validated static files. The scheduled legacy agency refre
 
 Run `python scripts/validate_legal_review.py`, `node tests/legal-review.cjs` and `python -m unittest discover -s scripts -p 'test_*.py'`. Sources, case histories and methodological notes are collected at the bottom of the main page.
 
-## Atlas interface
+## Interface
 
-The main page uses an original atlas design informed by [Meta-Moment](https://meta-moment.researchonresearch.org/topics): a navy data hero, slab-serif headings, short chart introductions, white research panels, and expandable source notes. Roboto and Roboto Slab are self-hosted with their licenses in `vendor/fonts/`; no external font service is required at runtime.
+The main page uses an original research-led design informed by [Meta-Moment](https://meta-moment.researchonresearch.org/topics): a navy data hero, slab-serif headings, short chart introductions, white research panels, and expandable source notes. Roboto and Roboto Slab are self-hosted with their licenses in `vendor/fonts/`; no external font service is required at runtime.
 
 The opening map reads the published OPM department records directly. Each point has a fixed data position: percentage headcount change on the horizontal axis and December 2024 headcount on a logarithmic vertical axis. Defense is excluded, and points require both observations plus a positive baseline. The map's net-change summary uses the same reported non-defense population as the workforce view; it is not a layoff count. The opening summary reports the net change in non-defense headcount; technical agency and account coverage counts are kept out of the headline.
 

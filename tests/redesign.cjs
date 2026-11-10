@@ -30,7 +30,7 @@ const fs=require('node:fs/promises');
   await work.locator('button[data-chart-mode="bubbles"]').click();assert(await work.locator('.bubble-chart').isVisible());
   const treasuryBubble=work.locator('.agency-bubble[data-agency="TR"]');
   await treasuryBubble.hover();await page.locator('#atlas-tooltip:not([hidden])').waitFor();
-  for(const value of ['Treasury','117,063','83,063','34,000','Select to explore'])assert((await page.locator('#atlas-tooltip').innerText()).includes(value),'Tooltip figure '+value);
+  for(const value of ['Treasury','117,063','83,063','34,000','Explore'])assert((await page.locator('#atlas-tooltip').innerText()).includes(value),'Tooltip figure '+value);
   const tipBounds=await page.locator('#atlas-tooltip').boundingBox();assert(tipBounds.x>=0&&tipBounds.x+tipBounds.width<=width,'Tooltip fits screen');
   await treasuryBubble.focus();await page.keyboard.press('Escape');assert(await page.locator('#atlas-tooltip').isHidden());
   const colors=await work.locator('.agency-bubble circle').evaluateAll(nodes=>new Set(nodes.map(n=>getComputedStyle(n).fill)).size);assert(colors>3,'Source units have distinct colors');

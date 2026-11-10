@@ -115,7 +115,7 @@ window.AtlasChartTools = {
       const source=document.createElement('small');source.textContent=people?'OPM · reported civilian headcount':'OMB SF 133 · reported discretionary amounts';
       const values=document.createElement('p');const end=(endPeriod||document.getElementById('end')?.value)==='202608'?'Aug 31, 2026':'Sep 30, 2026';values.textContent=(people?'Dec 31, 2024':'FY2024')+': '+exact(row.a)+' → '+(people?end:'FY2026')+': '+exact(row.b);
       const delta=document.createElement('p');delta.className='tip-delta';delta.textContent='Change: '+(row.a==null||row.b==null?'Not comparable':(row.b-row.a>0?'+':'')+exact(row.b-row.a))+(people?' employees':'');
-      const action=document.createElement('span');action.className='tip-action';action.textContent='Select to explore the source records →';
+      const action=document.createElement('span');action.className='tip-action';action.textContent='Explore →';
       tip.append(heading,source,values,delta,action);tip.hidden=false;target.setAttribute('aria-describedby','atlas-tooltip');move(event);
     };
     const hide=()=>{if(this.tooltipTarget===target){tip.hidden=true;target.removeAttribute('aria-describedby');}};
