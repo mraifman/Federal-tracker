@@ -125,24 +125,13 @@
   }
 
   root.innerHTML=
-  '<section class="repair-hero">'+
-   '<p class="eyebrow">The federal workforce · December 2024 → September 2026</p>'+
-   '<p class="eyebrow">A closer look at the source snapshots</p><h2>What changed behind the totals?</h2>'+
-   '<p class="lede">By September 2026, agencies reported <b>'+num(-p.net_change)+'</b> fewer non-defense employees than in December 2024 — a <b>'+Math.abs(pct).toFixed(0)+'%</b> decline. Explore staffing and funding changes, with payroll estimates by occupation and pay grade.</p>'+
-   '<div class="repair-tiles">'+
-    tile('Fewer federal employees',num(p.positions_to_restore),'Combined decreases across occupations and pay grades.','Non-defense · December 2024 to September 2026')+
-    tile('Modeled payroll benchmark · not a rebuilding budget',money(p.loaded_payroll)+'/yr','Existing model of baseline salaries for declining occupation and grade groups; see the methodology below.','At baseline pay, including benefits and overhead.')+
-    tile('Drop in federal funding',money(domestic),'Combined reductions across non-defense accounts.','Account decreases, before increases elsewhere · FY2024 to FY2026')+
-   '</div>'+
-  '</section>'+
   '<section class="service-people">'+
    '<h2>The people behind public services</h2>'+
    '<p class="section-lede">Changes in the inspectors, scientists and specialists who deliver public services. Most cards compare December 2024 with September 2026; † marks a same-season comparison. Select a role to explore its agency.</p>'+
    serviceGroups+
   '</section>'+
   '<section class="demolition">'+
-   '<h2>Where the workforce shrank</h2>'+
-   '<p class="section-lede">Compare losses by pay grade and agency. Select an agency to explore its record.</p>'+
+   '<h2>Agencies and experience hallowed out</h2>'+
    '<div class="demolition-grid">'+
     '<div class="grade-chart"><h3>Staffing changes, by pay grade</h3>'+
      '<p class="chart-note">Change by pay grade, outside defense. Headcount in GS-13 to 15 fell by <b>'+num(-senior)+'</b>.</p>'+
