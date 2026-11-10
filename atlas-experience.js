@@ -34,7 +34,7 @@
     const before = all.reduce((sum, r) => sum + (r.values['202412'] ?? 0), 0);
     const after = all.reduce((sum, r) => sum + (r.values['202609'] ?? 0), 0);
     facts.innerHTML = '<div class="workforce-signal"><b>' + number(Math.abs(after-before)) + '</b><div><span>Net ' + (after < before ? 'fewer' : 'more') + ' reported non-defense employees</span><small>December 2024 → September 2026</small></div><a href="#method">What this measures ↗</a></div>';
-    const W=520,H=350,L=82,R=20,T=24,B=55;
+    const W=520,H=350,L=104,R=20,T=24,B=55;
     const min=-100,max=Math.max(125,Math.ceil(Math.max(...rows.map(r=>r.pct))/25)*25);
     const logMax=Math.ceil(Math.log10(Math.max(...rows.map(r=>r.a))));
     const x = n => L+(n-min)/(max-min)*(W-L-R);
