@@ -49,3 +49,4 @@ body{font-size:17px;line-height:1.65}
 main>.hero-statement{color:var(--navy);margin:20px 0 26px;font-size:clamp(23px,2.05vw,30px)}main>.hero-statement .statement-build{color:#167a78}main>.hero-statement .statement-loss{color:#bd3156}@media(max-width:760px){main>.hero-statement{font-size:26px;margin:16px 4px 24px}}
 .hero-key{justify-content:center;text-align:center}
 html{scroll-padding-top:calc(var(--header-height,90px) + 16px)}.atlas-reading-nav{top:var(--header-height,90px)}
+#project-views,.atlas-reading-nav{display:none!important}.site-header nav a[aria-current]{border-bottom:3px solid var(--coral);color:var(--navy)}.site-header nav a{border-bottom-width:3px}

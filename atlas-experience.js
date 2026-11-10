@@ -8,6 +8,18 @@
   const signed = value => (value < 0 ? '−' : value > 0 ? '+' : '') + number(Math.abs(value));
   const header = document.querySelector('.site-header');
   if (header && window.ResizeObserver) new ResizeObserver(() => document.documentElement.style.setProperty('--header-height', header.getBoundingClientRect().height + 'px')).observe(header);
+  const updateHeaderSection = () => {
+    const notes = document.getElementById('page-notes');
+    const inNotes = notes && notes.getBoundingClientRect().top < innerHeight * .4;
+    const view = document.querySelector('[data-project-tab][aria-selected="true"]')?.dataset.projectTab || 'workforce';
+    document.querySelectorAll('.site-header nav a').forEach(a => {
+      const active = inNotes ? a.hash === '#page-notes' : a.dataset.exploreView === view;
+      if (active) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+    });
+  };
+  addEventListener('scroll', updateHeaderSection, { passive: true });
+  addEventListener('resize', updateHeaderSection);
+  updateHeaderSection();
   const map = document.getElementById('hero-map');
   const facts = document.getElementById('atlas-facts');
   const get = async name => {
@@ -47,11 +59,11 @@
       point.onmouseenter=preview;point.onfocus=preview;window.AtlasChartTools?.attachTooltip(point,r,{people:true,endPeriod:'202609'});
       point.onclick=()=>{
         if(!document.querySelector('#workforce-app .agency-bubble')){
-          location.href='?view=workforce&department='+encodeURIComponent(r.id)+'#project-views';return;
+          location.href='?view=workforce&department='+encodeURIComponent(r.id)+'#workforce-panel';return;
         }
         window.dispatchEvent(new CustomEvent('atlas-focus-workforce',{detail:{department:r.id}}));
         document.querySelector('[data-project-tab="workforce"]').click();
-        document.getElementById('project-views').scrollIntoView({behavior:'smooth'});
+        document.getElementById('workforce-panel').scrollIntoView({behavior:'smooth'});
       };
       point.onkeydown=event=>{
         if(event.key==='Enter'||event.key===' '){event.preventDefault();point.onclick();return;}

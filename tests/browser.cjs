@@ -13,7 +13,7 @@ const {chromium}=require('playwright');
   await page.locator('.agency-bubble[data-agency="TR|TR93"]').focus();await page.keyboard.press('Enter');
   if(!(await page.locator('.bubble-guide').innerText()).includes('Occupational series'.toUpperCase()))throw Error('Leaf roles not explicitly labeled');
   if(await page.locator('[role="dialog"]').count())throw Error('Unexpected workforce modal');
-  await page.click('[data-project-tab="uses"]');await page.locator('#outbound-kind').waitFor();
+  await page.click('.site-header [data-explore-view="uses"]');await page.locator('#outbound-kind').waitFor();
   await page.click('[data-show-grants]');await page.waitForFunction(()=>document.querySelector('#outbound-kind').value==='Grants / cooperative agreements');
   if(await page.locator('#outbound-panel tbody tr').count()<1)throw Error('Grant program allocation missing');
   await page.selectOption('#outbound-group','recipient');await page.locator('#outbound-panel tbody tr').first().waitFor();
