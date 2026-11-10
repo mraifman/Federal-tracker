@@ -14,7 +14,7 @@ const {chromium}=require('playwright');
   if(!(await page.locator('.bubble-guide').innerText()).includes('Occupational series'.toUpperCase()))throw Error('Leaf roles not explicitly labeled');
   if(await page.locator('[role="dialog"]').count())throw Error('Unexpected workforce modal');
   await page.click('.site-header [data-explore-view="uses"]');await page.locator('#outbound-kind').waitFor();
-  await page.click('[data-show-grants]');await page.waitForFunction(()=>document.querySelector('#outbound-kind').value==='Grants / cooperative agreements');
+  await page.selectOption('#outbound-kind','Grants / cooperative agreements');await page.waitForFunction(()=>document.querySelector('#outbound-kind').value==='Grants / cooperative agreements');
   if(await page.locator('#outbound-panel tbody tr').count()<1)throw Error('Grant program allocation missing');
   await page.selectOption('#outbound-group','recipient');await page.locator('#outbound-panel tbody tr').first().waitFor();
   if(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth))throw Error('Page overflow');

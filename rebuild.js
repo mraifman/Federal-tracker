@@ -110,7 +110,7 @@
    const dc=budget.discretionary.cuts.slice(0,6),dmax=Math.max(1,...dc.map(c=>Math.abs(c.amount)));
    const dbars=dc.map(c=>'<div class="disc-row"><span class="disc-name">'+esc(c.function)+'</span><span class="disc-track"><i style="width:'+(Math.abs(c.amount)/dmax*100)+'%"></i></span><span class="disc-val">−'+money(Math.abs(c.amount))+'</span></div>').join('');
    budgetSection='<section class="budget-structure">'+
-    '<h2>Discretionary spending fell from '+disc.share_a.toFixed(0)+'% to '+disc.share_b.toFixed(0)+'% of the budget</h2>'+
+    '<h2>Discretionary budget authority fell from '+disc.share_a.toFixed(0)+'% to '+disc.share_b.toFixed(0)+'% of the budget</h2>'+
     '<p class="section-lede">Congress’s annual funding decisions cover just <b>'+disc.share_b.toFixed(0)+'%</b> of the budget. Mandatory programs account for <b>'+mand.share_b.toFixed(0)+'%</b>; debt interest takes <b>'+ni.share_b.toFixed(0)+'%</b>.</p>'+
     '<div class="bud-stacks"><div class="bud-legend">'+budget.categories.map(c=>'<span><i style="background:'+color[c.name]+'"></i>'+esc(c.name)+'</span>').join('')+'</div>'+
      stackRow('FY2024','a',budget.total.a)+stackRow('FY2026','b',budget.total.b)+
@@ -118,7 +118,7 @@
     '<div class="budget-grid">'+
      '<div class="debt-panel"><h3>The national debt’s interest grew '+ni.pct.toFixed(0)+'% from 2024 to 2026</h3>'+
       '<p class="chart-note">Net interest more than quadrupled since 2016, past <b>'+money(ni.b)+'</b> — more than any discretionary function. Election-cycle years.</p>'+spark+'</div>'+
-     '<div class="disc-panel"><h3>The cuts Congress chose</h3>'+
+     '<div class="disc-panel"><h3>Largest discretionary reductions</h3>'+
       '<p class="chart-note">Largest discretionary cuts, FY2024 → FY2026.</p>'+dbars+'</div></div>'+
     '<p class="muted">'+esc(budget.basis)+'</p>'+
    '</section>';
@@ -133,16 +133,15 @@
   '<section class="demolition">'+
    '<h2>Agencies and experience hallowed out</h2>'+
    '<div class="demolition-grid">'+
-    '<div class="grade-chart"><h3>Staffing changes, by pay grade</h3>'+
-     '<p class="chart-note">Change by pay grade, outside defense. Headcount in GS-13 to 15 fell by <b>'+num(-senior)+'</b>.</p>'+
+    '<div class="grade-chart"><h3>Change in headcount by pay grade</h3>'+
      '<div class="grade-bars">'+gradeBars+'</div>'+
      '<div class="grade-axis">← fewer employees</div></div>'+
-    '<div class="agency-casualties"><h3>Agencies hollowed out</h3>'+cas+'</div>'+
+    '<div class="agency-casualties"><h3>Agencies that experienced the largest drop in headcount</h3>'+cas+'</div>'+
    '</div>'+
   '</section>'+
-  budgetSection+
-  cashSection+
-  '<p class="repair-cta">Explore the records behind the headlines ↓</p>';
+  '';
+  const fundingContext=document.getElementById('funding-context');
+  if(fundingContext){fundingContext.innerHTML=budgetSection;}
 
   // ---- footnotes collected at the very bottom of the page ----
   const methodDetails='<div class="repair-method">'+
@@ -159,7 +158,7 @@
   // ---- wire drill-downs ----
   root.querySelectorAll('[data-agency-code]').forEach(el=>el.addEventListener('click',()=>focusWorkforce(el.dataset.agencyCode)));
   root.querySelectorAll('[data-seasonal-note]').forEach(el=>{const go=e=>{e.stopPropagation();e.preventDefault();const note=document.getElementById('seasonal-note');if(note){note.closest('details').open=true;note.scrollIntoView({behavior:'smooth',block:'center'})}};el.addEventListener('click',go);el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')go(e)})});
-  root.querySelectorAll('[data-topic-code]').forEach(el=>el.addEventListener('click',()=>focusFunding(el.dataset.topicCode,el.dataset.metric)));
+  document.querySelectorAll('#repair-hero [data-topic-code],#funding-context [data-topic-code]').forEach(el=>el.addEventListener('click',()=>focusFunding(el.dataset.topicCode,el.dataset.metric)));
   root.querySelector('[data-explore-funding]')?.addEventListener('click',()=>focusFunding('all'));
   root.querySelectorAll('[data-opm]').forEach(el=>el.addEventListener('click',()=>{
     window.dispatchEvent(new CustomEvent('atlas-open-uses',{detail:{opmId:el.dataset.opm}}));
