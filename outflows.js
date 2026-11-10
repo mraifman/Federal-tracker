@@ -81,6 +81,7 @@ function grantFlow(){
   panel.querySelector('#flow-clear').onclick=()=>{chosen=null;draw();panel.querySelector('#flow-clear').focus({preventScroll:true});};
   panel.querySelector('.flow-scroll').hidden=!active.length;
   if(!active.length)detail.textContent='No positive flows in this view. Choose another year or comparison.';
+  const hero=document.createElement('section');hero.className='section-hero money-hero';hero.setAttribute('aria-label','Federal award flows overview');hero.innerHTML='<div class="section-hero-copy"><h2>Where did federal '+(grants?'grants':'awards')+' go?</h2><p>FY2024 → FY2026 · award obligations</p><a href="#award-notes">Sources ↗</a></div><div class="section-hero-visual"></div>';panel.prepend(hero);const visual=hero.querySelector('.section-hero-visual');for(const selector of ['.measure-badge','.flow-period','.flow-scroll','.flow-inspector'])visual.append(panel.querySelector(selector));
   window.AtlasNotes?.collect('flow-notes','Money flows · reading the chart',panel,':scope>.muted');
  }
  draw();
