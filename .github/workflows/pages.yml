@@ -1,4 +1,4 @@
-name: Deploy Progress 2028
+name: 'Deploy Horizon: 2029'
 on:
   push:
     branches: [main]

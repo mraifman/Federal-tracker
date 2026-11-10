@@ -19,10 +19,7 @@
       .map(r => ({id:r.id, name:title(r.name), a:r.values['202412'], b:r.values['202609'], pct:(r.values['202609']/r.values['202412']-1)*100}));
     const before = all.reduce((sum, r) => sum + (r.values['202412'] ?? 0), 0);
     const after = all.reduce((sum, r) => sum + (r.values['202609'] ?? 0), 0);
-    facts.innerHTML = '<div class="atlas-fact"><b>' + number(rows.length) + '</b>comparable agencies<small>OPM · non-defense departments &amp; agencies</small></div><div class="atlas-fact"><b>' + number(Math.abs(after-before)) + '</b>net ' + (after < before ? 'fewer' : 'more') + ' reported employees<small>December 2024 → September 2026 · not layoffs</small></div><div class="atlas-fact" id="account-coverage"><a href="#funding-panel" data-hero-funding>Explore budget accounts ↗</a><small>OMB SF 133 · source-by-source funding records</small></div>';
-    facts.querySelector('[data-hero-funding]').onclick = event => {
-      event.preventDefault();document.querySelector('[data-project-tab="funding"]').click();document.getElementById('project-views').scrollIntoView({behavior:'smooth'});
-    };
+    facts.innerHTML = '<div class="workforce-signal"><b>' + number(Math.abs(after-before)) + '</b><div><span>Net ' + (after < before ? 'fewer' : 'more') + ' reported non-defense employees</span><small>December 2024 → September 2026 · reported headcount, not layoffs</small></div><a href="#method">What this measures ↗</a></div>';
     const W=520,H=350,L=54,R=20,T=24,B=55;
     const min=-100,max=Math.max(125,Math.ceil(Math.max(...rows.map(r=>r.pct))/25)*25);
     const logMax=Math.ceil(Math.log10(Math.max(...rows.map(r=>r.a))));
@@ -40,6 +37,7 @@
       svg+='</g>';
     }
     map.innerHTML=svg+'</svg>';
+    const heroSvg=map.querySelector('svg');new ResizeObserver(entries=>{const width=entries[0].contentRect.width;if(width)heroSvg.style.setProperty('--hero-axis-size',Math.max(12,14*W/width)+'px')}).observe(map);
     const points=[...map.querySelectorAll('[data-hero-agency]')];
     points.forEach((point,i)=>{
       const r=rows[i];
@@ -62,11 +60,7 @@
         if(next!=null){event.preventDefault();points.forEach(p=>p.setAttribute('tabindex','-1'));points[next].setAttribute('tabindex','0');points[next].focus();}
       };
     });
-    // This is a source-record count, not the number of discretionary accounts.
-    get('authority-comparison').then(authority=>{
-      const node=document.getElementById('account-coverage');
-      node.innerHTML='<b>'+number(authority.records.length)+'</b>source budget accounts<small>OMB SF 133 · includes all funding types</small>';
-    }).catch(()=>{});
+
   }).catch(()=>{
     map.innerHTML='<p class="hero-loading">Workforce map unavailable. Explore the source views below.</p>';
     facts.innerHTML='<span class="atlas-fact">Source records and coverage are available in each view below.</span>';
