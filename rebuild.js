@@ -105,8 +105,8 @@
    const maxY=Math.max(...tr.map(d=>d.amount))*1.08,sx=i=>L+i/(tr.length-1)*(W-L-R),sy=v=>Tp+(1-v/maxY)*(H-Tp-Bm);
    const pts=tr.map((d,i)=>sx(i)+','+sy(d.amount)).join(' ');
    const spark='<svg viewBox="0 0 '+W+' '+H+'" class="interest-spark" role="img" aria-label="Net interest on the national debt by presidential-election year">'+
-     '<polyline points="'+pts+'" fill="none" stroke="#19354a" stroke-width="2.5"/>'+
-     tr.map((d,i)=>'<circle cx="'+sx(i)+'" cy="'+sy(d.amount)+'" r="3.5" fill="#19354a"/><text x="'+sx(i)+'" y="'+(H-9)+'" text-anchor="'+(i===0?'start':i===tr.length-1?'end':'middle')+'" font-size="10" fill="#5d727b">'+d.year+'</text><text x="'+sx(i)+'" y="'+(sy(d.amount)-8)+'" text-anchor="'+(i===tr.length-1?'end':i===0?'start':'middle')+'" font-size="10" font-weight="600" fill="#19354a">'+money(d.amount)+'</text>').join('')+'</svg>';
+     '<polyline points="'+pts+'" fill="none" stroke="#242151" stroke-width="2.5"/>'+
+     tr.map((d,i)=>'<circle cx="'+sx(i)+'" cy="'+sy(d.amount)+'" r="3.5" fill="#242151"/><text x="'+sx(i)+'" y="'+(H-9)+'" text-anchor="'+(i===0?'start':i===tr.length-1?'end':'middle')+'" font-size="10" fill="#5d727b">'+d.year+'</text><text x="'+sx(i)+'" y="'+(sy(d.amount)-8)+'" text-anchor="'+(i===tr.length-1?'end':i===0?'start':'middle')+'" font-size="10" font-weight="600" fill="#242151">'+money(d.amount)+'</text>').join('')+'</svg>';
    const dc=budget.discretionary.cuts.slice(0,6),dmax=Math.max(1,...dc.map(c=>Math.abs(c.amount)));
    const dbars=dc.map(c=>'<div class="disc-row"><span class="disc-name">'+esc(c.function)+'</span><span class="disc-track"><i style="width:'+(Math.abs(c.amount)/dmax*100)+'%"></i></span><span class="disc-val">−'+money(Math.abs(c.amount))+'</span></div>').join('');
    budgetSection='<section class="budget-structure">'+
@@ -127,11 +127,11 @@
   root.innerHTML=
   '<section class="repair-hero">'+
    '<p class="eyebrow">The federal workforce · December 2024 → September 2026</p>'+
-   '<h1>To <span class="hl-build">build back better</span>, we must first know what was <span class="hl-demo">demolished</span>.</h1>'+
+   '<p class="eyebrow">A closer look at the source snapshots</p><h2>What changed behind the totals?</h2>'+
    '<p class="lede">By September 2026, agencies reported <b>'+num(-p.net_change)+'</b> fewer non-defense employees than in December 2024 — a <b>'+Math.abs(pct).toFixed(0)+'%</b> decline. Explore staffing and funding changes, with payroll estimates by occupation and pay grade.</p>'+
    '<div class="repair-tiles">'+
     tile('Fewer federal employees',num(p.positions_to_restore),'Combined decreases across occupations and pay grades.','Non-defense · December 2024 to September 2026')+
-    tile('Operational funding needed to reinstate the lost workforce',money(p.loaded_payroll)+'/yr','Estimated annual payroll to restore the lost positions at their former pay grades.','At baseline pay, including benefits and overhead.')+
+    tile('Modeled payroll benchmark · not a rebuilding budget',money(p.loaded_payroll)+'/yr','Existing model of baseline salaries for declining occupation and grade groups; see the methodology below.','At baseline pay, including benefits and overhead.')+
     tile('Drop in federal funding',money(domestic),'Combined reductions across non-defense accounts.','Account decreases, before increases elsewhere · FY2024 to FY2026')+
    '</div>'+
   '</section>'+
