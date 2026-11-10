@@ -29,7 +29,7 @@ window.AtlasChartTools = {
       this.attachTooltip(g,r,{people});this.attachTooltip(button,r,{people});g.querySelector('title')?.remove();
     }
     if(rows.length>8){const all=document.createElement('button');all.className='ledger-more';all.textContent='Show all '+rows.length+' plotted records';all.onclick=()=>{ledger.querySelectorAll('.ledger-row').forEach(r=>r.hidden=false);all.remove()};ledger.append(all);}
-    const colorControl=toolbar.querySelector('select');const colorKey=svg.dataset.colorMode||'record';
+    const colorControl=toolbar.querySelector('select');const colorKey=svg.dataset.colorMode||(people?'record':'direction');
     const direction=r=>r.a==null||r.b==null?'#8894b0':r.b<r.a?'#d8506e':r.b>r.a?'#34858c':'#8894b0';
     const setColor=value=>{
       svg.dataset.colorMode=value;colorControl.value=value;
@@ -45,9 +45,10 @@ window.AtlasChartTools = {
     const list=document.createElement('div');list.className='atlas-ranked';
     const heading=document.createElement('div');heading.className='ranked-head';heading.innerHTML='<span>Largest absolute changes · select to explore</span><span>← Decrease · Increase →</span>';list.append(heading);
     const max=Math.max(1,...rows.filter(({r})=>r.a!=null&&r.b!=null).map(({r})=>Math.abs(r.b-r.a)));
+    const rankedLimit=!people&&matchMedia('(max-width:650px)').matches?5:12;
     for(const [index,{g,r}] of rows.entries()){
       const delta=r.a==null||r.b==null?null:r.b-r.a;
-      const button=document.createElement('button');button.className='ranked-row';button.hidden=index>=12;button.type='button';button.dataset.rankedId=r.id;
+      const button=document.createElement('button');button.className='ranked-row';button.hidden=index>=rankedLimit;button.type='button';button.dataset.rankedId=r.id;
       const name=document.createElement('span');name.className='ranked-label';name.textContent=title(r.name);
       const track=document.createElement('span');track.className='ranked-track';track.setAttribute('aria-hidden','true');
       const bar=document.createElement('i');bar.style.width=(delta==null?0:Math.abs(delta)/max*50)+'%';bar.className=delta>0?'gain':'';track.append(bar);
@@ -56,13 +57,14 @@ window.AtlasChartTools = {
       button.append(name,track,value);button.onclick=()=>g.dispatchEvent(new MouseEvent('click',{bubbles:true}));
       button.onfocus=()=>g.dispatchEvent(new Event('mouseenter'));list.append(button);
     }
-    if(rows.length>12){const more=document.createElement('button');more.className='outline ranked-more';more.type='button';more.textContent='Show all '+rows.length+' chart records';more.onclick=()=>{list.querySelectorAll('.ranked-row').forEach(r=>r.hidden=false);more.remove()};list.append(more);}
+    if(rows.length>rankedLimit){const more=document.createElement('button');more.className='outline ranked-more';more.type='button';more.textContent='Show all '+rows.length+' chart records';more.onclick=()=>{list.querySelectorAll('.ranked-row').forEach(r=>r.hidden=false);more.remove()};list.append(more);}
     if(!rows.length){const p=document.createElement('p');p.textContent='No comparable records in this selection.';list.append(p);}
     host.append(list);
     const reading=document.createElement('p');reading.className='chart-reading';reading.textContent='Same source records in both views. '+(people?'Employee counts':'Dollar amounts')+' are not normalized across drilldown levels. Circle position is layout only. All matching records remain in the source table and full export.';host.append(reading);
     this.tables(host.closest('[data-project-panel]'));
     const setMode=next=>{
       host.dataset.chartMode=next;svg.dataset.chartMode=next;svg.style.display=next==='bubbles'?'':'none';stage.hidden=next!=='bubbles';colorControl.parentElement.hidden=next!=='bubbles';list.hidden=next!=='ranked';
+      if(next==='bubbles'&&!people){const scene=d3.select(svg);this.bubbleLabels(scene.selectAll('.allocation-name'),d=>d);scene.selectAll('.allocation-value').attr('y',function(d){return d3.select(this.parentNode).select('.allocation-name').selectAll('tspan').size()>2?42:d.radius>45?27:15;});}
       toolbar.querySelectorAll('[data-chart-mode]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.chartMode===next)));
     };
     toolbar.querySelectorAll('[data-chart-mode]').forEach(button=>button.onclick=()=>setMode(button.dataset.chartMode));setMode(mode);
@@ -85,13 +87,13 @@ window.AtlasChartTools = {
     selection.each(function(d){
       const row=reader(d),radius=d.radius,text=d3.select(this).text('');
       if(radius<28)return;
-      const label=api.shortLabel(row),width=radius*1.65;
-      let size=radius>85?24:radius>55?20:16,lines=[];
+      const label=api.shortLabel(row),width=radius*1.72,maxLines=radius>55?3:radius>45?2:1;
+      let size=radius>85?26:radius>55?22:17,lines=[];
       const probe=text.append('tspan');
       function wrap(){lines=[];let line='';for(const word of label.split(/\s+/)){const trial=line?line+' '+word:word;probe.text(trial);if(probe.node().getComputedTextLength()>width&&line){lines.push(line);line=word}else line=trial}if(line)lines.push(line);}
-      for(;size>=12;size--){text.style('font-size',size+'px');wrap();if(lines.length<=(radius>45?2:1)&&lines.every(line=>{probe.text(line);return probe.node().getComputedTextLength()<=width}))break;}
-      lines=lines.slice(0,radius>45?2:1);if(lines.join(' ')!==label){let last=lines.at(-1)||label;probe.text(last+'…');while(last.length>1&&probe.node().getComputedTextLength()>width){last=last.slice(0,-1);probe.text(last+'…')}lines[lines.length-1]=last+'…';}
-      probe.remove();text.attr('y',null);text.selectAll('tspan').data(lines).join('tspan').attr('x',0).attr('y',(line,i)=>lines.length===2?-22+i*(size+1):-9).text(line=>line);
+      for(;size>=12;size--){text.style('font-size',size+'px');wrap();if(lines.length<=maxLines&&lines.every((line,i)=>{const y=lines.length>1?-12-(lines.length-1)*(size+1)/2+i*(size+1):-10,edge=Math.max(Math.abs(y-size*.8),Math.abs(y+size*.2)),chord=2*Math.sqrt(Math.max(0,radius*radius-edge*edge))*.94;probe.text(line);return probe.node().getComputedTextLength()<=Math.min(width,chord)}))break;}
+      lines=lines.slice(0,maxLines);if(lines.join(' ')!==label){let last=lines.at(-1)||label;probe.text(last+'…');while(last.length>1&&probe.node().getComputedTextLength()>width){last=last.slice(0,-1);probe.text(last+'…')}lines[lines.length-1]=last+'…';}
+      probe.remove();text.attr('y',null);text.selectAll('tspan').data(lines).join('tspan').attr('x',0).attr('y',(line,i)=>lines.length>1?-12-(lines.length-1)*(size+1)/2+i*(size+1):-10).text(line=>line);
     });
   },
   recordColor(id){

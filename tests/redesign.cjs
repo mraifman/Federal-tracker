@@ -59,12 +59,12 @@ const fs=require('node:fs/promises');
   await page.selectOption('#uses-agency','NIH');await page.locator('#outbound-kind').waitFor();
   assert(!(await page.locator('#uses-app').innerText()).includes('Reported workforce'));
   assert(await page.locator('#outlays-app').isVisible());
-  await page.locator('#grant-flow svg path[role="button"]').first().waitFor();
-  await page.locator('#grant-flow svg path[role="button"]').first().focus();await page.keyboard.press('Enter');assert.equal(await page.locator('#outbound-group').inputValue(),'program');
+  await page.locator('#grant-flow [data-flow-sector]').first().waitFor();
+  await page.locator('#grant-flow [data-flow-sector]').first().focus();await page.keyboard.press('Enter');assert.equal(await page.locator('#outbound-group').inputValue(),'program');
   await page.locator('#outbound-bubbles .award-mark').first().click();await page.waitForFunction(()=>document.getElementById('outbound-group')?.value==='recipient');
   await page.locator('#outbound-bubbles .award-mark').first().waitFor();
   await page.locator('#uses-panel').evaluate(e=>e.scrollIntoView({block:'start'}));await page.screenshot({path:'/tmp/federal-redesign-'+width+'-money.png'});await noOverflow();
-  await page.click('#uses-panel .section-hero-copy a');assert(await page.locator('#award-notes').getAttribute('open')!==null);
+  await page.click('#uses-panel .flow-footer a[href="#award-notes"]');assert(await page.locator('#award-notes').getAttribute('open')!==null);
   assert.deepEqual(errors,[]);assert.deepEqual(failures,[]);
   console.log(JSON.stringify({url,width,heroCount:expected.count,sourceValues:true,workforceDrilldown:true,rankedAndBubbles:true,tooltips:true,colorModes:true,csv:true,search:true,periods:true,fundingDrilldown:true,accountSources:true,moneyFlows:true,recipients:true,notes:true,noOverflow:true,errors,failures}));await page.close();
  }
