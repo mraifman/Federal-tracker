@@ -4,12 +4,13 @@ const {chromium}=require('playwright');
  const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',headless:true,args:['--no-sandbox']});
  for(const viewport of [{width:1280,height:1000},{width:390,height:844}]){
   const page=await browser.newPage({viewport}),errors=[];page.on('pageerror',e=>errors.push(e.message));
-  await page.goto(process.argv[2]||'http://127.0.0.1:8000/');await page.waitForSelector('.agency-bubble');
-  if(!(await page.locator('.headline-stats').innerText()).includes('185,816'))throw Error('Non-defense default mismatch');
+  await page.goto(process.argv[2]||'http://127.0.0.1:8000/');await page.waitForSelector('.agency-bubble',{state:'attached'});
+  if(!(await page.locator('#workforce-app .headline-stats').innerText()).includes('185,816'))throw Error('Non-defense default mismatch');
   await page.click('[data-focus="TR"]');
-  for(const n of ['117,063','83,063','34,000'])if(!(await page.locator('.headline-stats').innerText()).includes(n))throw Error('Treasury mismatch '+n);
+  for(const n of ['117,063','83,063','34,000'])if(!(await page.locator('#workforce-app .headline-stats').innerText()).includes(n))throw Error('Treasury mismatch '+n);
   if(await page.locator('.agency-bubble').count()<2)throw Error('Agency did not default to internal breakdown');
-  await page.click('.agency-bubble[data-agency="TR|TR93"]');
+  await page.locator('#workforce-app button[data-chart-mode="bubbles"]').click();
+  await page.locator('.agency-bubble[data-agency="TR|TR93"]').focus();await page.keyboard.press('Enter');
   if(!(await page.locator('.bubble-guide').innerText()).includes('Occupational series'.toUpperCase()))throw Error('Leaf roles not explicitly labeled');
   if(await page.locator('[role="dialog"]').count())throw Error('Unexpected workforce modal');
   await page.click('[data-project-tab="uses"]');await page.locator('#outbound-kind').waitFor();

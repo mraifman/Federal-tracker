@@ -42,3 +42,22 @@ GitHub Actions deploys validated static files. The scheduled legacy agency refre
 `python scripts/build_legal_review.py` screens the complete displayed program set for large reductions, negative net obligations and missing-year transactions. It generates `data/legal-review-queue.json`; this is a review queue, not an automated litigation search. The daily refresh regenerates financial flags and overdue-review notices but never updates a case’s `checked_on` date or verifies a court finding. Reviewers must read new orders, stays and appeals and update sources and scope explicitly. A documented search with no case identified is distinct from a record not reviewed.
 
 Run `python scripts/validate_legal_review.py`, `node tests/legal-review.cjs` and `python -m unittest discover -s scripts -p 'test_*.py'`. Sources, case histories and methodological notes are collected at the bottom of the main page.
+
+## Atlas interface
+
+The main page uses an original atlas design informed by [Meta-Moment](https://meta-moment.researchonresearch.org/topics): a navy data hero, slab-serif headings, short chart introductions, white research panels, and expandable source notes. Roboto and Roboto Slab are self-hosted with their licenses in `vendor/fonts/`; no external font service is required at runtime.
+
+The opening map reads the published OPM department records directly. Each point has a fixed data position: percentage headcount change on the horizontal axis and December 2024 headcount on a logarithmic vertical axis. Defense is excluded, and points require both observations plus a positive baseline. The map's net-change summary uses the same reported non-defense population as the workforce view; it is not a layoff count. The budget-account headline counts all source records in `authority-comparison.json`, not just discretionary accounts.
+
+Workforce and funding charts offer **Bubbles** and **Ranked changes** over the same bound chart records. Mobile starts with ranked changes, initially showing 12 rows with a control to show the complete plotted subset. The existing full tables and exports retain all matching records. The display choice survives drilldowns, and source tables expand in place. Chart-only CSV exports identify their subset and units. Normal wheel scrolling passes through bubble charts; Ctrl/Command-scroll zooms, dragging pans, and double-click resets the allocation plot.
+
+`atlas.css` supplies the design; `atlas-experience.js` draws the source-bound hero; `atlas-chart-tools.js` supplies shared chart controls. Both deployment workflows include these files, the icon and self-hosted fonts. Existing source datasets, ingestion, financial calculations, benefit exclusions and legal review are unchanged by the redesign.
+
+Browser verification (requires Playwright and Chromium):
+
+```sh
+node tests/redesign.cjs http://127.0.0.1:8000/
+node tests/browser.cjs http://127.0.0.1:8000/
+```
+
+The redesign suite checks desktop and mobile source figures, hero coverage, chart modes, workforce/occupation drilldowns, search and periods, CSV contents, funding/account drilldowns, money-flow selection, recipients, expandable notes, missing assets, JavaScript errors and page overflow. Set `CHROMIUM_PATH` if Chromium is installed at another path. Pass the published site URL to run the same suite against production.

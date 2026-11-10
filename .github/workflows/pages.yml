@@ -2,7 +2,7 @@ name: Deploy Progress 2028
 on:
   push:
     branches: [main]
-    paths: ['index.html', 'simple.html', 'needs.css', 'needs.js', 'story.js', 'tracker.js', 'tracker.css', 'workforce.js', 'workforce.css', 'research.js', 'research.css', 'atlas-bubbles.js', 'outflows.js', 'legal-review.js', 'notes.js', 'rebuild.js', 'rebuild.css', 'vendor/**', 'data/**', 'scripts/validate_change_data.py', '.github/workflows/pages.yml']
+    paths: ['favicon.svg', 'atlas.css', 'atlas-experience.js', 'atlas-chart-tools.js', 'index.html', 'simple.html', 'needs.css', 'needs.js', 'story.js', 'tracker.js', 'tracker.css', 'workforce.js', 'workforce.css', 'research.js', 'research.css', 'atlas-bubbles.js', 'outflows.js', 'legal-review.js', 'notes.js', 'rebuild.js', 'rebuild.css', 'vendor/**', 'data/**', 'scripts/validate_change_data.py', '.github/workflows/pages.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -31,7 +31,7 @@ jobs:
       - uses: actions/configure-pages@v5
       - run: |
           mkdir _site
-          cp index.html simple.html grant-change-examples.html workforce.js workforce.css research.js research.css atlas-bubbles.js notes.js legal-review.js outflows.js rebuild.js rebuild.css _site/
+          cp favicon.svg atlas.css atlas-experience.js atlas-chart-tools.js index.html simple.html grant-change-examples.html workforce.js workforce.css research.js research.css atlas-bubbles.js notes.js legal-review.js outflows.js rebuild.js rebuild.css _site/
           cp -r data vendor _site/
       - uses: actions/upload-pages-artifact@v3
         with:
