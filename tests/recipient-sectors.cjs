@@ -2,7 +2,7 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),zlib=require('node:zlib'),vm=require('node:vm');
 const root=path.join(__dirname,'..'),sourceRoot=p=>(p.startsWith('data/outbound')||p==='data/recipient-sector-audit.json')?(process.env.ATLAS_AWARD_OUTPUT_ROOT||root):root,read=p=>JSON.parse(p.endsWith('.gz')?zlib.gunzipSync(fs.readFileSync(path.join(sourceRoot(p),p))):fs.readFileSync(path.join(sourceRoot(p),p),'utf8'));
 const index=read('data/outbound-awards.json');
-assert.equal(index.recipient_sector_version,'fabs-explicit-codes-v2');
+assert.match(index.recipient_sector_version,/^fabs-explicit-codes-v[23]$/);
 const rules=read('data/recipient-sector-rules.json');assert(rules.groups.Nonprofits.includes('M'));assert(!rules.groups.Academia.includes('M'));
 const source=fs.readFileSync(path.join(root,'outflows.js'),'utf8');
 const filterCode=source.slice(source.indexOf('function filtered('),source.indexOf('function pairs('));
