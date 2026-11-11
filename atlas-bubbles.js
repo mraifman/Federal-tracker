@@ -43,7 +43,7 @@ window.AtlasBubbles._zoom=function(svg,layer){
 window.AtlasBubbles.externalLabels=function(svg,nodes,options){
  const layer=svg.select('g.atlas-zoom');layer.selectAll('.bubble-callouts,.bubble-leaders').remove();
  const [, ,width,height]=svg.attr('viewBox').split(/\s+/).map(Number);
- const aliases={'community development & disaster relief':'Community Dev. & Disaster Relief','commerce & housing credit':'Commerce & Housing Credit','social security':'Social Security','general government':'General Govt.','administration of justice':'Justice','veterans benefits and services':'Veterans Benefits','veterans benefits & services':'Veterans Benefits','general science, space, and technology':'Science & Space','science, space & technology':'Science & Space','education, training & social services':'Education & Social Services'};
+ const aliases={'community development & disaster relief':'Community Dev. & Disaster Relief','commerce & housing credit':'Commerce & Housing Credit','social security':'Social Security','general government':'General Govt.','administration of justice':'Law Enforcement & Justice','law enforcement & justice':'Law Enforcement & Justice','veterans benefits and services':'Veterans Benefits','veterans benefits & services':'Veterans Benefits','general science, space, and technology':'Science & Space','science, space & technology':'Science & Space','education, training & social services':'Education & Social Services'};
  const labels=layer.append('g').attr('class','bubble-callouts'),leaders=layer.insert('g','.bubble-callouts').attr('class','bubble-leaders');
  const placed=[],segments=[],probe=labels.append('text').attr('class','bubble-callout-label');
  const measure=s=>{probe.text(s);return probe.node().getComputedTextLength()||s.length*8.5;};

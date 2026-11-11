@@ -8,9 +8,12 @@
       "agency": "Department of Homeland Security",
       "bureau": "U.S. Customs and Border Protection",
       "account": "Operations and Support",
-      "candidates": ["350", "750"],
+      "candidates": [
+        "350",
+        "750"
+      ],
       "topic_code": "750",
-      "topic": "Justice",
+      "topic": "Law enforcement & justice",
       "reason": "CBP's operating account funds border security, customs and immigration enforcement; agricultural inspection is a small share. Primary function: federal law enforcement activities (751)."
     },
     {
@@ -18,7 +21,10 @@
       "agency": "Department of the Treasury",
       "bureau": "Internal Revenue Service",
       "account": "Enforcement",
-      "candidates": ["750", "800"],
+      "candidates": [
+        "750",
+        "800"
+      ],
       "topic_code": "800",
       "topic": "General government",
       "reason": "Tax enforcement is central fiscal operations (803), not the administration of criminal justice."
@@ -28,7 +34,11 @@
       "agency": "Department of Homeland Security",
       "bureau": "United States Coast Guard",
       "account": "Operations and Support",
-      "candidates": ["050", "300", "400"],
+      "candidates": [
+        "050",
+        "300",
+        "400"
+      ],
       "topic_code": "400",
       "topic": "Transportation",
       "reason": "OMB places most Coast Guard operations under water transportation (403); defense and environmental missions are secondary shares."
@@ -38,7 +48,10 @@
       "agency": "Department of Energy",
       "bureau": "Energy Programs",
       "account": "Nuclear Energy",
-      "candidates": ["050", "270"],
+      "candidates": [
+        "050",
+        "270"
+      ],
       "topic_code": "270",
       "topic": "Energy",
       "reason": "Civilian nuclear energy research and development is energy supply (271), not atomic energy defense activities."
