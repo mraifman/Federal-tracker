@@ -1,6 +1,6 @@
 {
   "source": "https://api.usaspending.gov/api/v2/references/toptier_agencies/",
-  "retrieved_at_utc": "2026-11-11T05:16:20.311320+00:00",
+  "retrieved_at_utc": "2026-11-11T13:32:23.351715+00:00",
   "coverage": "USAspending top-tier agencies; not all federal entities",
   "count": 111,
   "agencies": [
@@ -205,11 +205,11 @@
         "congressional_justification_url": "https://www.heritageabroad.gov/cj",
         "active_fy": "2026",
         "active_fq": "4",
-        "outlay_amount": 0.0,
-        "obligated_amount": 0.0,
-        "budget_authority_amount": 0.0,
+        "outlay_amount": 432396.7,
+        "obligated_amount": 352012.36,
+        "budget_authority_amount": 1171798.79,
         "current_total_budget_authority_amount": 16181198695809.91,
-        "percentage_of_total_budget_authority": 0.0,
+        "percentage_of_total_budget_authority": 7.241730430659843e-08,
         "agency_slug": "commission-for-the-preservation-of-americas-heritage-abroad"
       }
     },
