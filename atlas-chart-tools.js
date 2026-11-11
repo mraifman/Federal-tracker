@@ -113,7 +113,7 @@ window.AtlasChartTools = {
     });
   },
   recordColor(id){
-    const colors=['#bd3e7b','#6254ce','#267d78','#217e96','#aa3154','#ad5626','#3866b0','#7d3fc0','#9e4866','#48773e','#875735'];
+    const colors=['#bd3e7b','#2463a6','#267d78','#217e96','#aa3154','#ad5626','#3866b0','#185d9e','#9e4866','#48773e','#875735'];
     let hash=0;for(const c of String(id))hash=(hash*31+c.charCodeAt(0))>>>0;
     return colors[hash%colors.length];
   },
