@@ -107,8 +107,8 @@
    const bars=(list,cls)=>{const mx=Math.max(1,...list.map(c=>Math.abs(c.amount)));return list.map(c=>'<div class="disc-row '+cls+'"><span class="disc-name">'+esc(c.topic)+'</span><span class="disc-track"><i class="'+cls+'" style="width:'+(Math.abs(c.amount)/mx*100)+'%"></i></span><span class="disc-val">'+(c.amount<0?'−':'+')+money(Math.abs(c.amount))+'</span></div>').join('')};
    const pct=(choices.b/choices.a-1)*100,cuts=ch.cuts.filter(c=>Math.abs(c.amount)>=1e9),adds=ch.adds.filter(c=>c.amount>=1e9);
    budgetSection='<section class="budget-structure">'+
-    '<h2>Entitlement spending takes a growing share of federal resources</h2>'+
-    '<p class="section-lede">Entitlement benefit programs — Social Security, Medicare, Medicaid and similar — required <b>'+ent.share_b.toFixed(0)+'%</b> of what the government committed in FY2026, up from '+ent.share_a.toFixed(0)+'% in FY2024, and interest on the debt another <b>'+ni.share_b.toFixed(0)+'%</b>. That leaves <b>'+choices.share_b.toFixed(0)+'%</b> for the funding choices this site examines, down from '+choices.share_a.toFixed(0)+'%.</p>'+
+    '<h2>Entitlement spending requires a growing share of resources</h2>'+
+    '<p class="section-lede">Entitlement benefit programs — Social Security, Medicare, Medicaid and similar — required <b>'+ent.share_b.toFixed(0)+'%</b> of what the government committed in FY2026, up from '+ent.share_a.toFixed(0)+'% in FY2024.</p>'+
     '<div class="bud-stacks"><div class="bud-legend">'+cats.map(c=>'<span><i style="background:'+color[c.name]+'"></i>'+esc(c.name)+'</span>').join('')+'</div>'+
      stackRow('FY2024','a')+stackRow('FY2026','b')+
      '<p class="muted">Funding choices: '+money(choices.a)+' to '+money(choices.b)+' committed ('+(pct>0?'+':'')+pct.toFixed(0)+'%); entitlements and interest grew faster.</p></div>'+
