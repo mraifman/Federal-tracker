@@ -3,20 +3,27 @@
 Federal code definitions: compile_fabs_business_categories in Treasury's
 create_business_categories_functions.sql (pinned source in data/raw).
 Concatenated modern codes and legacy two-digit codes are both supported.
+v3 splits public bodies into explicit government levels and separates
+non-domestic entities; everything else is unchanged from v2.
 """
 import re
-VERSION = 'fabs-explicit-codes-v2'
+VERSION = 'fabs-explicit-codes-v3'
 SOURCE = 'https://github.com/fedspendingtransparency/usaspending-api/blob/1fcb25ff13af5c1600db95989f92d57c3b7014a1/usaspending_api/broker/management/sql/create_business_categories_functions.sql'
 GROUPS = {
  'Individuals': {'P','21'},
  'Academia': {'H','O','S','T','U','V','06','20'},
  'Nonprofits': {'M','N','12'},
- 'Government / public bodies': set('ABCDEFGIJKL') | {'00','01','02','04','05','11'},
+ 'Tribal governments': {'I','J','K','11'},
+ 'State governments': {'A','F','00'},            # F = U.S. territory or possession
+ 'Local governments': {'B','C','D','G','01','02','04','05'},  # county, city/township, special district, school district
+ 'Public authorities & other public bodies': {'L','E'},        # housing authorities, regional organizations
  'Private sector': {'Q','R','22','23'},
+ 'Foreign entities': {'W'},                        # non-domestic (non-US) entity, type unspecified
 }
+GOVERNMENT = ['Tribal governments','State governments','Local governments','Public authorities & other public bodies','Federal government','Foreign governments']
 # Explicit higher-education codes override nonprofit/public-body flags.
 # Any individual flag takes precedence to prevent publication of personal names.
-PRIORITY = ['Individuals','Academia','Nonprofits','Government / public bodies','Private sector']
+PRIORITY = ['Individuals','Academia','Nonprofits','Tribal governments','State governments','Local governments','Public authorities & other public bodies','Private sector','Foreign entities']
 
 def codes(value):
     value = str(value or '').strip().upper()

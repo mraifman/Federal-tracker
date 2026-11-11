@@ -15,7 +15,7 @@ for parent,periods in totals.items():
 print('Validated all occupational-series counts against their source organizational totals.')
 p=ROOT/'data/outbound-awards.json'
 if not p.exists():raise SystemExit('Complete external award export is required.')
-i=read('data/outbound-awards.json');assert i.get('recipient_sector_version')=='fabs-explicit-codes-v2', 'Recipient sectors require explicit-code rebuild'
+i=read('data/outbound-awards.json');assert i.get('recipient_sector_version') in ('fabs-explicit-codes-v2','fabs-explicit-codes-v3'), 'Recipient sectors require explicit-code rebuild'
 audit=read(i['sector_audit']);assert audit['version']==i['recipient_sector_version']
 audit_counts=collections.Counter()
 for row in audit['rows']:

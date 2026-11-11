@@ -41,9 +41,15 @@ def sector(t,kind):
  else:
   out=pc.if_else(true(t,'for_profit_organization'),'Private sector',out)
   out=pc.if_else(pc.or_(true(t,'nonprofit_organization'),true(t,'other_not_for_profit_organization')),'Nonprofits',out)
-  government=true(t,'us_federal_government')
-  for field in ['us_state_government','us_local_government','us_tribal_government','foreign_government','us_government_entity','school_district_local_government','airport_authority','housing_authorities_public_tribal','port_authority','transit_authority']:government=pc.or_(government,true(t,field))
-  out=pc.if_else(government,'Government / public bodies',out)
+  out=pc.if_else(true(t,'foreign_government'),'Foreign governments',out)
+  authority=true(t,'us_government_entity')
+  for field in ['airport_authority','housing_authorities_public_tribal','port_authority','transit_authority']:authority=pc.or_(authority,true(t,field))
+  out=pc.if_else(authority,'Public authorities & other public bodies',out)
+  out=pc.if_else(pc.or_(true(t,'us_local_government'),true(t,'school_district_local_government')),'Local governments',out)
+  out=pc.if_else(true(t,'us_state_government'),'State governments',out)
+  out=pc.if_else(true(t,'us_tribal_government'),'Tribal governments',out)
+  out=pc.if_else(true(t,'us_federal_government'),'Federal government',out)
+  # Government levels are assigned above from the reported boolean flags; no combined fallback.
   out=pc.if_else(pc.or_(true(t,'educational_institution'),true(t,'private_university_or_college')),'Academia',out)
  return out
 
@@ -105,11 +111,16 @@ def export_all(receipts):
  print('Transaction identifiers checked; materializing deduplicated records.',flush=True)
  if con.execute("SELECT count(*) FROM information_schema.views WHERE table_name='tx'").fetchone()[0]:con.execute('DROP VIEW tx')
  con.execute('CREATE OR REPLACE TABLE tx AS SELECT * FROM raw QUALIFY row_number() OVER(PARTITION BY year,source_kind,transaction_key ORDER BY transaction_key)=1')
+ # Conservative identity evidence: an unclassified record inherits a sector only when the same UEI reports exactly one sector elsewhere in these archives.
+ con.execute("CREATE OR REPLACE TABLE recipient_identity AS SELECT recipient_id,min(sector) sector FROM tx WHERE recipient_id NOT IN ('','INDIVIDUALS') AND sector NOT IN ('Unknown / unclassified','Individuals') GROUP BY recipient_id HAVING count(DISTINCT sector)=1")
+ inherited=con.execute("SELECT count(*),coalesce(sum(amount),0) FROM tx t JOIN recipient_identity i USING(recipient_id) WHERE t.sector='Unknown / unclassified'").fetchone()
+ con.execute("UPDATE tx SET sector=i.sector FROM recipient_identity i WHERE tx.recipient_id=i.recipient_id AND tx.sector='Unknown / unclassified'")
+ print('Inherited sectors for',format(inherited[0],','),'unclassified transactions from consistent same-UEI records.',flush=True)
  summary=records('SELECT year,award_kind,count(*) transaction_count,count(amount) known_amount_count,sum(amount) amount,sum(loan_face_value) loan_face_value FROM tx GROUP BY ALL',con)
  audit=records('SELECT year,source_kind,reported_business_types_code,reported_business_types_description,prior_keyword_sector,sector,count(*) transaction_count,sum(amount) amount FROM tx GROUP BY ALL',con)
  (OUT_ROOT/'data').mkdir(parents=True,exist_ok=True)
  reviewed=records("SELECT year,transaction_key,program_code,program_name,recipient_id,recipient_name,reported_business_types_code,reported_business_types_description,sector,amount FROM tx WHERE source_kind='assistance' AND program_code IN ('66.957','66.960') ORDER BY year,program_code,recipient_id,transaction_key",con)
- (OUT_ROOT/'data/recipient-sector-audit.json').write_text(json.dumps({'version':SECTOR_VERSION,'code_source':SECTOR_SOURCE,'scope':'Both full fiscal years; one current official archive vintage for assistance and contracts. Changes compare the old keyword rule with explicit codes on the same transactions, not different archive vintages.','sources':receipts,'reviewed_examples':reviewed,'rows':audit},separators=(',',':'))+'\n')
+ (OUT_ROOT/'data/recipient-sector-audit.json').write_text(json.dumps({'version':SECTOR_VERSION,'inherited_unknown':{'transactions':inherited[0],'amount':inherited[1],'rule':'An unclassified record inherits a sector only when the same UEI reports exactly one sector elsewhere in these archives; conflicting or absent evidence stays unclassified.'},'code_source':SECTOR_SOURCE,'scope':'Both full fiscal years; one current official archive vintage for assistance and contracts. Changes compare the old keyword rule with explicit codes on the same transactions, not different archive vintages.','sources':receipts,'reviewed_examples':reviewed,'rows':audit},separators=(',',':'))+'\n')
  sector_rows=records('SELECT year,topic_code,sector,award_kind,environment_lens,sum(amount) amount,count(*) transaction_count,count(amount) known_amount_count FROM tx GROUP BY ALL',con)
  # Expand separate funding/issuing views; these are never added together.
  con.execute("CREATE OR REPLACE VIEW units AS SELECT *, 'funding' basis,coalesce(nullif(funding_agency_code,''),'unreported') unit_code,coalesce(nullif(funding_agency_name,''),'Funding agency unreported') unit_name FROM tx UNION ALL SELECT *, 'awarding' basis,coalesce(nullif(awarding_agency_code,''),'unreported') unit_code,coalesce(nullif(awarding_agency_name,''),'Awarding agency unreported') unit_name FROM tx UNION ALL SELECT *, 'awarding' basis,'NIH' unit_code,'National Institutes of Health' unit_name FROM tx WHERE lower(awarding_sub_agency_name) LIKE '%national institutes of health%' UNION ALL SELECT *, 'funding' basis,'NIH' unit_code,'National Institutes of Health' unit_name FROM tx WHERE lower(funding_sub_agency_name) LIKE '%national institutes of health%' UNION ALL SELECT *, 'funding' basis,'ALL' unit_code,'All government external awards' unit_name FROM tx UNION ALL SELECT *, 'awarding' basis,'ALL' unit_code,'All government external awards' unit_name FROM tx")
