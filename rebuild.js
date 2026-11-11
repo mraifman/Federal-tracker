@@ -99,7 +99,7 @@
    const ent=by['Entitlement benefit programs'],ni=by['Net interest on the debt'],choices=by['Funding choices'];
    const omb={};(budget.categories||[]).forEach(c=>omb[c.name]=c);const niTrend=omb['Net interest']||{};
    const color={'Entitlement benefit programs':'#6b7f88','Net interest on the debt':'#c27a4e','Self-financed funds':'#aeb8c8','Funding choices':'#43838b'};
-   const stackRow=(label,key)=>'<div class="bud-stack"><span class="bud-year">'+label+'</span><span class="bud-bar">'+cats.map(c=>{const pct=c[key]/tot[key]*100;return '<span class="bud-seg" style="width:'+pct+'%;background:'+color[c.name]+'" title="'+esc(c.name==='Funding choices'?'Non-entitlement, non-interest':c.name)+' · '+pct.toFixed(1)+'%">'+(pct>11?'<span class="bud-seg-lbl">'+pct.toFixed(0)+'%</span>':'')+'</span>';}).join('')+'</span><strong class="budget-total" aria-label="'+label+' total obligations '+contextMoney(tot[key])+'">'+contextMoney(tot[key])+'</strong></div>';
+   const stackRow=(label,key)=>'<div class="bud-stack"><span class="bud-year">'+label+'</span><span class="bud-bar">'+cats.map(c=>{const pct=c[key]/tot[key]*100;const segName=c.name==='Funding choices'?'Non-entitlement, non-interest':c.name,tip=segName+' · '+label+' · '+contextMoney(c[key])+' · '+pct.toFixed(1)+'% of total obligations';return '<span class="bud-seg" tabindex="0" role="img" aria-label="'+esc(tip)+'" data-seg-tip="'+esc(tip)+'" style="width:'+pct+'%;background:'+color[c.name]+'" title="'+esc(tip)+'">'+(pct>11?'<span class="bud-seg-lbl">'+pct.toFixed(0)+'%</span>':'')+'</span>';}).join('')+'</span><strong class="budget-total" aria-label="'+label+' total obligations '+contextMoney(tot[key])+'">'+contextMoney(tot[key])+'</strong></div>';
    const spark='<div class="interest-chart-host"></div>';
    const bars=(list,cls)=>{const mx=Math.max(1,...list.map(c=>Math.abs(c.amount)));return list.map(c=>'<div class="disc-row '+cls+'"><span class="disc-name">'+esc(c.topic)+'</span><span class="disc-track"><i class="'+cls+'" style="width:'+(Math.abs(c.amount)/mx*100)+'%"></i></span><span class="disc-val">'+(c.amount<0?'−':'+')+money(Math.abs(c.amount))+'</span></div>').join('')};
    const pct=(choices.b/choices.a-1)*100,cuts=ch.cuts.filter(c=>Math.abs(c.amount)>=1e9),adds=ch.adds.filter(c=>c.amount>=1e9);
@@ -107,7 +107,7 @@
     '<h2>The share of resources for non-entitlement spending is shrinking</h2>'+
     '<p class="section-lede">Entitlement benefits, including Social Security, Medicare and Medicaid, accounted for <b>'+ent.share_b.toFixed(0)+'%</b> of federal obligations in FY2026, up from <span class="budget-period">'+ent.share_a.toFixed(0)+'% in FY2024</span>.</p>'+
     '<div class="bud-stacks"><div class="bud-legend">'+cats.map(c=>'<span><i style="background:'+color[c.name]+'"></i>'+esc(c.name==='Funding choices'?'Non-entitlement, non-interest':c.name)+'</span>').join('')+'</div>'+
-     '<p class="budget-total-heading">Total obligations</p>'+stackRow('FY2024','a')+stackRow('FY2026','b')+
+     '<p class="budget-total-heading">Total obligations</p>'+stackRow('FY2024','a')+stackRow('FY2026','b')+'<p class="context-chart-inspector bud-inspector" aria-live="polite">Hover or focus a segment for its dollar amount.</p>'+
      '<p class="muted">Non-entitlement, non-interest: '+money(choices.a)+' to '+money(choices.b)+' committed ('+(pct>0?'+':'')+pct.toFixed(0)+'%); entitlements and interest grew faster.</p></div>'+
     '<div class="budget-grid">'+
      '<div class="debt-panel"><h3>The national debt’s interest grew '+(niTrend.pct!=null?niTrend.pct.toFixed(0)+'% ':'')+'from 2024 to 2026</h3>'+
@@ -137,7 +137,7 @@
   '</section>'+
   '';
   const fundingContext=document.getElementById('funding-context');
-  if(fundingContext){fundingContext.innerHTML=budgetSection;window.FundingContextCharts?.render(budget);const methodology=fundingContext.querySelector('.budget-structure>:last-child');if(methodology?.classList.contains('muted'))window.AtlasNotes?.publish('budget-release-method','OMB budget-release context',[methodology]);}
+  if(fundingContext){fundingContext.innerHTML=budgetSection;{const inspector=fundingContext.querySelector('.bud-inspector');fundingContext.querySelectorAll('[data-seg-tip]').forEach(seg=>{const show=()=>{if(inspector)inspector.textContent=seg.dataset.segTip;fundingContext.querySelectorAll('.bud-seg.is-active').forEach(x=>x.classList.remove('is-active'));seg.classList.add('is-active')};seg.addEventListener('mouseenter',show);seg.addEventListener('focus',show);seg.addEventListener('click',show)})}window.FundingContextCharts?.render(budget);const methodology=fundingContext.querySelector('.budget-structure>:last-child');if(methodology?.classList.contains('muted'))window.AtlasNotes?.publish('budget-release-method','OMB budget-release context',[methodology]);}
 
   // ---- footnotes collected at the very bottom of the page ----
   const methodDetails='<div class="repair-method">'+
