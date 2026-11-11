@@ -6,8 +6,8 @@ window.AtlasChartTools = {
     const controls=selectors.map(s=>root.querySelector(s)).filter(Boolean);if(!controls.length)return;
     const layout=document.createElement('div');layout.className='explore-layout';
     const filters=document.createElement('details');filters.className='award-filter-panel explore-filters';filters.open=this.filterStates.get(root.id)??!matchMedia('(max-width:760px)').matches;
-    const summary=document.createElement('summary');summary.textContent='Filters';filters.append(summary);filters.addEventListener('toggle',()=>this.filterStates.set(root.id,filters.open));
-    const results=document.createElement('div');results.className='explore-results';for(const control of controls)filters.append(control);
+    const summary=document.createElement('summary');summary.textContent='Filters';filters.append(summary);filters.addEventListener('toggle',()=>{if(filters.isConnected)this.filterStates.set(root.id,filters.open)});
+    const results=document.createElement('div');results.className='explore-results';for(const control of controls)filters.append(control);const ranking=filters.querySelector('.rank-control');if(ranking)summary.after(ranking);
     for(const child of [...root.children])if(!preserve.some(s=>child.matches(s)))results.append(child);
     layout.append(filters,results);root.append(layout);
   },
@@ -86,7 +86,7 @@ window.AtlasChartTools = {
     };
   },
   displayName(value){
-    const names=[...Object.values(this.agencyNames).filter(v=>/^[A-Z0-9]{2,5}$/.test(v)),'FMSHRC','OSHRC','USAID','NIH','CDC','HIV','AIDS','FDA','STEM','DNA','RNA','SBIR','STTR','GOCO','FFRDC','LLC','LLP','LP','PLC','SLS','IBM','SAIC','RTX','BAE','US','USA','AI','IT'];
+    const names=[...Object.values(this.agencyNames).filter(v=>/^[A-Z0-9]{2,5}$/.test(v)),'FMSHRC','OSHRC','USAID','NIH','CDC','HIV','AIDS','FDA','STEM','DNA','RNA','SBIR','STTR','GOCO','FFRDC','LLC','LLP','LP','PLC','SLS','IBM','SAIC','RTX','BAE','US','USA','AI','IT','PII'];
     const acronyms=new Map(names.map(v=>[v.toLowerCase(),v]));
     return String(value||'').toLowerCase().replace(/\b[a-z][a-z0-9]*\b/g,word=>acronyms.get(word)||word[0].toUpperCase()+word.slice(1));
   },
@@ -144,7 +144,7 @@ window.AtlasChartTools = {
     if(!panel)return;
     this.tableOpen??=new Map();
     panel.querySelectorAll('#agencies > .table-scroll, #funding-app > .table-scroll, .trend-main > .table-scroll').forEach(table=>{
-      if(table.closest('#funding-app'))return;
+      if(table.closest('#funding-app,#workforce-app'))return;
       const footer=table.nextElementSibling?.classList.contains('table-footer')?table.nextElementSibling:null;
       const details=document.createElement('details');details.className='records-table';const key=panel.id+':'+(table.parentElement.id||'records');details.open=this.tableOpen.get(key)||false;details.ontoggle=()=>{if(details.isConnected)this.tableOpen.set(key,details.open)};
       const summary=document.createElement('summary');summary.textContent='Compare the source records';details.append(summary);table.before(details);details.append(table);if(footer)details.append(footer);
