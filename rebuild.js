@@ -104,7 +104,7 @@
    let spark='';
    if(tr.length>1){const W=360,H=118,L=5,R=5,Tp=24,Bm=24,maxY=Math.max(...tr.map(d=>d.amount))*1.08,sx=i=>L+i/(tr.length-1)*(W-L-R),sy=v=>Tp+(1-v/maxY)*(H-Tp-Bm),pts=tr.map((d,i)=>sx(i)+','+sy(d.amount)).join(' ');
     spark='<svg viewBox="0 0 '+W+' '+H+'" class="interest-spark" role="img" aria-label="Net interest on the national debt by presidential-election year"><polyline points="'+pts+'" fill="none" stroke="#242151" stroke-width="2.5"/>'+tr.map((d,i)=>'<circle cx="'+sx(i)+'" cy="'+sy(d.amount)+'" r="3.5" fill="#242151"/><text x="'+sx(i)+'" y="'+(H-9)+'" text-anchor="'+(i===0?'start':i===tr.length-1?'end':'middle')+'" font-size="10" fill="#5d727b">'+d.year+'</text><text x="'+sx(i)+'" y="'+(sy(d.amount)-8)+'" text-anchor="'+(i===tr.length-1?'end':i===0?'start':'middle')+'" font-size="10" font-weight="600" fill="#242151">'+money(d.amount)+'</text>').join('')+'</svg>';}
-   const bars=(list,cls)=>{const mx=Math.max(1,...list.map(c=>Math.abs(c.amount)));return list.map(c=>'<div class="disc-row"><span class="disc-name">'+esc(c.topic)+'</span><span class="disc-track"><i class="'+cls+'" style="width:'+(Math.abs(c.amount)/mx*100)+'%"></i></span><span class="disc-val">'+(c.amount<0?'−':'+')+money(Math.abs(c.amount))+'</span></div>').join('')};
+   const bars=(list,cls)=>{const mx=Math.max(1,...list.map(c=>Math.abs(c.amount)));return list.map(c=>'<div class="disc-row '+cls+'"><span class="disc-name">'+esc(c.topic)+'</span><span class="disc-track"><i class="'+cls+'" style="width:'+(Math.abs(c.amount)/mx*100)+'%"></i></span><span class="disc-val">'+(c.amount<0?'−':'+')+money(Math.abs(c.amount))+'</span></div>').join('')};
    const pct=(choices.b/choices.a-1)*100,cuts=ch.cuts.filter(c=>Math.abs(c.amount)>=1e9),adds=ch.adds.filter(c=>c.amount>=1e9);
    budgetSection='<section class="budget-structure">'+
     '<h2>Funding choices fell from '+choices.share_a.toFixed(0)+'% to '+choices.share_b.toFixed(0)+'% of what the government committed</h2>'+
@@ -115,8 +115,9 @@
     '<div class="budget-grid">'+
      '<div class="debt-panel"><h3>The national debt’s interest grew '+(niTrend.pct!=null?niTrend.pct.toFixed(0)+'% ':'')+'from 2024 to 2026</h3>'+
       '<p class="chart-note">Net interest more than quadrupled since 2016, past <b>'+money(niTrend.b||ni.b)+'</b> — more than any single funding choice. Election-cycle years.</p>'+spark+'</div>'+
-     '<div class="disc-panel"><h3>Largest reductions in funding choices</h3><p class="chart-note">Funds committed, FY2024 → FY2026.</p>'+bars(cuts,'')+
-      '<h3 class="disc-second">Largest increases in funding choices</h3>'+bars(adds,'gain')+'</div></div>'+
+     '<div class="disc-panel"><h3>Largest reductions in funding choices</h3><p class="chart-note">Obligations, FY2024 → FY2026.</p>'+bars(cuts,'')+
+      '</div></div>'+
+    '<div class="disc-panel funding-increases"><h3>Largest increases in funding choices</h3><p class="chart-note">Obligations, FY2024 → FY2026.</p>'+bars(adds,'gain')+'</div>'+
     '<p class="muted">'+esc(ch.basis)+'</p>'+
    '</section>';
   }
