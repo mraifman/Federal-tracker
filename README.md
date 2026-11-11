@@ -1,4 +1,4 @@
-# Horizon: 2029
+# Blue Hour Project
 
 An interactive comparison of federal people, funding by purpose, spending uses, and resources awarded to outside parties. The site is published from this repository to [GitHub Pages](https://mraifman.github.io/Federal-tracker/).
 
@@ -81,7 +81,7 @@ The command retrieves the current federal archive catalog, requires one consiste
 
 `python -m unittest discover -s scripts -p 'test_*.py'` tests recipient-code behavior without third-party dependencies. `node tests/recipient-sectors.cjs` checks the published GGRF records and sector filters; deployment runs this regression alongside financial reconciliation. Funding and awarding roles are tested separately and are never added together.
 
-The Horizon: 2029 header gives the opening chart two-thirds of the desktop hero, uses larger interface and explanatory text, and stacks the chart below the introduction on phones. Agency labels use the official USAspending abbreviations matched through the existing workforce crosswalk; funding labels use the policy-area names, with original source codes retained in data and exports.
+The Blue Hour Project header gives the opening chart two-thirds of the desktop hero, uses larger interface and explanatory text, and stacks the chart below the introduction on phones. Agency labels use the official USAspending abbreviations matched through the existing workforce crosswalk; funding labels use the policy-area names, with original source codes retained in data and exports.
 
 Recipient chart rows open an on-demand USAspending transaction lookup (`award-detail.js`). It keeps archive totals separate from live API records, checks recipient identity, shows individual award links and action amounts, and claims reconciliation only when all pages and known amounts match both archived fiscal-year totals. The exact request, retrieval date and source aggregate are recorded on About the Evidence; the dialog can export the complete evidence JSON.
 

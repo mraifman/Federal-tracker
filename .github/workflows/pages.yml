@@ -1,4 +1,4 @@
-name: 'Deploy Horizon: 2029'
+name: 'Deploy Blue Hour Project'
 on:
   push:
     branches: [main]
