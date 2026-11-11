@@ -111,8 +111,8 @@
    const dbars=dc.map(c=>'<div class="disc-row"><span class="disc-name">'+esc(c.function)+'</span><span class="disc-track"><i style="width:'+(Math.abs(c.amount)/dmax*100)+'%"></i></span><span class="disc-val">−'+money(Math.abs(c.amount))+'</span></div>').join('');
    budgetSection='<section class="budget-structure">'+
     '<h2>Discretionary budget authority fell from '+disc.share_a.toFixed(0)+'% to '+disc.share_b.toFixed(0)+'% of the budget</h2>'+
-    '<p class="section-lede">Congress’s annual funding decisions cover just <b>'+disc.share_b.toFixed(0)+'%</b> of the budget. Mandatory programs account for <b>'+mand.share_b.toFixed(0)+'%</b>; debt interest takes <b>'+ni.share_b.toFixed(0)+'%</b>.</p>'+
-    '<div class="bud-stacks"><div class="bud-legend">'+budget.categories.map(c=>'<span><i style="background:'+color[c.name]+'"></i>'+esc(c.name)+'</span>').join('')+'</div>'+
+    '<p class="section-lede">Congress’s annual funding decisions cover just <b>'+disc.share_b.toFixed(0)+'%</b> of the budget. Mandatory spending — mostly entitlements such as Social Security, Medicare and Medicaid, plus other formula programs — is <b>'+mand.share_b.toFixed(0)+'%</b>; interest on the debt takes <b>'+ni.share_b.toFixed(0)+'%</b>.</p>'+
+    '<div class="bud-stacks"><div class="bud-legend">'+budget.categories.map(c=>'<span><i style="background:'+color[c.name]+'"></i>'+esc({Mandatory:'Mandatory · mostly entitlements',Discretionary:'Discretionary · annual choices','Net interest':'Net interest on the debt'}[c.name]||c.name)+'</span>').join('')+'</div>'+
      stackRow('FY2024','a',budget.total.a)+stackRow('FY2026','b',budget.total.b)+
      '<p class="muted">'+money(disc.a)+' to '+money(disc.b)+' ('+disc.pct.toFixed(0)+'%), squeezed by growing mandatory programs and debt interest.</p></div>'+
     '<div class="budget-grid">'+

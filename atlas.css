@@ -92,3 +92,17 @@ body[data-view="evidence"] main>.universe-hero,body[data-view="evidence"] .peopl
 /* Remove the empty strip's framing after its label and link are removed. */
 #funding-app .explore-results>.trend-layout{border:0;background:transparent;margin:0;padding:0}#funding-app .explore-results .trend-main{border:0;background:transparent;margin:0}
 #funding-app .section-hero .ranked-more{background:#ffffff0d;color:#f2f3fa;border:1px solid #b9c4e080;font:500 13px/1.4 var(--sans);padding:8px 12px;box-shadow:none}#funding-app .section-hero .ranked-more:hover,#funding-app .section-hero .ranked-more:focus-visible{background:#ffffff20;border-color:#fff}
+
+/* Rank-by toggle inside the left Filters panels */
+.rank-control{margin:0 0 16px}.rank-control .filter-label{display:block;font:500 11px/1.5 var(--sans);color:var(--muted);margin:0 0 6px}.rank-control .sort-toggle{display:inline-flex;border:1px solid var(--line);background:#fff}.rank-control .sort-toggle button{border:0;border-radius:0;padding:8px 12px;font:500 11px var(--sans);background:#fff;color:var(--muted);cursor:pointer}.rank-control .sort-toggle button[aria-pressed=true]{background:var(--navy);color:#fff}
+/* Dark hero ranked rows: no light fill on hover; thin colored edge + underlined label */
+#funding-app .section-hero .ranked-row:hover,#funding-app .section-hero .ranked-row:focus-visible{background:transparent;box-shadow:inset 3px 0 0 var(--coral);outline:none}#funding-app .section-hero .ranked-row:hover .ranked-label,#funding-app .section-hero .ranked-row:focus-visible .ranked-label{text-decoration:underline}
+/* About the Evidence: one left-aligned reading column */
+.method .method-grid,#evidence-panel .method-grid,.page-notes .method-grid{grid-template-columns:1fr;gap:14px;max-width:78ch}
+/* Budget context sits between the funding hero and the filters/table layout */
+#funding-app>#funding-context{margin:26px 0 10px}
+.rank-control .sort-toggle{display:flex;width:100%}.rank-control .sort-toggle button{flex:1;padding:7px 6px;font-size:10.5px;white-space:nowrap;text-align:center}
+/* Bottom "Data & sources" strip; replaces prominent export buttons */
+.data-sources{margin:24px 0 0;padding-top:14px;border-top:1px solid var(--line);font:400 11px/1.8 var(--sans);color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 16px;align-items:center}.data-sources>span{font-weight:600;letter-spacing:.08em;text-transform:uppercase;font-size:10px;color:var(--ink)}.data-sources a,.data-sources .link-button{color:var(--muted);text-decoration:underline;text-underline-offset:2px;background:none;border:0;padding:0;font:inherit;cursor:pointer}.data-sources a:hover,.data-sources .link-button:hover,.data-sources .link-button:focus-visible{color:var(--navy)}
+/* Evidence page: notes blocks read left-aligned, never centered */
+.page-notes .repair-method,#evidence-panel .repair-method,.evidence-group .repair-method{margin-left:0;margin-right:0;max-width:78ch}
