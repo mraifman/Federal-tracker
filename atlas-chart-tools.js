@@ -85,6 +85,20 @@ window.AtlasChartTools = {
       const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download=people?'workforce-chart-records.csv':'funding-chart-records.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
     };
   },
+
+  recipientIdentity(row){
+    const id=String(row.sourceId??row.recipient_id??row.id??'').trim(),name=String(row.recipient_name??row.name??'').trim();
+    if(id==='INDIVIDUALS'||/^individuals?(?:\s*[—-]\s*names? not published|\s*\(aggregated\))?$/i.test(name))return {identified:false,kind:'individuals',label:'Individuals — privacy aggregate'};
+    if(/^(?:redacted(?:\s+due to\s+(?:pii|privacy|personally identifiable information))?|recipient(?: name)? (?:redacted|withheld)|names? (?:not published|withheld|redacted)|not disclosed)$/i.test(name)||/^(?:redacted|withheld)$/i.test(id))return {identified:false,kind:'redacted',label:'Redacted identity — source group'};
+    if(/multiple recipients?|miscellaneous .*awardees|aggregate(?:d)? recipients?/i.test(name))return {identified:false,kind:'aggregate',label:'Source-reported recipient aggregate'};
+    if(!id||/^(?:unreported|unknown|unidentified|not available|n\/?a|none|null|0+|unreported[:_-].*)$/i.test(id)||/^(?:unknown|unreported|unidentified|not available)(?: recipient)?$/i.test(name))return {identified:false,kind:'unreported',label:'Recipient identity not established'};
+    return {identified:true,kind:'identified',label:'Identified recipient'};
+  },
+  recipientGroupKey(row){
+    const id=String(row.recipient_id??row.sourceId??row.id??'').trim(),name=String(row.recipient_name??row.name??'').trim();
+    if(id==='INDIVIDUALS')return id;
+    return this.recipientIdentity(row).identified?id:'SOURCE_GROUP:'+JSON.stringify([id,name]);
+  },
   displayName(value){
     const names=[...Object.values(this.agencyNames).filter(v=>/^[A-Z0-9]{2,5}$/.test(v)),'FMSHRC','OSHRC','USAID','NIH','CDC','HIV','AIDS','FDA','STEM','DNA','RNA','SBIR','STTR','GOCO','FFRDC','LLC','LLP','LP','PLC','SLS','IBM','SAIC','RTX','BAE','US','USA','AI','IT','PII'];
     const acronyms=new Map(names.map(v=>[v.toLowerCase(),v]));acronyms.set('vs','vs');

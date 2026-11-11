@@ -2,7 +2,7 @@ name: 'Deploy Blue Hour Project'
 on:
   push:
     branches: [main]
-    paths: ['social-preview.png', 'favicon.svg', 'atlas.css', 'atlas-experience.js', 'atlas-chart-tools.js', 'index.html', 'simple.html', 'needs.css', 'needs.js', 'story.js', 'tracker.js', 'tracker.css', 'workforce.js', 'workforce.css', 'research.js', 'research.css', 'atlas-bubbles.js', 'outflows.js', 'award-detail.js', 'legal-review.js', 'notes.js', 'rebuild.js', 'rebuild.css', 'transitions.js', 'vendor/**', 'data/**', 'scripts/validate_change_data.py', 'scripts/prepare_site.py', 'tests/**', '.github/workflows/pages.yml']
+    paths: ['funding-context-charts.js', 'scripts/extend_interest_history.py', 'social-preview.png', 'favicon.svg', 'atlas.css', 'atlas-experience.js', 'atlas-chart-tools.js', 'index.html', 'simple.html', 'needs.css', 'needs.js', 'story.js', 'tracker.js', 'tracker.css', 'workforce.js', 'workforce.css', 'research.js', 'research.css', 'atlas-bubbles.js', 'outflows.js', 'award-detail.js', 'legal-review.js', 'notes.js', 'rebuild.js', 'rebuild.css', 'transitions.js', 'vendor/**', 'data/**', 'scripts/validate_change_data.py', 'scripts/prepare_site.py', 'tests/**', '.github/workflows/pages.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -22,6 +22,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - run: python -m unittest discover -s scripts -p 'test_interest_history.py'
       - run: python scripts/validate_data.py
       - run: python scripts/validate_change_data.py
       - run: python scripts/validate_comparison.py
@@ -29,6 +30,7 @@ jobs:
       - run: python scripts/validate_legal_review.py
       - run: node tests/legal-review.cjs
       - run: node tests/recipient-sectors.cjs
+      - run: node tests/recipient-identities.cjs
       - uses: actions/configure-pages@v5
       - run: |
           python scripts/prepare_site.py

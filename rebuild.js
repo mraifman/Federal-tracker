@@ -8,6 +8,7 @@
  const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  const num=n=>Math.round(n).toLocaleString('en-US');
  const money=n=>{const v=Math.abs(n),d=v>=1e12?1e12:v>=1e9?1e9:v>=1e6?1e6:1;return (n<0?'−':'')+'$'+(v/d).toLocaleString('en-US',{maximumFractionDigits:d===1?0:v/d>=100?0:1})+({1:'',1e6:'M',1e9:'B',1e12:'T'}[d]);};
+ const contextMoney=n=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',notation:'compact',maximumFractionDigits:2}).format(n);
  const title=s=>window.AtlasChartTools.displayName(s);
 
  function focusWorkforce(code){
@@ -98,28 +99,24 @@
    const ent=by['Entitlement benefit programs'],ni=by['Net interest on the debt'],choices=by['Funding choices'];
    const omb={};(budget.categories||[]).forEach(c=>omb[c.name]=c);const niTrend=omb['Net interest']||{};
    const color={'Entitlement benefit programs':'#6b7f88','Net interest on the debt':'#c27a4e','Self-financed funds':'#aeb8c8','Funding choices':'#43838b'};
-   const stackRow=(label,key)=>'<div class="bud-stack"><span class="bud-year">'+label+'</span><span class="bud-bar">'+cats.map(c=>{const pct=c[key]/tot[key]*100;return '<span class="bud-seg" style="width:'+pct+'%;background:'+color[c.name]+'" title="'+esc(c.name)+' · '+pct.toFixed(1)+'%">'+(pct>11?'<span class="bud-seg-lbl">'+pct.toFixed(0)+'%</span>':'')+'</span>';}).join('')+'</span></div>';
-   // net-interest trajectory on the presidential-election cycle (OMB budget database)
-   const tr=(budget.net_interest_trend||[]).filter(d=>[2016,2020,2024,2026].includes(d.year));
-   let spark='';
-   if(tr.length>1){const W=360,H=118,L=5,R=5,Tp=24,Bm=24,maxY=Math.max(...tr.map(d=>d.amount))*1.08,sx=i=>L+i/(tr.length-1)*(W-L-R),sy=v=>Tp+(1-v/maxY)*(H-Tp-Bm),pts=tr.map((d,i)=>sx(i)+','+sy(d.amount)).join(' ');
-    spark='<svg viewBox="0 0 '+W+' '+H+'" class="interest-spark" role="img" aria-label="Net interest on the national debt by presidential-election year"><polyline points="'+pts+'" fill="none" stroke="#102d52" stroke-width="2.5"/>'+tr.map((d,i)=>'<circle cx="'+sx(i)+'" cy="'+sy(d.amount)+'" r="3.5" fill="#102d52"/><text x="'+sx(i)+'" y="'+(H-9)+'" text-anchor="'+(i===0?'start':i===tr.length-1?'end':'middle')+'" font-size="10" fill="#5d727b">'+d.year+'</text><text x="'+sx(i)+'" y="'+(sy(d.amount)-8)+'" text-anchor="'+(i===tr.length-1?'end':i===0?'start':'middle')+'" font-size="10" font-weight="600" fill="#102d52">'+money(d.amount)+'</text>').join('')+'</svg>';}
+   const stackRow=(label,key)=>'<div class="bud-stack"><span class="bud-year">'+label+'</span><span class="bud-bar">'+cats.map(c=>{const pct=c[key]/tot[key]*100;return '<span class="bud-seg" style="width:'+pct+'%;background:'+color[c.name]+'" title="'+esc(c.name==='Funding choices'?'Non-entitlement, non-interest':c.name)+' · '+pct.toFixed(1)+'%">'+(pct>11?'<span class="bud-seg-lbl">'+pct.toFixed(0)+'%</span>':'')+'</span>';}).join('')+'</span><strong class="budget-total" aria-label="'+label+' total obligations '+contextMoney(tot[key])+'">'+contextMoney(tot[key])+'</strong></div>';
+   const spark='<div class="interest-chart-host"></div>';
    const bars=(list,cls)=>{const mx=Math.max(1,...list.map(c=>Math.abs(c.amount)));return list.map(c=>'<div class="disc-row '+cls+'"><span class="disc-name">'+esc(c.topic)+'</span><span class="disc-track"><i class="'+cls+'" style="width:'+(Math.abs(c.amount)/mx*100)+'%"></i></span><span class="disc-val">'+(c.amount<0?'−':'+')+money(Math.abs(c.amount))+'</span></div>').join('')};
    const pct=(choices.b/choices.a-1)*100,cuts=ch.cuts.filter(c=>Math.abs(c.amount)>=1e9),adds=ch.adds.filter(c=>c.amount>=1e9);
    budgetSection='<section class="budget-structure">'+
     '<h2>The share of resources for non-entitlement spending is shrinking</h2>'+
-    '<p class="section-lede">Entitlement benefit programs — Social Security, Medicare, Medicaid and similar — required <b>'+ent.share_b.toFixed(0)+'%</b> of what the government committed in FY2026, up from '+ent.share_a.toFixed(0)+'% in FY2024.</p>'+
-    '<div class="bud-stacks"><div class="bud-legend">'+cats.map(c=>'<span><i style="background:'+color[c.name]+'"></i>'+esc(c.name)+'</span>').join('')+'</div>'+
-     stackRow('FY2024','a')+stackRow('FY2026','b')+
-     '<p class="muted">Funding choices: '+money(choices.a)+' to '+money(choices.b)+' committed ('+(pct>0?'+':'')+pct.toFixed(0)+'%); entitlements and interest grew faster.</p></div>'+
+    '<p class="section-lede">Entitlement benefits, including Social Security, Medicare and Medicaid, accounted for <b>'+ent.share_b.toFixed(0)+'%</b> of federal obligations in FY2026, up from <span class="budget-period">'+ent.share_a.toFixed(0)+'% in FY2024</span>.</p>'+
+    '<div class="bud-stacks"><div class="bud-legend">'+cats.map(c=>'<span><i style="background:'+color[c.name]+'"></i>'+esc(c.name==='Funding choices'?'Non-entitlement, non-interest':c.name)+'</span>').join('')+'</div>'+
+     '<p class="budget-total-heading">Total obligations</p>'+stackRow('FY2024','a')+stackRow('FY2026','b')+
+     '<p class="muted">Non-entitlement, non-interest: '+money(choices.a)+' to '+money(choices.b)+' committed ('+(pct>0?'+':'')+pct.toFixed(0)+'%); entitlements and interest grew faster.</p></div>'+
     '<div class="budget-grid">'+
      '<div class="debt-panel"><h3>The national debt’s interest grew '+(niTrend.pct!=null?niTrend.pct.toFixed(0)+'% ':'')+'from 2024 to 2026</h3>'+
-      '<p class="chart-note">Net interest more than quadrupled since 2016, past <b>'+money(niTrend.b||ni.b)+'</b> — more than any single funding choice. Election-cycle years.</p>'+spark+'</div>'+
-     '<div class="disc-panel"><h3>Largest reductions in funding choices</h3><p class="chart-note">Obligations, FY2024 → FY2026.</p>'+bars(cuts,'')+
+      '<p class="chart-note">Net interest at election-cycle intervals, 2004–2026. OMB budget-authority series in nominal dollars; FY2026 is an estimate from the FY2027 release.</p>'+spark+'</div>'+
+     '<div class="disc-panel"><h3>Largest reductions outside entitlements and interest</h3><p class="chart-note">Obligations, FY2024 → FY2026.</p>'+bars(cuts,'')+
       '</div></div>'+
-    '<div class="disc-panel funding-increases"><h3>Largest increases in funding choices</h3><p class="chart-note">Obligations, FY2024 → FY2026.</p>'+bars(adds,'gain')+'</div>'+
-    (ch.by_topic&&ch.by_topic.length?'<div class="disc-panel choices-totals"><h3>Funds committed in FY2026, by funding choice</h3><p class="chart-note">Obligations within funding choices, largest first; FY2024 and the change shown beneath each amount.</p>'+(()=>{const mx=Math.max(1,...ch.by_topic.map(t=>t.b));return ch.by_topic.map(t=>'<div class="disc-row total"><span class="disc-name">'+esc(t.topic)+'</span><span class="disc-track"><i class="total" style="width:'+(Math.max(0,t.b)/mx*100)+'%"></i></span><span class="disc-val total">'+money(t.b)+'<small>'+money(t.a)+' in FY2024 · '+(t.amount<0?'−':'+')+money(Math.abs(t.amount))+'</small></span></div>').join('')})()+'</div>':'')+
-    '<p class="muted">'+esc(ch.basis)+'</p>'+
+    '<div class="disc-panel funding-increases"><h3>Largest increases outside entitlements and interest</h3><p class="chart-note">Obligations, FY2024 → FY2026.</p>'+bars(adds,'gain')+'</div>'+
+    (ch.by_topic&&ch.by_topic.length?'<section class="disc-panel funding-composition"><h3>Where the '+choices.share_b.toFixed(0)+'% goes</h3><p class="chart-note">FY2026 obligations outside entitlements and debt interest. Area represents each topic’s share of the <b>'+contextMoney(choices.b)+'</b> total.</p><div class="funding-composition-host"></div></section>':'')+
+    '<p class="muted">'+esc(ch.basis.replace(/funding choices/gi,'non-entitlement, non-interest funding'))+'</p>'+
    '</section>';
   }
 
@@ -140,7 +137,7 @@
   '</section>'+
   '';
   const fundingContext=document.getElementById('funding-context');
-  if(fundingContext){fundingContext.innerHTML=budgetSection;const methodology=fundingContext.querySelector('.budget-structure>:last-child');if(methodology?.classList.contains('muted'))window.AtlasNotes?.publish('budget-release-method','OMB budget-release context',[methodology]);}
+  if(fundingContext){fundingContext.innerHTML=budgetSection;window.FundingContextCharts?.render(budget);const methodology=fundingContext.querySelector('.budget-structure>:last-child');if(methodology?.classList.contains('muted'))window.AtlasNotes?.publish('budget-release-method','OMB budget-release context',[methodology]);}
 
   // ---- footnotes collected at the very bottom of the page ----
   const methodDetails='<div class="repair-method">'+

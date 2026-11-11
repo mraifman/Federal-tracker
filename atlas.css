@@ -140,3 +140,47 @@ body{font-size:16px}input,select{font-size:16px}label{font-size:16px}.outline,bu
 
 /* Mobile readability: compact navigation, uncrowded chart and stacked section headings. */
 @media(max-width:760px){html{scroll-padding-top:16px}.site-header{position:relative;display:flex;flex-wrap:wrap;padding:14px 18px 10px;gap:12px}.site-header .brand{gap:10px;min-width:0}.site-header .brand b{font-size:clamp(21px,5.7vw,25px);letter-spacing:0}.site-header .brand-mark{width:42px;height:42px}.site-header nav{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.45fr);gap:4px 16px;width:100%;max-width:none;font-size:14px}.site-header nav a{font-size:14px;line-height:1.35;min-height:42px;display:flex;align-items:center;justify-self:start;padding:8px 0;white-space:normal;min-width:0}.universe-hero.hero-frame,.section-hero.hero-frame{padding:22px 12px;row-gap:18px}.hero-frame .hero-visual,.hero-frame .section-hero-visual{padding-top:12px}.hero-frame .hero-chart-title{font-size:17px;line-height:1.45;margin-bottom:14px}.hero-chart-heading{padding-top:0;margin-bottom:12px}.hero-map-svg{width:100%;max-height:none}.hero-footer{display:flex;align-items:center;flex-wrap:wrap;gap:10px 16px;padding:12px 0!important}.hero-footer>a{font-size:14px;line-height:1.5}.hero-footer .viz-reset{margin-left:auto}#workforce-panel>.panel-intro{display:flex;flex-direction:column;align-items:flex-start;gap:10px;padding:18px}#workforce-panel>.panel-intro h2{font-size:26px;line-height:1.25;max-width:none}#workforce-panel>.panel-intro .reading-link{font-size:14px;white-space:normal}.explore-filters .spotlight{white-space:normal}.explore-filters .spotlight h3{line-height:1.4}}
+
+.recipient-identity-note,.recipient-source-groups>p{font-size:16px;line-height:1.6;color:var(--muted)}.recipient-source-groups{margin:24px 0;padding:18px 20px;border:1px solid var(--line);background:var(--panel)}.recipient-source-groups>summary{font-size:17px;font-weight:600;line-height:1.5;cursor:pointer}.recipient-source-groups table{font-size:15px}.recipient-source-groups td small{display:block;font-size:14px;color:var(--muted);margin-top:6px}.recipient-source-groups td{font-variant-numeric:tabular-nums}.recipient-source-groups .table-scroll{max-width:100%;overflow:auto}.recipient-source-groups p{margin:14px 0}@media(max-width:760px){.recipient-source-groups{padding:14px}.recipient-source-groups table{min-width:620px}}
+
+/* Shared typography, clear budget totals and responsive source-bound charts. */
+#funding-context .budget-structure>.section-lede{max-width:96ch;text-wrap:pretty}
+#funding-context .budget-structure>h2{text-wrap:balance}
+.budget-period{white-space:nowrap}
+#funding-context .bud-stack{grid-template-columns:76px minmax(0,1fr) 100px;gap:16px}
+#funding-context .budget-total{font:600 18px/1.3 var(--sans);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+.budget-total-heading{font:400 14px/1.4 var(--sans);color:var(--muted);text-align:right;margin:4px 0 8px}
+#funding-context .disc-val{font-family:var(--sans);font-size:16px;font-weight:600}
+#funding-context .disc-val small{font-family:var(--sans);font-size:14px;line-height:1.5}
+#funding-context .funding-composition{margin-top:24px}
+#funding-context .funding-composition h3{font:550 24px/1.35 var(--slab);margin:0 0 12px}
+#funding-context .funding-composition .chart-note{font:400 16px/1.6 var(--sans);color:var(--muted)}
+.interest-chart-host{width:100%;min-width:0;margin-top:12px}
+.interest-history-svg{display:block;width:100%;height:auto;overflow:visible;background:#fff}
+.interest-history-svg text{font:400 13px var(--sans);fill:var(--muted)}
+.interest-history-svg .interest-endpoint{font-size:14px;font-weight:600;fill:var(--ink)}
+.interest-history-svg circle:focus{outline:2px solid var(--coral);outline-offset:3px}
+.context-chart-inspector{font:400 14px/1.6 var(--sans);color:var(--muted);margin:14px 0;min-height:2.5em}
+.composition-map{width:100%;min-width:0;margin-top:18px}
+.composition-map svg{display:block;width:100%;height:auto}
+.composition-map text{fill:#fff;font-family:var(--sans);pointer-events:none}
+.composition-map .composition-label{font-size:14px;font-weight:500}
+.composition-map .composition-amount{font-size:14px;font-weight:600}
+.composition-map g[role=button]{cursor:pointer}
+.composition-map g:focus{outline:2px solid var(--coral);outline-offset:-2px}
+.composition-map g:hover>rect{filter:brightness(1.12)}
+.composition-topics{margin:12px 0;color:var(--ink);font:400 15px var(--sans)}
+.composition-topics>summary{cursor:pointer;padding:8px 0}
+.composition-topic-chips{display:flex;flex-wrap:wrap;gap:8px;padding:12px 0}
+.composition-topic-chip{border:1px solid var(--line);border-left:5px solid var(--topic-color);padding:9px 12px;background:white;color:var(--ink);font:400 14px/1.5 var(--sans);text-align:left}
+.composition-topic-chip:disabled{opacity:1;cursor:default}
+.explore-filters,.explore-filters .spotlights,.explore-filters .spotlight-cards,.explore-filters .spotlight{min-width:0;max-width:100%}
+.explore-filters .spotlight h3,.spotlight-cards .spotlight h3{white-space:normal;overflow-wrap:break-word}
+.explore-filters label>small{font-size:14px;line-height:1.5;white-space:normal}
+@media(max-width:760px){
+ #funding-context .bud-stacks{padding:18px 12px}
+ #funding-context .bud-stack{grid-template-columns:55px minmax(0,1fr) 70px;gap:8px}
+ #funding-context .budget-total{font-size:15px}
+ #funding-context .bud-year{font-size:14px}
+ #funding-context .funding-composition h3{font-size:22px}
+}

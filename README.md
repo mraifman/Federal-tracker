@@ -86,3 +86,11 @@ The Blue Hour Project header gives the opening chart two-thirds of the desktop h
 Recipient chart rows open an on-demand USAspending transaction lookup (`award-detail.js`). It keeps archive totals separate from live API records, checks recipient identity, shows individual award links and action amounts, and claims reconciliation only when all pages and known amounts match both archived fiscal-year totals. The exact request, retrieval date and source aggregate are recorded on About the Evidence; the dialog can export the complete evidence JSON.
 
 Money Flows also offers **Agency changes** in the Show filter. Agency comparisons use the same benefit exclusions as recipient totals; selecting an agency leads to sectors, named recipients, programs and individual official awards. Compact drawer amounts are display rounding only; evidence JSON retains exact source values. Award descriptions use short sentence-case summaries with full source descriptions available below.
+
+## Recipient identity and source groups
+
+Named-recipient rankings exclude redacted names, source-reported aggregates, privacy-grouped individuals, and records without an established recipient identifier. These records remain in scope totals, source datasets, exports, and a separate expandable source-groups section. A blank identifier is grouped by its reported label instead of merging every blank identifier into one purported organization. Neither a repeated placeholder nor a source-sector label establishes that a reporting group is a single company.
+
+Source-group details show archived totals by program/purpose and award/accounting type, and do not make recipient-specific API searches or attribute individual awards to unidentified recipients. Differences are changes in reported group totals, not company growth. Negative obligations on non-loan awards reflect net reductions to prior commitments; negative loan subsidy costs use credit accounting and are not cash payments. Exact transaction-level causes require additional source evidence.
+
+Run `node tests/recipient-identities.cjs` to check placeholder separation, named-recipient classification, and preservation of both fiscal-year totals and negative amounts.

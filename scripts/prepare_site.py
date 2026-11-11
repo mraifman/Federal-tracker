@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Build one Pages bundle for both deployment workflows and verify its assets."""
 import argparse,pathlib,shutil
+from extend_interest_history import extend_history
 from html.parser import HTMLParser
 from urllib.parse import urlsplit
 ROOT=pathlib.Path(__file__).resolve().parents[1]
@@ -17,6 +18,7 @@ def prepare(output):
  for path in ROOT.iterdir():
   if path.is_file() and path.suffix in {'.html','.css','.js','.svg','.png','.jpg','.jpeg','.webp'}:shutil.copy2(path,output/path.name)
  if not (output/'social-preview.png').is_file():raise SystemExit('Site bundle is missing the social preview image')
+ extend_history(ROOT,output)
  parser=Assets();parser.feed((output/'index.html').read_text())
  missing=[name for name in sorted(parser.paths) if not (output/name).is_file() or not (ROOT/name).is_file()]
  if missing:raise SystemExit('Site bundle is missing referenced assets: '+', '.join(missing))

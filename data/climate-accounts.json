@@ -1,60 +1,102 @@
 {
-  "definition": "A conservative account-level lens for climate mitigation and clean energy, separate from the broad environment and energy lens.",
+  "definition": "Reviewed climate-related account lens covering mitigation and clean energy plus adaptation and resilience. Whole-account totals are not climate-only allocations. Climate-science budgets cannot yet be separated from broad science accounts.",
   "sources": [
     "data/authority-comparison.json",
-    "https://www.whitehouse.gov/omb/information-resources/guidance/budget-execution-reporting/"
+    "https://www.whitehouse.gov/omb/information-resources/guidance/budget-execution-reporting/",
+    "https://www.fema.gov/flood-maps/tools-resources/risk-map",
+    "https://www.fema.gov/grants/mitigation/pre-disaster",
+    "https://www.hud.gov/GRRP"
   ],
   "accounts": [
     {
       "treasury_account": "012-1908",
       "name": "Renewable Energy Program Account",
-      "basis": "Renewable energy assistance for agricultural producers and rural businesses."
+      "basis": "Renewable energy assistance for agricultural producers and rural businesses.",
+      "role": "Mitigation and clean energy",
+      "coverage": "Account-level; may include purposes beyond climate."
     },
     {
       "treasury_account": "089-0321",
       "name": "Energy Efficiency and Renewable Energy",
-      "basis": "Explicit energy efficiency and renewable energy account."
+      "basis": "Explicit energy efficiency and renewable energy account.",
+      "role": "Mitigation and clean energy",
+      "coverage": "Account-level; may include purposes beyond climate."
     },
     {
       "treasury_account": "089-2297",
       "name": "Office of Clean Energy Demonstrations",
-      "basis": "Explicit clean energy demonstration account."
+      "basis": "Explicit clean energy demonstration account.",
+      "role": "Mitigation and clean energy",
+      "coverage": "Account-level; may include purposes beyond climate."
     },
     {
       "treasury_account": "089-0322",
       "name": "Advanced Technology Vehicles Manufacturing Loan Program",
-      "basis": "Advanced-technology vehicle manufacturing program; account obligations, not loan face value."
+      "basis": "Advanced-technology vehicle manufacturing program; account obligations, not loan face value.",
+      "role": "Mitigation and clean energy",
+      "coverage": "Account-level; may include purposes beyond climate."
     },
     {
       "treasury_account": "020-0964",
       "name": "Clean Vehicle Credit",
-      "basis": "Explicit clean vehicle credit account."
+      "basis": "Explicit clean vehicle credit account.",
+      "role": "Mitigation and clean energy",
+      "coverage": "Account-level; may include purposes beyond climate."
     },
     {
       "treasury_account": "020-0965",
       "name": "Credit for Previously-owned Clean Vehicles",
-      "basis": "Explicit clean vehicle credit account."
+      "basis": "Explicit clean vehicle credit account.",
+      "role": "Mitigation and clean energy",
+      "coverage": "Account-level; may include purposes beyond climate."
     },
     {
       "treasury_account": "020-0947",
       "name": "Payment to Issuer of New Clean Renewable Energy Bonds",
-      "basis": "Explicit clean renewable energy bond account."
+      "basis": "Explicit clean renewable energy bond account.",
+      "role": "Mitigation and clean energy",
+      "coverage": "Account-level; may include purposes beyond climate."
     },
     {
       "treasury_account": "020-0948",
       "name": "Payment to Issuer of Qualified Energy Conservation Bonds",
-      "basis": "Explicit energy conservation bond account."
+      "basis": "Explicit energy conservation bond account.",
+      "role": "Mitigation and clean energy",
+      "coverage": "Account-level; may include purposes beyond climate."
     },
     {
       "treasury_account": "020-0080",
       "name": "Clean Technology Fund Program Account",
-      "basis": "Explicit clean technology fund account."
+      "basis": "Explicit clean technology fund account.",
+      "role": "Mitigation and clean energy",
+      "coverage": "Account-level; may include purposes beyond climate."
+    },
+    {
+      "treasury_account": "070-0500",
+      "name": "Flood Map Modernization Fund",
+      "role": "Adaptation and resilience",
+      "basis": "Flood-hazard mapping and risk analysis supports adaptation to changing flood risk, and includes non-climate hazards.",
+      "coverage": "Climate-related, mixed-purpose account; the full amount is not a climate-only allocation."
+    },
+    {
+      "treasury_account": "070-0716",
+      "name": "National Pre-disaster Mitigation Fund",
+      "role": "Adaptation and resilience",
+      "basis": "Pre-disaster mitigation supports resilience to weather-related hazards, and also includes other hazards.",
+      "coverage": "Climate-related, mixed-purpose account; the full amount is not a climate-only allocation."
+    },
+    {
+      "treasury_account": "086-0482",
+      "name": "Green and Resilient Retrofit Program for Multifamily Housing",
+      "role": "Mitigation and resilience",
+      "basis": "Green and Resilient Retrofit supports energy and water efficiency and resilience in housing.",
+      "coverage": "Climate-related, mixed-purpose account; the full amount is not a climate-only allocation."
     }
   ],
   "limitations": [
-    "This is not a comprehensive inventory of federal climate funding, nor a claim that every dollar in each selected account is exclusively for climate mitigation.",
-    "Broad fossil-energy research, oil and gas development, general environmental cleanup, climate science and adaptation are not classified as mitigation by this lens.",
-    "Mixed accounts such as EPA Environmental Programs and Management may contain climate programs but are omitted until a documented program-level allocation is available.",
-    "The lens preserves existing funding scope, non-financing exclusions, source obligations and missing-year treatment. No new dollar allocations are estimated."
+    "This is a reviewed, non-exhaustive climate-related account lens, not a comprehensive federal climate budget. Whole-account obligations can include other activities.",
+    "It covers reviewed mitigation and clean energy accounts and selected adaptation/resilience accounts. It excludes broad fossil-energy research and oil/gas development.",
+    "Large mixed science budgets such as NOAA Operations, Research and Facilities and NASA Science cannot be assigned a defensible climate-only share from these account data and are omitted; climate science is therefore undercounted.",
+    "The existing non-financing and entitlement/interest scope exclusions still apply. No estimated climate-only dollar shares are introduced."
   ]
 }

@@ -14,7 +14,7 @@ async function get(path){const r=await fetch(path+'?v=sectors-20261111');if(!r.o
 let agencies=[],current='',sortKey='funding',sortDir=-1,showAll=false;
 const MEASURES=[
  {key:'people',label:'People',sub:'Civilian employees · OPM',a:'Dec 2024',b:'Sep 2026',fmt:num,explore:'Explore in People →'},
- {key:'funding',label:'Funding',sub:'Funds committed (obligations) · OMB SF 133 · funding choices scope',a:'FY2024',b:'FY2026',fmt:money,explore:'Explore in Funding Priorities →'},
+ {key:'funding',label:'Funding',sub:'Funds committed (obligations) · OMB SF 133 · non-entitlement, non-interest funding scope',a:'FY2024',b:'FY2026',fmt:money,explore:'Explore in Funding Priorities →'},
  {key:'awards',label:'Awards',sub:'Award obligations · USAspending · benefits excluded',a:'FY2024',b:'FY2026',fmt:money,explore:'Explore in Money Flows →'}
 ];
 Promise.all([get('data/workforce-changes.json'),get('data/authority-comparison.json'),get('data/entitlement-accounts.json'),get('data/agencies.json'),get('data/spending-workforce-crosswalk.json'),get('data/outbound/agency-changes.json.gz')]).then(([work,authority,ent,directory,cross,awardRows])=>{
