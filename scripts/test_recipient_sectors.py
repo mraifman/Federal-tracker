@@ -23,7 +23,7 @@ class RecipientSectorTests(unittest.TestCase):
         for code in ['Q','R','22','23']:
             self.assertEqual(assistance_sector(code),'Private sector')
         for code in [None,'','X','ZZ','99']:
-            self.assertEqual(assistance_sector(code),'Unknown / unclassified')
+            self.assertEqual(assistance_sector(code),'Other · as reported')
 
     def test_individuals_are_protected_even_with_other_flags(self):
         for code in ['P','21','PRG','PAB','HP']:

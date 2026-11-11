@@ -9,7 +9,12 @@ ROOT=a.ROOT;prior=json.loads((ROOT/'data/outbound-awards.json').read_text());pri
 con=duckdb.connect(str(STAGE/'analysis.duckdb'));con.execute("SET memory_limit='2GB'");con.execute('SET threads=4');con.execute("SET temp_directory='"+str(STAGE.parent/'spill')+"'")
 if not con.execute("SELECT count(*) FROM information_schema.views WHERE table_name='units'").fetchone()[0]:
     src=(ROOT/'scripts/analyze_external_awards.py').read_text();m=re.search(r'con\.execute\("(CREATE OR REPLACE VIEW units AS .*?)"\)',src);con.execute(m.group(1))
-program_rules=apply_rules(con);print('Program-eligibility rules classified',format(sum(r['transactions'] for r in program_rules['applied']),','),'transactions.',flush=True)
+con.execute("UPDATE tx SET sector='Other · as reported' WHERE sector='Unknown / unclassified'")
+program_rules=apply_rules(con)
+prev={r['program_code']:r for r in (prior_audit.get('program_rules') or {}).get('applied',[])}
+for r in program_rules['applied']:
+    if r['program_code'] in prev:r['transactions']+=prev[r['program_code']]['transactions'];r['amount']+=prev[r['program_code']]['amount']
+print('Program-eligibility rules classified',format(sum(r['transactions'] for r in program_rules['applied']),','),'transactions.',flush=True)
 audit=a.records('SELECT year,source_kind,reported_business_types_code,reported_business_types_description,prior_keyword_sector,sector,count(*) transaction_count,sum(amount) amount FROM tx GROUP BY ALL',con)
 reviewed=a.records("SELECT year,transaction_key,program_code,program_name,recipient_id,recipient_name,reported_business_types_code,reported_business_types_description,sector,amount FROM tx WHERE source_kind='assistance' AND program_code IN ('66.957','66.960') ORDER BY year,program_code,recipient_id,transaction_key",con)
 (OUT/'data').mkdir(parents=True,exist_ok=True)

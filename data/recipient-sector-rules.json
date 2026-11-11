@@ -73,7 +73,7 @@
   "Foreign entities"
  ],
  "reason": "Higher education must be explicitly reported; nonprofit definitions exclude higher education and are not positive academic evidence. Any individual flag wins for privacy. These mutually exclusive analytic groups are not official program-purpose assignments.",
- "unknown": "Unmapped or missing classifications stay Unknown / unclassified.",
+ "unknown": "Records whose reported type is the federal code X (Other), or that carry no recognized code, are shown as \"Other · as reported\". Nothing is inferred from names or addresses.",
  "contract_scope": "Contract grouping remains based on explicit reported boolean organization-type flags; the assistance keyword correction is not applied to contract descriptions.",
  "government_levels": {
   "basis": "FABS government codes split by level: A/00 state (F = U.S. territory or possession), B/C/D/G/01/02/04/05 local governments and school districts, I/J/K/11 tribal governments, L authorities and commissions, E regional organizations. Contracts use the reported boolean organization-type flags for the same levels, plus federal and foreign governments.",

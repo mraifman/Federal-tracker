@@ -1,7 +1,7 @@
 """Assign a recipient class from program eligibility to records the agency coded as Other.
 
 Rules live in data/program-recipient-rules.json. A rule applies only to assistance
-records whose sector is still 'Unknown / unclassified' after explicit FABS codes and
+records whose sector is still 'Other · as reported' after explicit FABS codes and
 same-UEI evidence; it never overrides a reported recipient type and never reads names.
 """
 import json,pathlib
@@ -15,7 +15,7 @@ def load_rules():
 def apply_rules(con):
     data=load_rules();applied=[]
     for rule in data['rules']:
-        n,amt=con.execute("SELECT count(*),coalesce(sum(amount),0) FROM tx WHERE source_kind='assistance' AND sector='Unknown / unclassified' AND program_code=?",[rule['program_code']]).fetchone()
-        if n:con.execute("UPDATE tx SET sector=? WHERE source_kind='assistance' AND sector='Unknown / unclassified' AND program_code=?",[rule['sector'],rule['program_code']])
+        n,amt=con.execute("SELECT count(*),coalesce(sum(amount),0) FROM tx WHERE source_kind='assistance' AND sector='Other · as reported' AND program_code=?",[rule['program_code']]).fetchone()
+        if n:con.execute("UPDATE tx SET sector=? WHERE source_kind='assistance' AND sector='Other · as reported' AND program_code=?",[rule['sector'],rule['program_code']])
         applied.append({'program_code':rule['program_code'],'program_name':rule['program_name'],'sector':rule['sector'],'eligibility':rule['eligibility'],'transactions':n,'amount':amt})
     return {'version':data['version'],'rules_file':'data/program-recipient-rules.json','basis':data['definition'],'applied':applied}

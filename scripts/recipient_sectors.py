@@ -37,4 +37,4 @@ def codes(value):
 
 def assistance_sector(value):
     reported = codes(value)
-    return next((group for group in PRIORITY if reported & GROUPS[group]), 'Unknown / unclassified')
+    return next((group for group in PRIORITY if reported & GROUPS[group]), 'Other · as reported')

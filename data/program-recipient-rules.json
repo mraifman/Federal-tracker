@@ -1,7 +1,7 @@
 {
   "version": "program-recipient-rules-v1",
   "definition": "For a small set of assistance programs whose eligible recipients are fixed by statute or program rule, an award record that the agency coded with recipient type X (Other) is assigned the program's recipient class. The rule never overrides a reported recipient type, never reads recipient names or addresses, and applies only to records that would otherwise be unclassified. Every affected program is listed here with the eligibility basis; audit counts are in data/recipient-sector-audit.json.",
-  "applies_to": "Records with sector 'Unknown / unclassified' after explicit FABS codes and same-UEI evidence; program code must match exactly.",
+  "applies_to": "Records with sector 'Other · as reported' after explicit FABS codes and same-UEI evidence; program code must match exactly.",
   "rules": [
     {"program_code": "14.850", "program_name": "Public Housing Operating Fund", "sector": "Housing authorities", "eligibility": "Public housing agencies only (42 U.S.C. 1437g)."},
     {"program_code": "14.872", "program_name": "Public Housing Capital Fund", "sector": "Housing authorities", "eligibility": "Public housing agencies only (42 U.S.C. 1437g)."},
