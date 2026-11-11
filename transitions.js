@@ -10,7 +10,7 @@ const pct=(a,b)=>a>0&&b!=null?(b/a-1)*100:null;
 const fmtPct=p=>p==null?'n/a':(p>0?'+':'')+p.toFixed(1)+'%';
 const sign=(n,f)=>n==null?'—':(n>0?'+':n<0?'−':'')+f(Math.abs(n));
 const title=v=>window.AtlasChartTools?.displayName?window.AtlasChartTools.displayName(v):String(v||'');
-async function get(path){const r=await fetch(path);if(!r.ok)throw Error(path);if(!path.endsWith('.gz'))return r.json();const raw=await r.arrayBuffer(),b=new Uint8Array(raw);if(b[0]===31&&b[1]===139)return JSON.parse(await new Response(new Blob([raw]).stream().pipeThrough(new DecompressionStream('gzip'))).text());return JSON.parse(new TextDecoder().decode(raw));}
+async function get(path){const r=await fetch(path+'?v=sectors-20261111');if(!r.ok)throw Error(path);if(!path.endsWith('.gz'))return r.json();const raw=await r.arrayBuffer(),b=new Uint8Array(raw);if(b[0]===31&&b[1]===139)return JSON.parse(await new Response(new Blob([raw]).stream().pipeThrough(new DecompressionStream('gzip'))).text());return JSON.parse(new TextDecoder().decode(raw));}
 let agencies=[],current='',sortKey='funding',sortDir=-1,showAll=false;
 const MEASURES=[
  {key:'people',label:'People',sub:'Civilian employees · OPM',a:'Dec 2024',b:'Sep 2026',fmt:num,explore:'Explore in People →'},
