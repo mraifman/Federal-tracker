@@ -1,1 +1,261 @@
-{"retrieved_on":"2026-11-07","source":"https://www.whitehouse.gov/wp-content/uploads/2026/04/budauth_fy2027.xlsx","baseline_year":2024,"comparison_year":2026,"total":{"a":6977804000000,"b":7564835000000},"categories":[{"name":"Mandatory","a":4240317000000,"b":4783389000000,"pct":12.8,"share_a":60.8,"share_b":63.2},{"name":"Discretionary","a":1857585000000,"b":1765240000000,"pct":-5.0,"share_a":26.6,"share_b":23.3},{"name":"Net interest","a":879902000000,"b":1016206000000,"pct":15.5,"share_a":12.6,"share_b":13.4}],"net_interest_trend":[{"year":2015,"amount":223196000000},{"year":2016,"amount":240033000000},{"year":2017,"amount":262535000000},{"year":2018,"amount":324985000000},{"year":2019,"amount":375881000000},{"year":2020,"amount":344785000000},{"year":2021,"amount":352333000000},{"year":2022,"amount":475885000000},{"year":2023,"amount":658296000000},{"year":2024,"amount":879902000000},{"year":2025,"amount":970692000000},{"year":2026,"amount":1016206000000},{"year":2027,"amount":1065368000000}],"discretionary":{"a":1857585000000,"b":1765240000000,"pct":-5.0,"cuts":[{"function":"Department of Defense-Military","amount":-52063000000},{"function":"International development and humanitarian assistance","amount":-24040000000},{"function":"Disaster relief and insurance","amount":-14254000000},{"function":"International security assistance","amount":-12195000000},{"function":"Mortgage credit","amount":-4775000000},{"function":"Energy supply","amount":-3757000000},{"function":"Ground transportation","amount":-3129000000}],"adds":[{"function":"Other advancement of commerce","amount":12603000000},{"function":"Housing assistance","amount":8653000000},{"function":"Air transportation","amount":2597000000},{"function":"Food and nutrition assistance","amount":1234000000}]},"basis":"OMB budget-authority database (FY2027 release). Budget authority, not outlays. Net interest is gross interest net of offsetting collections. FY2027 continuing-resolution figures are not shown."}
+{
+ "retrieved_on": "2026-11-07",
+ "source": "https://www.whitehouse.gov/wp-content/uploads/2026/04/budauth_fy2027.xlsx",
+ "baseline_year": 2024,
+ "comparison_year": 2026,
+ "total": {
+  "a": 6977804000000,
+  "b": 7564835000000
+ },
+ "categories": [
+  {
+   "name": "Mandatory",
+   "a": 4240317000000,
+   "b": 4783389000000,
+   "pct": 12.8,
+   "share_a": 60.8,
+   "share_b": 63.2
+  },
+  {
+   "name": "Discretionary",
+   "a": 1857585000000,
+   "b": 1765240000000,
+   "pct": -5.0,
+   "share_a": 26.6,
+   "share_b": 23.3
+  },
+  {
+   "name": "Net interest",
+   "a": 879902000000,
+   "b": 1016206000000,
+   "pct": 15.5,
+   "share_a": 12.6,
+   "share_b": 13.4
+  }
+ ],
+ "net_interest_trend": [
+  {
+   "year": 2015,
+   "amount": 223196000000
+  },
+  {
+   "year": 2016,
+   "amount": 240033000000
+  },
+  {
+   "year": 2017,
+   "amount": 262535000000
+  },
+  {
+   "year": 2018,
+   "amount": 324985000000
+  },
+  {
+   "year": 2019,
+   "amount": 375881000000
+  },
+  {
+   "year": 2020,
+   "amount": 344785000000
+  },
+  {
+   "year": 2021,
+   "amount": 352333000000
+  },
+  {
+   "year": 2022,
+   "amount": 475885000000
+  },
+  {
+   "year": 2023,
+   "amount": 658296000000
+  },
+  {
+   "year": 2024,
+   "amount": 879902000000
+  },
+  {
+   "year": 2025,
+   "amount": 970692000000
+  },
+  {
+   "year": 2026,
+   "amount": 1016206000000
+  },
+  {
+   "year": 2027,
+   "amount": 1065368000000
+  }
+ ],
+ "discretionary": {
+  "a": 1857585000000,
+  "b": 1765240000000,
+  "pct": -5.0,
+  "cuts": [
+   {
+    "function": "Department of Defense-Military",
+    "amount": -52063000000
+   },
+   {
+    "function": "International development and humanitarian assistance",
+    "amount": -24040000000
+   },
+   {
+    "function": "Disaster relief and insurance",
+    "amount": -14254000000
+   },
+   {
+    "function": "International security assistance",
+    "amount": -12195000000
+   },
+   {
+    "function": "Mortgage credit",
+    "amount": -4775000000
+   },
+   {
+    "function": "Energy supply",
+    "amount": -3757000000
+   },
+   {
+    "function": "Ground transportation",
+    "amount": -3129000000
+   }
+  ],
+  "adds": [
+   {
+    "function": "Other advancement of commerce",
+    "amount": 12603000000
+   },
+   {
+    "function": "Housing assistance",
+    "amount": 8653000000
+   },
+   {
+    "function": "Air transportation",
+    "amount": 2597000000
+   },
+   {
+    "function": "Food and nutrition assistance",
+    "amount": 1234000000
+   }
+  ]
+ },
+ "basis": "OMB budget-authority database (FY2027 release). Budget authority, not outlays. Net interest is gross interest net of offsetting collections. FY2027 continuing-resolution figures are not shown.",
+ "choices": {
+  "basis": "OMB SF 133 year-end reports, FY2024 and FY2026, all non-financing accounts. Shares, reductions and increases all use obligations (line 2190): funds committed during the year. Reductions and increases are within funding choices, by topic, as in the Funding Priorities view. Exclusions: data/entitlement-accounts.json.",
+  "total": {
+   "a": 9184917977170.908,
+   "b": 10554716851598.828
+  },
+  "categories": [
+   {
+    "name": "Entitlement benefit programs",
+    "a": 5027836896876.971,
+    "b": 6047192261580.058,
+    "share_a": 54.74013931723339,
+    "share_b": 57.29374218754176
+   },
+   {
+    "name": "Net interest on the debt",
+    "a": 1149557674230.5798,
+    "b": 1381623253726.24,
+    "share_a": 12.515709743819189,
+    "share_b": 13.090102493056948
+   },
+   {
+    "name": "Self-financed funds",
+    "a": 190205362129.96,
+    "b": 98822525852.23999,
+    "share_a": 2.07084442781868,
+    "share_b": 0.9362877966477173
+   },
+   {
+    "name": "Funding choices",
+    "a": 2817318043933.3975,
+    "b": 3027078810440.2905,
+    "share_a": 30.67330651112873,
+    "share_b": 28.67986752275357
+   }
+  ],
+  "choices_obligations": {
+   "a": 2817318043933.4,
+   "b": 3027078810440.2896
+  },
+  "cuts": [
+   {
+    "topic": "Education, training & social services",
+    "a": 268510236142.5301,
+    "b": 197161169755.17,
+    "amount": -71349066387.36008
+   },
+   {
+    "topic": "Community development & disaster relief",
+    "a": 97130699309.17,
+    "b": 63218896222.32001,
+    "amount": -33911803086.84999
+   },
+   {
+    "topic": "International affairs",
+    "a": 98487131980.09998,
+    "b": 70674823592.11,
+    "amount": -27812308387.989975
+   },
+   {
+    "topic": "Natural resources & environment",
+    "a": 147687107182.00995,
+    "b": 120284416805.62997,
+    "amount": -27402690376.379974
+   },
+   {
+    "topic": "Commerce & housing credit",
+    "a": 62095320680.90002,
+    "b": 43295259962.80999,
+    "amount": -18800060718.090027
+   },
+   {
+    "topic": "Medicare",
+    "a": 3976509118.35,
+    "b": 3699705632.87,
+    "amount": -276803485.48
+   }
+  ],
+  "adds": [
+   {
+    "topic": "Defense",
+    "a": 994496570460.3099,
+    "b": 1233870717471.6196,
+    "amount": 239374147011.3097
+   },
+   {
+    "topic": "Law enforcement & justice",
+    "a": 97830080366.02003,
+    "b": 172462768352.35004,
+    "amount": 74632687986.33
+   },
+   {
+    "topic": "Transportation",
+    "a": 174541662557.83,
+    "b": 216295078650.8499,
+    "amount": 41753416093.01993
+   },
+   {
+    "topic": "Agriculture",
+    "a": 42954827332.920006,
+    "b": 57092654800.54999,
+    "amount": 14137827467.629982
+   },
+   {
+    "topic": "Income security",
+    "a": 119786901116.69003,
+    "b": 126917607122.65999,
+    "amount": 7130706005.969955
+   },
+   {
+    "topic": "General government",
+    "a": 66676655128.99003,
+    "b": 70462923123.16005,
+    "amount": 3786267994.170021
+   }
+  ]
+ }
+}

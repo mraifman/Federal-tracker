@@ -1,100 +1,306 @@
 {
   "version": "entitlement-accounts-v1",
-  "definition": "Benefit programs that pay individuals, or pay states on their behalf, under eligibility rules fixed in law: anyone who qualifies is entitled to the benefit, and spending follows caseloads and formulas rather than an annual funding decision. Interest on the national debt is set aside on the same basis. Mandatory funding that pays for government operations, such as direct appropriations to immigration enforcement, is a funding choice and remains in the breakdowns.",
+  "definition": "Benefit programs that pay individuals, or pay states on their behalf, under eligibility rules fixed in law: anyone who qualifies is entitled to the benefit, and spending follows caseloads and formulas rather than an annual funding decision. Interest on the national debt is set aside on the same basis. Mandatory funding that pays for government operations, such as direct appropriations to immigration enforcement, is a funding choice and remains in the breakdowns. Self-financed funds whose activity follows claims, premiums or customers' deposits rather than a funding decision — deposit and share insurance, pension insurance, the Universal Service Fund, the Exchange Stabilization Fund and the Foreign Military Sales trust fund — are set aside on the same basis.",
   "basis": "OMB SF 133 Treasury account codes from the retained FY2024 and FY2026 reports. Classification is by account, not by agency, and applies to the whole account; mixed accounts are not split. The list is exhaustive for the retained reports and is reviewed by name. 'Mandatory' in budget law is wider than this list: it also covers highways, crop insurance, student loans, deposit insurance and other formula or credit programs, which stay visible as choices.",
-  "excluded_topics": ["Net interest"],
+  "excluded_topics": [
+    "Net interest"
+  ],
   "groups": [
     {
       "name": "Social Security and railroad retirement",
       "accounts": [
-        {"treasury_account": "028-8006", "name": "Federal Old-Age and Survivors Insurance Trust Fund"},
-        {"treasury_account": "028-8007", "name": "Federal Disability Insurance Trust Fund"},
-        {"treasury_account": "028-0404", "name": "Payments to Social Security Trust Funds"},
-        {"treasury_account": "028-0406", "name": "Supplemental Security Income Program"},
-        {"treasury_account": "060-8010", "name": "Railroad Social Security Equivalent Benefit Account"},
-        {"treasury_account": "060-8011", "name": "Rail Industry Pension Fund"},
-        {"treasury_account": "060-8118", "name": "National Railroad Retirement Investment Trust"}
+        {
+          "treasury_account": "028-8006",
+          "name": "Federal Old-Age and Survivors Insurance Trust Fund"
+        },
+        {
+          "treasury_account": "028-8007",
+          "name": "Federal Disability Insurance Trust Fund"
+        },
+        {
+          "treasury_account": "028-0404",
+          "name": "Payments to Social Security Trust Funds"
+        },
+        {
+          "treasury_account": "028-0406",
+          "name": "Supplemental Security Income Program"
+        },
+        {
+          "treasury_account": "060-8010",
+          "name": "Railroad Social Security Equivalent Benefit Account"
+        },
+        {
+          "treasury_account": "060-8011",
+          "name": "Rail Industry Pension Fund"
+        },
+        {
+          "treasury_account": "060-8118",
+          "name": "National Railroad Retirement Investment Trust"
+        }
       ]
     },
     {
       "name": "Medicare",
       "accounts": [
-        {"treasury_account": "075-8004", "name": "Federal Supplementary Medical Insurance Trust Fund"},
-        {"treasury_account": "075-8005", "name": "Federal Hospital Insurance Trust Fund"},
-        {"treasury_account": "075-8308", "name": "Medicare Prescription Drug Account"},
-        {"treasury_account": "075-0580", "name": "Payments to Health Care Trust Funds"},
-        {"treasury_account": "075-0585", "name": "Taxation on OASDI Benefits"}
+        {
+          "treasury_account": "075-8004",
+          "name": "Federal Supplementary Medical Insurance Trust Fund"
+        },
+        {
+          "treasury_account": "075-8005",
+          "name": "Federal Hospital Insurance Trust Fund"
+        },
+        {
+          "treasury_account": "075-8308",
+          "name": "Medicare Prescription Drug Account"
+        },
+        {
+          "treasury_account": "075-0580",
+          "name": "Payments to Health Care Trust Funds"
+        },
+        {
+          "treasury_account": "075-0585",
+          "name": "Taxation on OASDI Benefits"
+        }
       ]
     },
     {
       "name": "Medicaid, CHIP and marketplace credits",
       "accounts": [
-        {"treasury_account": "075-0512", "name": "Grants to States for Medicaid"},
-        {"treasury_account": "075-0515", "name": "Children's Health Insurance Fund"},
-        {"treasury_account": "075-0949", "name": "Refundable Premium Assistance Tax Credit"}
+        {
+          "treasury_account": "075-0512",
+          "name": "Grants to States for Medicaid"
+        },
+        {
+          "treasury_account": "075-0515",
+          "name": "Children's Health Insurance Fund"
+        },
+        {
+          "treasury_account": "075-0949",
+          "name": "Refundable Premium Assistance Tax Credit"
+        }
       ]
     },
     {
       "name": "Nutrition, income support and refundable credits",
       "accounts": [
-        {"treasury_account": "012-3505", "name": "Supplemental Nutrition Assistance Program"},
-        {"treasury_account": "012-3539", "name": "State Child Nutrition Programs"},
-        {"treasury_account": "020-0906", "name": "Payment Where Earned Income Credit Exceeds Liability for Tax"},
-        {"treasury_account": "020-0922", "name": "Payment Where Child Credit Exceeds Liability for Tax"},
-        {"treasury_account": "016-8042", "name": "Unemployment Trust Fund"},
-        {"treasury_account": "075-1552", "name": "Temporary Assistance for Needy Families"},
-        {"treasury_account": "075-1545", "name": "Payments to States for Foster Care and Permanency"},
-        {"treasury_account": "075-1501", "name": "Payments to States for Child Support Enforcement and Family Support"}
+        {
+          "treasury_account": "012-3505",
+          "name": "Supplemental Nutrition Assistance Program"
+        },
+        {
+          "treasury_account": "012-3539",
+          "name": "State Child Nutrition Programs"
+        },
+        {
+          "treasury_account": "020-0906",
+          "name": "Payment Where Earned Income Credit Exceeds Liability for Tax"
+        },
+        {
+          "treasury_account": "020-0922",
+          "name": "Payment Where Child Credit Exceeds Liability for Tax"
+        },
+        {
+          "treasury_account": "016-8042",
+          "name": "Unemployment Trust Fund"
+        },
+        {
+          "treasury_account": "075-1552",
+          "name": "Temporary Assistance for Needy Families"
+        },
+        {
+          "treasury_account": "075-1545",
+          "name": "Payments to States for Foster Care and Permanency"
+        },
+        {
+          "treasury_account": "075-1501",
+          "name": "Payments to States for Child Support Enforcement and Family Support"
+        }
       ]
     },
     {
       "name": "Federal civilian and military retirement and retiree health",
       "accounts": [
-        {"treasury_account": "024-8135", "name": "Civil Service Retirement and Disability Fund"},
-        {"treasury_account": "024-0200", "name": "Payment to Civil Service Retirement and Disability Fund"},
-        {"treasury_account": "024-0206", "name": "Government Payment for Annuitants, Employees Health Benefits"},
-        {"treasury_account": "024-5391", "name": "Postal Service Retiree Health Benefits Fund"},
-        {"treasury_account": "019-8186", "name": "Foreign Service Retirement and Disability Fund"},
-        {"treasury_account": "070-0602", "name": "Retired Pay (Coast Guard)"},
-        {"treasury_account": "097-8097", "name": "Military Retirement Fund"},
-        {"treasury_account": "097-0040", "name": "Payment to Military Retirement Fund"},
-        {"treasury_account": "097-0041", "name": "Concurrent Receipt Accrual Payments to the Military Retirement Fund"},
-        {"treasury_account": "097-0850", "name": "Payment to DoD Medicare-Eligible Retiree Health Care Fund"},
-        {"treasury_account": "097-5472", "name": "DoD Medicare-Eligible Retiree Health Care Fund"},
-        {"treasury_account": "021-1004", "name": "Medicare-Eligible Retiree Health Fund Contribution, Army"},
-        {"treasury_account": "017-1000", "name": "Medicare-Eligible Retiree Health Fund Contribution, Navy"},
-        {"treasury_account": "017-1001", "name": "Medicare-Eligible Retiree Health Fund Contribution, Marine Corps"},
-        {"treasury_account": "057-1007", "name": "Medicare-Eligible Retiree Health Fund Contribution, Air Force"},
-        {"treasury_account": "021-1006", "name": "Medicare-Eligible Retiree Health Fund Contribution, National Guard"}
+        {
+          "treasury_account": "024-8135",
+          "name": "Civil Service Retirement and Disability Fund"
+        },
+        {
+          "treasury_account": "024-0200",
+          "name": "Payment to Civil Service Retirement and Disability Fund"
+        },
+        {
+          "treasury_account": "024-0206",
+          "name": "Government Payment for Annuitants, Employees Health Benefits"
+        },
+        {
+          "treasury_account": "024-5391",
+          "name": "Postal Service Retiree Health Benefits Fund"
+        },
+        {
+          "treasury_account": "019-8186",
+          "name": "Foreign Service Retirement and Disability Fund"
+        },
+        {
+          "treasury_account": "070-0602",
+          "name": "Retired Pay (Coast Guard)"
+        },
+        {
+          "treasury_account": "097-8097",
+          "name": "Military Retirement Fund"
+        },
+        {
+          "treasury_account": "097-0040",
+          "name": "Payment to Military Retirement Fund"
+        },
+        {
+          "treasury_account": "097-0041",
+          "name": "Concurrent Receipt Accrual Payments to the Military Retirement Fund"
+        },
+        {
+          "treasury_account": "097-0850",
+          "name": "Payment to DoD Medicare-Eligible Retiree Health Care Fund"
+        },
+        {
+          "treasury_account": "097-5472",
+          "name": "DoD Medicare-Eligible Retiree Health Care Fund"
+        },
+        {
+          "treasury_account": "021-1004",
+          "name": "Medicare-Eligible Retiree Health Fund Contribution, Army"
+        },
+        {
+          "treasury_account": "017-1000",
+          "name": "Medicare-Eligible Retiree Health Fund Contribution, Navy"
+        },
+        {
+          "treasury_account": "017-1001",
+          "name": "Medicare-Eligible Retiree Health Fund Contribution, Marine Corps"
+        },
+        {
+          "treasury_account": "057-1007",
+          "name": "Medicare-Eligible Retiree Health Fund Contribution, Air Force"
+        },
+        {
+          "treasury_account": "021-1006",
+          "name": "Medicare-Eligible Retiree Health Fund Contribution, National Guard"
+        }
       ]
     },
     {
       "name": "Veterans' benefits",
       "accounts": [
-        {"treasury_account": "036-0102", "name": "Disability Compensation Benefits"},
-        {"treasury_account": "036-0137", "name": "Readjustment Benefits (education and training)"},
-        {"treasury_account": "036-1126", "name": "Cost of War Toxic Exposures Fund"}
+        {
+          "treasury_account": "036-0102",
+          "name": "Disability Compensation Benefits"
+        },
+        {
+          "treasury_account": "036-0137",
+          "name": "Readjustment Benefits (education and training)"
+        },
+        {
+          "treasury_account": "036-1126",
+          "name": "Cost of War Toxic Exposures Fund"
+        }
       ]
     },
     {
       "name": "Statutory compensation funds",
       "accounts": [
-        {"treasury_account": "016-1523", "name": "Energy Employees Occupational Illness Compensation Fund"},
-        {"treasury_account": "015-0139", "name": "Victims Compensation Fund"},
-        {"treasury_account": "015-0333", "name": "Payment to Radiation Exposure Compensation Trust Fund"},
-        {"treasury_account": "015-8116", "name": "Radiation Exposure Compensation Trust Fund"}
+        {
+          "treasury_account": "016-1523",
+          "name": "Energy Employees Occupational Illness Compensation Fund"
+        },
+        {
+          "treasury_account": "015-0139",
+          "name": "Victims Compensation Fund"
+        },
+        {
+          "treasury_account": "015-0333",
+          "name": "Payment to Radiation Exposure Compensation Trust Fund"
+        },
+        {
+          "treasury_account": "015-8116",
+          "name": "Radiation Exposure Compensation Trust Fund"
+        }
+      ]
+    },
+    {
+      "name": "Self-financed and claims-driven funds",
+      "accounts": [
+        {
+          "treasury_account": "051-4596",
+          "name": "FDIC Deposit Insurance Fund",
+          "reason": "Premium-financed; obligations are bank-failure resolution costs."
+        },
+        {
+          "treasury_account": "025-4468",
+          "name": "NCUA Credit Union Share Insurance Fund",
+          "reason": "Premium-financed insurance."
+        },
+        {
+          "treasury_account": "027-5183",
+          "name": "FCC Universal Service Fund",
+          "reason": "Financed by telecommunications carrier contributions, not appropriations."
+        },
+        {
+          "treasury_account": "016-4204",
+          "name": "Pension Benefit Guaranty Corporation Fund",
+          "reason": "Premium-financed pension insurance; payments follow plan terminations."
+        },
+        {
+          "treasury_account": "020-4444",
+          "name": "Exchange Stabilization Fund",
+          "reason": "Treasury's standing currency-stabilization fund; activity is not appropriated."
+        },
+        {
+          "treasury_account": "011-8242",
+          "name": "Foreign Military Sales Trust Fund",
+          "reason": "Holds foreign governments' deposits for their own purchases; not U.S. funding."
+        },
+        {
+          "treasury_account": "070-4236",
+          "name": "National Flood Insurance Fund",
+          "reason": "Premium-financed insurance; payments follow flood claims."
+        }
       ]
     }
   ],
   "kept_as_choices_examples": [
-    {"treasury_account": "070-0540", "name": "DHS Operations and Support (incl. immigration enforcement)", "reason": "Direct appropriation for operations; a policy choice, not a benefit formula."},
-    {"treasury_account": "069-8083", "name": "Federal-aid Highways", "reason": "Contract authority for programs, not individual benefits."},
-    {"treasury_account": "091-0243", "name": "Federal Direct Student Loan Program Account", "reason": "Credit program subsidy; shown as a choice."},
-    {"treasury_account": "012-3510", "name": "WIC", "reason": "Annually appropriated (discretionary)."},
-    {"treasury_account": "016-4204", "name": "Pension Benefit Guaranty Corporation Fund", "reason": "Premium-financed insurance, not a benefit formula."}
+    {
+      "treasury_account": "070-0540",
+      "name": "DHS Operations and Support (incl. immigration enforcement)",
+      "reason": "Direct appropriation for operations; a policy choice, not a benefit formula."
+    },
+    {
+      "treasury_account": "069-8083",
+      "name": "Federal-aid Highways",
+      "reason": "Contract authority for programs, not individual benefits."
+    },
+    {
+      "treasury_account": "091-0243",
+      "name": "Federal Direct Student Loan Program Account",
+      "reason": "Credit program subsidy; shown as a choice."
+    },
+    {
+      "treasury_account": "012-3510",
+      "name": "WIC",
+      "reason": "Annually appropriated (discretionary)."
+    },
+    {
+      "treasury_account": "016-4204",
+      "name": "Pension Benefit Guaranty Corporation Fund",
+      "reason": "Premium-financed insurance, not a benefit formula."
+    }
   ],
   "sources": [
-    {"title": "OMB Circular A-11, section 20 (mandatory and discretionary; entitlement authority)", "url": "https://www.whitehouse.gov/wp-content/uploads/2025/08/a11.pdf"},
-    {"title": "OMB SF 133 budget execution reports", "url": "https://www.whitehouse.gov/omb/information-resources/guidance/budget-execution-reporting/"}
+    {
+      "title": "OMB Circular A-11, section 20 (mandatory and discretionary; entitlement authority)",
+      "url": "https://www.whitehouse.gov/wp-content/uploads/2025/08/a11.pdf"
+    },
+    {
+      "title": "OMB SF 133 budget execution reports",
+      "url": "https://www.whitehouse.gov/omb/information-resources/guidance/budget-execution-reporting/"
+    }
   ]
 }

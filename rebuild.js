@@ -93,34 +93,31 @@
 
   // ---- the budget's structure: mandatory vs discretionary, and the debt ----
   let budgetSection='';
-  if(budget&&budget.categories&&budget.categories.length){
-   const cm={};budget.categories.forEach(c=>cm[c.name]=c);
-   const disc=cm['Discretionary'],mand=cm['Mandatory'],ni=cm['Net interest'];
-   const color={'Mandatory':'#6b7f88','Discretionary':'#43838b','Net interest':'#c27a4e'};
-   const stackRow=(label,key,total)=>'<div class="bud-stack"><span class="bud-year">'+label+'</span><span class="bud-bar">'+
-     budget.categories.map(c=>{const pct=c[key]/total*100;return '<span class="bud-seg" style="width:'+pct+'%;background:'+color[c.name]+'">'+(pct>11?'<span class="bud-seg-lbl">'+pct.toFixed(0)+'%</span>':'')+'</span>';}).join('')+'</span></div>';
-   // net-interest trajectory on the presidential-election cycle
-   const tr=budget.net_interest_trend.filter(d=>[2016,2020,2024,2026].includes(d.year));
-   const W=360,H=118,L=5,R=5,Tp=14,Bm=24;
-   const maxY=Math.max(...tr.map(d=>d.amount))*1.08,sx=i=>L+i/(tr.length-1)*(W-L-R),sy=v=>Tp+(1-v/maxY)*(H-Tp-Bm);
-   const pts=tr.map((d,i)=>sx(i)+','+sy(d.amount)).join(' ');
-   const spark='<svg viewBox="0 0 '+W+' '+H+'" class="interest-spark" role="img" aria-label="Net interest on the national debt by presidential-election year">'+
-     '<polyline points="'+pts+'" fill="none" stroke="#242151" stroke-width="2.5"/>'+
-     tr.map((d,i)=>'<circle cx="'+sx(i)+'" cy="'+sy(d.amount)+'" r="3.5" fill="#242151"/><text x="'+sx(i)+'" y="'+(H-9)+'" text-anchor="'+(i===0?'start':i===tr.length-1?'end':'middle')+'" font-size="10" fill="#5d727b">'+d.year+'</text><text x="'+sx(i)+'" y="'+(sy(d.amount)-8)+'" text-anchor="'+(i===tr.length-1?'end':i===0?'start':'middle')+'" font-size="10" font-weight="600" fill="#242151">'+money(d.amount)+'</text>').join('')+'</svg>';
-   const dc=budget.discretionary.cuts.slice(0,6),dmax=Math.max(1,...dc.map(c=>Math.abs(c.amount)));
-   const dbars=dc.map(c=>'<div class="disc-row"><span class="disc-name">'+esc(c.function)+'</span><span class="disc-track"><i style="width:'+(Math.abs(c.amount)/dmax*100)+'%"></i></span><span class="disc-val">−'+money(Math.abs(c.amount))+'</span></div>').join('');
+  if(budget&&budget.choices&&budget.choices.categories&&budget.choices.categories.length){
+   const ch=budget.choices,cats=ch.categories,tot=ch.total,by={};cats.forEach(c=>by[c.name]=c);
+   const ent=by['Entitlement benefit programs'],ni=by['Net interest on the debt'],choices=by['Funding choices'];
+   const omb={};(budget.categories||[]).forEach(c=>omb[c.name]=c);const niTrend=omb['Net interest']||{};
+   const color={'Entitlement benefit programs':'#6b7f88','Net interest on the debt':'#c27a4e','Self-financed funds':'#aeb8c8','Funding choices':'#43838b'};
+   const stackRow=(label,key)=>'<div class="bud-stack"><span class="bud-year">'+label+'</span><span class="bud-bar">'+cats.map(c=>{const pct=c[key]/tot[key]*100;return '<span class="bud-seg" style="width:'+pct+'%;background:'+color[c.name]+'" title="'+esc(c.name)+' · '+pct.toFixed(1)+'%">'+(pct>11?'<span class="bud-seg-lbl">'+pct.toFixed(0)+'%</span>':'')+'</span>';}).join('')+'</span></div>';
+   // net-interest trajectory on the presidential-election cycle (OMB budget database)
+   const tr=(budget.net_interest_trend||[]).filter(d=>[2016,2020,2024,2026].includes(d.year));
+   let spark='';
+   if(tr.length>1){const W=360,H=118,L=5,R=5,Tp=14,Bm=24,maxY=Math.max(...tr.map(d=>d.amount))*1.08,sx=i=>L+i/(tr.length-1)*(W-L-R),sy=v=>Tp+(1-v/maxY)*(H-Tp-Bm),pts=tr.map((d,i)=>sx(i)+','+sy(d.amount)).join(' ');
+    spark='<svg viewBox="0 0 '+W+' '+H+'" class="interest-spark" role="img" aria-label="Net interest on the national debt by presidential-election year"><polyline points="'+pts+'" fill="none" stroke="#242151" stroke-width="2.5"/>'+tr.map((d,i)=>'<circle cx="'+sx(i)+'" cy="'+sy(d.amount)+'" r="3.5" fill="#242151"/><text x="'+sx(i)+'" y="'+(H-9)+'" text-anchor="'+(i===0?'start':i===tr.length-1?'end':'middle')+'" font-size="10" fill="#5d727b">'+d.year+'</text><text x="'+sx(i)+'" y="'+(sy(d.amount)-8)+'" text-anchor="'+(i===tr.length-1?'end':i===0?'start':'middle')+'" font-size="10" font-weight="600" fill="#242151">'+money(d.amount)+'</text>').join('')+'</svg>';}
+   const bars=(list,cls)=>{const mx=Math.max(1,...list.map(c=>Math.abs(c.amount)));return list.map(c=>'<div class="disc-row"><span class="disc-name">'+esc(c.topic)+'</span><span class="disc-track"><i class="'+cls+'" style="width:'+(Math.abs(c.amount)/mx*100)+'%"></i></span><span class="disc-val">'+(c.amount<0?'−':'+')+money(Math.abs(c.amount))+'</span></div>').join('')};
+   const pct=(choices.b/choices.a-1)*100,cuts=ch.cuts.filter(c=>Math.abs(c.amount)>=1e9),adds=ch.adds.filter(c=>c.amount>=1e9);
    budgetSection='<section class="budget-structure">'+
-    '<h2>Discretionary budget authority fell from '+disc.share_a.toFixed(0)+'% to '+disc.share_b.toFixed(0)+'% of the budget</h2>'+
-    '<p class="section-lede">Congress’s annual funding decisions cover just <b>'+disc.share_b.toFixed(0)+'%</b> of the budget. Mandatory spending — mostly entitlements such as Social Security, Medicare and Medicaid, plus other formula programs — is <b>'+mand.share_b.toFixed(0)+'%</b>; interest on the debt takes <b>'+ni.share_b.toFixed(0)+'%</b>.</p>'+
-    '<div class="bud-stacks"><div class="bud-legend">'+budget.categories.map(c=>'<span><i style="background:'+color[c.name]+'"></i>'+esc({Mandatory:'Mandatory · mostly entitlements',Discretionary:'Discretionary · annual choices','Net interest':'Net interest on the debt'}[c.name]||c.name)+'</span>').join('')+'</div>'+
-     stackRow('FY2024','a',budget.total.a)+stackRow('FY2026','b',budget.total.b)+
-     '<p class="muted">'+money(disc.a)+' to '+money(disc.b)+' ('+disc.pct.toFixed(0)+'%), squeezed by growing mandatory programs and debt interest.</p></div>'+
+    '<h2>Funding choices fell from '+choices.share_a.toFixed(0)+'% to '+choices.share_b.toFixed(0)+'% of what the government committed</h2>'+
+    '<p class="section-lede">Entitlement benefit programs — Social Security, Medicare, Medicaid and similar — took <b>'+ent.share_b.toFixed(0)+'%</b> of funds committed in FY2026; interest on the debt <b>'+ni.share_b.toFixed(0)+'%</b>. Everything else — the funding choices this site examines — was <b>'+choices.share_b.toFixed(0)+'%</b>.</p>'+
+    '<div class="bud-stacks"><div class="bud-legend">'+cats.map(c=>'<span><i style="background:'+color[c.name]+'"></i>'+esc(c.name)+'</span>').join('')+'</div>'+
+     stackRow('FY2024','a')+stackRow('FY2026','b')+
+     '<p class="muted">Funding choices: '+money(choices.a)+' to '+money(choices.b)+' committed ('+(pct>0?'+':'')+pct.toFixed(0)+'%); entitlements and interest grew faster.</p></div>'+
     '<div class="budget-grid">'+
-     '<div class="debt-panel"><h3>The national debt’s interest grew '+ni.pct.toFixed(0)+'% from 2024 to 2026</h3>'+
-      '<p class="chart-note">Net interest more than quadrupled since 2016, past <b>'+money(ni.b)+'</b> — more than any discretionary function. Election-cycle years.</p>'+spark+'</div>'+
-     '<div class="disc-panel"><h3>Largest discretionary reductions</h3>'+
-      '<p class="chart-note">Largest discretionary cuts, FY2024 → FY2026.</p>'+dbars+'</div></div>'+
-    '<p class="muted">'+esc(budget.basis)+'</p>'+
+     '<div class="debt-panel"><h3>The national debt’s interest grew '+(niTrend.pct!=null?niTrend.pct.toFixed(0)+'% ':'')+'from 2024 to 2026</h3>'+
+      '<p class="chart-note">Net interest more than quadrupled since 2016, past <b>'+money(niTrend.b||ni.b)+'</b> — more than any single funding choice. Election-cycle years.</p>'+spark+'</div>'+
+     '<div class="disc-panel"><h3>Largest reductions in funding choices</h3><p class="chart-note">Funds committed, FY2024 → FY2026.</p>'+bars(cuts,'')+
+      '<h3 class="disc-second">Largest increases in funding choices</h3>'+bars(adds,'gain')+'</div></div>'+
+    '<p class="muted">'+esc(ch.basis)+'</p>'+
    '</section>';
   }
 
