@@ -77,8 +77,7 @@
  "contract_scope": "Contract grouping remains based on explicit reported boolean organization-type flags; the assistance keyword correction is not applied to contract descriptions.",
  "government_levels": {
   "basis": "FABS government codes split by level: A/00 state (F = U.S. territory or possession), B/C/D/G/01/02/04/05 local governments and school districts, I/J/K/11 tribal governments, L authorities and commissions, E regional organizations. Contracts use the reported boolean organization-type flags for the same levels, plus federal and foreign governments.",
-  "unknown_inheritance": "An unclassified record inherits a sector only when the same UEI reports exactly one sector elsewhere in these archives; conflicting or absent evidence stays unclassified. Counts are recorded in the sector audit.",
-  "residual": "Published data of 2026-11-11: a small residual of contract recipients (about $3.5B of FY2024 obligations) remains in the combined Government / public bodies group; a corrected rebuild assigns them by level."
+  "unknown_inheritance": "An unclassified record inherits a sector only when the same UEI reports exactly one sector elsewhere in these archives; conflicting or absent evidence stays unclassified. Counts are recorded in the sector audit."
  },
  "foreign": "W (non-domestic entity) is reported separately as Foreign entities; it is never inferred from names or addresses."
 }
