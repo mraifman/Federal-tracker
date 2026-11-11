@@ -123,11 +123,11 @@
   root.innerHTML=
   '<section class="service-people">'+
    '<h2>The people behind public services</h2>'+
-   '<p class="section-lede">Changes in the inspectors, scientists and specialists who deliver public services. Most cards compare December 2024 with September 2026; † marks a same-season comparison. Select a role to explore its agency.</p>'+
+   '<p class="section-lede">Changes in the inspectors, scientists and specialists who deliver public services. Most cards compare December 2024 with September 2026; † marks a same‑season comparison. Select a role to explore its agency.</p>'+
    serviceGroups+
   '</section>'+
   '<section class="demolition">'+
-   '<h2>Agencies and experience hollowed out</h2>'+
+   '<h2>Agencies and staff experience hollowed out</h2>'+
    '<div class="demolition-grid">'+
     '<div class="grade-chart"><h3>Change in headcount by pay grade</h3>'+
      '<div class="grade-bars">'+gradeBars+'</div>'+

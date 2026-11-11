@@ -54,7 +54,7 @@
     for (const n of [-100,-50,0,50,100]) svg+='<line x1="'+x(n)+'" x2="'+x(n)+'" y1="'+T+'" y2="'+(H-B)+'" stroke="'+(n===0?'#b9c6ef66':'#b9c6ef15')+'" '+(n===0?'':'stroke-dasharray="2 5"')+'/><text x="'+x(n)+'" y="'+(H-B+23)+'" text-anchor="middle">'+(n>0?'+':'')+n+'%</text>';
     for (const n of [1,100,10000,1000000].filter(n=>Math.log10(n)<=logMax)) svg+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+y(n)+'" y2="'+y(n)+'" stroke="#b9c6ef15" stroke-dasharray="2 5"/><text x="'+(L-10)+'" y="'+(y(n)+3)+'" text-anchor="end">'+(n>=1e6?'1M':n>=1e3?n/1e3+'k':n)+'</text>';
     svg+='<text class="hero-y-title" transform="translate(16 '+((T+H-B)/2)+') rotate(-90)" text-anchor="middle">Employees in Dec. 2024</text>';
-    svg+='<text x="'+(W-R)+'" y="'+(H-8)+'" text-anchor="end">Change in Headcount (%)</text>';
+    svg+='<text x="'+((L+W-R)/2)+'" y="'+(H-8)+'" text-anchor="middle">Change in Headcount (%)</text>';
     for (const [i,r] of rows.entries()) {
       const color=r.b<r.a?'#f47797':r.b>r.a?'#75d6d7':'#acb4d6';
       svg+='<g class="hero-point" role="button" tabindex="'+(i===0?'0':'-1')+'" data-hero-agency="'+esc(r.id)+'" aria-label="'+esc(r.name)+': '+number(r.a)+' to '+number(r.b)+' employees; '+signed(r.b-r.a)+'; '+r.pct.toFixed(1)+' percent"><circle cx="'+x(r.pct)+'" cy="'+y(r.a)+'" r="9" fill="'+color+'" opacity=".3" filter="url(#atlas-glow)"/><circle class="point-core" cx="'+x(r.pct)+'" cy="'+y(r.a)+'" r="3.3" fill="'+color+'"/>';
@@ -62,7 +62,7 @@
       svg+='</g>';
     }
     map.innerHTML=svg+'</svg>';map.append(document.querySelector('.hero-key'));
-    const heroSvg=map.querySelector('svg');new ResizeObserver(entries=>{const width=entries[0].contentRect.width;if(width)heroSvg.style.setProperty('--hero-axis-size',Math.max(12,14*W/width)+'px')}).observe(map);
+    const heroSvg=map.querySelector('svg');new ResizeObserver(entries=>{const width=entries[0].contentRect.width;if(width)heroSvg.style.setProperty('--hero-axis-size',(14*W/width)+'px')}).observe(map);
     const points=[...map.querySelectorAll('[data-hero-agency]')];
     points.forEach((point,i)=>{
       const r=rows[i];

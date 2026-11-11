@@ -184,3 +184,11 @@ body{font-size:16px}input,select{font-size:16px}label{font-size:16px}.outline,bu
  #funding-context .bud-year{font-size:14px}
  #funding-context .funding-composition h3{font-size:22px}
 }
+/* People filters: one type size for every label and control */
+#workforce-app .explore-filters label,#workforce-app .explore-filters input,#workforce-app .explore-filters select{font-size:14px}
+/* People: the bubble chart takes the full stage; the side list of plotted units is not shown */
+#workforce-app .atlas-bubble-stage{display:block}#workforce-app .chart-ledger{display:none}
+/* Section ledes: wider measure and balanced line breaks */
+.service-people .section-lede,.demolition .section-lede{max-width:92ch;text-wrap:pretty}
+/* Pay-grade chart sits unboxed beside the agency list */
+.demolition .grade-chart{border:0;background:transparent;padding:0}
