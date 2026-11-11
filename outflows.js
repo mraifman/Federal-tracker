@@ -133,7 +133,8 @@ function renderAwardGraphic(rows, onSelect) {
   const start=position(row.a),end=position(row.b);
   button.style.setProperty('--baseline-position',start+'%');
   button.style.setProperty('--ink',change<0?'#d8506e':change>0?'#34858c':'#8894b0');
-  button.innerHTML='<span class="endpoint-caption"><strong>'+esc(titleCase(row.name))+'</strong><small>'+esc(money(row.a))+' → '+esc(money(row.b))+'</small>'+(row.parentLabels?'<small class="award-parent">'+esc(window.AtlasChartTools.displayName(row.parentLabels))+'</small>':'')+ruleTag(row)+legalTag(row)+'</span><span class="endpoint-track" aria-hidden="true"><i class="endpoint-line" style="left:'+Math.min(start,end)+'%;width:'+Math.abs(start-end)+'%"></i><i class="endpoint-before" style="left:'+start+'%"></i><i class="endpoint-after" style="left:'+end+'%"></i></span><b>'+esc(signed(change))+'</b>';
+  const primary=awardSort==='amount'?money(row.b):signed(change),secondary=awardSort==='amount'?'<small class="award-secondary">'+esc(signed(change))+' vs FY2024</small>':'';
+  button.innerHTML='<span class="endpoint-caption"><strong>'+esc(titleCase(row.name))+'</strong>'+(group==='recipient'&&row.id&&row.id!=='INDIVIDUALS'?'<small class="award-id">'+esc(row.id)+'</small>':'')+'<small>'+esc(money(row.a))+' → '+esc(money(row.b))+'</small>'+(row.parentLabels?'<small class="award-parent">'+esc(window.AtlasChartTools.displayName(row.parentLabels))+'</small>':'')+ruleTag(row)+legalTag(row)+'</span><span class="endpoint-track" aria-hidden="true"><i class="endpoint-line" style="left:'+Math.min(start,end)+'%;width:'+Math.abs(start-end)+'%"></i><i class="endpoint-before" style="left:'+start+'%"></i><i class="endpoint-after" style="left:'+end+'%"></i></span><b>'+esc(primary)+secondary+'</b>';
   button.onclick=()=>onSelect(row);
   grid.append(button);
  }
