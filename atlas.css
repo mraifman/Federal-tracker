@@ -112,4 +112,4 @@ body[data-view="evidence"] main>.universe-hero,body[data-view="evidence"] .peopl
 .transition-table{margin:18px 0 0}.transition-table>summary{cursor:pointer;font:500 13px var(--slab);padding:10px 0}.transition-table th button{background:none;border:0;padding:0;font:inherit;color:inherit;cursor:pointer;text-decoration:underline dotted;text-underline-offset:3px}.transition-table td[data-tone=loss]{color:var(--coral)}.transition-table td[data-tone=gain]{color:var(--teal)}.transition-table td small{color:var(--muted);margin-left:4px}.transition-table tr.is-current td{background:#efeffa}
 @media(max-width:650px){.transitions{padding:22px 18px 18px}.transitions-controls select{min-width:0;width:100%}.transitions-controls label{width:100%}}
 /* The cross-measure block belongs with the investigations, not the evidence page */
-body[data-view=evidence] #agency-transitions{display:none}
+[data-project-panel] #agency-transitions{margin:26px -28px 0;border-inline:0;box-shadow:none}#agency-transitions[hidden]{display:none}

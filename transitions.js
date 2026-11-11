@@ -67,6 +67,9 @@ function explore(row,key){
  else window.dispatchEvent(new CustomEvent('horizon-focus-award-agency',{detail:{code:row.code}}));
  document.getElementById(tab+'-panel')?.scrollIntoView({behavior:'smooth',block:'start'});
 }
+// The block lives inside whichever investigation tab is open; it is never part of About the Evidence.
+function place(){const view=document.body.dataset.view||'workforce';const panel=document.getElementById({workforce:'workforce',funding:'funding',uses:'uses'}[view]+'-panel');if(!panel){host.hidden=true;return}host.hidden=false;if(host.parentElement!==panel)panel.append(host)}
+place();new MutationObserver(place).observe(document.body,{attributes:true,attributeFilter:['data-view']});
 // Keep the picker in step with selections made elsewhere on the page.
 window.addEventListener('horizon-focus-award-agency',e=>{if(agencies.some(a=>a.code===e.detail?.code)){current=e.detail.code;render()}});
 window.addEventListener('atlas-focus-workforce',e=>{const hit=agencies.find(a=>a.opm===e.detail?.department);if(hit){current=hit.code;render()}});

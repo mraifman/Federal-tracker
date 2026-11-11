@@ -4,14 +4,14 @@ window.AtlasBubbles={render(host,rows,options={}){const el=typeof host==='string
 /* Source identifiers sit inside the circles. Full names and exact figures live
    in the shared tooltip and the adjacent source-unit ledger. Positions only fit
    the diagram; they imply neither geographic nor semantic relationships. */
-window.AtlasBubbles.callouts=function(svg,nodes,{width=1100,height=650,padding=100}={}){
+window.AtlasBubbles.callouts=function(svg,nodes,{width=1100,height=650,padding=100,stretch=1}={}){
  const selection=d3.select(svg);
  selection.selectAll('g.bubble-callouts,g.bubble-leaders').remove();
  const packed=nodes.map(node=>({r:node.radius+5,node}));
  if(packed.length){
   d3.packSiblings(packed);const bounds=d3.packEnclose(packed);
   const scale=Math.min((width-padding)/(bounds.r*2),(height-padding)/(bounds.r*2));
-  packed.forEach(p=>{p.node.x=width/2+(p.x-bounds.x)*scale;p.node.y=height/2+(p.y-bounds.y)*scale;p.node.radius=(p.r-5)*scale});
+  packed.forEach(p=>{p.node.x=width/2+(p.x-bounds.x)*scale*stretch;p.node.y=height/2+(p.y-bounds.y)*scale;p.node.radius=(p.r-5)*scale});
  }
  // The overview has clear space beside International Affairs for this tiny dot.
  const environment=nodes.find(n=>n.id==='300'&&n.radius<36);
