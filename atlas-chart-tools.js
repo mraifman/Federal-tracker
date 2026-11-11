@@ -64,7 +64,7 @@ window.AtlasChartTools = {
     this.tables(host.closest('[data-project-panel]'));
     const setMode=next=>{
       host.dataset.chartMode=next;svg.dataset.chartMode=next;svg.style.display=next==='bubbles'?'':'none';stage.hidden=next!=='bubbles';colorControl.parentElement.hidden=next!=='bubbles';list.hidden=next!=='ranked';
-      if(next==='bubbles'&&!people){const scene=d3.select(svg);this.bubbleLabels(scene.selectAll('.allocation-name'),d=>d);scene.selectAll('.allocation-value').attr('y',function(d){return d3.select(this.parentNode).select('.allocation-name').selectAll('tspan').size()>2?42:d.radius>45?27:15;});}
+      if(next==='bubbles'&&!people){const scene=d3.select(svg);this.bubbleLabels(scene.selectAll('.allocation-name'),d=>d);scene.selectAll('.allocation-value').attr('y',function(d){return d.callout?7:d3.select(this.parentNode).select('.allocation-name').selectAll('tspan').size()>2?42:d.radius>45?27:15;});}
       toolbar.querySelectorAll('[data-chart-mode]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.chartMode===next)));
     };
     toolbar.querySelectorAll('[data-chart-mode]').forEach(button=>button.onclick=()=>setMode(button.dataset.chartMode));setMode(mode);
@@ -90,7 +90,7 @@ window.AtlasChartTools = {
     const api=this;
     selection.each(function(d){
       const row=reader(d),radius=d.radius,text=d3.select(this).text('');
-      const uniform=this.classList.contains('allocation-name');if(radius<(uniform?36:28))return;
+      const uniform=this.classList.contains('allocation-name');if(uniform&&d.callout)return;if(radius<(uniform?36:28))return;
       const label=api.shortLabel(row),width=radius*1.72,maxLines=radius>55?3:radius>45?2:1;
       let size=uniform?20:radius>85?26:radius>55?22:17,lines=[];
       const probe=text.append('tspan');

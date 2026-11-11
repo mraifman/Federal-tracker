@@ -82,3 +82,6 @@ body[data-view="evidence"] main>.universe-hero,body[data-view="evidence"] .peopl
    Explanatory paragraphs and the shared editorial headline retain sentence case;
    source acronyms and identifiers retain their original spelling. */
 :where(h1,h2,h3,h4,h5,h6):not(.hero-statement), :where(label,button,summary,th,option), .flow-change-heading, .hero-footer>a, .evidence-index>a, .bubble-breadcrumb, .endpoint-caption>strong, .hero-signal-label, .funding-hero-signal>span {text-transform:capitalize}
+
+/* External labels reveal smaller funding bubbles without shrinking their type. */
+.allocation-bubbles .bubble-callouts,.allocation-bubbles .bubble-leaders{display:block}.bubble-callout-label{font:500 16px var(--sans);fill:var(--navy)}.bubble-callouts>g{cursor:pointer}.bubble-leaders{pointer-events:none}.bubble-leaders path{fill:none;stroke:#6a7794;stroke-width:1.2;vector-effect:non-scaling-stroke}.section-hero .bubble-callout-label{fill:#e4e7f6}.section-hero .bubble-leaders path{stroke:#c2c8e2;stroke-opacity:.8}.bubble-callouts>g:hover text,.bubble-callouts>g:focus text{fill:var(--coral);text-decoration:underline}.bubble-callouts>g:focus{outline:none}
