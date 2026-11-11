@@ -107,8 +107,8 @@
    const bars=(list,cls)=>{const mx=Math.max(1,...list.map(c=>Math.abs(c.amount)));return list.map(c=>'<div class="disc-row '+cls+'"><span class="disc-name">'+esc(c.topic)+'</span><span class="disc-track"><i class="'+cls+'" style="width:'+(Math.abs(c.amount)/mx*100)+'%"></i></span><span class="disc-val">'+(c.amount<0?'−':'+')+money(Math.abs(c.amount))+'</span></div>').join('')};
    const pct=(choices.b/choices.a-1)*100,cuts=ch.cuts.filter(c=>Math.abs(c.amount)>=1e9),adds=ch.adds.filter(c=>c.amount>=1e9);
    budgetSection='<section class="budget-structure">'+
-    '<h2>Funding choices fell from '+choices.share_a.toFixed(0)+'% to '+choices.share_b.toFixed(0)+'% of what the government committed</h2>'+
-    '<p class="section-lede">Entitlement benefit programs — Social Security, Medicare, Medicaid and similar — took <b>'+ent.share_b.toFixed(0)+'%</b> of funds committed in FY2026; interest on the debt <b>'+ni.share_b.toFixed(0)+'%</b>. Everything else — the funding choices this site examines — was <b>'+choices.share_b.toFixed(0)+'%</b>.</p>'+
+    '<h2>Funding choices are '+choices.share_b.toFixed(0)+'% of what the government commits, down from '+choices.share_a.toFixed(0)+'%</h2>'+
+    '<p class="section-lede">Of every dollar the government committed in FY2026, entitlement benefit programs — Social Security, Medicare, Medicaid and similar — took <b>'+ent.share_b.toFixed(0)+'%</b> and interest on the debt <b>'+ni.share_b.toFixed(0)+'%</b>. Both grew faster than the funding choices this site examines, which are everything else.</p>'+
     '<div class="bud-stacks"><div class="bud-legend">'+cats.map(c=>'<span><i style="background:'+color[c.name]+'"></i>'+esc(c.name)+'</span>').join('')+'</div>'+
      stackRow('FY2024','a')+stackRow('FY2026','b')+
      '<p class="muted">Funding choices: '+money(choices.a)+' to '+money(choices.b)+' committed ('+(pct>0?'+':'')+pct.toFixed(0)+'%); entitlements and interest grew faster.</p></div>'+
