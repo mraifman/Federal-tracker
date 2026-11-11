@@ -8,7 +8,7 @@
  const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  const num=n=>Math.round(n).toLocaleString('en-US');
  const money=n=>{const v=Math.abs(n),d=v>=1e12?1e12:v>=1e9?1e9:v>=1e6?1e6:1;return (n<0?'−':'')+'$'+(v/d).toLocaleString('en-US',{maximumFractionDigits:d===1?0:v/d>=100?0:1})+({1:'',1e6:'M',1e9:'B',1e12:'T'}[d]);};
- const title=s=>String(s).toLowerCase().replace(/\b\w/g,c=>c.toUpperCase()).replace(/\b(Usda|Nih|Cdc|Fda|Epa|Irs|Fbi|Sba|Nasa|Nsf|Usaid|U\.s\.)\b/gi,c=>c.toUpperCase());
+ const title=s=>window.AtlasChartTools.displayName(s);
 
  function focusWorkforce(code){
   if(!code)return;
@@ -107,7 +107,7 @@
    const bars=(list,cls)=>{const mx=Math.max(1,...list.map(c=>Math.abs(c.amount)));return list.map(c=>'<div class="disc-row '+cls+'"><span class="disc-name">'+esc(c.topic)+'</span><span class="disc-track"><i class="'+cls+'" style="width:'+(Math.abs(c.amount)/mx*100)+'%"></i></span><span class="disc-val">'+(c.amount<0?'−':'+')+money(Math.abs(c.amount))+'</span></div>').join('')};
    const pct=(choices.b/choices.a-1)*100,cuts=ch.cuts.filter(c=>Math.abs(c.amount)>=1e9),adds=ch.adds.filter(c=>c.amount>=1e9);
    budgetSection='<section class="budget-structure">'+
-    '<h2>Entitlement spending requires a growing share of resources</h2>'+
+    '<h2>The share of resources for non-entitlement spending is shrinking</h2>'+
     '<p class="section-lede">Entitlement benefit programs — Social Security, Medicare, Medicaid and similar — required <b>'+ent.share_b.toFixed(0)+'%</b> of what the government committed in FY2026, up from '+ent.share_a.toFixed(0)+'% in FY2024.</p>'+
     '<div class="bud-stacks"><div class="bud-legend">'+cats.map(c=>'<span><i style="background:'+color[c.name]+'"></i>'+esc(c.name)+'</span>').join('')+'</div>'+
      stackRow('FY2024','a')+stackRow('FY2026','b')+

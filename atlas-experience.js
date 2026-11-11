@@ -4,7 +4,7 @@
   'use strict';
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const number = value => Math.round(value).toLocaleString('en-US');
-  const title = value => value.toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
+  const title = value => window.AtlasChartTools.displayName(value);
   const signed = value => (value < 0 ? '−' : value > 0 ? '+' : '') + number(Math.abs(value));
   const header = document.querySelector('.site-header');
   if (header && window.ResizeObserver) new ResizeObserver(() => document.documentElement.style.setProperty('--header-height', header.getBoundingClientRect().height + 'px')).observe(header);
@@ -20,6 +20,15 @@
   addEventListener('scroll', updateHeaderSection, { passive: true });
   addEventListener('resize', updateHeaderSection);
   updateHeaderSection();
+
+  // Explicit text presentation prevents iOS from rendering link arrows as emoji.
+  const plainLinkArrows = root => {
+    if(root.nodeType===Node.TEXT_NODE){if(root.parentElement?.closest('a,button'))root.data=root.data.replace(/↗(?:\uFE0F)?(?!\uFE0E)/gu,'↗\uFE0E');return;}
+    if(root.nodeType!==Node.ELEMENT_NODE)return;
+    const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let node;while(node=walker.nextNode())if(node.parentElement?.closest('a,button'))node.data=node.data.replace(/↗(?:\uFE0F)?(?!\uFE0E)/gu,'↗\uFE0E');
+  };
+  plainLinkArrows(document.body);
+  new MutationObserver(records=>{for(const record of records)for(const node of record.addedNodes)plainLinkArrows(node)}).observe(document.body,{childList:true,subtree:true});
   const map = document.getElementById('hero-map');
   const facts = document.getElementById('atlas-facts');
   const get = async name => {
@@ -44,7 +53,7 @@
     let svg='<svg class="hero-map-svg" viewBox="0 0 '+W+' '+H+'" role="group" aria-label="OPM agency workforce chart: percentage change versus baseline employee count"><desc>Each point is one agency with both observations. Horizontal position is percentage headcount change from December 2024 to September 2026. Vertical position is baseline headcount on a logarithmic scale. Defense is excluded. Use left and right arrow keys to explore agencies.</desc><defs><filter id="atlas-glow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="6"/></filter></defs>';
     for (const n of [-100,-50,0,50,100]) svg+='<line x1="'+x(n)+'" x2="'+x(n)+'" y1="'+T+'" y2="'+(H-B)+'" stroke="'+(n===0?'#b9c6ef66':'#b9c6ef15')+'" '+(n===0?'':'stroke-dasharray="2 5"')+'/><text x="'+x(n)+'" y="'+(H-B+23)+'" text-anchor="middle">'+(n>0?'+':'')+n+'%</text>';
     for (const n of [1,100,10000,1000000].filter(n=>Math.log10(n)<=logMax)) svg+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+y(n)+'" y2="'+y(n)+'" stroke="#b9c6ef15" stroke-dasharray="2 5"/><text x="'+(L-10)+'" y="'+(y(n)+3)+'" text-anchor="end">'+(n>=1e6?'1M':n>=1e3?n/1e3+'k':n)+'</text>';
-    svg+='<text class="hero-y-title" transform="translate(16 '+((T+H-B)/2)+') rotate(-90)" text-anchor="middle"><tspan x="0" dy="0">Employees in</tspan><tspan x="0" dy="1.25em">December 2024</tspan></text>';
+    svg+='<text class="hero-y-title" transform="translate(16 '+((T+H-B)/2)+') rotate(-90)" text-anchor="middle">Employees in Dec. 2024</text>';
     svg+='<text x="'+(W-R)+'" y="'+(H-8)+'" text-anchor="end">Change in Headcount (%)</text>';
     for (const [i,r] of rows.entries()) {
       const color=r.b<r.a?'#f47797':r.b>r.a?'#75d6d7':'#acb4d6';

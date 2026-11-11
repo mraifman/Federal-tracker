@@ -1,0 +1,60 @@
+{
+  "definition": "A conservative account-level lens for climate mitigation and clean energy, separate from the broad environment and energy lens.",
+  "sources": [
+    "data/authority-comparison.json",
+    "https://www.whitehouse.gov/omb/information-resources/guidance/budget-execution-reporting/"
+  ],
+  "accounts": [
+    {
+      "treasury_account": "012-1908",
+      "name": "Renewable Energy Program Account",
+      "basis": "Renewable energy assistance for agricultural producers and rural businesses."
+    },
+    {
+      "treasury_account": "089-0321",
+      "name": "Energy Efficiency and Renewable Energy",
+      "basis": "Explicit energy efficiency and renewable energy account."
+    },
+    {
+      "treasury_account": "089-2297",
+      "name": "Office of Clean Energy Demonstrations",
+      "basis": "Explicit clean energy demonstration account."
+    },
+    {
+      "treasury_account": "089-0322",
+      "name": "Advanced Technology Vehicles Manufacturing Loan Program",
+      "basis": "Advanced-technology vehicle manufacturing program; account obligations, not loan face value."
+    },
+    {
+      "treasury_account": "020-0964",
+      "name": "Clean Vehicle Credit",
+      "basis": "Explicit clean vehicle credit account."
+    },
+    {
+      "treasury_account": "020-0965",
+      "name": "Credit for Previously-owned Clean Vehicles",
+      "basis": "Explicit clean vehicle credit account."
+    },
+    {
+      "treasury_account": "020-0947",
+      "name": "Payment to Issuer of New Clean Renewable Energy Bonds",
+      "basis": "Explicit clean renewable energy bond account."
+    },
+    {
+      "treasury_account": "020-0948",
+      "name": "Payment to Issuer of Qualified Energy Conservation Bonds",
+      "basis": "Explicit energy conservation bond account."
+    },
+    {
+      "treasury_account": "020-0080",
+      "name": "Clean Technology Fund Program Account",
+      "basis": "Explicit clean technology fund account."
+    }
+  ],
+  "limitations": [
+    "This is not a comprehensive inventory of federal climate funding, nor a claim that every dollar in each selected account is exclusively for climate mitigation.",
+    "Broad fossil-energy research, oil and gas development, general environmental cleanup, climate science and adaptation are not classified as mitigation by this lens.",
+    "Mixed accounts such as EPA Environmental Programs and Management may contain climate programs but are omitted until a documented program-level allocation is available.",
+    "The lens preserves existing funding scope, non-financing exclusions, source obligations and missing-year treatment. No new dollar allocations are estimated."
+  ]
+}

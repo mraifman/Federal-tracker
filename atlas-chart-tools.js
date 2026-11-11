@@ -88,7 +88,7 @@ window.AtlasChartTools = {
   displayName(value){
     const names=[...Object.values(this.agencyNames).filter(v=>/^[A-Z0-9]{2,5}$/.test(v)),'FMSHRC','OSHRC','USAID','NIH','CDC','HIV','AIDS','FDA','STEM','DNA','RNA','SBIR','STTR','GOCO','FFRDC','LLC','LLP','LP','PLC','SLS','IBM','SAIC','RTX','BAE','US','USA','AI','IT','PII'];
     const acronyms=new Map(names.map(v=>[v.toLowerCase(),v]));acronyms.set('vs','vs');
-    return String(value||'').toLowerCase().replace(/\b[a-z][a-z0-9]*\b/g,word=>acronyms.get(word)||word[0].toUpperCase()+word.slice(1));
+    return String(value||'').toLowerCase().replace(/\b[a-z][a-z0-9]*\b/g,(word,offset,text)=>word==='a'&&offset>0&&!/[.!?]\s*$/.test(text.slice(0,offset))?'a':acronyms.get(word)||word[0].toUpperCase()+word.slice(1));
   },
   shortLabel(row,maxChars=Infinity){
     const alias=this.agencyLabel(row);
