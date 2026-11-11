@@ -47,7 +47,7 @@ const fs=require('node:fs/promises');
   await page.selectOption('#end','202608');assert((await work.locator('.headline-stats').innerText()).includes('August'));await page.selectOption('#end','202609');
   await page.locator('#workforce-panel').evaluate(e=>e.scrollIntoView({block:'start'}));await page.screenshot({path:'/tmp/federal-redesign-'+width+'-workforce.png'});await noOverflow();
   await page.click(' .site-header [data-explore-view="funding"]');const funding=page.locator('#funding-app');await funding.locator('.allocation-bubble').first().waitFor({state:'attached'});
-  assert.equal(await page.locator('#funding-metric').inputValue(),'net_authority');
+  assert.equal(await page.locator('#funding-metric').inputValue(),'obligations');
   await funding.locator('button[data-chart-mode="ranked"]').click();assert(await funding.locator('.ranked-row:visible').count()>0);
   const original=await funding.locator('.allocation-bubble').first().evaluate(e=>e.__data__);assert.equal(typeof original.a,'number');assert.equal(typeof original.b,'number');
   await page.selectOption('#funding-topic','550');
