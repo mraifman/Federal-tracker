@@ -2,7 +2,7 @@ name: 'Deploy Horizon: 2029'
 on:
   push:
     branches: [main]
-    paths: ['favicon.svg', 'atlas.css', 'atlas-experience.js', 'atlas-chart-tools.js', 'index.html', 'simple.html', 'needs.css', 'needs.js', 'story.js', 'tracker.js', 'tracker.css', 'workforce.js', 'workforce.css', 'research.js', 'research.css', 'atlas-bubbles.js', 'outflows.js', 'award-detail.js', 'legal-review.js', 'notes.js', 'rebuild.js', 'rebuild.css', 'vendor/**', 'data/**', 'scripts/validate_change_data.py', '.github/workflows/pages.yml']
+    paths: ['favicon.svg', 'atlas.css', 'atlas-experience.js', 'atlas-chart-tools.js', 'index.html', 'simple.html', 'needs.css', 'needs.js', 'story.js', 'tracker.js', 'tracker.css', 'workforce.js', 'workforce.css', 'research.js', 'research.css', 'atlas-bubbles.js', 'outflows.js', 'award-detail.js', 'legal-review.js', 'notes.js', 'rebuild.js', 'rebuild.css', 'transitions.js', 'vendor/**', 'data/**', 'scripts/validate_change_data.py', '.github/workflows/pages.yml']
   workflow_dispatch:
 permissions:
   contents: read
