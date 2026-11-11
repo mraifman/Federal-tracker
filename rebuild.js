@@ -118,6 +118,7 @@
      '<div class="disc-panel"><h3>Largest reductions in funding choices</h3><p class="chart-note">Obligations, FY2024 → FY2026.</p>'+bars(cuts,'')+
       '</div></div>'+
     '<div class="disc-panel funding-increases"><h3>Largest increases in funding choices</h3><p class="chart-note">Obligations, FY2024 → FY2026.</p>'+bars(adds,'gain')+'</div>'+
+    (ch.by_topic&&ch.by_topic.length?'<div class="disc-panel choices-totals"><h3>Funds committed in FY2026, by funding choice</h3><p class="chart-note">Obligations within funding choices, largest first; FY2024 and the change shown beneath each amount.</p>'+(()=>{const mx=Math.max(1,...ch.by_topic.map(t=>t.b));return ch.by_topic.map(t=>'<div class="disc-row total"><span class="disc-name">'+esc(t.topic)+'</span><span class="disc-track"><i class="total" style="width:'+(Math.max(0,t.b)/mx*100)+'%"></i></span><span class="disc-val total">'+money(t.b)+'<small>'+money(t.a)+' in FY2024 · '+(t.amount<0?'−':'+')+money(Math.abs(t.amount))+'</small></span></div>').join('')})()+'</div>':'')+
     '<p class="muted">'+esc(ch.basis)+'</p>'+
    '</section>';
   }

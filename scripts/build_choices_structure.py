@@ -33,10 +33,11 @@ order=['Entitlement benefit programs','Net interest on the debt','Self-financed 
 total=[sum(v[0] for v in cat.values()),sum(v[1] for v in cat.values())]
 categories=[{'name':n,'a':cat[n][0],'b':cat[n][1],'share_a':cat[n][0]/total[0]*100,'share_b':cat[n][1]/total[1]*100} for n in order if n in cat]
 changes=sorted(((k,v[0],v[1],v[1]-v[0]) for k,v in topic.items() if not k.startswith(('Mixed','Unclassified'))),key=lambda x:x[3])
+by_topic=sorted(({'topic':k,'a':x,'b':y,'amount':d} for k,x,y,d in changes),key=lambda t:-t['b'])
 cuts=[{'topic':k,'a':x,'b':y,'amount':d} for k,x,y,d in changes if d<0][:6]
 adds=[{'topic':k,'a':x,'b':y,'amount':d} for k,x,y,d in reversed(changes) if d>0][:6]
 p=ROOT/'data/budget-structure.json';b=json.loads(p.read_text())
-b['choices']={'basis':'OMB SF 133 year-end reports, FY2024 and FY2026, all non-financing accounts. Shares, reductions and increases all use obligations (line 2190): funds committed during the year. Reductions and increases are within funding choices, by topic, as in the Funding Priorities view. Exclusions: data/entitlement-accounts.json.','total':{'a':total[0],'b':total[1]},'categories':categories,'choices_obligations':{'a':sum(v[0] for v in topic.values()),'b':sum(v[1] for v in topic.values())},'cuts':cuts,'adds':adds}
+b['choices']={'basis':'OMB SF 133 year-end reports, FY2024 and FY2026, all non-financing accounts. Shares, reductions and increases all use obligations (line 2190): funds committed during the year. Reductions and increases are within funding choices, by topic, as in the Funding Priorities view. Exclusions: data/entitlement-accounts.json.','total':{'a':total[0],'b':total[1]},'categories':categories,'choices_obligations':{'a':sum(v[0] for v in topic.values()),'b':sum(v[1] for v in topic.values())},'cuts':cuts,'adds':adds,'by_topic':by_topic}
 p.write_text(json.dumps(b,indent=1)+'\n')
 for c in categories:print(f"{c['name']:30} ${c['a']/1e12:5.2f}T -> ${c['b']/1e12:5.2f}T   {c['share_a']:4.0f}% -> {c['share_b']:4.0f}%")
 print(f"{'TOTAL':30} ${total[0]/1e12:5.2f}T -> ${total[1]/1e12:5.2f}T");co=b['choices']['choices_obligations'];print(f"choices obligations ${co['a']/1e12:.2f}T -> ${co['b']/1e12:.2f}T ({(co['b']-co['a'])/1e9:+,.0f}B)")
