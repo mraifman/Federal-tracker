@@ -113,3 +113,4 @@ body[data-view="evidence"] main>.universe-hero,body[data-view="evidence"] .peopl
 @media(max-width:650px){.transitions{padding:22px 18px 18px}.transitions-controls select{min-width:0;width:100%}.transitions-controls label{width:100%}}
 /* The cross-measure block belongs with the investigations, not the evidence page */
 [data-project-panel] #agency-transitions{margin:26px 0 0;border:0;border-top:1px solid var(--line);padding-inline:0;box-shadow:none}#agency-transitions[hidden]{display:none}
+.rule-tag{display:inline-block;margin-top:4px;font:500 10.5px/1.4 var(--sans);color:var(--muted);border:1px solid var(--line);padding:1px 6px;border-radius:2px}

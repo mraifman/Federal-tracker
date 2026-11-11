@@ -1,0 +1,38 @@
+{
+  "version": "program-recipient-rules-v1",
+  "definition": "For a small set of assistance programs whose eligible recipients are fixed by statute or program rule, an award record that the agency coded with recipient type X (Other) is assigned the program's recipient class. The rule never overrides a reported recipient type, never reads recipient names or addresses, and applies only to records that would otherwise be unclassified. Every affected program is listed here with the eligibility basis; audit counts are in data/recipient-sector-audit.json.",
+  "applies_to": "Records with sector 'Unknown / unclassified' after explicit FABS codes and same-UEI evidence; program code must match exactly.",
+  "rules": [
+    {"program_code": "14.850", "program_name": "Public Housing Operating Fund", "sector": "Housing authorities", "eligibility": "Public housing agencies only (42 U.S.C. 1437g)."},
+    {"program_code": "14.872", "program_name": "Public Housing Capital Fund", "sector": "Housing authorities", "eligibility": "Public housing agencies only (42 U.S.C. 1437g)."},
+    {"program_code": "20.507", "program_name": "Federal Transit Formula Grants (Urbanized Area)", "sector": "Transit authorities", "eligibility": "Designated recipients, chiefly public transit agencies; states for small urbanized areas (49 U.S.C. 5307)."},
+    {"program_code": "20.525", "program_name": "State of Good Repair Grants", "sector": "Transit authorities", "eligibility": "Designated recipients and states that operate or fund fixed-guideway transit (49 U.S.C. 5337)."},
+    {"program_code": "20.500", "program_name": "Federal Transit Capital Investment Grants", "sector": "Transit authorities", "eligibility": "Public transit project sponsors (49 U.S.C. 5309)."},
+    {"program_code": "20.526", "program_name": "Buses and Bus Facilities", "sector": "Transit authorities", "eligibility": "Designated recipients, states and local authorities that operate fixed-route bus service, and tribes (49 U.S.C. 5339)."},
+    {"program_code": "93.640", "program_name": "Basic Health Program (Affordable Care Act)", "sector": "State governments", "eligibility": "States only (42 U.S.C. 18051)."},
+    {"program_code": "93.917", "program_name": "HIV Care Formula Grants (Ryan White Part B)", "sector": "State governments", "eligibility": "States and territories only (42 U.S.C. 300ff-21)."},
+    {"program_code": "14.228", "program_name": "Community Development Block Grants / State's Program", "sector": "State governments", "eligibility": "States administer the non-entitlement program (42 U.S.C. 5306(d))."},
+    {"program_code": "15.875", "program_name": "Economic, Social and Political Development of the Territories", "sector": "State governments", "eligibility": "Territorial governments; territories are grouped with state governments as in the federal recipient codes."},
+    {"program_code": "93.914", "program_name": "HIV Emergency Relief Project Grants (Ryan White Part A)", "sector": "Local governments", "eligibility": "Chief elected officials of eligible metropolitan and transitional areas (42 U.S.C. 300ff-11)."},
+    {"program_code": "19.515", "program_name": "Contributions to International Organizations for Overseas Assistance", "sector": "International organizations", "eligibility": "Payments to international organizations by definition of the account."},
+    {"program_code": "19.707", "program_name": "Assessed Contributions for State Department", "sector": "International organizations", "eligibility": "Assessed dues to international organizations of which the United States is a member."},
+    {"program_code": "19.790", "program_name": "Contributions to International Organizations (CIO)", "sector": "International organizations", "eligibility": "Payments to international organizations by definition of the account."},
+    {"program_code": "85.002", "program_name": "MCC Foreign Assistance for Overseas Programs", "sector": "Foreign governments", "eligibility": "Compacts and threshold programs are agreements with eligible partner-country governments (22 U.S.C. 7708)."},
+    {"program_code": "98.001", "program_name": "USAID Foreign Assistance for Programs Overseas", "sector": "Foreign assistance recipients", "eligibility": "Program-defined class: implementers of overseas assistance (foreign and U.S. organizations, governments and international bodies); the recipient type itself is not reported."},
+    {"program_code": "19.046", "program_name": "Global Health Security and Transition of Life-Saving Services", "sector": "Foreign assistance recipients", "eligibility": "Program-defined class: implementers of overseas health assistance; recipient type not reported."},
+    {"program_code": "19.045", "program_name": "International Disaster and Humanitarian Response", "sector": "Foreign assistance recipients", "eligibility": "Program-defined class: implementers of overseas humanitarian assistance; recipient type not reported."},
+    {"program_code": "87.006", "program_name": "Political Risk Insurance (DFC)", "sector": "Private sector", "eligibility": "Insurance issued to U.S. private investors and companies (22 U.S.C. 9621)."},
+    {"program_code": "81.126", "program_name": "Federal Loan Guarantees for Innovative Energy Technologies", "sector": "Private sector", "eligibility": "Guarantees to private project sponsors (42 U.S.C. 16513)."},
+    {"program_code": "93.774", "program_name": "Medicare Supplementary Medical Insurance", "sector": "Health care providers & plans", "eligibility": "Payments to enrolled providers, suppliers and Medicare plans by definition of the program; excluded from the site's award views as a mandatory benefit."},
+    {"program_code": "93.773", "program_name": "Medicare Hospital Insurance", "sector": "Health care providers & plans", "eligibility": "Payments to enrolled providers and Medicare plans; excluded from the site's award views as a mandatory benefit."},
+    {"program_code": "93.770", "program_name": "Medicare Prescription Drug Coverage", "sector": "Health care providers & plans", "eligibility": "Payments to Part D plan sponsors; excluded from the site's award views as a mandatory benefit."}
+  ],
+  "not_classified": [
+    {"program_code": "14.267", "reason": "Continuum of Care: nonprofits, states, local governments and housing agencies are all eligible."},
+    {"program_code": "14.239", "reason": "HOME: states and local participating jurisdictions are both eligible."},
+    {"program_code": "14.251", "reason": "Community Project Funding: congressionally directed to named entities of every type."},
+    {"program_code": "10.931", "reason": "Agricultural Conservation Easements: landowners and several entity types are eligible."},
+    {"program_code": "86.001", "reason": "Pension plan termination insurance: payees are plans and participants."},
+    {"program_code": "AZ11, M181 and other contract codes", "reason": "Product or service codes do not define a recipient class."}
+  ]
+}
