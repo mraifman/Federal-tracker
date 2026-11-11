@@ -131,7 +131,7 @@
    serviceGroups+
   '</section>'+
   '<section class="demolition">'+
-   '<h2>Agencies and experience hallowed out</h2>'+
+   '<h2>Agencies and experience hollowed out</h2>'+
    '<div class="demolition-grid">'+
     '<div class="grade-chart"><h3>Change in headcount by pay grade</h3>'+
      '<div class="grade-bars">'+gradeBars+'</div>'+
@@ -141,19 +141,17 @@
   '</section>'+
   '';
   const fundingContext=document.getElementById('funding-context');
-  if(fundingContext){fundingContext.innerHTML=budgetSection;}
+  if(fundingContext){fundingContext.innerHTML=budgetSection;const methodology=fundingContext.querySelector('.budget-structure>:last-child');if(methodology?.classList.contains('muted'))window.AtlasNotes?.publish('budget-release-method','OMB budget-release context',[methodology]);}
 
   // ---- footnotes collected at the very bottom of the page ----
   const methodDetails='<div class="repair-method">'+
-   '<p>December 2024 is a historical comparison point, not a recommended staffing or funding target. The cards describe changes to assess, not a prescribed rebuilding plan.</p>'+
-   '<p><b>Staffing declines.</b> The '+num(p.positions_to_restore)+' figure sums decreases within occupation, pay-plan and grade groups without offsetting growth in other groups. Promotions, reclassifications and turnover can contribute. It is not a count of unique people separated, eliminated jobs or positions that should be rehired. The net non-defense headcount decline, after growth is included, is '+num(-p.net_change)+'.</p>'+
-   '<p><b>Payroll represented.</b> Baseline mean salaries for the same occupation, pay plan and grade are applied to those declines. The estimate includes the existing 33% benefits-and-overhead allowance; it is not observed payroll savings, a wage bill for identified departing people, or a rebuilding budget. Base pay is '+money(p.base_payroll)+'.</p>'+
-   '<p><b>Funding reductions.</b> The card sums account-level decreases outside defense. Increases in other accounts are not subtracted, so this is not the net change in total federal funding or a proposed amount to restore.</p>'+
-   '<p>'+esc(det.methodology.salary_imputation)+' Salaries are reported for '+det.salary_coverage.reported_pct+'% of non-defense staff. '+esc(det.methodology.defense)+'</p>'+
-   '<p>'+'Net headcount changes are not layoff counts. Separations, new hires and transfers are distinct personnel actions. '+esc(f.basis)+' The cash-payment chart includes mandatory funding; topic drill-downs show only discretionary funding.'+' * marks an occupation whose average salary was imputed.</p></div>';
+   '<p>December 2024 is the historical comparison point, not a staffing target. Occupation and pay-grade counts describe reported headcount; promotions, reclassifications and transfers can affect the groups.</p>'+
+   '<p>'+esc(det.methodology.defense)+'</p>'+
+   '<p>Net headcount changes are not layoff counts. Separations, hiring and transfers are distinct personnel actions. '+esc(f.basis)+'</p>'+
+   '<p>'+esc(budget.basis)+' <a href="'+esc(budget.source)+'">OMB FY2027 source release ↗</a> · retrieved '+esc(budget.retrieved_on)+'.</p></div>';
   const pageNotes=document.getElementById('page-notes');
   if(pageNotes){pageNotes.querySelector('#rebuild-notes')?.remove();
-   pageNotes.insertAdjacentHTML('beforeend','<details id="rebuild-notes" class="note-block"><summary>Staffing, payroll and funding measures</summary>'+methodDetails+seasonalNote+'</details>');}
+   pageNotes.insertAdjacentHTML('beforeend','<details id="rebuild-notes" class="note-block"><summary>Workforce and budget comparison methods</summary>'+methodDetails+seasonalNote+'</details>');}
 
   // ---- wire drill-downs ----
   root.querySelectorAll('[data-agency-code]').forEach(el=>el.addEventListener('click',()=>focusWorkforce(el.dataset.agencyCode)));

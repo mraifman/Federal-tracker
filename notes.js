@@ -1,25 +1,17 @@
-/* Keep source and scope detail in one quiet footer, replacing stale view notes. */
+/* One evidence page, with readable sections rather than inline accordions. */
 (()=>{'use strict';
- function collect(id,title,container,selector){
-  const footer=document.getElementById('page-notes');if(!footer)return;
-  const nodes=[...container.querySelectorAll(selector)];
-  document.getElementById(id)?.remove();if(!nodes.length)return;
-  const details=document.createElement('details');details.id=id;details.className='note-block';
-  const summary=document.createElement('summary');summary.textContent=title;details.append(summary);
-  for(const node of nodes){if(node.tagName==='DETAILS'){for(const child of [...node.children])if(child.tagName!=='SUMMARY')details.append(child);node.remove();}else details.append(node);}
-  footer.append(details);
- }
- // Move the static methodology blocks into the same bottom-of-page notes area.
- const footer=document.getElementById('page-notes');
- if(footer){[...document.querySelectorAll('main>section.method')].forEach((section,i)=>{
-  const details=document.createElement('details');details.className='note-block';details.id=section.id||'funding-method-notes';
-  const summary=document.createElement('summary');summary.textContent=i===0?'Workforce · definitions and sources':'Funding and spending · definitions and sources';details.append(summary);
-  for(const child of [...section.children])if(child.tagName!=='H2'&&!child.classList.contains('eyebrow'))details.append(child);
-  section.remove();footer.append(details);
- });}
- window.AtlasNotes={collect};
- document.addEventListener('click',e=>{const link=e.target.closest('a[href^="#"]');if(!link)return;const id=link.getAttribute('href').slice(1);const target=document.getElementById(id);if(!target||!target.closest('#page-notes'))return;
-  for(let node=target;node;node=node.parentElement)if(node.tagName==='DETAILS')node.open=true;
-  e.preventDefault();history.replaceState(null,'','#'+id);target.scrollIntoView({behavior:'smooth',block:'start'});target.setAttribute('tabindex','-1');target.focus({preventScroll:true});
- });
+ const root=document.getElementById('page-notes');if(!root)return;
+ const groups=[['coverage','Coverage & methods'],['people','People'],['funding','Funding priorities'],['money','Money flows']];
+ root.innerHTML='<h2>About the Evidence</h2><nav class="evidence-index" aria-label="Evidence sections">'+groups.map(([id,title])=>'<a href="#evidence-'+id+'">'+title+'</a>').join('')+'</nav>'+groups.map(([id,title])=>'<section class="evidence-group" id="evidence-'+id+'"><h3>'+title+'</h3></section>').join('');
+ function group(id){if(/rebuild|coverage/.test(id))return 'coverage';if(/award|flow|spending|legal|recipient/.test(id))return 'money';if(/funding|budget/.test(id))return 'funding';return 'people';}
+ function expand(container){for(const detail of [...container.querySelectorAll('details')].reverse()){const section=document.createElement('section');section.className='evidence-subsection';if(detail.id)section.id=detail.id;const heading=document.createElement('h5');heading.textContent=detail.querySelector(':scope>summary')?.textContent||'Methodology';section.append(heading);for(const child of [...detail.children])if(child.tagName!=='SUMMARY')section.append(child);detail.replaceWith(section);}}
+ function publish(id,title,nodes){document.getElementById(id)?.remove();if(!nodes.length)return;const section=document.createElement('section');section.id=id;section.className='note-block';const heading=document.createElement('h4');heading.textContent=title;section.append(heading);for(const node of nodes){if(node.tagName==='DETAILS'){for(const child of [...node.children])if(child.tagName!=='SUMMARY')section.append(child);node.remove();}else section.append(node);}expand(section);root.querySelector('#evidence-'+group(id)).append(section);return section;}
+ function collect(id,title,container,selector){publish(id,title,[...container.querySelectorAll(selector)]);}
+ for(const [i,section] of [...document.querySelectorAll('main>section.method')].entries()){const id=section.id||'funding-method-notes';for(const child of [...section.children])if(child.tagName==='H2'||child.classList.contains('eyebrow'))child.remove();publish(id,i===0?'Definitions and federal sources':'Funding and spending definitions',[...section.children]);section.remove();}
+ const coverage=document.querySelector('main>.coverage-note');if(coverage){const title=coverage.querySelector('summary');title?.remove();publish('coverage-method','Coverage and limits',[...coverage.children]);coverage.remove();}
+ // Older evidence-producing modules can keep appending notes; organize those too.
+ const organize=()=>{for(const node of [...root.children]){if(node.tagName==='DETAILS'){const title=node.querySelector(':scope>summary')?.textContent||'Sources';const id=node.id||'additional-evidence';const children=[...node.children].filter(x=>x.tagName!=='SUMMARY');node.remove();publish(id,title,children);}}};
+ new MutationObserver(organize).observe(root,{childList:true});
+ window.AtlasNotes={collect,publish};
+ document.addEventListener('click',e=>{const link=e.target.closest('a[href^="#"]');if(!link)return;const id=link.getAttribute('href').slice(1),target=document.getElementById(id);if(!target||!target.closest('#page-notes'))return;e.preventDefault();window.dispatchEvent(new CustomEvent('horizon-open-view',{detail:{view:'evidence'}}));history.replaceState(null,'','#'+id);target.scrollIntoView({behavior:'smooth',block:'start'});target.setAttribute('tabindex','-1');target.focus({preventScroll:true});});
 })();

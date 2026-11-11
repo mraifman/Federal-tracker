@@ -13,7 +13,7 @@ An interactive comparison of federal people, funding by purpose, spending uses, 
 
 Workforce bubbles reform in place from agencies to subagencies, then occupational series at the source’s organizational limit. Occupational series are actual reported roles, **not** invented office allocations. Public OPM data does not expose NIH institute/center staffing; NIH-wide totals are not substituted for institute headcounts. Funding bubbles drill through topic → agency → bureau → account. Familiar agency acronyms and policy-area names appear inside bubbles; full titles and exact figures appear in navy hover/focus tooltips and the summary ledger. Technical source identifiers remain in the source records and exports. Bubble positions arrange the plot only, without geographic or semantic claims. Crowded charts show the largest changes with all matching records retained in tables/exports.
 
-The agency spending view connects grants/fixed charges to named assistance programs and outside recipients. External allocation bubbles drill sector → program/purpose → recipient, with topic filters, funding/awarding perspectives and CSV export. Account-spending and award periods/scopes differ and are explicitly labeled.
+The agency spending view connects grants/fixed charges to named assistance programs and outside recipients. Sector selection opens recipient companies and organizations; program/purpose views remain available in the sidebar, with topic filters, funding/awarding perspectives and CSV export. Account-spending and award periods/scopes differ and are explicitly labeled.
 
 Missing data is never evidence of cancellation. Reviewed cases distinguish statutory closure, zero new appropriations, spending from prior balances, account recoding and transferred operations. Source rows, URLs, hashes, derived values and reasons remain in the public datasets.
 
@@ -41,11 +41,11 @@ GitHub Actions deploys validated static files. The scheduled legacy agency refre
 
 `python scripts/build_legal_review.py` screens the complete displayed program set for large reductions, negative net obligations and missing-year transactions. It generates `data/legal-review-queue.json`; this is a review queue, not an automated litigation search. The daily refresh regenerates financial flags and overdue-review notices but never updates a case’s `checked_on` date or verifies a court finding. Reviewers must read new orders, stays and appeals and update sources and scope explicitly. A documented search with no case identified is distinct from a record not reviewed.
 
-Run `python scripts/validate_legal_review.py`, `node tests/legal-review.cjs` and `python -m unittest discover -s scripts -p 'test_*.py'`. Sources, case histories and methodological notes are collected at the bottom of the main page.
+Run `python scripts/validate_legal_review.py`, `node tests/legal-review.cjs` and `python -m unittest discover -s scripts -p 'test_*.py'`. Sources, case histories and methodological notes are organized in the About the Evidence view, with expanded sections for People, Funding Priorities and Money Flows.
 
 ## Interface
 
-The main page uses an original research-led design informed by [Meta-Moment](https://meta-moment.researchonresearch.org/topics): a navy data hero, slab-serif headings, short chart introductions, white research panels, and expandable source notes. Roboto and Roboto Slab are self-hosted with their licenses in `vendor/fonts/`; no external font service is required at runtime.
+The main page uses an original research-led design informed by [Meta-Moment](https://meta-moment.researchonresearch.org/topics): a navy data hero, slab-serif headings, short chart introductions, white research panels, and a dedicated About the Evidence view. Roboto and Roboto Slab are self-hosted with their licenses in `vendor/fonts/`; no external font service is required at runtime.
 
 The opening map reads the published OPM department records directly. Each point has a fixed data position: percentage headcount change on the horizontal axis and December 2024 headcount on a logarithmic vertical axis. Defense is excluded, and points require both observations plus a positive baseline. The map's net-change summary uses the same reported non-defense population as the workforce view; it is not a layoff count. The opening summary reports the net change in non-defense headcount; technical agency and account coverage counts are kept out of the headline.
 
@@ -60,7 +60,7 @@ node tests/redesign.cjs http://127.0.0.1:8000/
 node tests/browser.cjs http://127.0.0.1:8000/
 ```
 
-The redesign suite checks desktop and mobile source figures, hero coverage, chart modes, workforce/occupation drilldowns, search and periods, CSV contents, funding/account drilldowns, money-flow selection, recipients, expandable notes, missing assets, JavaScript errors and page overflow. Set `CHROMIUM_PATH` if Chromium is installed at another path. Pass the published site URL to run the same suite against production.
+The redesign suite checks desktop and mobile source figures, hero coverage, chart modes, workforce/occupation drilldowns, search and periods, CSV contents, funding/account drilldowns, money-flow selection, recipients, organized evidence, missing assets, JavaScript errors and page overflow. Set `CHROMIUM_PATH` if Chromium is installed at another path. Pass the published site URL to run the same suite against production.
 
 
 ## Recipient-sector correction (November 2026)
@@ -82,3 +82,5 @@ The command retrieves the current federal archive catalog, requires one consiste
 `python -m unittest discover -s scripts -p 'test_*.py'` tests recipient-code behavior without third-party dependencies. `node tests/recipient-sectors.cjs` checks the published GGRF records and sector filters; deployment runs this regression alongside financial reconciliation. Funding and awarding roles are tested separately and are never added together.
 
 The Horizon: 2029 header gives the opening chart two-thirds of the desktop hero, uses larger interface and explanatory text, and stacks the chart below the introduction on phones. Agency labels use the official USAspending abbreviations matched through the existing workforce crosswalk; funding labels use the policy-area names, with original source codes retained in data and exports.
+
+Recipient chart rows open an on-demand USAspending transaction lookup (`award-detail.js`). It keeps archive totals separate from live API records, checks recipient identity, shows individual award links and action amounts, and claims reconciliation only when all pages and known amounts match both archived fiscal-year totals. The exact request, retrieval date and source aggregate are recorded on About the Evidence; the dialog can export the complete evidence JSON.

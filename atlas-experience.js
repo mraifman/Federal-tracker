@@ -10,7 +10,7 @@
   if (header && window.ResizeObserver) new ResizeObserver(() => document.documentElement.style.setProperty('--header-height', header.getBoundingClientRect().height + 'px')).observe(header);
   const updateHeaderSection = () => {
     const notes = document.getElementById('page-notes');
-    const inNotes = notes && notes.getBoundingClientRect().top < innerHeight * .4;
+    const inNotes = notes && notes.getClientRects().length > 0 && notes.getBoundingClientRect().top < innerHeight * .4;
     const view = document.querySelector('[data-project-tab][aria-selected="true"]')?.dataset.projectTab || 'workforce';
     document.querySelectorAll('.site-header nav a').forEach(a => {
       const active = inNotes ? a.hash === '#page-notes' : a.dataset.exploreView === view;
@@ -34,7 +34,7 @@
     const before = all.reduce((sum, r) => sum + (r.values['202412'] ?? 0), 0);
     const after = all.reduce((sum, r) => sum + (r.values['202609'] ?? 0), 0);
     facts.innerHTML = '<div class="workforce-signal"><b>' + number(Math.abs(after-before)) + '</b><div><span>' + (after < before ? 'Fewer' : 'More') + ' non-defense employees</span><small>December 2024 → September 2026</small></div><a href="#method">What this measures ↗</a></div>';
-    const opening=document.querySelector('.universe-hero'),footer=document.createElement('div');footer.className='hero-footer people-hero-footer';opening.after(footer);footer.append(opening.querySelector('.hero-source'),facts.querySelector('.workforce-signal>a'));
+    const opening=document.querySelector('.universe-hero'),footer=document.createElement('div');footer.className='hero-footer people-hero-footer';opening.after(footer);footer.append(opening.querySelector('.hero-source'),facts.querySelector('.workforce-signal>a'));const reset=document.createElement('button');reset.className='outline viz-reset';reset.textContent='Reset';reset.onclick=()=>{opening.querySelector('[data-hero-agency]')?.dispatchEvent(new Event('mouseleave'));window.dispatchEvent(new CustomEvent('atlas-reset-workforce'));window.AtlasChartTools?.hideTooltip();};footer.append(reset);
     const W=520,H=350,L=104,R=20,T=24,B=55;
     const min=-100,max=Math.max(125,Math.ceil(Math.max(...rows.map(r=>r.pct))/25)*25);
     const logMax=Math.ceil(Math.log10(Math.max(...rows.map(r=>r.a))));
@@ -45,14 +45,14 @@
     for (const n of [-100,-50,0,50,100]) svg+='<line x1="'+x(n)+'" x2="'+x(n)+'" y1="'+T+'" y2="'+(H-B)+'" stroke="'+(n===0?'#b9c6ef66':'#b9c6ef15')+'" '+(n===0?'':'stroke-dasharray="2 5"')+'/><text x="'+x(n)+'" y="'+(H-B+23)+'" text-anchor="middle">'+(n>0?'+':'')+n+'%</text>';
     for (const n of [1,100,10000,1000000].filter(n=>Math.log10(n)<=logMax)) svg+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+y(n)+'" y2="'+y(n)+'" stroke="#b9c6ef15" stroke-dasharray="2 5"/><text x="'+(L-10)+'" y="'+(y(n)+3)+'" text-anchor="end">'+(n>=1e6?'1M':n>=1e3?n/1e3+'k':n)+'</text>';
     svg+='<text class="hero-y-title" transform="translate(16 '+((T+H-B)/2)+') rotate(-90)" text-anchor="middle"><tspan x="0" dy="0">Employees in</tspan><tspan x="0" dy="1.25em">December 2024</tspan></text>';
-    svg+='<text x="'+(W-R)+'" y="'+(H-8)+'" text-anchor="end">Staff change (%)</text>';
+    svg+='<text x="'+(W-R)+'" y="'+(H-8)+'" text-anchor="end">Change in Headcount (%)</text>';
     for (const [i,r] of rows.entries()) {
       const color=r.b<r.a?'#f47797':r.b>r.a?'#75d6d7':'#acb4d6';
       svg+='<g class="hero-point" role="button" tabindex="'+(i===0?'0':'-1')+'" data-hero-agency="'+esc(r.id)+'" aria-label="'+esc(r.name)+': '+number(r.a)+' to '+number(r.b)+' employees; '+signed(r.b-r.a)+'; '+r.pct.toFixed(1)+' percent"><circle cx="'+x(r.pct)+'" cy="'+y(r.a)+'" r="9" fill="'+color+'" opacity=".3" filter="url(#atlas-glow)"/><circle class="point-core" cx="'+x(r.pct)+'" cy="'+y(r.a)+'" r="3.3" fill="'+color+'"/>';
       if(highlights[r.id]) svg+='<text x="'+(x(r.pct)+(r.pct<-50?8:-8))+'" y="'+(y(r.a)-8)+'" text-anchor="'+(r.pct<-50?'start':'end')+'">'+highlights[r.id]+'</text>';
       svg+='</g>';
     }
-    map.innerHTML=svg+'</svg>';
+    map.innerHTML=svg+'</svg>';map.append(document.querySelector('.hero-key'));
     const heroSvg=map.querySelector('svg');new ResizeObserver(entries=>{const width=entries[0].contentRect.width;if(width)heroSvg.style.setProperty('--hero-axis-size',Math.max(12,14*W/width)+'px')}).observe(map);
     const points=[...map.querySelectorAll('[data-hero-agency]')];
     points.forEach((point,i)=>{

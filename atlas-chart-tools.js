@@ -75,7 +75,11 @@ window.AtlasChartTools = {
       const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download=people?'workforce-chart-records.csv':'funding-chart-records.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
     };
   },
-  displayName(value){const name=String(value||'');return name===name.toUpperCase()?name.toLowerCase().replace(/\b\w/g,c=>c.toUpperCase()).replace(/\b(Of|And|The|For|In|On|To)\b/g,s=>s.toLowerCase()).replace(/^./,s=>s.toUpperCase()):name;},
+  displayName(value){
+    const names=[...Object.values(this.agencyNames).filter(v=>/^[A-Z0-9]{2,12}$/.test(v)),'USAID','NIH','CDC','HIV','AIDS','FDA','STEM','DNA','RNA','SBIR','STTR','GOCO','FFRDC','LLC','LLP','LP','PLC','SLS','IBM','SAIC','RTX','BAE','US','USA','AI','IT'];
+    const acronyms=new Map(names.map(v=>[v.toLowerCase(),v]));
+    return String(value||'').toLowerCase().replace(/\b[a-z][a-z0-9]*\b/g,word=>acronyms.get(word)||word[0].toUpperCase()+word.slice(1));
+  },
   shortLabel(row,maxChars=Infinity){
     const alias=this.agencyLabel(row);
     const name=String(row.name||'').replace(/\bof\b/gi,'of');
@@ -86,13 +90,15 @@ window.AtlasChartTools = {
     const api=this;
     selection.each(function(d){
       const row=reader(d),radius=d.radius,text=d3.select(this).text('');
-      if(radius<28)return;
+      const uniform=this.classList.contains('allocation-name');if(radius<(uniform?36:28))return;
       const label=api.shortLabel(row),width=radius*1.72,maxLines=radius>55?3:radius>45?2:1;
-      let size=radius>85?26:radius>55?22:17,lines=[];
+      let size=uniform?20:radius>85?26:radius>55?22:17,lines=[];
       const probe=text.append('tspan');
       function wrap(){lines=[];let line='';for(const word of label.split(/\s+/)){const trial=line?line+' '+word:word;probe.text(trial);if(probe.node().getComputedTextLength()>width&&line){lines.push(line);line=word}else line=trial}if(line)lines.push(line);}
-      for(;size>=12;size--){text.style('font-size',size+'px');wrap();if(lines.length<=maxLines&&lines.every((line,i)=>{const y=lines.length>1?-12-(lines.length-1)*(size+1)/2+i*(size+1):-10,edge=Math.max(Math.abs(y-size*.8),Math.abs(y+size*.2)),chord=2*Math.sqrt(Math.max(0,radius*radius-edge*edge))*.94;probe.text(line);return probe.node().getComputedTextLength()<=Math.min(width,chord)}))break;}
+      for(;size>=(uniform?20:12);size--){text.style('font-size',size+'px');wrap();if(lines.length<=maxLines&&lines.every((line,i)=>{const y=lines.length>1?-12-(lines.length-1)*(size+1)/2+i*(size+1):-10,edge=Math.max(Math.abs(y-size*.8),Math.abs(y+size*.2)),chord=2*Math.sqrt(Math.max(0,radius*radius-edge*edge))*.94;probe.text(line);return probe.node().getComputedTextLength()<=Math.min(width,chord)}))break;}
+      if(uniform){size=20;text.style('font-size','20px');}
       lines=lines.slice(0,maxLines);if(lines.join(' ')!==label){let last=lines.at(-1)||label;probe.text(last+'…');while(last.length>1&&probe.node().getComputedTextLength()>width){last=last.slice(0,-1);probe.text(last+'…')}lines[lines.length-1]=last+'…';}
+      if(uniform)lines=lines.map((line,i)=>{const y=lines.length>1?-12-(lines.length-1)*(size+1)/2+i*(size+1):-10,edge=Math.max(Math.abs(y-size*.8),Math.abs(y+size*.2)),allowed=2*Math.sqrt(Math.max(0,radius*radius-edge*edge))*.94;let result=line;probe.text(result);while(result.length>1&&probe.node().getComputedTextLength()>allowed){result=result.replace(/…$/,'').slice(0,-1)+'…';probe.text(result);}return result;});
       probe.remove();text.attr('y',null);text.selectAll('tspan').data(lines).join('tspan').attr('x',0).attr('y',(line,i)=>lines.length>1?-12-(lines.length-1)*(size+1)/2+i*(size+1):-10).text(line=>line);
     });
   },
@@ -128,6 +134,7 @@ window.AtlasChartTools = {
     if(!panel)return;
     this.tableOpen??=new Map();
     panel.querySelectorAll('#agencies > .table-scroll, #funding-app > .table-scroll, .trend-main > .table-scroll').forEach(table=>{
+      if(table.closest('#funding-app'))return;
       const footer=table.nextElementSibling?.classList.contains('table-footer')?table.nextElementSibling:null;
       const details=document.createElement('details');details.className='records-table';const key=panel.id+':'+(table.parentElement.id||'records');details.open=this.tableOpen.get(key)||false;details.ontoggle=()=>{if(details.isConnected)this.tableOpen.set(key,details.open)};
       const summary=document.createElement('summary');summary.textContent='Compare the source records';details.append(summary);table.before(details);details.append(table);if(footer)details.append(footer);
