@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 """Validate evidence scope and review coverage without inferring court outcomes."""
 import datetime,gzip,json,pathlib,urllib.parse
+from recipient_rows import recipient_rows
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 def main():
  data=json.loads((ROOT/'data/legal-cases.json').read_text());queue=json.loads((ROOT/'data/legal-review-queue.json').read_text())
  ids=[c['id'] for c in data['cases']];assert len(ids)==len(set(ids))
  unit=json.loads(gzip.decompress((ROOT/'data/outbound/ALL.json.gz').read_bytes()))
- recs=json.loads(gzip.decompress((ROOT/unit['recipients_file']).read_bytes()))
+ recs=recipient_rows(ROOT,unit['recipients_file'],basis='funding')
  actual={(r['program_code'],r['recipient_id']):r['recipient_name'] for r in recs}
  for case in data['cases']:
   for field in ['checked_on','next_review_on']:datetime.date.fromisoformat(case[field])

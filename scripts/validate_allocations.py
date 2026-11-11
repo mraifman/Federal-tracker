@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Check organizational rollups and external award conservation across views."""
 import collections,gzip,json,math,pathlib,os
+from recipient_rows import recipient_rows
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 def read(p):
  path=(pathlib.Path(os.environ.get('ATLAS_AWARD_OUTPUT_ROOT',str(ROOT))) if p.startswith('data/outbound') or p=='data/recipient-sector-audit.json' else ROOT)/p
@@ -31,12 +32,16 @@ def agg(rows):
   d[(r['basis'],r['year'],r['sector'],r['award_kind'],r['topic_code'],r['environment_lens'])]+=r['amount'] or 0
  return d
 for u in i['units']:
- d=read(u['file']);s=agg(d['sectors']);p=agg(d['programs']);recipients=read(d['recipients_file']);r=agg(recipients)
- for row in recipients:
-  if row['sector']=='Individuals':assert row['recipient_id'] in ['INDIVIDUALS','OTHER_RECIPIENTS']
+ d=read(u['file']);s=agg(d['sectors']);p=agg(d['programs']);r=agg(recipient_rows(os.environ.get('ATLAS_AWARD_OUTPUT_ROOT',str(ROOT)),d['recipients_file']))
  assert s.keys()==p.keys()==r.keys(),u['code']
  for k,n in s.items():
   assert abs(n-p[k])<max(1,abs(n)*1e-10),(u['code'],k,'program reconciliation')
   assert abs(n-r[k])<max(1,abs(n)*1e-10),(u['code'],k,'recipient reconciliation')
+agency_rows=read('data/outbound/agency-changes.json.gz')
+policy=read('data/mandatory-benefit-programs.json')['programs']
+expected=agg(r for r in read('data/outbound/ALL.json.gz')['programs'] if r['program_code'] not in policy)
+actual=agg(agency_rows)
+assert expected.keys()==actual.keys()
+for key,value in expected.items():assert abs(value-actual[key])<max(1,abs(value)*1e-10),(key,'agency comparison reconciliation')
 for path in (ROOT/'data/outbound').glob('*.json.gz'):assert path.stat().st_size<95_000_000,(path,'GitHub file limit')
 print(f"Validated four full award archives and sector/program/recipient conservation across {len(i['units'])} agency views.")

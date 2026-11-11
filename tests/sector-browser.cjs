@@ -4,7 +4,7 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),fs=r
  const target=new URL(process.argv[2]||'http://127.0.0.1:8000/');target.searchParams.set('view','uses');target.searchParams.set('agency','ALL');
  for(const width of [1440,390]){
   const page=await browser.newPage({viewport:{width,height:1000},acceptDownloads:true,reducedMotion:'reduce'}),errors=[];page.on('pageerror',e=>errors.push(e.message));
-  await page.goto(target.href,{waitUntil:'networkidle'});await page.locator('#outbound-kind').waitFor({state:'attached'});await page.locator('.award-filter-panel').evaluate(e=>e.open=true);const panel=page.locator('#outbound-panel');
+  await page.goto(target.href,{waitUntil:'networkidle'});await page.locator('#outbound-kind').waitFor({state:'attached'});await page.locator('#outbound-panel .award-filter-panel').evaluate(e=>e.open=true);const panel=page.locator('#outbound-panel');
   const pick=async label=>{await panel.locator('.award-mark .endpoint-caption>strong').filter({hasText:label}).first().click();await page.waitForFunction(()=>document.querySelector('#outbound-group').value==='recipient');await page.selectOption('#outbound-group','program')};
   await pick('Academia');assert((await panel.locator('.recipient-scope').innerText()).includes('Academia'));
   assert(!/national clean investment fund|clean communities investment accelerator/i.test(await panel.locator('#outbound-bubbles').innerText()));
