@@ -1,6 +1,6 @@
 {
   "source": "https://api.usaspending.gov/api/v2/references/toptier_agencies/",
-  "retrieved_at_utc": "2026-11-17T20:59:34.131524+00:00",
+  "retrieved_at_utc": "2026-11-18T20:37:29.999387+00:00",
   "coverage": "USAspending top-tier agencies; not all federal entities",
   "count": 111,
   "agencies": [
@@ -376,11 +376,11 @@
         "congressional_justification_url": "https://www.ignet.gov/cj",
         "active_fy": "2026",
         "active_fq": "4",
-        "outlay_amount": 0.0,
-        "obligated_amount": 0.0,
-        "budget_authority_amount": 0.0,
+        "outlay_amount": 29475903.57,
+        "obligated_amount": 31671604.69,
+        "budget_authority_amount": 141660644.46,
         "current_total_budget_authority_amount": 14142952299307.62,
-        "percentage_of_total_budget_authority": 0.0,
+        "percentage_of_total_budget_authority": 1.0016341811952171e-05,
         "agency_slug": "council-of-the-inspectors-general-on-integrity-and-efficiency"
       }
     },
@@ -566,11 +566,11 @@
         "congressional_justification_url": "https://www.hhs.gov/cj",
         "active_fy": "2026",
         "active_fq": "4",
-        "outlay_amount": 2954913646938.27,
-        "obligated_amount": 3178504503781.51,
-        "budget_authority_amount": 3524332785558.29,
+        "outlay_amount": 2954915382244.14,
+        "obligated_amount": 3178504574728.37,
+        "budget_authority_amount": 3524332883053.65,
         "current_total_budget_authority_amount": 14142952299307.62,
-        "percentage_of_total_budget_authority": 0.2491935708310935,
+        "percentage_of_total_budget_authority": 0.24919357772465844,
         "agency_slug": "department-of-health-and-human-services"
       }
     },
@@ -642,11 +642,11 @@
         "congressional_justification_url": "https://www.dol.gov/cj",
         "active_fy": "2026",
         "active_fq": "4",
-        "outlay_amount": 173882994.95,
-        "obligated_amount": 180839964.92,
-        "budget_authority_amount": 214031718.4,
+        "outlay_amount": 70153388967.28,
+        "obligated_amount": 71475252796.72,
+        "budget_authority_amount": 76645711853.28,
         "current_total_budget_authority_amount": 14142952299307.62,
-        "percentage_of_total_budget_authority": 1.5133454025046674e-05,
+        "percentage_of_total_budget_authority": 0.005419357304700254,
         "agency_slug": "department-of-labor"
       }
     },
@@ -699,11 +699,11 @@
         "congressional_justification_url": "https://www.treasury.gov/cj",
         "active_fy": "2026",
         "active_fq": "4",
-        "outlay_amount": 2120585132316.93,
-        "obligated_amount": 2113980650878.02,
-        "budget_authority_amount": 2546273594517.22,
+        "outlay_amount": 2120586025182.89,
+        "obligated_amount": 2113980697249.02,
+        "budget_authority_amount": 2546273640888.22,
         "current_total_budget_authority_amount": 14142952299307.62,
-        "percentage_of_total_budget_authority": 0.18003833574704733,
+        "percentage_of_total_budget_authority": 0.18003833902578284,
         "agency_slug": "department-of-the-treasury"
       }
     },
@@ -1478,11 +1478,11 @@
         "congressional_justification_url": "https://www.nlrb.gov/cj",
         "active_fy": "2026",
         "active_fq": "4",
-        "outlay_amount": 0.0,
-        "obligated_amount": 0.0,
-        "budget_authority_amount": 0.0,
+        "outlay_amount": 282701819.34,
+        "obligated_amount": 300868917.8,
+        "budget_authority_amount": 311894038.79,
         "current_total_budget_authority_amount": 14142952299307.62,
-        "percentage_of_total_budget_authority": 0.0,
+        "percentage_of_total_budget_authority": 2.2052965476329088e-05,
         "agency_slug": "national-labor-relations-board"
       }
     },
@@ -2086,11 +2086,11 @@
         "congressional_justification_url": "https://www.ustda.gov/cj",
         "active_fy": "2026",
         "active_fq": "4",
-        "outlay_amount": 0.0,
-        "obligated_amount": 0.0,
-        "budget_authority_amount": 0.0,
+        "outlay_amount": 62400254.68,
+        "obligated_amount": 135749212.49,
+        "budget_authority_amount": 242287239.44,
         "current_total_budget_authority_amount": 14142952299307.62,
-        "percentage_of_total_budget_authority": 0.0,
+        "percentage_of_total_budget_authority": 1.713130570707372e-05,
         "agency_slug": "united-states-trade-and-development-agency"
       }
     },
