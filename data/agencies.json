@@ -1,6 +1,6 @@
 {
   "source": "https://api.usaspending.gov/api/v2/references/toptier_agencies/",
-  "retrieved_at_utc": "2026-11-19T20:42:38.369067+00:00",
+  "retrieved_at_utc": "2026-11-20T20:26:56.106466+00:00",
   "coverage": "USAspending top-tier agencies; not all federal entities",
   "count": 111,
   "agencies": [
@@ -72,11 +72,11 @@
         "congressional_justification_url": "https://www.achp.gov/sites/default/files/2021-06/ACHP%202022%20Budget%20Justification-final-5-10-21.pdf",
         "active_fy": "2026",
         "active_fq": "4",
-        "outlay_amount": 0.0,
-        "obligated_amount": 0.0,
-        "budget_authority_amount": 0.0,
+        "outlay_amount": 11309165.94,
+        "obligated_amount": 14345630.12,
+        "budget_authority_amount": 16065431.87,
         "current_total_budget_authority_amount": 14142952299307.62,
-        "percentage_of_total_budget_authority": 0.0,
+        "percentage_of_total_budget_authority": 1.1359319843556636e-06,
         "agency_slug": "advisory-council-on-historic-preservation"
       }
     },
